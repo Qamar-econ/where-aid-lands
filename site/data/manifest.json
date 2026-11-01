@@ -33,8 +33,10 @@
   "dl/tables/kh_need.csv",
   "dl/tables/kh_ols_simple.csv",
   "dl/tables/kh_robustness.csv",
+  "dl/tables/kh_sample_located.csv",
   "dl/tables/kh_shapley.csv",
-  "dl/tables/kh_shapley5.csv"
+  "dl/tables/kh_shapley5.csv",
+  "dl/tables/kh_size_decomposition.csv"
  ],
  "code": [
   "dl/code/kh_common.py",
@@ -55,6 +57,7 @@
   "dl/code/kh_s13_site_images.py",
   "dl/code/kh_s14_dedup.py",
   "dl/code/kh_s15_access2017.py",
-  "dl/code/kh_s16_access_sensitivity.py"
+  "dl/code/kh_s16_access_sensitivity.py",
+  "dl/code/kh_s17_sample_and_size.py"
  ]
 }
