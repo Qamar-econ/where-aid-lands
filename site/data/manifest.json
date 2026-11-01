@@ -36,7 +36,8 @@
   "dl/tables/kh_sample_located.csv",
   "dl/tables/kh_shapley.csv",
   "dl/tables/kh_shapley5.csv",
-  "dl/tables/kh_size_decomposition.csv"
+  "dl/tables/kh_size_decomposition.csv",
+  "dl/tables/kh_wild_bootstrap.csv"
  ],
  "code": [
   "dl/code/kh_common.py",
@@ -58,6 +59,7 @@
   "dl/code/kh_s14_dedup.py",
   "dl/code/kh_s15_access2017.py",
   "dl/code/kh_s16_access_sensitivity.py",
-  "dl/code/kh_s17_sample_and_size.py"
+  "dl/code/kh_s17_sample_and_size.py",
+  "dl/code/kh_s18_wild_bootstrap.py"
  ]
 }
