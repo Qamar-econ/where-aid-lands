@@ -86,3 +86,9 @@ for k, v in docs.items():
     (SITE / "dl" / k).write_bytes(v.read_bytes())
 print("districts", len(geo), "| project points", len(pts), "| site files:", sorted(p.name for p in (SITE / "dl").iterdir()))
 print("sizes KB:", {p.name: round(p.stat().st_size / 1024) for p in list((SITE / "data").iterdir()) + list((SITE / "dl").iterdir())})
+
+# province outlines for the map overlay (dissolved GEO2_KH parents, lake excluded)
+pv = gpd.read_file(proc / "kh_units.gpkg")
+pv = pv[~pv.ADMIN_NAME.str.contains("Lake", case=False, na=False)].dissolve(by="PARENT", as_index=False)[["PARENT", "geometry"]]
+pv["geometry"] = pv.geometry.simplify(0.003, preserve_topology=True)
+pv.to_file(SITE / "data/provinces.geojson", driver="GeoJSON", COORDINATE_PRECISION=4)
