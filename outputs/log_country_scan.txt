@@ -1,0 +1,47 @@
+﻿KEN ADM2 units 290
+PHL ADM2 units 87
+COL ADM2 units 1122
+GHA ADM2 units 260
+RWA ADM2 units 30
+BGD ADM2 units 64
+UGA ADM2 units 151
+KHM ADM2 units 197
+PER ADM2 units 196
+HND ADM2 units 298
+NPL ADM2 units 75
+TLS ADM2 units 65
+VNM ADM2 units 708
+BOL ADM2 units 110
+GTM ADM2 units 342
+SEN ADM2 units 45
+ZMB ADM2 units 116
+TZA ADM2 units 170
+MWI ADM2 units 28
+LKA ADM2 units 25
+MNG ADM2 units 339
+LAO ADM2 units 148
+     share_units_ge30        tests_per_1k        top5pct_units_share_of_tests       
+type            fixed mobile        fixed mobile                        fixed mobile
+iso                                                                                 
+BGD              1.00   1.00         1.05   0.68                         0.55   0.35
+BOL              0.56   0.75        14.07   5.19                         0.83   0.73
+COL              0.63   0.49        25.05   4.16                         0.84   0.70
+GHA              0.15   0.16         0.32   0.16                         0.68   0.50
+GTM              0.71   0.54        14.86   2.37                         0.74   0.49
+HND              0.30   0.15        11.10   1.41                         0.82   0.74
+KEN              0.40   0.23         1.56   0.23                         0.50   0.51
+KHM              0.78   0.91         9.82   3.00                         0.56   0.43
+LAO              0.61   1.00         3.50  18.09                         0.59   0.17
+LKA              1.00   1.00         5.11   2.54                         0.27   0.31
+MNG              0.08   0.04         1.90   1.40                         0.87   0.91
+MWI              0.07   0.14         0.04   0.05                         0.52   0.38
+NPL              0.85   0.40         4.87   0.15                         0.46   0.40
+PER              0.77   0.92        13.51   3.64                         0.75   0.56
+PHL              1.00   1.00        35.52   6.23                         0.37   0.35
+RWA              0.33   0.20         0.30   0.14                         0.45   0.46
+SEN              0.33   0.20         1.05   0.12                         0.62   0.56
+TLS              0.06   0.14         0.58   1.75                         0.83   0.73
+TZA              0.20   0.21         0.22   0.15                         0.76   0.68
+UGA              0.10   0.12         0.18   0.10                         0.90   0.75
+VNM              0.99   0.95        19.59   3.13                         0.38   0.34
+ZMB              0.06   0.14         0.08   0.19                         0.89   0.70

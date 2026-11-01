@@ -1,0 +1,17 @@
+country,level,ookla,reference,spearman,p
+TL,municipality (13),tests/pop 2019,DHS 2009 mobile ownership,0.19780219780219782,0.5171309114848299
+TL,municipality (13),tiles/pop 2019,DHS 2009 mobile ownership,0.21978021978021978,0.4706148514721425
+TL,municipality (13),tests/pop 2019,DHS 2016 mobile ownership,-0.049450549450549455,0.8725444288811492
+TL,municipality (13),tiles/pop 2019,DHS 2016 mobile ownership,-0.016483516483516484,0.9573761750901848
+TL,municipality (13),tests/pop 2022,DHS 2009 mobile ownership,0.3021978021978022,0.3156083662499548
+TL,municipality (13),tiles/pop 2022,DHS 2009 mobile ownership,0.21978021978021978,0.4706148514721425
+TL,municipality (13),tests/pop 2022,DHS 2016 mobile ownership,0.47802197802197804,0.09849011541638986
+TL,municipality (13),tiles/pop 2022,DHS 2016 mobile ownership,0.41208791208791207,0.1617510527725265
+TL,municipality (13),tests/pop 2025,DHS 2009 mobile ownership,0.35714285714285715,0.2309298623020339
+TL,municipality (13),tiles/pop 2025,DHS 2009 mobile ownership,0.26373626373626374,0.38393651665067413
+TL,municipality (13),tests/pop 2025,DHS 2016 mobile ownership,0.20329670329670327,0.5053147342962485
+TL,municipality (13),tiles/pop 2025,DHS 2016 mobile ownership,-0.005494505494505494,0.9857869107140622
+NP,district (75),tests/pop 2019,census 2011 mobile_pct,0.5444675311301076,4.4297765741473146e-07
+NP,district (75),tests/pop 2019,census 2011 internet_pct,0.6093292665302528,6.580469623401934e-09
+NP,district (75),tests/pop 2025,census 2011 mobile_pct,0.48214742970948304,1.186488439290047e-05
+NP,district (75),tests/pop 2025,census 2011 internet_pct,0.5561751403428739,2.2122423325747752e-07

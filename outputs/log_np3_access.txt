@@ -1,0 +1,12 @@
+﻿edges 15533027 | hospitals 1752
+towns >= 20k: 41 | district HQ from GeoNames: 21 | HQ fallback to centroid: 54
+PC1 var share 0.73 {'neg_ln_tt_town_dry': np.float64(0.35), 'neg_ln_tt_town_wet': np.float64(0.36), 'neg_ln_tt_hq': np.float64(0.36), 'neg_ln_tt_hosp': np.float64(0.35), 'neg_ln_walk': np.float64(0.34), 'share_walk30': np.float64(0.3), 'ln_road_density': np.float64(0.35), 'paved_share': np.float64(0.09), 'neg_wet_penalty': np.float64(0.25), 'neg_steep_share': np.float64(0.31)}
+       tt_ktm_dry  tt_town_dry  tt_hq_dry  tt_hosp_dry  share_walk30  paved_share  access_pc1
+count       75.00        75.00      75.00        75.00         75.00        75.00       75.00
+mean       694.14       253.21     205.66       105.29          0.94         0.06        0.00
+std        459.35       253.66     178.58        83.79          0.08         0.03        1.00
+min         13.33        13.12      12.34         5.42          0.64         0.00       -2.36
+25%        344.45        63.13      77.15        35.01          0.93         0.04       -0.59
+50%        614.45       188.54     142.79        79.18          0.97         0.05       -0.04
+75%        895.87       344.07     261.87       149.00          0.99         0.07        0.86
+max       2015.52      1261.06     928.57       415.67          1.00         0.15        2.22

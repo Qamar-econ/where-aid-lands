@@ -1,0 +1,381 @@
+ADM0_A3,tests,tiles16,year,NAME,INCOME_GRP,pop,income,tests_per_100k
+AFG,5113,838,2019,Afghanistan,5. Low income,41454761.0,Low income,12.333927097058888
+AGO,1322,402,2019,Angola,3. Upper middle income,36749906.0,Lower middle income,3.5972881127913636
+ALB,6331,1510,2019,Albania,4. Lower middle income,2411658.0,Upper middle income,262.51649280287666
+ARE,15464,3840,2019,United Arab Emirates,2. High income: nonOECD,10483751.0,High income,147.5044571356187
+ARG,77573,22296,2019,Argentina,3. Upper middle income,45538401.0,Upper middle income,170.34634132190985
+ARM,24908,3222,2019,Armenia,4. Lower middle income,2964300.0,Upper middle income,840.2658300441925
+AUS,183406,40579,2019,Australia,1. High income: OECD,26659922.0,High income,687.9464988682263
+AUT,84234,23019,2019,Austria,1. High income: OECD,9131761.0,High income,922.4288721529177
+AZE,16178,3310,2019,Azerbaijan,3. Upper middle income,10153958.0,Upper middle income,159.32703286738038
+BDI,315,48,2019,Burundi,5. Low income,13689450.0,Low income,2.3010420433253347
+BEL,22907,10161,2019,Belgium,1. High income: OECD,11779946.0,High income,194.45759768338496
+BEN,1950,369,2019,Benin,5. Low income,14111034.0,Lower middle income,13.81897315249896
+BFA,3225,512,2019,Burkina Faso,5. Low income,23025776.0,Low income,14.006042619367093
+BGD,78721,13400,2019,Bangladesh,5. Low income,171466990.0,Lower middle income,45.91029445376046
+BGR,21617,5880,2019,Bulgaria,3. Upper middle income,6446596.0,High income,335.3242548470542
+BHS,312,126,2019,Bahamas,2. High income: nonOECD,399440.0,High income,78.10935309433206
+BIH,7623,2710,2019,Bosnia and Herz.,3. Upper middle income,3185073.0,Upper middle income,239.33517379350488
+BLR,75665,12008,2019,Belarus,3. Upper middle income,9178298.0,Upper middle income,824.3903172461823
+BLZ,843,313,2019,Belize,4. Lower middle income,411106.0,Upper middle income,205.05660340642075
+BOL,23181,3789,2019,Bolivia,4. Lower middle income,12244159.0,Lower middle income,189.32292532300505
+BRA,928232,114614,2019,Brazil,3. Upper middle income,211140729.0,Upper middle income,439.6271644965288
+BRN,537,75,2019,Brunei,2. High income: nonOECD,458949.0,High income,117.00646477059541
+BTN,2157,366,2019,Bhutan,4. Lower middle income,786385.0,Lower middle income,274.2931261405037
+BWA,1649,459,2019,Botswana,3. Upper middle income,2480244.0,Upper middle income,66.48539417895981
+CAF,40,16,2019,Central African Rep.,5. Low income,5152421.0,Low income,0.7763340767379063
+CAN,76248,30212,2019,Canada,1. High income: OECD,40049088.0,High income,190.3863578616322
+CHE,59477,14950,2019,Switzerland,1. High income: OECD,8888822.0,High income,669.1212851376706
+CHL,169841,19350,2019,Chile,3. Upper middle income,19658835.0,High income,863.9423444980335
+CHN,440787,116643,2019,China,3. Upper middle income,1410710000.0,Upper middle income,31.245755683308406
+CIV,3605,836,2019,Côte d'Ivoire,4. Lower middle income,31165654.0,Lower middle income,11.567220761675658
+CMR,980,330,2019,Cameroon,4. Lower middle income,28372687.0,Lower middle income,3.4540260497710347
+COD,1764,348,2019,Dem. Rep. Congo,5. Low income,105789731.0,Low income,1.6674586307436587
+COG,51,15,2019,Congo,4. Lower middle income,6182885.0,Lower middle income,0.8248576514038349
+COL,111591,10671,2019,Colombia,3. Upper middle income,52321152.0,Upper middle income,213.28085436650937
+COM,134,29,2019,Comoros,5. Low income,850387.0,Lower middle income,15.757531570920063
+CPV,31,12,2019,Cabo Verde,4. Lower middle income,522331.0,Upper middle income,5.9349339786457245
+CRI,48675,5275,2019,Costa Rica,3. Upper middle income,5105525.0,High income,953.3789375235652
+CUB,897,313,2019,Cuba,3. Upper middle income,11019931.0,Upper middle income,8.139796882575762
+CYN,892,341,2019,N. Cyprus,3. Upper middle income,,,
+CYP,3136,796,2019,Cyprus,2. High income: nonOECD,1344976.0,High income,233.16401184853854
+CZE,23567,10663,2019,Czechia,1. High income: OECD,10864042.0,High income,216.92662822916185
+DEU,235024,91260,2019,Germany,1. High income: OECD,83287273.0,High income,282.18477029497654
+DMA,562,94,2019,Dominica,3. Upper middle income,66510.0,Upper middle income,844.985716433619
+DNK,40403,13089,2019,Denmark,1. High income: OECD,5946952.0,High income,679.3900472040132
+DOM,42300,4106,2019,Dominican Rep.,3. Upper middle income,11331265.0,Upper middle income,373.3034219921606
+DZA,103417,12357,2019,Algeria,3. Upper middle income,46164219.0,Upper middle income,224.01981933237082
+ECU,17087,3391,2019,Ecuador,3. Upper middle income,17980083.0,Upper middle income,95.03293171672233
+EGY,56800,9323,2019,Egypt,4. Lower middle income,114535772.0,Lower middle income,49.59149356412423
+ESP,75416,24525,2019,Spain,1. High income: OECD,48352528.0,High income,155.97116245917897
+EST,16964,4969,2019,Estonia,1. High income: OECD,1370286.0,High income,1237.9897335300805
+ETH,465,166,2019,Ethiopia,5. Low income,128691692.0,Low income,0.3613286862371815
+FIN,257683,52242,2019,Finland,1. High income: OECD,5583911.0,High income,4614.74045700227
+FJI,591,193,2019,Fiji,4. Lower middle income,924145.0,Upper middle income,63.95100335986236
+FRA,303628,89052,2019,France,1. High income: OECD,68372286.0,High income,444.08051531288567
+FRO,415,111,2019,Faeroe Is.,2. High income: nonOECD,54398.0,High income,762.8956946946579
+GAB,170,60,2019,Gabon,3. Upper middle income,2484789.0,Upper middle income,6.841627196514473
+GBR,331666,90354,2019,United Kingdom,1. High income: OECD,68526000.0,High income,484.00023348801915
+GEO,3350,1164,2019,Georgia,4. Lower middle income,3715483.0,Upper middle income,90.16324391741261
+GHA,2615,776,2019,Ghana,4. Lower middle income,33787914.0,Lower middle income,7.739453817717188
+GIN,758,203,2019,Guinea,5. Low income,14405468.0,Lower middle income,5.261890832009067
+GMB,138,56,2019,Gambia,5. Low income,2697845.0,Low income,5.115193793564863
+GNB,74,20,2019,Guinea-Bissau,5. Low income,2153339.0,Low income,3.436523464257137
+GRC,36628,8645,2019,Greece,1. High income: OECD,10407351.0,High income,351.9435445196381
+GRD,184,78,2019,Grenada,3. Upper middle income,117081.0,Upper middle income,157.1561568486774
+GRL,279,107,2019,Greenland,2. High income: nonOECD,56865.0,High income,490.63571616987605
+GTM,22152,3892,2019,Guatemala,4. Lower middle income,18124838.0,Upper middle income,122.21902341968517
+GUM,1500,219,2019,Guam,2. High income: nonOECD,166506.0,High income,900.8684371734352
+GUY,117,49,2019,Guyana,4. Lower middle income,826353.0,High income,14.1585980809654
+HKG,56992,1732,2019,Hong Kong,2. High income: nonOECD,7536100.0,High income,756.2532344316026
+HND,10507,2162,2019,Honduras,4. Lower middle income,10644851.0,Lower middle income,98.70499831326902
+HRV,51178,11625,2019,Croatia,2. High income: nonOECD,3859686.0,High income,1325.9627855737488
+HTI,1246,290,2019,Haiti,5. Low income,11637398.0,Lower middle income,10.706860760455214
+HUN,52785,16180,2019,Hungary,1. High income: OECD,9592186.0,High income,550.2916644860722
+IDN,1443577,104629,2019,Indonesia,4. Lower middle income,281190067.0,Upper middle income,513.3812212506069
+IMN,199,87,2019,Isle of Man,2. High income: nonOECD,84165.0,High income,236.440325551001
+IND,4565970,359341,2019,India,4. Lower middle income,1438069596.0,Lower middle income,317.5068865025918
+IRL,58200,16015,2019,Ireland,1. High income: OECD,5311538.0,High income,1095.7278287381168
+IRN,52703,14192,2019,Iran,3. Upper middle income,90608707.0,Upper middle income,58.165491755665386
+IRQ,9839,3052,2019,Iraq,4. Lower middle income,45074049.0,Upper middle income,21.828524879138328
+ISL,1654,768,2019,Iceland,1. High income: OECD,385663.0,High income,428.87183888524436
+ISR,35762,5545,2019,Israel,1. High income: OECD,9849000.0,High income,363.1028530815311
+ITA,1106360,151720,2019,Italy,1. High income: OECD,58984216.0,High income,1875.6882349678092
+JAM,2404,594,2019,Jamaica,3. Upper middle income,2839786.0,Upper middle income,84.654266201749
+JOR,49898,5053,2019,Jordan,3. Upper middle income,11439213.0,Upper middle income,436.20133657796214
+JPN,126515,36270,2019,Japan,1. High income: OECD,124516650.0,High income,101.60488577230434
+KAZ,63514,13820,2019,Kazakhstan,3. Upper middle income,20330104.0,Upper middle income,312.4135518441027
+KEN,9325,2264,2019,Kenya,5. Low income,55339003.0,Lower middle income,16.850683052602157
+KGZ,11205,2347,2019,Kyrgyzstan,5. Low income,7099750.0,Lower middle income,157.82245853727244
+KHM,50083,7486,2019,Cambodia,5. Low income,17423880.0,Lower middle income,287.4388482932619
+KOR,29308,8851,2019,South Korea,1. High income: OECD,51712619.0,High income,56.67475476343598
+KOS,718,201,2019,Kosovo,4. Lower middle income,,,
+KWT,36413,2768,2019,Kuwait,2. High income: nonOECD,4853420.0,High income,750.2544597417904
+LAO,15144,3883,2019,Laos,4. Lower middle income,7664993.0,Lower middle income,197.57356595107132
+LBN,5573,1748,2019,Lebanon,3. Upper middle income,5773493.0,Lower middle income,96.52735354489909
+LBR,97,33,2019,Liberia,5. Low income,5493031.0,Low income,1.7658738863844021
+LBY,7118,1778,2019,Libya,3. Upper middle income,7305659.0,Upper middle income,97.43132002191726
+LCA,100,32,2019,Saint Lucia,3. Upper middle income,179285.0,Upper middle income,55.777114649859165
+LKA,20614,5086,2019,Sri Lanka,4. Lower middle income,22037000.0,Upper middle income,93.54267822298861
+LSO,1381,108,2019,Lesotho,4. Lower middle income,2311472.0,Lower middle income,59.74547820609551
+LTU,20210,6310,2019,Lithuania,3. Upper middle income,2871585.0,High income,703.7925048361793
+LUX,2218,851,2019,Luxembourg,1. High income: OECD,666430.0,High income,332.81815044340743
+LVA,23052,5883,2019,Latvia,3. Upper middle income,1883710.0,High income,1223.75524895021
+MAR,49650,8296,2019,Morocco,4. Lower middle income,37712505.0,Lower middle income,131.65394343335188
+MDA,5508,1625,2019,Moldova,4. Lower middle income,2457783.0,Upper middle income,224.104406288106
+MDG,136,67,2019,Madagascar,5. Low income,31195932.0,Low income,0.4359542776282497
+MEX,316772,51713,2019,Mexico,3. Upper middle income,129739759.0,Upper middle income,244.15954094688894
+MKD,13356,2371,2019,North Macedonia,3. Upper middle income,1827816.0,Upper middle income,730.7081237936422
+MLI,1130,247,2019,Mali,5. Low income,23769127.0,Low income,4.7540660622495725
+MMR,41595,8370,2019,Myanmar,5. Low income,54133798.0,Lower middle income,76.83739463467906
+MNE,3962,818,2019,Montenegro,3. Upper middle income,623529.0,Upper middle income,635.4155139536413
+MNG,1657,566,2019,Mongolia,4. Lower middle income,3481145.0,Upper middle income,47.599281270961136
+MNP,524,116,2019,N. Mariana Is.,2. High income: nonOECD,45143.0,High income,1160.7558203929734
+MOZ,2869,658,2019,Mozambique,5. Low income,33635160.0,Low income,8.529764686714735
+MRT,374,109,2019,Mauritania,5. Low income,5022441.0,Lower middle income,7.446578267420166
+MUS,289,131,2019,Mauritius,3. Upper middle income,1248647.0,Upper middle income,23.145052204506158
+MWI,458,201,2019,Malawi,5. Low income,21104482.0,Low income,2.1701551357668953
+MYS,585049,35201,2019,Malaysia,3. Upper middle income,35126298.0,Upper middle income,1665.5583802198569
+NAM,2138,657,2019,Namibia,3. Upper middle income,2963095.0,Lower middle income,72.15428462469141
+NCL,83,44,2019,New Caledonia,2. High income: nonOECD,289870.0,High income,28.63352537344327
+NER,251,82,2019,Niger,5. Low income,26159867.0,Low income,0.9594850004397958
+NGA,10184,3004,2019,Nigeria,4. Lower middle income,227882945.0,Lower middle income,4.4689610273379605
+NIC,4830,1286,2019,Nicaragua,4. Lower middle income,6823613.0,Lower middle income,70.78361565932887
+NLD,66853,24327,2019,Netherlands,1. High income: OECD,17877117.0,High income,373.95850796300095
+NOR,26411,11945,2019,Norway,1. High income: OECD,5519601.0,High income,478.494731774996
+NPL,7170,1792,2019,Nepal,5. Low income,29694614.0,Lower middle income,24.145792903723216
+NZL,8198,3962,2019,New Zealand,1. High income: OECD,5200000.0,High income,157.65384615384616
+OMN,3683,1791,2019,Oman,2. High income: nonOECD,5049269.0,High income,72.94125149600863
+PAK,237519,29756,2019,Pakistan,4. Lower middle income,247504495.0,Lower middle income,95.96552983815506
+PAN,18670,2284,2019,Panama,3. Upper middle income,4458759.0,High income,418.72637655455253
+PER,46422,7076,2019,Peru,3. Upper middle income,33845617.0,Upper middle income,137.15808460516467
+PHL,233954,18738,2019,Philippines,4. Lower middle income,114891199.0,Upper middle income,203.63091519307758
+PNG,548,135,2019,Papua New Guinea,4. Lower middle income,10389635.0,Lower middle income,5.27448750605772
+POL,280958,73008,2019,Poland,1. High income: OECD,36687353.0,High income,765.8170378222708
+PRI,41525,5278,2019,Puerto Rico,2. High income: nonOECD,3203794.0,High income,1296.1195382724356
+PRK,13,11,2019,North Korea,5. Low income,26418204.0,Low income,0.0492084927499235
+PRT,27629,11184,2019,Portugal,1. High income: OECD,10578174.0,High income,261.188745808114
+PRY,15231,3662,2019,Paraguay,4. Lower middle income,6844146.0,Upper middle income,222.54054779076893
+PSX,26750,2154,2019,Palestine,4. Lower middle income,,,
+PYF,32,19,2019,Fr. Polynesia,2. High income: nonOECD,281118.0,High income,11.383120255551049
+QAT,13574,2001,2019,Qatar,2. High income: nonOECD,2656032.0,High income,511.06311972144914
+ROU,99989,19549,2019,Romania,3. Upper middle income,19061062.0,High income,524.572030666497
+RUS,1367323,226793,2019,Russia,3. Upper middle income,143826130.0,High income,950.6777384610153
+RWA,1510,312,2019,Rwanda,5. Low income,13954471.0,Low income,10.82090464052704
+SAH,7,3,2019,W. Sahara,5. Low income,,,
+SAU,242263,31557,2019,Saudi Arabia,2. High income: nonOECD,33702731.0,High income,718.8230532415904
+SDN,2910,664,2019,Sudan,4. Lower middle income,50042791.0,Low income,5.815023386685207
+SDS,209,30,2019,S. Sudan,5. Low income,,,
+SEN,1322,399,2019,Senegal,4. Lower middle income,18077573.0,Lower middle income,7.312928566240612
+SLE,35,21,2019,Sierra Leone,5. Low income,8460512.0,Low income,0.4136865475753713
+SLV,13327,1667,2019,El Salvador,4. Lower middle income,6309624.0,Upper middle income,211.2170233915682
+SMR,4685,793,2019,San Marino,2. High income: nonOECD,33860.0,High income,13836.385115180152
+SOL,340,83,2019,Somaliland,4. Lower middle income,,,
+SOM,136,35,2019,Somalia,5. Low income,18358615.0,Low income,0.7407966232746861
+SRB,36667,9177,2019,Serbia,3. Upper middle income,6623183.0,Upper middle income,553.6159879622834
+STP,4,1,2019,São Tomé and Principe,4. Lower middle income,230871.0,Lower middle income,1.7325692702851376
+SUR,587,201,2019,Suriname,3. Upper middle income,628886.0,Upper middle income,93.3396513835576
+SVK,19315,6944,2019,Slovakia,1. High income: OECD,5426740.0,High income,355.92270866118514
+SVN,20534,5597,2019,Slovenia,1. High income: OECD,2120461.0,High income,968.3743299216538
+SWE,14748,7080,2019,Sweden,1. High income: OECD,10536632.0,High income,139.96882495279326
+SWZ,344,117,2019,eSwatini,4. Lower middle income,1230506.0,Lower middle income,27.95597908502681
+SYR,10986,2208,2019,Syria,4. Lower middle income,23594623.0,Low income,46.561455972405234
+TCA,134,35,2019,Turks and Caicos Is.,2. High income: nonOECD,46198.0,High income,290.05584657344474
+TCD,55,23,2019,Chad,5. Low income,19319064.0,Low income,0.28469288160130324
+TGO,729,318,2019,Togo,5. Low income,8223850.0,Lower middle income,8.864461292460344
+THA,837013,89056,2019,Thailand,3. Upper middle income,71702435.0,Upper middle income,1167.3425037796833
+TJK,1991,623,2019,Tajikistan,5. Low income,10389799.0,Lower middle income,19.163027119196435
+TKM,320,181,2019,Turkmenistan,3. Upper middle income,7364438.0,Upper middle income,4.345205974984106
+TLS,2286,290,2019,Timor-Leste,4. Lower middle income,1384286.0,Lower middle income,165.1392848009732
+TON,131,49,2019,Tonga,4. Lower middle income,104597.0,Upper middle income,125.24259778005106
+TTO,3337,900,2019,Trinidad and Tobago,2. High income: nonOECD,1367510.0,High income,244.0201534175253
+TUN,17403,3420,2019,Tunisia,3. Upper middle income,12200431.0,Lower middle income,142.64250172801272
+TUR,153269,30169,2019,Turkey,3. Upper middle income,85325965.0,Upper middle income,179.6276197989674
+TWN,817049,23902,2019,Taiwan,2. High income: nonOECD,,,
+TZA,4218,1079,2019,Tanzania,5. Low income,66617606.0,Lower middle income,6.331659531565875
+UGA,1830,557,2019,Uganda,5. Low income,48656601.0,Low income,3.761051866323338
+UKR,331990,51763,2019,Ukraine,4. Lower middle income,37732836.0,Upper middle income,879.8437520042226
+URY,5528,1727,2019,Uruguay,3. Upper middle income,3388081.0,High income,163.16020779904613
+USA,1502737,449526,2019,United States of America,1. High income: OECD,336755052.0,High income,446.24037295808705
+UZB,18181,4659,2019,Uzbekistan,4. Lower middle income,35652307.0,Lower middle income,50.995297443164056
+VEN,10798,2525,2019,Venezuela,3. Upper middle income,28300854.0,Lower middle income,38.15432566098535
+VNM,270211,42843,2019,Vietnam,4. Lower middle income,100352192.0,Upper middle income,269.2626783877327
+VUT,16,9,2019,Vanuatu,4. Lower middle income,320409.0,Lower middle income,4.9936175325911565
+YEM,576,126,2019,Yemen,4. Lower middle income,39390799.0,Low income,1.462270414976858
+ZAF,69408,17408,2019,South Africa,3. Upper middle income,63212384.0,Upper middle income,109.80126932089763
+ZMB,1847,575,2019,Zambia,4. Lower middle income,20723965.0,Lower middle income,8.912387180734962
+ZWE,1546,447,2019,Zimbabwe,5. Low income,16340822.0,Lower middle income,9.460968364994123
+AFG,4123,1296,2025,Afghanistan,5. Low income,41454761.0,Low income,9.945781619631095
+AGO,3773,1078,2025,Angola,3. Upper middle income,36749906.0,Lower middle income,10.266692927051297
+ALB,8399,1636,2025,Albania,4. Lower middle income,2411658.0,Upper middle income,348.2666281869154
+ALD,308,100,2025,Åland,1. High income: OECD,,,
+ARE,30096,5108,2025,United Arab Emirates,2. High income: nonOECD,10483751.0,High income,287.0728234579398
+ARG,49358,16502,2025,Argentina,3. Upper middle income,45538401.0,Upper middle income,108.38764408965523
+ARM,11034,2144,2025,Armenia,4. Lower middle income,2964300.0,Upper middle income,372.22953142394493
+ATA,146,16,2025,Antarctica,2. High income: nonOECD,,,
+AUS,153922,37918,2025,Australia,1. High income: OECD,26659922.0,High income,577.3535271408522
+AUT,84955,21111,2025,Austria,1. High income: OECD,9131761.0,High income,930.3243919765312
+AZE,10446,3302,2025,Azerbaijan,3. Upper middle income,10153958.0,Upper middle income,102.8761395310085
+BDI,762,185,2025,Burundi,5. Low income,13689450.0,Low income,5.566330276234618
+BEL,29207,11838,2025,Belgium,1. High income: OECD,11779946.0,High income,247.9383182231905
+BEN,8992,1663,2025,Benin,5. Low income,14111034.0,Lower middle income,63.723182865267
+BFA,1434,525,2025,Burkina Faso,5. Low income,23025776.0,Low income,6.2278031367976485
+BGD,58693,14332,2025,Bangladesh,5. Low income,171466990.0,Lower middle income,34.2299121247769
+BGR,70077,11267,2025,Bulgaria,3. Upper middle income,6446596.0,High income,1087.0388031140776
+BHS,117,63,2025,Bahamas,2. High income: nonOECD,399440.0,High income,29.291007410374522
+BIH,15784,4841,2025,Bosnia and Herz.,3. Upper middle income,3185073.0,Upper middle income,495.56164018846664
+BLR,52697,12175,2025,Belarus,3. Upper middle income,9178298.0,Upper middle income,574.1478430968356
+BLZ,799,295,2025,Belize,4. Lower middle income,411106.0,Upper middle income,194.35376764143555
+BOL,40227,6631,2025,Bolivia,4. Lower middle income,12244159.0,Lower middle income,328.54032686115886
+BRA,445178,88883,2025,Brazil,3. Upper middle income,211140729.0,Upper middle income,210.84420902989305
+BRN,1051,145,2025,Brunei,2. High income: nonOECD,458949.0,High income,229.00147946721748
+BTN,2465,619,2025,Bhutan,4. Lower middle income,786385.0,Lower middle income,313.45969213553155
+BWA,5618,1203,2025,Botswana,3. Upper middle income,2480244.0,Upper middle income,226.50997240594072
+CAF,835,72,2025,Central African Rep.,5. Low income,5152421.0,Low income,16.205973851903792
+CAN,115184,36092,2025,Canada,1. High income: OECD,40049088.0,High income,287.6070486299214
+CHE,49480,13226,2025,Switzerland,1. High income: OECD,8888822.0,High income,556.6541888227708
+CHL,161506,22343,2025,Chile,3. Upper middle income,19658835.0,High income,821.5441047244152
+CHN,235559,82534,2025,China,3. Upper middle income,1410710000.0,Upper middle income,16.697903892366256
+CIV,3662,1089,2025,Côte d'Ivoire,4. Lower middle income,31165654.0,Lower middle income,11.750114404786757
+CMR,4040,1083,2025,Cameroon,4. Lower middle income,28372687.0,Lower middle income,14.239046164362225
+COD,5624,1093,2025,Dem. Rep. Congo,5. Low income,105789731.0,Low income,5.316205974661189
+COG,91,42,2025,Congo,4. Lower middle income,6182885.0,Lower middle income,1.4718048289754702
+COL,157219,16636,2025,Colombia,3. Upper middle income,52321152.0,Upper middle income,300.4884143223758
+COM,54,11,2025,Comoros,5. Low income,850387.0,Lower middle income,6.350050036042414
+CPV,197,44,2025,Cabo Verde,4. Lower middle income,522331.0,Upper middle income,37.71554818687767
+CRI,26441,4789,2025,Costa Rica,3. Upper middle income,5105525.0,High income,517.8899329647784
+CUB,8296,1382,2025,Cuba,3. Upper middle income,11019931.0,Upper middle income,75.28177808009869
+CYN,4059,922,2025,N. Cyprus,3. Upper middle income,,,
+CYP,9475,1878,2025,Cyprus,2. High income: nonOECD,1344976.0,High income,704.4735370742675
+CZE,55212,16655,2025,Czechia,1. High income: OECD,10864042.0,High income,508.2086391050403
+DEU,350530,106201,2025,Germany,1. High income: OECD,83287273.0,High income,420.86862418943645
+DJI,28,17,2025,Djibouti,4. Lower middle income,1152944.0,Lower middle income,2.428565481064128
+DMA,108,45,2025,Dominica,3. Upper middle income,66510.0,Upper middle income,162.38159675236807
+DNK,27553,9803,2025,Denmark,1. High income: OECD,5946952.0,High income,463.3129710816566
+DOM,19202,3421,2025,Dominican Rep.,3. Upper middle income,11331265.0,Upper middle income,169.46033827644132
+DZA,90905,16546,2025,Algeria,3. Upper middle income,46164219.0,Upper middle income,196.91657731716418
+ECU,17362,3879,2025,Ecuador,3. Upper middle income,17980083.0,Upper middle income,96.56240185320613
+EGY,82407,15424,2025,Egypt,4. Lower middle income,114535772.0,Lower middle income,71.94870088272509
+ERI,5,4,2025,Eritrea,5. Low income,3470390.0,Low income,0.14407602603741942
+ESP,114916,26313,2025,Spain,1. High income: OECD,48352528.0,High income,237.66285808262188
+EST,19950,5518,2025,Estonia,1. High income: OECD,1370286.0,High income,1455.9004470599568
+ETH,16947,2290,2025,Ethiopia,5. Low income,128691692.0,Low income,13.16868224873444
+FIN,140243,35847,2025,Finland,1. High income: OECD,5583911.0,High income,2511.555073137806
+FJI,1141,325,2025,Fiji,4. Lower middle income,924145.0,Upper middle income,123.46547349171396
+FLK,23,12,2025,Falkland Is.,1. High income: OECD,,,
+FRA,167624,57281,2025,France,1. High income: OECD,68372286.0,High income,245.16366177956957
+FRO,234,111,2025,Faeroe Is.,2. High income: nonOECD,54398.0,High income,430.1628736350601
+GAB,331,153,2025,Gabon,3. Upper middle income,2484789.0,Upper middle income,13.321050600272297
+GBR,355702,93031,2025,United Kingdom,1. High income: OECD,68526000.0,High income,519.0759711642296
+GEO,18617,3193,2025,Georgia,4. Lower middle income,3715483.0,Upper middle income,501.0654065702898
+GHA,4398,1448,2025,Ghana,4. Lower middle income,33787914.0,Lower middle income,13.016488676986686
+GIN,805,246,2025,Guinea,5. Low income,14405468.0,Lower middle income,5.588155830827572
+GMB,786,224,2025,Gambia,5. Low income,2697845.0,Low income,29.134364650304224
+GNB,181,60,2025,Guinea-Bissau,5. Low income,2153339.0,Low income,8.405550635547863
+GNQ,3,3,2025,Eq. Guinea,2. High income: nonOECD,1847549.0,Upper middle income,0.16237729012870566
+GRC,108760,15932,2025,Greece,1. High income: OECD,10407351.0,High income,1045.0305750233656
+GRD,116,50,2025,Grenada,3. Upper middle income,117081.0,Upper middle income,99.07670757851402
+GRL,105,49,2025,Greenland,2. High income: nonOECD,56865.0,High income,184.6478501714587
+GTM,26327,6884,2025,Guatemala,4. Lower middle income,18124838.0,Upper middle income,145.25371206076434
+GUM,1474,248,2025,Guam,2. High income: nonOECD,166506.0,High income,885.2533842624289
+GUY,487,149,2025,Guyana,4. Lower middle income,826353.0,High income,58.93365184128333
+HKG,85854,1759,2025,Hong Kong,2. High income: nonOECD,7536100.0,High income,1139.2364750998527
+HND,12208,3070,2025,Honduras,4. Lower middle income,10644851.0,Lower middle income,114.68455500222596
+HRV,75759,13875,2025,Croatia,2. High income: nonOECD,3859686.0,High income,1962.828064251859
+HTI,1882,309,2025,Haiti,5. Low income,11637398.0,Lower middle income,16.171999960815985
+HUN,70336,17641,2025,Hungary,1. High income: OECD,9592186.0,High income,733.2635126132875
+IDN,1159106,130513,2025,Indonesia,4. Lower middle income,281190067.0,Upper middle income,412.2144186551227
+IMN,192,51,2025,Isle of Man,2. High income: nonOECD,84165.0,High income,228.12332917483513
+IND,2438751,390309,2025,India,4. Lower middle income,1438069596.0,Lower middle income,169.5850469812728
+IRL,56361,15490,2025,Ireland,1. High income: OECD,5311538.0,High income,1061.105088582629
+IRN,258260,36853,2025,Iran,3. Upper middle income,90608707.0,Upper middle income,285.0277953971907
+IRQ,41891,10446,2025,Iraq,4. Lower middle income,45074049.0,Upper middle income,92.93817824087648
+ISL,1430,651,2025,Iceland,1. High income: OECD,385663.0,High income,370.7900420833733
+ISR,42112,6661,2025,Israel,1. High income: OECD,9849000.0,High income,427.5764036958066
+ITA,861981,134059,2025,Italy,1. High income: OECD,58984216.0,High income,1461.3757009163267
+JAM,1964,708,2025,Jamaica,3. Upper middle income,2839786.0,Upper middle income,69.1601409401976
+JOR,41114,6086,2025,Jordan,3. Upper middle income,11439213.0,Upper middle income,359.41283722927443
+JPN,186959,36477,2025,Japan,1. High income: OECD,124516650.0,High income,150.14779148009524
+KAZ,159212,24732,2025,Kazakhstan,3. Upper middle income,20330104.0,Upper middle income,783.1342131845465
+KEN,17907,4802,2025,Kenya,5. Low income,55339003.0,Lower middle income,32.35873259227312
+KGZ,14363,3256,2025,Kyrgyzstan,5. Low income,7099750.0,Lower middle income,202.30289798936582
+KHM,29709,6319,2025,Cambodia,5. Low income,17423880.0,Lower middle income,170.50737264030744
+KOR,37359,9817,2025,South Korea,1. High income: OECD,51712619.0,High income,72.24348857674372
+KOS,4015,1231,2025,Kosovo,4. Lower middle income,,,
+KWT,39845,2811,2025,Kuwait,2. High income: nonOECD,4853420.0,High income,820.9674827235228
+LAO,11972,3715,2025,Laos,4. Lower middle income,7664993.0,Lower middle income,156.19061883031074
+LBN,4755,1541,2025,Lebanon,3. Upper middle income,5773493.0,Lower middle income,82.35915415503231
+LBR,642,183,2025,Liberia,5. Low income,5493031.0,Low income,11.687536443905014
+LBY,18143,4525,2025,Libya,3. Upper middle income,7305659.0,Upper middle income,248.3417307049234
+LCA,39,27,2025,Saint Lucia,3. Upper middle income,179285.0,Upper middle income,21.753074713445073
+LKA,62119,10691,2025,Sri Lanka,4. Lower middle income,22037000.0,Upper middle income,281.885011571448
+LSO,1930,250,2025,Lesotho,4. Lower middle income,2311472.0,Lower middle income,83.49657707296477
+LTU,42606,10249,2025,Lithuania,3. Upper middle income,2871585.0,High income,1483.7102157867519
+LUX,1884,728,2025,Luxembourg,1. High income: OECD,666430.0,High income,282.7003586273127
+LVA,27508,7240,2025,Latvia,3. Upper middle income,1883710.0,High income,1460.3097079699103
+MAR,47377,10392,2025,Morocco,4. Lower middle income,37712505.0,Lower middle income,125.62676491524496
+MDA,5815,1750,2025,Moldova,4. Lower middle income,2457783.0,Upper middle income,236.59533815637914
+MDG,4588,643,2025,Madagascar,5. Low income,31195932.0,Low income,14.707045777635365
+MEX,228158,50695,2025,Mexico,3. Upper middle income,129739759.0,Upper middle income,175.8581962527
+MKD,17304,2573,2025,North Macedonia,3. Upper middle income,1827816.0,Upper middle income,946.703606927612
+MLI,767,247,2025,Mali,5. Low income,23769127.0,Low income,3.22687492897825
+MMR,5461,1664,2025,Myanmar,5. Low income,54133798.0,Lower middle income,10.087967594662397
+MNE,4460,890,2025,Montenegro,3. Upper middle income,623529.0,Upper middle income,715.283491224947
+MNG,4559,884,2025,Mongolia,4. Lower middle income,3481145.0,Upper middle income,130.96265740151588
+MNP,441,98,2025,N. Mariana Is.,2. High income: nonOECD,45143.0,High income,976.8956427353079
+MOZ,8429,1743,2025,Mozambique,5. Low income,33635160.0,Low income,25.06008593388585
+MRT,1188,327,2025,Mauritania,5. Low income,5022441.0,Lower middle income,23.653836849452286
+MUS,814,229,2025,Mauritius,3. Upper middle income,1248647.0,Upper middle income,65.1905622645952
+MWI,1346,478,2025,Malawi,5. Low income,21104482.0,Low income,6.377792167559478
+MYS,691475,43604,2025,Malaysia,3. Upper middle income,35126298.0,Upper middle income,1968.539354759218
+NAM,2905,810,2025,Namibia,3. Upper middle income,2963095.0,Lower middle income,98.03938112007884
+NCL,223,54,2025,New Caledonia,2. High income: nonOECD,289870.0,High income,76.93103805154034
+NER,685,254,2025,Niger,5. Low income,26159867.0,Low income,2.6185148418376896
+NGA,38335,8436,2025,Nigeria,4. Lower middle income,227882945.0,Lower middle income,16.822233010899524
+NIC,10569,2899,2025,Nicaragua,4. Lower middle income,6823613.0,Lower middle income,154.8886198557861
+NLD,59777,21053,2025,Netherlands,1. High income: OECD,17877117.0,High income,334.3771817346164
+NOR,17691,8296,2025,Norway,1. High income: OECD,5519601.0,High income,320.51229789979385
+NPL,6191,2271,2025,Nepal,5. Low income,29694614.0,Lower middle income,20.84889872621345
+NZL,12985,4657,2025,New Zealand,1. High income: OECD,5200000.0,High income,249.71153846153845
+OMN,7533,3146,2025,Oman,2. High income: nonOECD,5049269.0,High income,149.18991244079095
+PAK,595232,56732,2025,Pakistan,4. Lower middle income,247504495.0,Lower middle income,240.49341002877543
+PAN,12308,2469,2025,Panama,3. Upper middle income,4458759.0,High income,276.0409342599589
+PER,117299,15990,2025,Peru,3. Upper middle income,33845617.0,Upper middle income,346.570724357012
+PHL,396552,32803,2025,Philippines,4. Lower middle income,114891199.0,Upper middle income,345.15437514060585
+PNG,2159,579,2025,Papua New Guinea,4. Lower middle income,10389635.0,Lower middle income,20.780325776603316
+POL,266190,67118,2025,Poland,1. High income: OECD,36687353.0,High income,725.5633841994543
+PRI,15763,3556,2025,Puerto Rico,2. High income: nonOECD,3203794.0,High income,492.01041015745704
+PRK,13,9,2025,North Korea,5. Low income,26418204.0,Low income,0.0492084927499235
+PRT,89008,18398,2025,Portugal,1. High income: OECD,10578174.0,High income,841.4306665781826
+PRY,8737,3131,2025,Paraguay,4. Lower middle income,6844146.0,Upper middle income,127.65654034849636
+PSX,32733,3816,2025,Palestine,4. Lower middle income,,,
+PYF,146,46,2025,Fr. Polynesia,2. High income: nonOECD,281118.0,High income,51.93548616595166
+QAT,7748,1648,2025,Qatar,2. High income: nonOECD,2656032.0,High income,291.71335285117044
+ROU,86543,17594,2025,Romania,3. Upper middle income,19061062.0,High income,454.03031583444823
+RUS,1345911,272579,2025,Russia,3. Upper middle income,143826130.0,High income,935.7903184908055
+RWA,7439,910,2025,Rwanda,5. Low income,13954471.0,Low income,53.309079219126254
+SAH,42,21,2025,W. Sahara,5. Low income,,,
+SAU,603566,42978,2025,Saudi Arabia,2. High income: nonOECD,33702731.0,High income,1790.8519045533728
+SDN,2569,1049,2025,Sudan,4. Lower middle income,50042791.0,Low income,5.133606556836528
+SDS,268,92,2025,S. Sudan,5. Low income,,,
+SEN,1971,667,2025,Senegal,4. Lower middle income,18077573.0,Lower middle income,10.903012257231653
+SLB,21,8,2025,Solomon Is.,4. Lower middle income,800005.0,Lower middle income,2.6249835938525385
+SLE,302,102,2025,Sierra Leone,5. Low income,8460512.0,Low income,3.5695239247932045
+SLV,21767,3536,2025,El Salvador,4. Lower middle income,6309624.0,Upper middle income,344.9809370574221
+SMR,4299,752,2025,San Marino,2. High income: nonOECD,33860.0,High income,12696.396928529239
+SOL,1698,305,2025,Somaliland,4. Lower middle income,,,
+SOM,804,186,2025,Somalia,5. Low income,18358615.0,Low income,4.3794153317121145
+SRB,39037,9800,2025,Serbia,3. Upper middle income,6623183.0,Upper middle income,589.3993869714909
+STP,3,3,2025,São Tomé and Principe,4. Lower middle income,230871.0,Lower middle income,1.2994269527138533
+SUR,1213,358,2025,Suriname,3. Upper middle income,628886.0,Upper middle income,192.88074468186602
+SVK,27560,8975,2025,Slovakia,1. High income: OECD,5426740.0,High income,507.85554494963833
+SVN,25135,6220,2025,Slovenia,1. High income: OECD,2120461.0,High income,1185.3554486500811
+SWE,26382,10523,2025,Sweden,1. High income: OECD,10536632.0,High income,250.38361404289338
+SWZ,2315,291,2025,eSwatini,4. Lower middle income,1230506.0,Lower middle income,188.1339871565031
+SYR,46770,6868,2025,Syria,4. Lower middle income,23594623.0,Low income,198.22312905783662
+TCA,62,39,2025,Turks and Caicos Is.,2. High income: nonOECD,46198.0,High income,134.20494393696697
+TCD,282,115,2025,Chad,5. Low income,19319064.0,Low income,1.4596980474830457
+TGO,2476,878,2025,Togo,5. Low income,8223850.0,Lower middle income,30.107553031730884
+THA,617481,70601,2025,Thailand,3. Upper middle income,71702435.0,Upper middle income,861.1715906161346
+TJK,8817,2045,2025,Tajikistan,5. Low income,10389799.0,Lower middle income,84.86208443493469
+TKM,763,374,2025,Turkmenistan,3. Upper middle income,7364438.0,Upper middle income,10.360600496602727
+TLS,2848,477,2025,Timor-Leste,4. Lower middle income,1384286.0,Lower middle income,205.73783163305848
+TON,421,71,2025,Tonga,4. Lower middle income,104597.0,Upper middle income,402.4972035526831
+TTO,3152,757,2025,Trinidad and Tobago,2. High income: nonOECD,1367510.0,High income,230.49191596405146
+TUN,51254,5245,2025,Tunisia,3. Upper middle income,12200431.0,Lower middle income,420.09991286373406
+TUR,109205,29480,2025,Turkey,3. Upper middle income,85325965.0,Upper middle income,127.9856606368296
+TWN,383008,19179,2025,Taiwan,2. High income: nonOECD,,,
+TZA,10493,2941,2025,Tanzania,5. Low income,66617606.0,Lower middle income,15.751091385661622
+UGA,4750,1393,2025,Uganda,5. Low income,48656601.0,Low income,9.762293095648008
+UKR,111351,30696,2025,Ukraine,4. Lower middle income,37732836.0,Upper middle income,295.1037128510563
+URY,4588,1538,2025,Uruguay,3. Upper middle income,3388081.0,High income,135.41588881729805
+USA,1438461,398113,2025,United States of America,1. High income: OECD,336755052.0,High income,427.15350265925633
+UZB,53479,12788,2025,Uzbekistan,4. Lower middle income,35652307.0,Lower middle income,150.00151322605853
+VEN,20616,5534,2025,Venezuela,3. Upper middle income,28300854.0,Lower middle income,72.84585829106075
+VNM,244460,45805,2025,Vietnam,4. Lower middle income,100352192.0,Upper middle income,243.60205305729644
+VUT,26,11,2025,Vanuatu,4. Lower middle income,320409.0,Lower middle income,8.11462849046063
+WSM,15,11,2025,Samoa,4. Lower middle income,216663.0,Upper middle income,6.923194084822974
+YEM,23730,1883,2025,Yemen,4. Lower middle income,39390799.0,Low income,60.24249470034867
+ZAF,68856,20452,2025,South Africa,3. Upper middle income,63212384.0,Upper middle income,108.92802271149907
+ZMB,5769,1235,2025,Zambia,4. Lower middle income,20723965.0,Lower middle income,27.837337111889543
+ZWE,8133,1875,2025,Zimbabwe,5. Low income,16340822.0,Lower middle income,49.77105802878216

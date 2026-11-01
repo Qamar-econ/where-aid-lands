@@ -1,0 +1,59 @@
+development projects located, planning 2009-2024: 1279 | district-years 1200 | mean N 1.07
+correlations (2016 cross-section):
+        access  conn  need  lnpop
+access    1.00  0.55 -0.39   0.85
+conn      0.55  1.00 -0.66   0.32
+need     -0.39 -0.66  1.00  -0.10
+lnpop     0.85  0.32 -0.10   1.00
+VIF: {'access': np.float64(5.92), 'conn': np.float64(2.2), 'need': np.float64(2.05), 'lnpop': np.float64(4.71)}
+                  spec  lnpop_b  lnpop_p  lnpop_pct  access_p  access_pct  conn_p  conn_pct  need_p  need_pct
+   (0) population only    0.774      0.0        NaN       NaN         NaN     NaN       NaN     NaN       NaN
+       (1) access only    0.926      0.0        NaN     0.431     -14.100     NaN       NaN     NaN       NaN
+         (2) conn only    0.701      0.0        NaN       NaN         NaN   0.421    12.459     NaN       NaN
+         (3) need only    0.712      0.0        NaN       NaN         NaN     NaN       NaN   0.336   -10.041
+             (4) joint    0.998      0.0        NaN     0.046     -37.841   0.154    22.820   0.037   -18.710
+(5) joint, all sectors    1.058      0.0        NaN     0.006     -43.940   0.048    36.792   0.294   -12.067
+access components, one at a time:
+   component  pct_per_sd     p
+ tt_town_dry     -17.344 0.371
+   tt_hq_dry     -28.653 0.054
+ tt_hosp_dry     -18.928 0.266
+  tt_ktm_dry      -8.666 0.406
+road_density     -43.235 0.001
+ paved_share       7.297 0.365
+share_walk30     -27.421 0.021
+heterogeneity (one construct at a time, % per SD; theta from population-only model):
+                              group  n_projects  access_pct  access_p  conn_pct  conn_p  need_pct  need_p  lnpop_b  theta_p_eq1
+                    All development        1279     -14.100     0.431    12.459   0.421   -10.041   0.336    0.774        0.034
+                Category: Education         203       6.325     0.876    53.812   0.081   -17.360   0.361    0.755        0.400
+                   Category: Health         209       7.434     0.690    29.867   0.140    -3.032   0.843    0.924        0.693
+       Category: Water & sanitation         111     -32.729     0.042   -25.471   0.271     4.494   0.780    0.642        0.029
+               Category: Governance         231     -35.741     0.163    -4.156   0.855    -3.877   0.846    0.975        0.835
+ Category: Agriculture & production         225     -46.140     0.004   -10.505   0.526    26.861   0.114    0.559        0.000
+Category: Environment & multisector         217      29.670     0.521    24.521   0.439   -48.826   0.003    0.831        0.328
+             Category: Other social          83     -32.163     0.375    24.534   0.432     0.524   0.984    0.499        0.072
+                        Size: < $1M         992     -11.258     0.608    12.285   0.462   -13.069   0.242    0.739        0.008
+                       Size: $1-10M         184     -28.652     0.129     2.149   0.920     4.259   0.844    0.819        0.350
+                       Size: > $10M          89     -31.086     0.096    27.520   0.279     9.436   0.641    1.004        0.984
+                   Donor: Bilateral         909     -15.466     0.470    10.287   0.537   -10.499   0.366    0.736        0.003
+                         Donor: MDB          74     -18.371     0.346    22.451   0.319     8.814   0.666    1.305        0.127
+                          Donor: UN         119     -11.514     0.689     4.463   0.877    -8.378   0.744    0.620        0.068
+              Donor: NGO/foundation         177      -8.594     0.616    14.928   0.498   -13.222   0.359    0.822        0.368
+                  Period: 2010-2014         307       1.956     0.941    85.128   0.113   -18.082   0.126    0.783        0.087
+                  Period: 2015-2019         506     -13.907     0.555    10.468   0.631    -5.701   0.697    0.765        0.080
+                  Period: 2020-2025         466     -25.331     0.120    11.576   0.456    -8.842   0.483    0.778        0.063
+              Placebo: Humanitarian         347     -47.852     0.053   -12.989   0.616    33.867   0.227    0.556        0.050
+            Placebo: Infrastructure         125     -14.209     0.569    55.151   0.101   -28.331   0.081    0.915        0.648
+robustness (one construct at a time):
+                                       spec  access_p  access_pct  conn_p  conn_pct  need_p  need_pct  lnpop_b  lnpop_p  lnpop_pct
+                                    R0 main     0.431     -14.100   0.421    12.459   0.336   -10.041    0.774      NaN        NaN
+  R1 IATI/WB only (single source 2010-2025)     0.392     -15.113   0.436    12.107   0.317   -10.542    0.779      NaN        NaN
+                         R2 binary counting     0.047     -19.378   0.398     9.323   0.871    -1.342    0.497      NaN        NaN
+                       R3 USD-weighted ($m)     0.047     -43.747   0.773     7.815   0.342    24.048    1.056      NaN        NaN
+              R4 excluding Kathmandu valley     0.872       4.008   0.017    42.810   0.027   -18.587    0.644      NaN        NaN
+   R5 excluding earthquake & COVID projects     0.568     -10.931   0.366    14.240   0.213   -12.887    0.794      NaN        NaN
+                R6 single-district projects     0.967       1.049   0.189    27.634   0.157   -17.170    0.897      NaN        NaN
+             R7 projects in <= 10 districts     0.468     -13.485   0.449    11.949   0.309   -10.918    0.799      NaN        NaN
+R8 documented planning year where available     0.431     -14.090   0.426    12.309   0.336   -10.042    0.774      NaN        NaN
+ R10 within: district + year FE (conn only)       NaN         NaN   0.065   -22.972     NaN       NaN    3.993    0.001        NaN
+portfolio status (all years): {'national_unresolved': 0.601, 'located': 0.212, 'central_institution': 0.187} | by USD: {'central_institution': 0.335, 'located': 0.338, 'national_unresolved': 0.327}

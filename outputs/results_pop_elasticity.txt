@@ -1,0 +1,6 @@
+Nepal 2009-2013 (districts)  pop only      theta 0.84 (95% CI 0.48-1.20; p[theta=1] 0.385)
+Nepal 2009-2013 (districts)  + covariates  theta 0.56 (95% CI -0.07-1.19; p[theta=1] 0.168)
+Timor-Leste 2009-2015 (postos) pop only      theta 0.48 (95% CI 0.34-0.62; p[theta=1] 0.000)
+Timor-Leste 2009-2015 (postos) + covariates  theta 0.38 (95% CI 0.23-0.54; p[theta=1] 0.000)
+Nepal 2019-2024 (districts)  pop only      theta 0.67 (95% CI 0.42-0.93; p[theta=1] 0.012)
+Nepal 2019-2024 (districts)  + covariates  theta 0.53 (95% CI 0.12-0.93; p[theta=1] 0.023)

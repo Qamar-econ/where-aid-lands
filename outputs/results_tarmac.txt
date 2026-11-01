@@ -1,0 +1,16 @@
+==========================================================================================
+Timor-Leste: 2222 precise dev-project locations (181 projects), tarmac network points 47,555
+  roadside percentile (tarmac): mean 0.494 (SE 0.007); median 0.520   [0.5 = no bias]
+  network percentile (nearest Ookla-tested tile): mean 0.506 (SE 0.007)
+  project-weighted (181 projects): tarmac percentile 0.491 (SE 0.020), network percentile 0.492 (SE 0.020); share of projects with mean tarmac percentile < 0.5: 60%
+  within 1 km of tarmac: projects 39% vs population 51% (ratio 0.78)
+  within 2 km of tarmac: projects 50% vs population 62% (ratio 0.80)
+  within 5 km of tarmac: projects 69% vs population 79% (ratio 0.87)
+==========================================================================================
+Nepal: 14877 precise dev-project locations (151 projects), tarmac network points 376,796
+  roadside percentile (tarmac): mean 0.535 (SE 0.002); median 0.552   [0.5 = no bias]
+  network percentile (nearest Ookla-tested tile): mean 0.526 (SE 0.002)
+  project-weighted (151 projects): tarmac percentile 0.417 (SE 0.016), network percentile 0.416 (SE 0.014); share of projects with mean tarmac percentile < 0.5: 60%
+  within 1 km of tarmac: projects 19% vs population 40% (ratio 0.46)
+  within 2 km of tarmac: projects 31% vs population 55% (ratio 0.57)
+  within 5 km of tarmac: projects 60% vs population 78% (ratio 0.76)

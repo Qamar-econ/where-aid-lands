@@ -1,0 +1,126 @@
+====================================================================================================
+A. REVERSE CAUSALITY: DO DEVELOPMENT PROJECTS ATTRACT POPULATION?
+  A1 growth 2010-15 ~ projects 2006-10 per 10k (excl Dili): b=+0.027 (se 0.895, p=0.975), R2=0.05  [access b=+0.450 p=0.148]
+  A2 + municipality FE: b=-0.473 (se 1.546, p=0.759), R2=0.22  [access b=+0.987 p=0.027]
+  A3 incl Dili + dummy: b=+0.027 (se 0.902, p=0.976), R2=0.06  [access b=+0.450 p=0.151]
+  simple Spearman (projects 2006-10 per capita vs growth 2010-15): rho=+0.13 p=0.329
+  A4 projects 2016-25 ~ growth 2010-15 (PPML): b=-0.007 per pp (p=0.879)
+  A5 WorldPop growth 2015-20 ~ log projects 2000-15 pc: b=-2.747 (p=0.000)
+  A6 projects 2006-10 ~ log census pop 2010: elasticity=0.39 (se 0.06); access b=+0.074 p=0.084; deprivation b=+0.024 p=0.556
+
+====================================================================================================
+B. ROADS vs NETWORK (excl. Dili; PPML; controls log pop + census deprivation)
+  outcome: precise
+    B1 physical only     phys_z=+0.014(p=0.801)   devR2=0.713 AIC=391.5
+    B2 network only      net_z=+0.108(p=0.029)   devR2=0.733 AIC=384.9
+    B3 both              phys_z=-0.011(p=0.841)  net_z=+0.111(p=0.023)   devR2=0.733 AIC=386.8
+    B4 interaction       phys_z=-0.011(p=0.838)  net_z=+0.113(p=0.020)  phys_z:net_z=-0.009(p=0.853)   devR2=0.733 AIC=388.7
+    B5 composite PC1     acc_z=+0.086(p=0.157)   devR2=0.725 AIC=387.7
+  outcome: all
+    B1 physical only     phys_z=+0.008(p=0.811)   devR2=0.700 AIC=408.2
+    B2 network only      net_z=+0.069(p=0.040)   devR2=0.719 AIC=403.3
+    B3 both              phys_z=-0.008(p=0.823)  net_z=+0.071(p=0.044)   devR2=0.719 AIC=405.2
+    B4 interaction       phys_z=-0.010(p=0.768)  net_z=+0.074(p=0.028)  phys_z:net_z=-0.019(p=0.527)   devR2=0.720 AIC=406.8
+    B5 composite PC1     acc_z=+0.051(p=0.136)   devR2=0.709 AIC=405.8
+  outcome: strict (no Dili-only)
+    B1 physical only     phys_z=+0.008(p=0.811)   devR2=0.700 AIC=408.2
+    B2 network only      net_z=+0.069(p=0.040)   devR2=0.719 AIC=403.3
+    B3 both              phys_z=-0.008(p=0.823)  net_z=+0.071(p=0.044)   devR2=0.719 AIC=405.2
+    B4 interaction       phys_z=-0.010(p=0.768)  net_z=+0.074(p=0.028)  phys_z:net_z=-0.019(p=0.527)   devR2=0.720 AIC=406.8
+    B5 composite PC1     acc_z=+0.051(p=0.136)   devR2=0.709 AIC=405.8
+  outcome: 2016-25 only
+    B1 physical only     phys_z=+0.070(p=0.670)   devR2=0.415 AIC=292.1
+    B2 network only      net_z=-0.037(p=0.656)   devR2=0.411 AIC=292.8
+    B3 both              phys_z=+0.083(p=0.619)  net_z=-0.061(p=0.448)   devR2=0.418 AIC=293.7
+    B4 interaction       phys_z=+0.090(p=0.580)  net_z=-0.091(p=0.311)  phys_z:net_z=+0.120(p=0.288)   devR2=0.434 AIC=293.2
+    B5 composite PC1     acc_z=+0.066(p=0.704)   devR2=0.413 AIC=292.5
+  2x2 groups (median splits):
+                   units        pop  precise    all_   dep  tt_h  precise_per10k  all_per10k
+grp2x2                                                                                      
+both high             21  467779.77    547.0  815.94 -0.48  4.85           11.69       17.44
+both low              20  220224.20    284.0  538.37  0.41  8.43           12.90       24.45
+network high only     10  134690.36    203.0  334.42  0.01  7.19           15.07       24.83
+road high only        10  165445.84    155.0  306.57  0.62  6.38            9.37       18.53
+  PPML 2x2 dummies vs 'both low':
+    both high            b=+0.094 p=0.450 IRR=1.10
+    network high only    b=+0.184 p=0.080 IRR=1.20
+    road high only       b=-0.135 p=0.328 IRR=0.87
+  all components jointly (precise outcome):
+    c_log_tt     b=-0.017 p=0.820  VIF=2.4
+    c_paved      b=-0.008 p=0.852  VIF=1.8
+    c_roadden    b=-0.049 p=0.591  VIF=2.2
+    c_steep      b=+0.046 p=0.294  VIF=1.3
+    c_wetpen     b=-0.049 p=0.361  VIF=2.0
+    c_net_tiles  b=+0.195 p=0.060  VIF=5.9
+    c_net_tests  b=-0.080 p=0.436  VIF=5.3
+
+====================================================================================================
+C. ROAD UPGRADES — measurement-consistent Budget Book panel (municipality x edition, 2013-2025)
+  panel: 12 municipalities x 11 editions; non-infra project mentions = 206
+  C1 counts (PPML, mun+edition FE, cluster mun): post b=-0.364 (se 0.328, p=0.268) IRR=0.70
+  C2 share of all municipal mentions: post b=-2.03 pp (p=0.371)
+  C3 log(1+planned amount, USD k): post b=-0.736 (p=0.599)
+  event study coefs: -4:+0.07, -3:+0.24, -2:-0.39, -1:+0.00, +0:-0.31, +1:-0.42, +2:-0.46, +3:-0.88, +4:-0.40
+  mean per municipality-edition:
+                                     amt                   n               share          
+period                         2013-2019 2020-2025 2013-2019 2020-2025 2013-2019 2020-2025
+region                                                                                    
+East corridor (Baucau, Lautém)   991.737  1002.042     1.857      1.75     0.071     0.059
+Not upgraded                     576.526   570.583     1.257      1.50     0.043     0.054
+Other upgraded                  2908.594   565.083     1.714      1.60     0.068     0.060
+  our DB, non-infra dev projects by period:
+                            projects                           usd_m                        
+period                       2006-10 2011-15 2016-20 2021-26 2006-10 2011-15 2016-20 2021-26
+grp                                                                                         
+East (Baucau+Lautém postos)    164.0   170.2    26.0    23.0    72.3    86.4    58.7    23.7
+Not upgraded postos            326.9   350.1    65.2    80.5   159.7   181.9   155.0    75.9
+Other upgraded postos          276.7   288.8    51.8    73.5   141.8   140.9    72.0    85.1
+
+====================================================================================================
+D. SENSITIVITY BY CATEGORY / ICT / SIZE / DURATION (PPML, excl. Dili; phys & net jointly; controls log pop, deprivation)
+  교육                 N=   342  road/phys b=-0.104(p=0.020)  network b=-0.002(p=0.975)  deprivation b=-0.106(p=0.054)
+  보건                 N=   439  road/phys b=+0.010(p=0.734)  network b=+0.064(p=0.124)  deprivation b=+0.139(p=0.006)
+  식수·위생              N=   151  road/phys b=+0.125(p=0.356)  network b=+0.076(p=0.495)  deprivation b=+0.064(p=0.618)
+  기타 사회              N=   106  road/phys b=+0.235(p=0.003)  network b=+0.005(p=0.954)  deprivation b=+0.304(p=0.001)
+  거버넌스               N=   484  road/phys b=+0.043(p=0.355)  network b=+0.089(p=0.064)  deprivation b=-0.077(p=0.170)
+  생산부문               N=   428  road/phys b=-0.071(p=0.113)  network b=+0.153(p=0.008)  deprivation b=-0.002(p=0.979)
+  환경·복합              N=    46  road/phys b=-0.476(p=0.068)  network b=-0.218(p=0.169)  deprivation b=-0.795(p=0.000)
+  교통 인프라             N=   194  road/phys b=+0.188(p=0.012)  network b=-0.055(p=0.539)  deprivation b=-0.093(p=0.384)
+  에너지 인프라            N=    21  road/phys b=-0.724(p=0.062)  network b=+0.270(p=0.467)  deprivation b=-0.419(p=0.179)
+  통신 인프라             N=    14  road/phys b=-0.455(p=0.020)  network b=+0.312(p=0.118)  deprivation b=-0.421(p=0.036)
+  인도적 지원             N=    72  road/phys b=-0.143(p=0.026)  network b=-0.159(p=0.060)  deprivation b=-0.087(p=0.288)
+  ICT 요소 포함          N=   145  road/phys b=-0.318(p=0.243)  network b=-0.206(p=0.150)  deprivation b=-0.420(p=0.004)
+  ICT 미포함            N=  1850  road/phys b=+0.015(p=0.654)  network b=+0.089(p=0.008)  deprivation b=+0.028(p=0.430)
+  소규모 (<$0.12m)      N=   178  road/phys b=-0.066(p=0.655)  network b=+0.078(p=0.458)  deprivation b=+0.146(p=0.268)
+  중규모                N=   729  road/phys b=+0.045(p=0.193)  network b=+0.055(p=0.169)  deprivation b=-0.005(p=0.900)
+  대규모 (>$0.82m)      N=  1034  road/phys b=-0.028(p=0.420)  network b=+0.088(p=0.019)  deprivation b=-0.023(p=0.547)
+  단기 (≤2년)           N=   805  road/phys b=-0.016(p=0.738)  network b=+0.096(p=0.036)  deprivation b=+0.010(p=0.836)
+  중기 (3-5년)          N=   806  road/phys b=+0.009(p=0.823)  network b=+0.036(p=0.309)  deprivation b=-0.049(p=0.185)
+  장기 (≥6년)           N=   259  road/phys b=-0.109(p=0.161)  network b=+0.152(p=0.017)  deprivation b=+0.073(p=0.307)
+  STACKED (unit FE) ICT vs non-ICT: extra network sensitivity of ICT projects = +0.073 (p=0.684); extra road sensitivity = -0.197 (p=0.567)
+  STACKED large vs small: network +0.099 (p=0.540); road +0.029 (p=0.865)
+  STACKED long vs short: network +0.039 (p=0.619); road -0.069 (p=0.521)
+
+====================================================================================================
+E. INFRASTRUCTURE CROWD-IN: do other projects follow access-infrastructure projects? (unit-year PPML, excl. Dili)
+  E1 cumulative infra projects (t-1), 2006-25: np.log1p(cum_access_l1)=+0.127(p=0.276)
+  E2 any infra start in t-1..t-3, 2006-25: any_access_l1_3=-0.025(p=0.712)
+  E3 lags + leads (placebo), 2006-25: any_access_l1_3=-0.021(p=0.757)  any_access_f1_3=+0.026(p=0.701)
+  E4 lags + leads, AMP era 2006-15 only: any_access_l1_3=-0.113(p=0.070)  any_access_f1_3=+0.067(p=0.370)
+  E5 cross-section: dev projects ~ log(1+infra projects): b=+0.109 (p=0.122)
+
+====================================================================================================
+F. HUB TEST: is the within-municipality access effect a 'municipal capital' effect?
+  F1 access PC1, muni FE: acc_z=+0.152(p=0.007)  dep_z=-0.054(p=0.341)
+  F2 + capital dummy: acc_z=+0.150(p=0.007)  mun_capital=-0.094(p=0.558)  dep_z=-0.081(p=0.233)
+  F3 network + road, muni FE: phys_z=-0.086(p=0.035)  net_z=+0.202(p=0.000)  dep_z=-0.037(p=0.485)
+  F4 + capital dummy: phys_z=-0.109(p=0.016)  net_z=+0.217(p=0.000)  mun_capital=-0.237(p=0.096)  dep_z=-0.102(p=0.091)
+
+====================================================================================================
+G. MAIN MODEL WITH CENSUS DEPRIVATION (replacing RWI) and strict outcome
+  np_dev        all 62   : access=+0.092(p=0.123)  deprivation=-0.101(p=0.006)  pop elasticity=0.44
+  np_dev        excl Dili: access=+0.086(p=0.157)  deprivation=-0.142(p=0.003)  pop elasticity=0.47
+  n_dev         all 62   : access=+0.034(p=0.441)  deprivation=-0.135(p=0.000)  pop elasticity=0.46
+  n_dev         excl Dili: access=+0.051(p=0.136)  deprivation=-0.023(p=0.506)  pop elasticity=0.37
+  n_dev_strict  all 62   : access=+0.039(p=0.326)  deprivation=-0.102(p=0.001)  pop elasticity=0.43
+  n_dev_strict  excl Dili: access=+0.051(p=0.136)  deprivation=-0.023(p=0.506)  pop elasticity=0.37

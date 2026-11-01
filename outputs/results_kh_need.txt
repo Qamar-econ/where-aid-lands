@@ -1,0 +1,27 @@
+RWI points 14399 | districts with RWI 140 of 141
+correlations:
+             need  access  conn  lights  prior_infra  lnpop
+need         1.00   -0.84 -0.04   -0.38        -0.25  -0.31
+access      -0.84    1.00  0.07    0.11         0.20   0.27
+conn        -0.04    0.07  1.00    0.04         0.08  -0.03
+lights      -0.38    0.11  0.04    1.00         0.28  -0.01
+prior_infra -0.25    0.20  0.08    0.28         1.00   0.35
+lnpop       -0.31    0.27 -0.03   -0.01         0.35   1.00
+NEED (= -RWI; % change in projects per SD more poverty):
+                                           spec  need_pct     p  projects
+                             need alone (count)   -52.863 0.014     304.9
+                         need + physical access    28.705 0.681     304.9
+                            need + night lights   -45.150 0.027     304.9
+                need, excluding Phnom Penh core   -51.055 0.057     229.2
+                        need, amount track ($m)    27.734 0.333    5355.1
+                           need, sector: Social   -67.883 0.000     173.5
+need, sector: Infrastructure (transport/energy)    35.764 0.081      17.0
+                       need, sector: Production   -59.598 0.018      38.2
+RACE (all five): need +70% (p 0.609), lights +114% (p 0.037), access +229% (p 0.296), conn +26% (p 0.131), prior_infra +176% (p 0.054) | VIF {'need': np.float64(4.6), 'lights': np.float64(1.48), 'access': np.float64(3.91), 'conn': np.float64(1.01), 'prior_infra': np.float64(1.27), 'lnpop': np.float64(1.28)}
+SHAPLEY (five factors explain 32.1 pp beyond population + province; full pseudo-R2 0.707):
+     factor  share_pct   pp
+     access       35.7 11.5
+       need       18.3  5.9
+     lights       16.9  5.4
+prior_infra       15.7  5.0
+       conn       13.5  4.3

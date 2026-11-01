@@ -1,0 +1,31 @@
+==========================================================================================
+Timor-Leste: N=61  (zero-light units: 2010 35, 2015 13)
+  2010 lights only                lights=+0.103(p=0.023)
+  2010 lights + network           lights=+0.082(p=0.063)  network=+0.127(p=0.013)
+  2010 lights + network + road    lights=+0.103(p=0.023)  network=+0.159(p=0.001)
+  2010 Gelbach (OLS): lights +0.060 -> +0.063; network explains +0.025 (41%, boot SE 0.024), road -0.028 (-46%)
+  2015 lights only                lights=+0.071(p=0.128)
+  2015 lights + network           lights=+0.065(p=0.095)  network=+0.139(p=0.007)
+  2015 lights + network + road    lights=+0.079(p=0.055)  network=+0.169(p=0.001)
+  2015 Gelbach (OLS): lights +0.036 -> +0.040; network explains +0.012 (33%, boot SE 0.025), road -0.016 (-44%)
+==========================================================================================
+Nepal: N=72  (zero-light units: 2010 27, 2015 1)
+  2010 lights only                lights=+0.001(p=0.985)
+  2010 lights + network           lights=-0.098(p=0.099)  network=+0.350(p=0.003)
+  2010 lights + network + road    lights=-0.102(p=0.089)  network=+0.404(p=0.002)
+  2010 Gelbach (OLS): lights +0.001 -> -0.087; network explains +0.102 (8650%, boot SE 0.102), road -0.015 (-1226%)
+  2015 lights only                lights=+0.011(p=0.873)
+  2015 lights + network           lights=-0.085(p=0.261)  network=+0.329(p=0.007)
+  2015 lights + network + road    lights=-0.085(p=0.251)  network=+0.380(p=0.005)
+  2015 Gelbach (OLS): lights +0.000 -> -0.091; network explains +0.111 (25196%, boot SE 0.074), road -0.019 (-4411%)
+
+==========================================================================================
+NEPAL PALIKA (district FE, SE clustered by district): 745 palikas in 72 districts; point-located dev projects = 10678
+  lights only                    ntl=-0.124(p=0.213)
+  network only                   net=+0.152(p=0.001)
+  road only                      road=-0.139(p=0.222)
+  lights + network               ntl=-0.214(p=0.019)  net=+0.188(p=0.000)
+  lights + network + road        ntl=-0.193(p=0.040)  net=+0.191(p=0.000)  road=-0.136(p=0.210)
+  + poverty (RWI)                ntl=-0.211(p=0.024)  net=+0.187(p=0.000)  road=-0.152(p=0.189)  poor=-0.038(p=0.696)
+  2010 lights + network + road   ntl10=-0.065(p=0.326)  net=+0.179(p=0.000)  road=-0.181(p=0.067)
+  Gelbach (OLS): lights -0.054 -> -0.099; network explains -120%, road 38%

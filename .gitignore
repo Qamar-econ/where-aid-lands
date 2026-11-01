@@ -1,0 +1,14 @@
+# raw downloads (3.7 GB) are rebuilt by scripts/kh_fetch.py and the other *_fetch scripts
+data/raw/
+data/interim/
+# large regenerable intermediates
+data/processed/cambodia/kh_cells_tt*.csv
+data/processed/nepal/cells_traveltime.csv
+data/processed/roads.gpkg
+*.tif
+*.osm.pbf
+# local test copies and Python caches
+site/_test.html
+__pycache__/
+*.pyc
+.ipynb_checkpoints/

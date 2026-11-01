@@ -1,0 +1,10 @@
+R-A Nepal 2009-2013: projects per size group {1: 231, 2: 20, 3: 14} | H1 road:size +0.122 (se 0.214, one-sided p 0.285) | H2 net:size +0.217 (se 0.315, one-sided p 0.754) | Holm min-p 0.570
+    size group 1: road +15% (p 0.846) | net +44% (p 0.515)
+    size group 2: road +5% (p 0.950) | net +170% (p 0.060)
+    size group 3: road +4% (p 0.957) | net +58% (p 0.229)
+TL units: 62 | posto_access pcodes matched: 61 | units.csv cols: ['unit', 'unit_name', 'mun_pcode', 'municipio', 'area_km2', 'pop2005', 'pop2010', 'pop2015', 'pop2020', 'pop2022', 'road_km', 'paved_km']
+TL located projects: 346 | > $10M: 20 -> 3 size groups (pre-registered rule)
+R-B Timor-Leste 2009-2015: projects per size group {1: 237, 2: 89, 3: 20} | H1 road:size -0.082 (se 0.107, one-sided p 0.778) | H2 net:size -0.015 (se 0.090, one-sided p 0.434) | Holm min-p 0.867
+    size group 1: road -6% (p 0.607) | net +22% (p 0.052)
+    size group 2: road -15% (p 0.145) | net +15% (p 0.050)
+    size group 3: road -19% (p 0.303) | net +23% (p 0.188)

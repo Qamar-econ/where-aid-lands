@@ -1,0 +1,32 @@
+(A) GEOCODING-BIAS BOUNDS (physical access, % per SD):
+                                                                            scenario  access_pct     p  projects
+                                                    observed (district-precise only)     175.343 0.004     304.9
+                              worst case: province-only -> least accessible district      60.721 0.123     413.9
+                                best case: province-only -> most accessible district     259.003 0.000     413.9
+precision check: Spearman(share district-precise, province access) over 21 provinces         NaN 0.297       NaN
+   province-only projects added: 109
+(B) STACKED EVENT STUDY: cohorts 2008-2016, treated districts 41, clean controls 36, stacked obs 2083
+ k      b    se     p
+-5 -0.260 0.595 0.662
+-4 -0.117 0.814 0.886
+-3 -0.922 0.785 0.240
+-2  0.056 0.675 0.934
+ 0 -0.123 0.715 0.863
+ 1 -0.227 0.589 0.700
+ 2 -0.350 0.747 0.639
+ 3 -0.837 0.608 0.168
+ 4 -0.107 0.642 0.867
+   pre-trend joint Wald p = 0.628 | average post effect = -28%
+(C) CONNECTIVITY (connectivity-only PC1 loadings {'c_speed': np.float64(0.18), 'c_tests': np.float64(0.6), 'c_foot': np.float64(0.62), 'c_fixed': np.float64(0.46)}, share 0.49):
+                                                                model       pct     p
+                                                    alone: conn_index   167.616 0.000
+                                                       alone: c_speed    82.748 0.002
+                                                       alone: c_tests   187.560 0.002
+                                                        alone: c_foot   156.624 0.007
+                                                       alone: c_fixed   218.230 0.000
+                               conn_index controlling physical access   161.667 0.000
+control function (mobile speed | fixed speed IV; first-stage F = 3.8) 25643.745 0.962
+             interaction conn_index x access (negative = substitutes)    -2.807 0.786
+                            social vs other: other-sector conn effect    61.664 0.107
+                           social vs other: social-sector conn effect   301.487 0.000
+   (for the 'social-sector' row, p refers to the difference from other sectors)

@@ -1,0 +1,5 @@
+all                        n(small/mid/large)=[335, 76, 40] | net_idx:size -0.34 (p 0.026) | road:size +0.73 (p 0.000)
+non-MDB only               n(small/mid/large)=[333, 67, 12] | net_idx:size -0.51 (p 0.047) | road:size +0.74 (p 0.028)
+bilateral only             n(small/mid/large)=[281, 37, 9] | net_idx:size -0.69 (p 0.049) | road:size +0.92 (p 0.029)
+binary counting            n(small/mid/large)=[335, 76, 40] | net_idx:size -0.12 (p 0.089) | road:size +0.43 (p 0.000)
+<= 10 districts            n(small/mid/large)=[329, 46, 21] | net_idx:size -0.48 (p 0.057) | road:size +0.81 (p 0.012)

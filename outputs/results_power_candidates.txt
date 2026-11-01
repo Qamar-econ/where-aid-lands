@@ -1,0 +1,24 @@
+POWER (MDE at 80% power, alpha .05, per 1 SD of network)
+  TL W3 posto 61                     mean projects/unit 2.6; SE(Net) 0.233; MDE 0.652 = 92% per SD
+  TL W2 posto 61 (DHS muni, no FE)   mean projects/unit 5.3; SE(Net) 0.048; MDE 0.134 = 14% per SD
+  NP W1 district 72                  mean projects/unit 15.4; SE(Net) 0.169; MDE 0.473 = 61% per SD
+
+AidData country AIMS/AMP geocoded releases: Burundi, Colombia, DRC, DRC-, Honduras, Iraq, Nepal, Nigeria, Senegal, SierraLeone, Somalia, Timor-Leste, TimorLeste, Uganda, timor-leste
+
+     country  aiddata_aims_geocoded                                                                        dhs_rounds_mobile  n_dhs_mobile                                                                     dhs_gps_rounds  ookla_2019_per100k
+     Senegal                   True 2010:88%; 2012:93%; 2014:94%; 2015:93%; 2016:94%; 2017:96%; 2018:97%; 2019:97%; 2023:88%             9 1993; 1997; 2005; 2008; 2010; 2012; 2014; 2015; 2016; 2017; 2018; 2019; 2020; 2023            7.312929
+       Nepal                   True                                                    2006:6%; 2011:75%; 2016:93%; 2022:96%             4                                                       2001; 2006; 2011; 2016; 2022           24.145793
+     Nigeria                   True                                                   2008:50%; 2013:75%; 2018:88%; 2024:90%             4                               1990; 2003; 2008; 2010; 2013; 2015; 2018; 2021; 2024            4.468961
+      Uganda                   True                                                             2006:16%; 2011:59%; 2016:74%             3                                           2000; 2006; 2009; 2011; 2014; 2016; 2018            3.761052
+         DRC                   True                                                             2007:21%; 2013:39%; 2023:54%             3                                                                   2007; 2013; 2023            1.667459
+Sierra Leone                   True                                                             2008:28%; 2013:55%; 2019:73%             3                                                             2008; 2013; 2016; 2019            0.413687
+ Timor-Leste                   True                                                                       2009:40%; 2016:84%             2                                                                         2009; 2016          165.139285
+    Honduras                   True                                                                       2005:36%; 2011:86%             2                                                                               2011           98.704998
+    Colombia                   True                                                                       2010:90%; 2015:95%             2                                                                               2010          213.280854
+     Burundi                   True                                                                       2010:18%; 2016:47%             2                                                                   2010; 2012; 2016            2.301042
+        Iraq                   True                                                                                                      0                                                                                              21.828525
+    Cambodia                  False                                                   2005:20%; 2010:62%; 2014:87%; 2021:92%             4                                                       2000; 2005; 2010; 2014; 2021          287.438848
+      Malawi                  False                                                             2010:39%; 2015:54%; 2024:65%             3                                     2000; 2004; 2010; 2012; 2014; 2015; 2017; 2024            2.170155
+       Haiti                  False                                                             2006:17%; 2012:77%; 2016:76%             3                                                             2000; 2006; 2012; 2016           10.706861
+     Bolivia                  False                                                                                 2008:56%             1                                                                               2008          189.322925
+ Afghanistan                  False                                                                                 2015:87%             1                                                                               2015           12.333927

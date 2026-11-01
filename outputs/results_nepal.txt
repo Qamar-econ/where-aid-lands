@@ -1,0 +1,77 @@
+districts 75, analysis sample (excl. Kathmandu valley) 72; located dev projects (A/B) total 3709, all tiers 5059
+Kathmandu valley: 9.5% of population, 10.2% of located dev projects; central-institution projects = 18.4% of projects, 33.5% of USD (excl. IFC GTFP outlier: 21.1%)
+====================================================================================================
+PRIMARY + ROBUSTNESS (PPML, 1 SD)
+  P  PRIMARY (census network, province FE)   N=72  phys=-0.138(p=0.155)  net=+0.401(p=0.012)  dep=+0.222(p=0.098)
+  R1 tier A only                             N=72  phys=-0.049(p=0.788)  net=+0.146(p=0.672)  dep=-0.037(p=0.912)
+  R2 all tiers, no FE                        N=72  phys=-0.120(p=0.118)  net=+0.305(p=0.006)  dep=+0.197(p=0.009)
+  R3 + night lights 2010                     N=72  phys=-0.138(p=0.154)  net=+0.400(p=0.021)  dep=+0.222(p=0.101)  ntl=+0.001(p=0.989)
+  R5 province-clustered SE (7)               N=72  phys=-0.138(p=0.202)  net=+0.401(p=0.098)  dep=+0.222(p=0.180)
+  R6 RWI instead of deprivation              N=72  phys=-0.106(p=0.264)  net=+0.328(p=0.000)  rwi_poor=+0.337(p=0.000)
+  R7a era 1 (<=2014, AIMS)                   N=72  phys=-0.096(p=0.408)  net=+0.275(p=0.176)  dep=+0.232(p=0.155)
+  R7b era 2 (>=2015)                         N=72  phys=-0.167(p=0.180)  net=+0.479(p=0.006)  dep=+0.222(p=0.185)
+  R8 incl. Kathmandu valley + dummy          N=75  phys=-0.208(p=0.041)  net=+0.419(p=0.009)  dep=+0.264(p=0.049)  capital=+0.000(p=1.000)
+  R9 excl. earthquake-related projects       N=72  phys=+0.006(p=0.955)  net=+0.532(p=0.008)  dep=+0.234(p=0.178)
+  R10 no FE                                  N=72  phys=-0.237(p=0.023)  net=+0.534(p=0.002)  dep=+0.318(p=0.009)
+  R11 Ookla instead of census network        N=72  phys=-0.043(p=0.621)  ook=+0.154(p=0.015)  dep=+0.018(p=0.818)
+  R12 census + Ookla jointly                 N=72  phys=-0.127(p=0.172)  net=+0.335(p=0.053)  ook=+0.092(p=0.185)  dep=+0.229(p=0.082)
+  leave-one-province-out: net [+0.259,+0.549]  phys [-0.209,-0.036]  dep [+0.108,+0.296]
+  randomization inference (network permuted within province): p = 0.002
+
+====================================================================================================
+ROADS vs NETWORK (model comparison, primary outcome)
+  road only     AIC=  855.7  phys=-0.034(p=0.730)
+  network only  AIC=  816.7  net=+0.340(p=0.015)
+  both          AIC=  808.6  phys=-0.138(p=0.155)  net=+0.401(p=0.012)
+  interaction   AIC=  810.4  phys=-0.126(p=0.311)  net=+0.389(p=0.022)  phys:net=+0.013(p=0.855)
+  Ookla only    AIC=  829.2  ook=+0.153(p=0.015)
+  Spearman: net_census~phys_idx 0.48, net_census~ookla 0.58, net~deprivation -0.84, phys~deprivation -0.22
+
+====================================================================================================
+REVERSE CAUSALITY (projects 2005-10 -> population growth 2011-2023; excl. valley)
+  growth ~ log(1+projects 2005-10 per 100k): b=+0.012 (p=0.943)
+  projects 2015+ ~ growth 2011-23: b=+0.172 (p=0.005)
+
+====================================================================================================
+SECTOR / ICT / SIZE / DURATION / DONOR FAMILY (PPML no FE, all tiers; Holm & BH)
+  Education          dep   b=+0.315 p=0.079 Holm=1.000 BH q=0.139
+  Health             net   b=+0.525 p=0.011 Holm=0.499 BH q=0.040
+  Health             dep   b=+0.362 p=0.009 Holm=0.417 BH q=0.038
+  Water & sanitation phys  b=-0.250 p=0.010 Holm=0.452 BH q=0.038
+  Other social       phys  b=-0.575 p=0.046 Holm=1.000 BH q=0.095
+  Other social       net   b=+0.716 p=0.016 Holm=0.687 BH q=0.052
+  Other social       dep   b=+0.608 p=0.005 Holm=0.239 BH q=0.029
+  Governance         net   b=+0.621 p=0.020 Holm=0.819 BH q=0.059
+  Governance         dep   b=+0.473 p=0.007 Holm=0.334 BH q=0.036
+  Env./multisector   net   b=+1.135 p=0.043 Holm=1.000 BH q=0.094
+  Energy infra       net   b=+0.772 p=0.000 Holm=0.025 BH q=0.010
+  Energy infra       dep   b=+0.378 p=0.033 Holm=1.000 BH q=0.079
+  Humanitarian       phys  b=-0.631 p=0.013 Holm=0.571 BH q=0.044
+  ICT component      net   b=+0.427 p=0.010 Holm=0.458 BH q=0.038
+  ICT component      dep   b=+0.381 p=0.001 Holm=0.055 BH q=0.010
+  Non-ICT            phys  b=-0.272 p=0.023 Holm=0.890 BH q=0.059
+  Non-ICT            net   b=+0.566 p=0.005 Holm=0.251 BH q=0.029
+  Non-ICT            dep   b=+0.298 p=0.041 Holm=1.000 BH q=0.094
+  Small              net   b=+1.237 p=0.001 Holm=0.039 BH q=0.010
+  Small              dep   b=+0.544 p=0.057 Holm=1.000 BH q=0.112
+  Medium             net   b=+0.542 p=0.024 Holm=0.890 BH q=0.059
+  Large              phys  b=-0.182 p=0.083 Holm=1.000 BH q=0.143
+  Large              net   b=+0.264 p=0.044 Holm=1.000 BH q=0.094
+  Large              dep   b=+0.280 p=0.002 Holm=0.082 BH q=0.013
+  Short              phys  b=-0.388 p=0.061 Holm=1.000 BH q=0.115
+  Short              net   b=+1.067 p=0.008 Holm=0.371 BH q=0.038
+  Short              dep   b=+0.640 p=0.022 Holm=0.890 BH q=0.059
+  Medium duration    phys  b=-0.229 p=0.074 Holm=1.000 BH q=0.135
+  Medium duration    net   b=+0.544 p=0.001 Holm=0.056 BH q=0.010
+  Medium duration    dep   b=+0.500 p=0.000 Holm=0.002 BH q=0.002
+  Bilateral          phys  b=-0.300 p=0.023 Holm=0.890 BH q=0.059
+  Bilateral          net   b=+0.576 p=0.010 Holm=0.452 BH q=0.038
+  Bilateral          dep   b=+0.297 p=0.058 Holm=1.000 BH q=0.112
+  Multilateral/UN    net   b=+0.458 p=0.004 Holm=0.216 BH q=0.029
+  Multilateral/UN    dep   b=+0.352 p=0.001 Holm=0.055 BH q=0.010
+  ICT: valley share of located ICT dev 10.4% vs non-ICT 14.8%; central-institution share ICT 30.6% vs non-ICT 16.7%
+
+====================================================================================================
+CROWD-IN PANEL (district-year 2005-2025, PPML district & year FE, cluster district; excl. valley)
+  2005-2025: lag(1-3y) b=+0.117 (p=0.162)   lead placebo b=+0.272 (p=0.007)
+  AIMS era 2005-2014: lag(1-3y) b=-0.078 (p=0.493)   lead placebo b=+0.116 (p=0.384)

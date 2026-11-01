@@ -1,0 +1,111 @@
+rank,code,municipalities,confidence,basis
+0,nationwide,,high,Sector-wide human development partnership (health/education/water/nutrition) delivered through national systems
+1,nationwide,,high,BESIK rural water and sanitation programme operates in all rural districts
+2,located,Baucau;Viqueque,moderate,UNDP/GCF FP109 project pages and stories document works in Baucau and Viqueque
+3,unknown,,low,Road Network Development Sector Project: road sections not stated in available text
+4,central,,high,HSSP-SP: Ministry of Health / SAMES system strengthening
+5,nationwide,,moderate,EVAW programme: national prevention/services/justice pillars
+6,nationwide,,moderate,Seeds of Life: national agricultural research and seed system across districts
+7,central,,high,Justice Sector Support Facility: national justice institutions
+8,central,,high,UNDP Justice System: national justice actors
+9,central,,high,PFMCBP: Ministry of Finance capacity
+10,central,,high,PFMCBP: Ministry of Finance capacity
+11,located,Dili,high,MCC Water Supply Sanitation and Drainage project targets Dili sewerage/drainage
+12,central,,high,UNDP Justice System: national justice actors
+13,central,,high,UNDP Justice System: national justice actors
+14,central,,high,Justice Sector Support Facility
+15,central,,high,Health Sector Strategic Plan MDTF: Ministry of Health
+16,unknown,,low,McGovern-Dole school feeding: target municipalities not in text
+17,nationwide,,high,UNICEF Basic Education Programme (national)
+18,nationwide,,high,UNICEF Basic Education Programme (national)
+19,regional,,high,EU COVID-19 health support in the Pacific (multi-country)
+20,nationwide,,high,R4D Roads for Development: rural roads in all municipalities
+21,located,Baucau;Bobonaro;Viqueque;Manatuto,moderate,TOMAK programme target municipalities (programme documentation)
+22,nationwide,,high,Timor-Leste Education Program: sector-wide
+23,nationwide,,high,UNICEF Basic Education Programme (national)
+24,located,Aileu;Ainaro;Ermera;Manufahi,moderate,Avansa Agrikultura horticulture in central highlands; BB5 2016 lists it under Ainaro
+25,nationwide,,high,GCF FP171 national early warning system
+26,central,,high,HSSP-SP: Ministry of Health
+27,nationwide,,moderate,Family planning services through several NGOs nationally
+28,central,,moderate,Health programme: design/M&E/blood bank (national level)
+29,unknown,,low,HADIAK: focus districts not named in text
+30,unknown,,low,GIZ Rural Development Project: districts not named in text
+31,unknown,,low,World Vision country expenditure: areas not stated
+32,unknown,,low,McGovern-Dole school feeding: target municipalities not in text
+33,unknown,,low,Food for Progress monetisation: areas not stated
+34,central,,high,ADB TA Infrastructure Project Management (central agency)
+35,nationwide,,moderate,Access to Justice: rural legal aid nationally
+36,central,,high,Public Sector Capacity Development Program
+37,located,Dili;Baucau;Liquiçá,high,BB5 2016 municipal section lists Mid-Level Skills Training in Dili Baucau Liquiça
+38,nationwide,,moderate,ILO Youth Employment Promotion (national)
+39,nationwide,,moderate,EU social inclusion & nutrition through national services
+40,unknown,,low,Food for Progress monetisation: areas not stated
+41,unknown,,low,ANCP partnership NGOs: areas not stated
+42,located,Dili;Baucau;Liquiçá,high,BB5 2016 municipal section lists Mid-Level Skills Training in Dili Baucau Liquiça
+43,nationwide,,moderate,WFP MCHN in clinics nationally (BB5 lists several municipalities)
+44,central,,high,Australia Awards scholarships
+45,central,,high,Australia Awards scholarships
+46,central,,high,Australia Awards scholarships
+47,nationwide,,high,UNICEF country programme output (national)
+48,unknown,,low,NZ crop diversification: areas not stated
+49,nationwide,,high,UNICEF Health and Nutrition Programme (national)
+50,nationwide,,high,UNICEF Health and Nutrition Programme (national)
+51,nationwide,,moderate,WFP relief/IDP component (national)
+52,central,,high,NZ scholarships
+53,located,Ainaro;Ermera,moderate,NZ Coffee & Cocoa: BB5 2016 lists under Ainaro; Ermera is the main coffee area
+54,central,,high,Trade governance (Ministry)
+55,nationwide,,moderate,EU nutrition & social inclusion (national)
+56,unknown,,low,NZ food security: text has no location
+57,unknown,,low,ADB Road Sector Improvement 2006: road sections not stated in text
+58,nationwide,,moderate,Spotlight Initiative national programme
+59,nationwide,,high,UNICEF WASH programme (national)
+60,central,,moderate,ATLASS specialist medical services at national hospital
+61,drop,,high,Aggregate row (agency totals)
+62,unknown,,low,HANDS early childhood: areas not stated
+63,central,,high,NGO advocacy for national governance
+64,nationwide,,high,UNICEF Health and Nutrition Programme (national)
+65,unknown,,low,ERA rural roads in 'selected districts' not named
+66,drop,,high,Aggregate row (agency totals)
+67,unknown,,low,ANCP: areas not stated
+68,nationwide,,high,Primary education support (national)
+69,nationwide,,high,UNICEF quality learning output (national)
+70,central,,high,Public Sector Linkages Program
+71,unknown,,low,ANCP: areas not stated
+72,nationwide,,moderate,MCH & family planning through several NGOs
+73,nationwide,,moderate,Portuguese language consolidation (teachers nationwide)
+74,unknown,,low,EU agro-forestry: areas not stated
+75,nationwide,,moderate,UNICEF basic education (policy + schools)
+76,central,,high,M&E House for Australian aid programme
+77,regional,,high,Caribbean and Pacific impact finance facility
+78,unknown,,low,DOCIA horticulture: areas not stated
+79,nationwide,,high,Partnership for Human Development (sector-wide)
+80,central,,high,NZ scholarships
+81,unknown,,low,GIZ RDP IV extension component: districts not named
+82,central,,high,e-Justice system for national judiciary
+83,central,,high,Public Sector Linkages Program
+84,central,,moderate,JICA construction equipment for Ministry of Public Works
+85,central,,high,Civil service reform
+86,central,,high,Anti-corruption accountability (national)
+87,nationwide,,high,13 model schools one per district
+88,unknown,,low,KOICA PV desalination: target site not stated in text
+89,central,,high,UNTAET trust fund
+90,unknown,,low,GIZ youth employment in agriculture: schools not named
+91,central,,high,Education policy advisory
+92,unknown,,low,GIZ YEP vocational schools not named
+93,unknown,,low,DOCIA horticulture: areas not stated
+94,unknown,,low,ANCP: areas not stated
+95,central,,high,UNDP civil service support
+96,nationwide,,moderate,UNICEF country programme 2003-07
+97,central,,high,Peace Corps overseas office costs
+98,located,Dili,high,Escola Portuguesa Ruy Cinatti is in Dili
+99,nationwide,,moderate,UNICEF child-friendly schools (national)
+100,nationwide,,moderate,PASK community policing (national)
+101,central,,high,MCC due diligence / oversight
+102,nationwide,,high,BESIK rural water and sanitation
+103,nationwide,,moderate,WFP MCHN national
+104,nationwide,,high,13 model schools one per district
+105,unknown,,low,USDA mud crab cultivation: areas not stated
+106,located,Manatuto;Baucau;Lautém,moderate,ADB RNUSP: Manatuto-Natarbora and Baucau-Lautem road sections (ADB RRP/monitoring reports)
+107,nationwide,,moderate,FAO disaster readiness (national)
+108,nationwide,,high,FTI programme national intake rate
+109,located,Dili,moderate,Chinese medical team based at the national hospital in Dili

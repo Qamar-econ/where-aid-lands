@@ -1,0 +1,46 @@
+BASELINE
+  W1 new (2009-13)                                           Net=+0.094 (p=0.626)
+  W1 active                                                  Net=+0.161 (p=0.340)
+  W2 new (2019-23) lag                                       Net=+0.429 (p=0.030)
+  W2 active lag                                              Net=+0.257 (p=0.076)
+
+A. geocoding method (W2 new): coordinate-based vs text-based assignments; source mix
+  W2 new, coordinates only (n=438)                           Net=+0.417 (p=0.151)
+  W2 new, text only (n=346)                                  Net=+0.386 (p=0.130)
+  W1 new, coordinates only (n=627)                           Net=+0.008 (p=0.965)
+  W1 new, text only (n=273)                                  Net=+0.223 (p=0.543)
+  share of W1 new links by method: {'coord': 0.64, 'text': 0.36}
+  share of W2 new links by method: {'coord': 0.51, 'text': 0.49}
+
+B. development trajectory controls (W2 new)
+  + population growth 2011-23                                Net=+0.147 (p=0.451)
+  + night-light growth 2010-20                               Net=+0.423 (p=0.041)
+  + 2010 lights + density                                    Net=+0.209 (p=0.348)
+  + all trajectory + W1 projects                             Net=+0.154 (p=0.406)
+
+C. chance: randomization inference (Net permuted within province, 1000 draws) and Holm over the 4 baseline tests
+  RI p (W2 new) = 0.001;  Holm-adjusted p of the 4 baseline tests: W1 new (2009-13)=0.680, W1 active=0.680, W2 new (2019-23) lag=0.119, W2 active lag=0.228
+
+D. earthquake composition
+  W2 new excl. earthquake-related projects                   Net=+0.429 (p=0.036)
+  W2 new excl. 14 earthquake-affected districts              Net=+0.397 (p=0.093)
+
+E. collinearity (VIF Net/Dep) and alternative network measures
+  VIF: Net 4.6, Road 3.6, Dep 3.9, lpop 3.0
+  W2 new, without deprivation                                Net=+0.284 (p=0.013)
+  W2 new, mobile ownership only                              Mob=-0.093 (p=0.602)
+  W2 new, internet only                                      Int=+0.422 (p=0.001)
+  W2 new, no province FE                                     Net=+0.504 (p=0.014)
+
+F. donor composition (W2 new)
+  W2 new, USA+UK (n=24)                                      Net=+1.427 (p=0.092)
+  W2 new, UN agencies (n=351)                                Net=+0.167 (p=0.553)
+  W2 new, other donors (n=409)                               Net=+0.510 (p=0.022)
+  W2 new links by donor: {'UN agencies': 382, 'Other bilateral/other': 199, 'NGO/foundation': 72, 'Germany': 69, 'Australia': 46, 'ADB': 43}
+
+G. placebo outcomes (W2 new): does 2011 network predict non-development projects too?
+  W2 new, access infrastructure (n=159)                      Net=+0.693 (p=0.000)
+  W2 new, humanitarian (n=85)                                Net=-0.570 (p=0.140)
+
+POWER: smallest detectable Net effect (80% power, alpha .05) given SE of W1 active model
+  SE=0.169 -> MDE ~ 0.473 (i.e. 61% per SD)

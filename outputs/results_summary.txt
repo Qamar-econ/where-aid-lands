@@ -1,0 +1,107 @@
+========================================================================================== 
+H1. Cross-section, 62 units (Dili urban = 4 merged postos). Outcome counts of non-infrastructure
+development projects started 2000-2026. NB2, robust SE. access_pc1 & need standardised (1 SD).
+
+M1 all units, main outcome: n_dev ~ access_pc1 + log_pop + poor_z  (N=62, pseudo-R2=0.227)
+   access_pc1       b=+0.034 (se 0.039) p=0.382  IRR=1.03
+   log_pop          b=+0.387 (se 0.044) p=0.000  IRR=1.47
+   poor_z           b=-0.134 (se 0.049) p=0.007  IRR=0.87
+
+M2 + Dili dummy: n_dev ~ access_pc1 + log_pop + poor_z + dili  (N=62, pseudo-R2=0.259)
+   access_pc1       b=+0.039 (se 0.035) p=0.272  IRR=1.04
+   log_pop          b=+0.350 (se 0.034) p=0.000  IRR=1.42
+   poor_z           b=-0.055 (se 0.040) p=0.168  IRR=0.95
+   dili             b=+0.811 (se 0.144) p=0.000  IRR=2.25
+
+M3 excl. Dili urban: n_dev ~ access_pc1 + log_pop + poor_z  (N=61, pseudo-R2=0.163)
+   access_pc1       b=+0.040 (se 0.035) p=0.244  IRR=1.04
+   log_pop          b=+0.349 (se 0.034) p=0.000  IRR=1.42
+   poor_z           b=-0.053 (se 0.039) p=0.171  IRR=0.95
+
+M4 precise-only outcome: np_dev ~ access_pc1 + log_pop + poor_z  (N=62, pseudo-R2=0.213)
+   access_pc1       b=+0.103 (se 0.057) p=0.069  IRR=1.11
+   log_pop          b=+0.415 (se 0.057) p=0.000  IRR=1.51
+   poor_z           b=-0.122 (se 0.051) p=0.017  IRR=0.89
+
+M5 precise-only, excl. Dili: np_dev ~ access_pc1 + log_pop + poor_z  (N=61, pseudo-R2=0.171)
+   access_pc1       b=+0.099 (se 0.057) p=0.085  IRR=1.10
+   log_pop          b=+0.433 (se 0.057) p=0.000  IRR=1.54
+   poor_z           b=-0.155 (se 0.057) p=0.007  IRR=0.86
+
+M6 precise, + density: np_dev ~ access_pc1 + log_pop + poor_z + density_z  (N=61, pseudo-R2=0.192)
+   access_pc1       b=+0.108 (se 0.053) p=0.041  IRR=1.11
+   log_pop          b=+0.580 (se 0.073) p=0.000  IRR=1.79
+   poor_z           b=-0.189 (se 0.062) p=0.002  IRR=0.83
+   density_z        b=-0.200 (se 0.060) p=0.001  IRR=0.82
+
+M7 OLS log(1+USD per capita), excl. Dili (N=61, R2=0.494)
+   access_pc1       b=-0.016 (se 0.086) p=0.855
+   log_pop          b=-0.671 (se 0.133) p=0.000
+   poor_z           b=-0.206 (se 0.171) p=0.228
+
+M8 OLS log(1+precise count) with municipality FE, excl. Dili (N=61, R2=0.811)
+   access_pc1       b=+0.173 (se 0.060) p=0.004
+   log_pop          b=+0.469 (se 0.077) p=0.000
+   poor_z           b=-0.022 (se 0.073) p=0.766
+
+==========================================================================================
+Components (each entered separately; precise outcome; controls log_pop + poor_z; excl. Dili)
+   log wet-season travel time (+ = farther)   b=+0.003 p=0.937 IRR=1.00
+   paved share                                b=+0.013 p=0.716 IRR=1.01
+   log road density                           b=-0.097 p=0.043 IRR=0.91
+   steep/landslide terrain share              b=-0.008 p=0.832 IRR=0.99
+   physical sub-index                         b=-0.028 p=0.582 IRR=0.97
+   network sub-index (Ookla)                  b=+0.132 p=0.005 IRR=1.14
+   joint physical + network:
+   phys_z           b=-0.061 (se 0.052) p=0.246  IRR=0.94
+   net_z            b=+0.143 (se 0.047) p=0.003  IRR=1.15
+   log_pop          b=+0.435 (se 0.054) p=0.000  IRR=1.54
+   poor_z           b=-0.175 (se 0.064) p=0.007  IRR=0.84
+
+==========================================================================================
+Heterogeneity (NB, access_pc1 + log_pop + poor_z, excl. Dili; outcome = all counts incl. muni split)
+   Era 1: start 2000-2015           access b=+0.061 (p=0.096)   poverty b=+0.026 (p=0.723)   N proj=1675
+   Era 2: start 2016-2026           access b=-0.079 (p=0.546)   poverty b=-0.409 (p=0.016)   N proj=320
+   Bilateral donors                 access b=+0.070 (p=0.054)   poverty b=-0.034 (p=0.545)   N proj=1363
+   Multilaterals & UN               access b=-0.021 (p=0.769)   poverty b=-0.097 (p=0.196)   N proj=618
+   Korea + Japan                    access b=+0.140 (p=0.137)   poverty b=-0.009 (p=0.929)   N proj=217
+   Education                        access b=-0.024 (p=0.689)   poverty b=-0.044 (p=0.512)   N proj=342
+   Health                           access b=+0.016 (p=0.717)   poverty b=+0.032 (p=0.621)   N proj=439
+   Water & sanitation               access b=+0.028 (p=0.787)   poverty b=-0.078 (p=0.447)   N proj=151
+   Governance                       access b=+0.085 (p=0.062)   poverty b=-0.141 (p=0.028)   N proj=484
+   Productive sectors               access b=+0.094 (p=0.148)   poverty b=-0.011 (p=0.888)   N proj=428
+   ACCESS infrastructure projects   access b=-0.002 (p=0.979)   poverty b=-0.240 (p=0.014)   N proj=229
+   Humanitarian                     access b=-0.377 (p=0.000)   poverty b=-0.032 (p=0.794)   N proj=72
+
+==========================================================================================
+Relative importance (Shapley R2 decomposition, OLS log(1+precise count per 10k pop), excl. Dili)
+          predictor  shapley_r2  share
+Accessibility (PC1)       0.043  0.063
+     Poverty (-RWI)       0.044  0.066
+    Population size       0.342  0.504
+            Density       0.249  0.367 
+   total R2 = 0.678
+   OLS coefficients:
+   access_pc1   b=+0.129 p=0.012
+   poor_z       b=-0.162 p=0.008
+   log_pop      b=-0.366 p=0.000
+   density_z    b=-0.216 p=0.000
+
+Moran's I of M5 Pearson residuals = 0.062 (permutation p = 0.172)
+Moran's I of precise projects per capita = 0.135
+
+==========================================================================================
+H2. Unit-year panel 2006-2025 (excl. Dili urban). New development projects started per unit-year.
+Time-varying wet-season travel time from corridor completion dates. PPML with unit & year FE, SE clustered by unit.
+   n_dev_new      elasticity wrt travel time = -1.919 (se 1.113, p=0.085); a 30% faster trip -> +68.5% projects
+   np_dev_new     elasticity wrt travel time = -3.060 (se 1.455, p=0.035); a 30% faster trip -> +109.1% projects
+   n_access_new   elasticity wrt travel time = -0.070 (se 1.232, p=0.955); a 30% faster trip -> +2.5% projects
+   event study n_dev_new: mean post coef = -0.611; mean pre coef = -0.727
+     joint pre-trend test p = 0.000
+   event study np_dev_new: mean post coef = -3.472; mean pre coef = -0.330
+     joint pre-trend test p = 0.110
+   staggered DiD (PPML TWFE) post-upgrade effect on new dev projects: -0.124 (se 0.288, p=0.667) -> IRR 0.88
+
+==========================================================================================
+Validation: our DB vs Ministry of Finance Budget Book municipal project counts (2016, 2017)
+   N municipality-years = 26; Spearman rho = 0.28; Pearson r = 0.65

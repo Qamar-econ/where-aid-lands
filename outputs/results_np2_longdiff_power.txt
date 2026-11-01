@@ -1,0 +1,11 @@
+located projects by period x group: {('P0', 'dev'): 29, ('P0', 'hum'): 2, ('P0', 'infra'): 4, ('P1', 'dev'): 156, ('P1', 'hum'): 20, ('P1', 'infra'): 17, ('P2', 'dev'): 180, ('P2', 'hum'): 28, ('P2', 'infra'): 17}
+all projects in scope by period: {'P0': 293, 'P1': 953, 'P2': 1180}
+located share by period (dev): {'P0': 0.131, 'P1': 0.199, 'P2': 0.184}
+dev projects per district: {'mean': {'P1': 2.08, 'P2': 2.4}, 'std': {'P1': 3.19, 'P2': 2.87}}
+located dev projects, remote vs connected (by 2011 internet median): {('P0', False): 21.9, ('P0', True): 7.1, ('P1', False): 122.1, ('P1', True): 33.9, ('P2', False): 115.7, ('P2', True): 64.3}
+null model: NB2 alpha = 0.00
+power for +10% per 10pp internet: 0.02 (failed fits 152)
+power for +20% per 10pp internet: 0.03 (failed fits 165)
+power for +30% per 10pp internet: 0.00 (failed fits 161)
+power for +50% per 10pp internet: 0.06 (failed fits 164)
+observed-data SE-based MDE (2.8 x SE): 85% per 10pp internet (SD of 2011->21 change = 1.46 x 10pp)

@@ -1,0 +1,75 @@
+Unique projects 2000-2026: 3,982
+By location level:
+lvl
+national     3088
+posto         511
+municipio     383
+National/HQ split: hq_default (IATI Dili office coords) = 525
+Development (non-infra) projects: 2,971; share without sub-national location: 75.7%
+Regions:
+                     units       pop  precise   all_  access_proj  tt_wet_h  pop_%  precise_%  all_%  precise_per10k
+region                                                                                                              
+Dili (urban)             1  348074.8    149.0  333.0         55.0       0.2   26.0       11.1   14.3             4.3
+Interior/other          27  454450.7    537.0  888.9        104.9       5.1   34.0       40.1   38.2            11.8
+North-coast highway     13  260404.3    323.0  511.3         59.3       5.6   19.5       24.1   22.0            12.4
+Oecusse                  4   72328.0     86.0  165.8         19.0      13.7    5.4        6.4    7.1            11.9
+South coast             17  200957.3    243.0  429.4         45.9       8.4   15.0       18.2   18.4            12.1
+
+Korea projects: 124; by source {'AidData-AMP': 78, 'BudgetBook5': 46}; by level {'national': 87, 'posto': 21, 'municipio': 16}
+Korea precise locations by unit:
+                    n  tt_h
+unit_name                  
+Dili (urban)       10   0.2
+Same                4   4.4
+Lospalos            3  10.1
+Suai                3   5.0
+Liquiçá             2   2.2
+Metinaro            2   1.0
+Maliana             2   4.9
+Atauro              1   4.4
+Atabae              1   3.8
+Aileu Vila          1   1.9
+Atsabe              1   4.4
+Cailaco             1   6.7
+Ermera              1   2.4
+Balibo              1   4.1
+Baguia              1  12.5
+Baucau              1   5.9
+Bazartete           1   1.6
+Bobonaro            1   5.4
+Barique/Natarbora   1   6.1
+Laulara             1   1.1
+Laleia              1   5.9
+Laga                1   8.7
+Laclubar            1   6.2
+Laclo               1   3.9
+Hatolia             1   4.4
+Letefoho            1   3.2
+Liquidoe            1   4.0
+Maubisse            1   3.0
+Maubara             1   2.8
+Manatuto            1   3.8
+Quelicai            1   8.9
+Remexio             1   2.6
+Railaco             1   1.7
+Vemasse             1   6.1
+Venilale            1   8.4
+Korea precise: pop-weighted mean wet travel time of project units = 4.0 h vs all-unit pop mean 4.6 h
+Mean wet-season travel time (h) of precise dev-project locations by donor group:
+                         n  tt_h
+donor_group                     
+China                    5  0.24
+Portugal                14  1.89
+Korea                   18  4.03
+New Zealand             11  4.09
+Japan                  106  4.47
+NGO/foundation           2  4.64
+World Bank              11  5.22
+USA                     23  5.50
+Other bilateral/other   39  5.65
+EU                      46  5.81
+Germany                  8  5.84
+ADB                     12  5.91
+UN agencies             77  5.94
+Australia               28  6.08
+Global funds             2  6.88

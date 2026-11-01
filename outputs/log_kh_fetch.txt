@@ -1,0 +1,49 @@
+﻿ok khm_ppp_2008_1km.tif
+ok khm_ppp_2015_1km.tif
+ok khm_ppp_2019_1km.tif
+ok khm_ppp_2020_1km.tif
+ok Copernicus_DSM_COG_30_N10_00_E102_00_DEM.tif
+ok Copernicus_DSM_COG_30_N10_00_E103_00_DEM.tif
+ok Copernicus_DSM_COG_30_N10_00_E104_00_DEM.tif
+ok Copernicus_DSM_COG_30_N10_00_E105_00_DEM.tif
+ok Copernicus_DSM_COG_30_N10_00_E106_00_DEM.tif
+ok Copernicus_DSM_COG_30_N10_00_E107_00_DEM.tif
+ok Copernicus_DSM_COG_30_N11_00_E102_00_DEM.tif
+ok Copernicus_DSM_COG_30_N11_00_E103_00_DEM.tif
+ok Copernicus_DSM_COG_30_N11_00_E104_00_DEM.tif
+ok Copernicus_DSM_COG_30_N11_00_E105_00_DEM.tif
+ok Copernicus_DSM_COG_30_N11_00_E106_00_DEM.tif
+ok Copernicus_DSM_COG_30_N11_00_E107_00_DEM.tif
+ok Copernicus_DSM_COG_30_N12_00_E102_00_DEM.tif
+ok Copernicus_DSM_COG_30_N12_00_E103_00_DEM.tif
+ok Copernicus_DSM_COG_30_N12_00_E104_00_DEM.tif
+ok Copernicus_DSM_COG_30_N12_00_E105_00_DEM.tif
+ok Copernicus_DSM_COG_30_N12_00_E106_00_DEM.tif
+ok Copernicus_DSM_COG_30_N12_00_E107_00_DEM.tif
+ok Copernicus_DSM_COG_30_N13_00_E102_00_DEM.tif
+ok Copernicus_DSM_COG_30_N13_00_E103_00_DEM.tif
+ok Copernicus_DSM_COG_30_N13_00_E104_00_DEM.tif
+ok Copernicus_DSM_COG_30_N13_00_E105_00_DEM.tif
+ok Copernicus_DSM_COG_30_N13_00_E106_00_DEM.tif
+ok Copernicus_DSM_COG_30_N13_00_E107_00_DEM.tif
+ok Copernicus_DSM_COG_30_N14_00_E102_00_DEM.tif
+ok Copernicus_DSM_COG_30_N14_00_E103_00_DEM.tif
+ok Copernicus_DSM_COG_30_N14_00_E104_00_DEM.tif
+ok Copernicus_DSM_COG_30_N14_00_E105_00_DEM.tif
+ok Copernicus_DSM_COG_30_N14_00_E106_00_DEM.tif
+ok Copernicus_DSM_COG_30_N14_00_E107_00_DEM.tif
+ok cambodia-latest.osm.pbf
+ok NTL 2008
+ok NTL 2015
+ok NTL 2019
+ok Ookla mobile 2019 1
+ok Ookla mobile 2019 2
+ok Ookla mobile 2019 3
+ok Ookla mobile 2019 4
+ok Ookla mobile 2020 1
+ok Ookla fixed 2019 1
+ok Ookla fixed 2019 2
+ok Ookla fixed 2019 3
+ok Ookla fixed 2019 4
+ok Ookla fixed 2020 1
+done

@@ -1,0 +1,69 @@
+1. Access quintiles (PC1), 61 units excl. Dili urban; Dili shown separately
+              units        pop  tt_wet_h   rwi  precise    all_  pop_share_%  precise_share_%  precise_per10k  ratio_share
+q                                                                                                                         
+Q1 least         13  114581.77      9.59 -0.31    160.0  322.64         8.58            11.96           13.96         1.39
+Q2               12  185117.82      8.15 -0.30    193.0  364.24        13.85            14.42           10.43         1.04
+Q3               12  157731.86      5.99 -0.22    201.0  357.93        11.80            15.02           12.74         1.27
+Q4               12  258237.08      6.22 -0.13    298.0  476.87        19.33            22.27           11.54         1.15
+Q5 most          12  272471.63      3.09 -0.03    337.0  473.62        20.39            25.19           12.37         1.24
+Dili (urban)      1  348074.83      0.24  0.93    149.0  333.00        26.05            11.14            4.28         0.43
+
+2. Correlations (61 units excl. Dili). r = Pearson, rho = Spearman
+                       y                  x  pearson_r   p_r  spearman_rho  p_rho
+precise projects (count)       access index      0.535 0.000         0.576  0.000
+precise projects (count)    wet travel time     -0.223 0.084        -0.356  0.005
+precise projects (count)  network sub-index      0.519 0.000         0.525  0.000
+precise projects (count) physical sub-index      0.316 0.013         0.331  0.009
+precise projects (count)     poverty (-RWI)     -0.615 0.000        -0.585  0.000
+precise projects (count)         population      0.801 0.000         0.745  0.000
+precise projects (count)            density      0.457 0.000         0.503  0.000
+   precise projects /10k       access index      0.075 0.567        -0.054  0.680
+   precise projects /10k    wet travel time     -0.011 0.932         0.107  0.410
+   precise projects /10k  network sub-index      0.198 0.127         0.102  0.434
+   precise projects /10k physical sub-index     -0.078 0.549        -0.197  0.127
+   precise projects /10k     poverty (-RWI)     -0.005 0.972         0.149  0.251
+   precise projects /10k         population     -0.495 0.000        -0.705  0.000
+   precise projects /10k            density     -0.380 0.003        -0.617  0.000
+   access vs poverty: rho = -0.56 (p=0.000)  -> accessible postos are also richer (collinearity to keep in mind)
+
+3. High vs low accessibility (median split of PC1), 61 units
+                     variable  mean_high  mean_low  welch_t   p_t  mannwhitney_p
+     precise projects (count)     24.129    14.700    3.694 0.001          0.001
+all projects incl. muni split     37.581    27.676    3.442 0.001          0.004
+              precise per 10k     16.025    15.176    0.353 0.725          0.449
+                  all per 10k     26.089    31.465   -1.272 0.208          0.054
+                   population  20356.478 11902.979    2.767 0.008          0.013
+                 RWI (wealth)     -0.107    -0.295    4.356 0.000          0.000
+
+4. Bivariate OLS (61 units)
+                             model   slope    se     p    r2
+               np_dev ~ access_pc1   6.389 1.232 0.000 0.286
+       np_dev ~ np.log(tt_wet_min)  -4.292 2.087 0.040 0.062
+               np_dev ~ access_net   6.086 1.373 0.000 0.269
+                  np_dev ~ poverty -35.156 7.096 0.000 0.379
+            np_per10k ~ access_pc1   0.760 1.300 0.559 0.006
+               np_per10k ~ poverty  -0.225 9.042 0.980 0.000
+np.log(np_dev+1) ~ np.log(pop2022)   0.525 0.058 0.000 0.599
+
+5. Concentration of precise development projects relative to population (62 units incl. Dili)
+   ranked by accessibility (low->high)      incl. Dili  index = -0.148
+   ranked by accessibility (low->high)      excl. Dili  index = +0.002
+   ranked by wealth (poor->rich)            incl. Dili  index = -0.165
+   ranked by wealth (poor->rich)            excl. Dili  index = -0.024
+   Gini (ranked by projects per capita)     incl. Dili  index = +0.307
+   Gini (ranked by projects per capita)     excl. Dili  index = +0.240
+   (concentration index > 0: projects concentrated in more accessible / richer units relative to population)
+
+6. Upgraded-corridor units vs others: new development projects per unit-year (excl. Dili urban)
+   outcome: n_dev_new
+period                             2006-2015 (before)  2016-2025 (after)  change_%
+group                                                                             
+Not upgraded                                    2.943              0.586   -80.107
+Upgraded corridor (>=60 min gain)               2.368              0.377   -84.070
+   simple difference-in-differences (upgraded - not) = +0.367 projects per unit-year
+   outcome: np_dev_new
+period                             2006-2015 (before)  2016-2025 (after)  change_%
+group                                                                             
+Not upgraded                                    1.774              0.348   -80.392
+Upgraded corridor (>=60 min gain)               1.345              0.184   -86.301
+   simple difference-in-differences (upgraded - not) = +0.266 projects per unit-year

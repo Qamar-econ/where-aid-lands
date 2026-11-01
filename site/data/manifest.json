@@ -1,0 +1,52 @@
+{
+ "data": [
+  "dl/data/kh_projects.csv",
+  "dl/data/kh_assign.csv",
+  "dl/data/kh_covariates.csv",
+  "dl/data/kh_access.csv",
+  "dl/data/kh_rwi.csv",
+  "dl/data/godad_khm.csv",
+  "dl/data/kh_access_pca.csv",
+  "dl/data/kh_units.geojson"
+ ],
+ "tables": [
+  "dl/tables/kh_access2017_main.csv",
+  "dl/tables/kh_access_pca.csv",
+  "dl/tables/kh_access_pca_170101.csv",
+  "dl/tables/kh_dedup_main.csv",
+  "dl/tables/kh_dedup_summary.csv",
+  "dl/tables/kh_ext_A_bounds.csv",
+  "dl/tables/kh_ext_B_event.csv",
+  "dl/tables/kh_ext_C_connectivity.csv",
+  "dl/tables/kh_geobias_checks.csv",
+  "dl/tables/kh_heterogeneity.csv",
+  "dl/tables/kh_infra1.csv",
+  "dl/tables/kh_infra2.csv",
+  "dl/tables/kh_ladder.csv",
+  "dl/tables/kh_main.csv",
+  "dl/tables/kh_need.csv",
+  "dl/tables/kh_ols_simple.csv",
+  "dl/tables/kh_robustness.csv",
+  "dl/tables/kh_shapley.csv",
+  "dl/tables/kh_shapley5.csv"
+ ],
+ "code": [
+  "dl/code/kh_fetch.py",
+  "dl/code/kh_s00_boundaries.py",
+  "dl/code/kh_s01_projects.py",
+  "dl/code/kh_s02_covariates.py",
+  "dl/code/kh_s03_access.py",
+  "dl/code/kh_s04_models.py",
+  "dl/code/kh_s05_maps.py",
+  "dl/code/kh_s06_ladder.py",
+  "dl/code/kh_s07_shapley.py",
+  "dl/code/kh_s08_extensions.py",
+  "dl/code/kh_s09_geobias.py",
+  "dl/code/kh_s10_rwi.py",
+  "dl/code/kh_s11_webexport.py",
+  "dl/code/kh_s12_site_files.py",
+  "dl/code/kh_s13_site_images.py",
+  "dl/code/kh_s14_dedup.py",
+  "dl/code/kh_s15_access2017.py"
+ ]
+}

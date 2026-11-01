@@ -1,0 +1,21 @@
+Sample: 251 DHS regions in 25 Sub-Saharan countries; surveys 2006-2011; WB projects approved after survey through 2014 = 687 region-project links
+====================================================================================================
+PPML, country FE, SE clustered by country (1 SD)
+  B1 Briggs replication: poverty             N=251  poor=-0.257(p=0.000)
+  B2 + mobile phone ownership                N=251  poor=-0.046(p=0.484)  mob=+0.308(p=0.000)
+  B3 + electricity                           N=251  poor=-0.045(p=0.459)  mob=+0.177(p=0.144)  elec=+0.122(p=0.119)
+  B4 night lights only                       N=251  ntl=+0.199(p=0.000)
+  B5 night lights + mobile                   N=251  ntl=+0.048(p=0.331)  mob=+0.287(p=0.000)
+  B6 night lights + mobile + electricity     N=251  ntl=+0.012(p=0.816)  mob=+0.207(p=0.046)  elec=+0.114(p=0.164)
+  B7 all                                     N=251  poor=-0.044(p=0.461)  ntl=+0.008(p=0.863)  mob=+0.174(p=0.157)  elec=+0.116(p=0.162)
+  B8 B2 excl. brightest (capital) region     N=226  poor=-0.004(p=0.942)  mob=+0.314(p=0.010)
+  Logit any aid: poverty alone -0.186 (p=0.529) -> with mobile +0.552 (p=0.020); mobile +1.719 (p=0.017)
+
+====================================================================================================
+GELBACH DECOMPOSITION (OLS log(1+projects), country FE; bootstrap SE by country, 400 draws)
+  poor: base -0.119 -> full +0.042; explained -0.161 (136% of base, SE 0.038)  mob: -0.161 (SE 0.038, 136%)
+  poor: base -0.119 -> full +0.047; explained -0.165 (139% of base, SE 0.037)  mob: -0.116 (SE 0.059, 98%)  elec: -0.049 (SE 0.038, 41%)
+  ntl: base +0.153 -> full +0.037; explained +0.116 (76% of base, SE 0.044)  mob: +0.116 (SE 0.044, 76%)
+  ntl: base +0.153 -> full +0.007; explained +0.146 (95% of base, SE 0.059)  mob: +0.093 (SE 0.048, 61%)  elec: +0.053 (SE 0.062, 35%)
+
+  Spearman correlations: poor_q1~mobile=-0.44, poor_q1~electricity=-0.49, mobile~electricity=+0.67, ntl~mobile=+0.69, ntl~poor_q1=-0.52

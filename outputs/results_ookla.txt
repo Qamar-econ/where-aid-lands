@@ -1,0 +1,14 @@
+TL municipalities matched to DHS: 13/13
+  Ookla 2019 tests/pop vs DHS 2009: rho=+0.20;  vs DHS 2016: rho=-0.05
+  Ookla 2022 tests/pop vs DHS 2009: rho=+0.30;  vs DHS 2016: rho=+0.48
+  Ookla 2025 tests/pop vs DHS 2009: rho=+0.36;  vs DHS 2016: rho=+0.20
+  excl. Dili (12): Ookla 2019 tests/pop vs DHS 2016 rho=-0.34; vs DHS 2009 rho=-0.02
+  postos with zero Ookla mobile tests in 2019Q1: 37/65; Dili 4 postos hold 81% of tests (pop share 27%)
+  postos with zero Ookla mobile tests in 2022Q1: 25/65; Dili 4 postos hold 70% of tests (pop share 27%)
+  postos with zero Ookla mobile tests in 2025Q1: 16/65; Dili 4 postos hold 60% of tests (pop share 27%)
+  stability across postos (Spearman tests/pop): 2019~2022 +0.72, 2019~2025 +0.56
+  TL population within 1.5 km of a tested tile, 2019Q1: 36%
+  TL population within 1.5 km of a tested tile, 2025Q1: 47%
+NP Ookla 2019 tests/pop vs census 2011 mobile rho=+0.54, internet rho=+0.61; zero-test districts 14/75
+NP Ookla 2025 tests/pop vs census 2011 mobile rho=+0.48, internet rho=+0.56; zero-test districts 3/75
+  Kathmandu valley share of Ookla 2019 tests 48% vs population 10%

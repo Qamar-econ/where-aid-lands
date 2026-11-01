@@ -1,0 +1,73 @@
+located projects (planning 2019-2024): 455 | cells: 450 | mean N per cell: 1.01 | zero share: 0.12
+MDE (2.8 x SE), % per SD: M1 net 72% | M1 road 118% | M2 net 66%
+RI p (M1 net_idx, within-province permutation of trajectories, 500 draws): 0.000
+                      spec            term      b    se     p  n_cells        sumN  pct_per_sd  p_holm
+                   M1 main         net_idx  0.505 0.194 0.009      450  455.000000        65.8   0.028
+                   M1 main            road  0.167 0.278 0.547      450  455.000000        18.2   0.547
+                   M1 main           paved -0.241 0.130 0.063      450  455.000000       -21.4     NaN
+                   M1 main             dep  0.027 0.127 0.832      450  455.000000         2.7     NaN
+M2 main (district+year FE)         net_idx -0.216 0.182 0.234      450  455.000000       -19.4   0.467
+                 R1 binary         net_idx  0.227 0.083 0.006      450 2009.000000        25.5     NaN
+                 R1 binary            road  0.260 0.224 0.246      450 2009.000000        29.7     NaN
+                 R1 binary           paved -0.143 0.064 0.025      450 2009.000000       -13.3     NaN
+                 R1 binary             dep -0.016 0.091 0.863      450 2009.000000        -1.6     NaN
+              R1 binary M2         net_idx  0.081 0.111 0.463      450 2009.000000         8.4     NaN
+         R2 palika-precise         net_idx  0.464 0.215 0.031      450  186.000000        59.1     NaN
+         R2 palika-precise            road  0.550 0.375 0.142      450  186.000000        73.3     NaN
+         R2 palika-precise           paved -0.332 0.199 0.095      450  186.000000       -28.3     NaN
+         R2 palika-precise             dep  0.105 0.161 0.513      450  186.000000        11.1     NaN
+         R3 observed dates         net_idx  0.170 0.170 0.317      450   61.000000        18.5     NaN
+         R3 observed dates            road  0.978 0.361 0.007      450   61.000000       165.8     NaN
+         R3 observed dates           paved -0.238 0.104 0.022      450   61.000000       -21.2     NaN
+         R3 observed dates             dep  0.142 0.119 0.233      450   61.000000        15.2     NaN
+                    R4 L-1         net_idx  0.579 0.176 0.001      450  387.000000        78.5     NaN
+                    R4 L-1            road  0.145 0.321 0.651      450  387.000000        15.6     NaN
+                    R4 L-1           paved -0.223 0.133 0.094      450  387.000000       -20.0     NaN
+                    R4 L-1             dep  0.095 0.130 0.466      450  387.000000         9.9     NaN
+                    R4 L+1         net_idx  0.529 0.190 0.005      450  510.000000        69.7     NaN
+                    R4 L+1            road  0.055 0.261 0.834      450  510.000000         5.6     NaN
+                    R4 L+1           paved -0.195 0.126 0.122      450  510.000000       -17.8     NaN
+                    R4 L+1             dep  0.080 0.125 0.525      450  510.000000         8.3     NaN
+                 R4 L-1 M2         net_idx -0.025 0.225 0.912      450  387.000000        -2.5     NaN
+                 R4 L+1 M2         net_idx  0.025 0.211 0.905      450  510.000000         2.5     NaN
+               R5 no covid         net_idx  0.467 0.199 0.019      450  444.000000        59.5     NaN
+               R5 no covid            road  0.192 0.293 0.512      450  444.000000        21.2     NaN
+               R5 no covid           paved -0.241 0.133 0.070      450  444.000000       -21.5     NaN
+               R5 no covid             dep  0.012 0.131 0.930      450  444.000000         1.2     NaN
+            R5 no covid M2         net_idx -0.215 0.178 0.227      450  444.000000       -19.4     NaN
+         R6 <=10 districts         net_idx  0.559 0.223 0.012      450  400.000000        75.0     NaN
+         R6 <=10 districts            road  0.127 0.275 0.645      450  400.000000        13.5     NaN
+         R6 <=10 districts           paved -0.271 0.150 0.071      450  400.000000       -23.7     NaN
+         R6 <=10 districts             dep  0.035 0.139 0.802      450  400.000000         3.6     NaN
+         R7 mob_tests_pc_z  mob_tests_pc_z  0.259 0.097 0.008      450  455.000000        29.5     NaN
+         R7 mob_tests_pc_z            road  0.166 0.301 0.581      450  455.000000        18.1     NaN
+      R7 mob_tests_pc_z M2  mob_tests_pc_z -0.104 0.094 0.268      450  455.000000        -9.9     NaN
+             R7 mob_mbps_z      mob_mbps_z -0.073 0.128 0.571      450  455.000000        -7.0     NaN
+             R7 mob_mbps_z            road  0.144 0.315 0.648      450  455.000000        15.5     NaN
+          R7 mob_mbps_z M2      mob_mbps_z -0.032 0.087 0.709      450  455.000000        -3.2     NaN
+        R7 mob_tiles_km2_z mob_tiles_km2_z  0.556 0.214 0.009      450  455.000000        74.3     NaN
+        R7 mob_tiles_km2_z            road  0.127 0.286 0.657      450  455.000000        13.6     NaN
+     R7 mob_tiles_km2_z M2 mob_tiles_km2_z -0.173 0.308 0.574      450  455.000000       -15.9     NaN
+         R7 fix_tests_pc_z  fix_tests_pc_z  0.417 0.198 0.035      450  455.000000        51.7     NaN
+         R7 fix_tests_pc_z            road  0.168 0.267 0.530      450  455.000000        18.3     NaN
+      R7 fix_tests_pc_z M2  fix_tests_pc_z -0.114 0.157 0.468      450  455.000000       -10.8     NaN
+                    R8 MDB         net_idx  0.214 0.214 0.316      450   39.000000        23.9     NaN
+                    R8 MDB            road  1.204 0.433 0.005      450   39.000000       233.5     NaN
+                    R8 MDB           paved -0.367 0.143 0.010      450   39.000000       -30.7     NaN
+                    R8 MDB             dep  0.160 0.137 0.245      450   39.000000        17.3     NaN
+              R8 bilateral         net_idx  0.533 0.239 0.026      450  331.000000        70.4     NaN
+              R8 bilateral            road  0.190 0.323 0.558      450  331.000000        20.9     NaN
+              R8 bilateral           paved -0.216 0.175 0.217      450  331.000000       -19.4     NaN
+              R8 bilateral             dep  0.078 0.168 0.643      450  331.000000         8.1     NaN
+               R8 UN-other         net_idx  0.530 0.381 0.164      450   85.000000        69.9     NaN
+               R8 UN-other            road -0.542 0.564 0.337      450   85.000000       -41.9     NaN
+               R8 UN-other           paved -0.308 0.233 0.187      450   85.000000       -26.5     NaN
+               R8 UN-other             dep -0.241 0.249 0.335      450   85.000000       -21.4     NaN
+           R9 USD-weighted         net_idx  0.294 0.194 0.129      450 2704.764239        34.2     NaN
+           R9 USD-weighted            road  1.757 0.327 0.000      450 2704.764239       479.5     NaN
+           R9 USD-weighted           paved -0.391 0.159 0.014      450 2704.764239       -32.4     NaN
+           R9 USD-weighted             dep  0.120 0.135 0.372      450 2704.764239        12.8     NaN
+            R10 no capital         net_idx  0.533 0.200 0.008      432  391.195426        70.4     NaN
+            R10 no capital            road -0.043 0.272 0.874      432  391.195426        -4.2     NaN
+            R10 no capital           paved -0.192 0.131 0.141      432  391.195426       -17.5     NaN
+            R10 no capital             dep -0.016 0.127 0.901      432  391.195426        -1.6     NaN

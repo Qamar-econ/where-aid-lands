@@ -1,0 +1,33 @@
+====================================================================================================
+PRIMARY MODEL AND PRE-SPECIFIED ROBUSTNESS (coefficients per 1 SD; PPML)
+  P  PRIMARY                                     N=61  road=-0.073(p=0.136)  network=+0.172(p=0.000)  need=-0.065(p=0.114)  
+  R1 tier A (exact points) only                  N=61  road=-0.046(p=0.385)  network=+0.116(p=0.054)  need=-0.071(p=0.173)  
+  R2 all located incl. municipal split, no FE    N=61  road=-0.003(p=0.938)  network=+0.054(p=0.137)  need=-0.037(p=0.265)  
+  R3 + pre-period hub: log night lights 2010     N=61  road=-0.075(p=0.113)  network=+0.167(p=0.001)  need=-0.060(p=0.196)  ntl=+0.014(p=0.797)
+  R4 + municipal-capital dummy                   N=61  road=-0.091(p=0.084)  network=+0.186(p=0.000)  need=-0.130(p=0.012)  mun_capital=-0.221(p=0.071)
+  R5 municipality-clustered SE (12 clusters)     N=61  road=-0.073(p=0.281)  network=+0.172(p=0.011)  need=-0.065(p=0.079)  
+  R6 RWI instead of census deprivation           N=61  road=-0.092(p=0.043)  network=+0.187(p=0.000)  need=-0.082(p=0.214)  
+  R7a projects started 2000-2015                 N=61  road=-0.069(p=0.096)  network=+0.197(p=0.000)  need=-0.026(p=0.486)  
+  R7b projects started 2016-2026                 N=61  road=-0.013(p=0.972)  network=-0.040(p=0.890)  need=-0.377(p=0.192)  
+  R8 all 62 incl. Dili (dummy)                   N=62  road=-0.073(p=0.136)  network=+0.172(p=0.000)  need=-0.065(p=0.114)  dili=-0.721(p=0.010)
+  R9 excl. Oecusse & Atauro (sea access)         N=56  road=-0.131(p=0.007)  network=+0.151(p=0.004)  need=-0.088(p=0.035)  
+  R10 no municipality FE                         N=61  road=-0.000(p=0.998)  network=+0.093(p=0.040)  need=-0.153(p=0.000)  
+
+  leave-one-municipality-out: network b in [+0.144, +0.223], p<0.05 in 13/13; road b in [-0.115, -0.034]; deprivation b in [-0.085, -0.045]
+  randomization inference (network permuted within municipality, 500 draws): two-sided p = 0.002
+
+====================================================================================================
+SECTOR FAMILY (no FE, all located incl. municipal split; Holm and Benjamini-Hochberg)
+  Education            phys  b=-0.101 p=0.028  Holm=0.723  BH q=0.100
+  Education            dep   b=-0.148 p=0.005  Holm=0.134  BH q=0.031
+  Health               dep   b=+0.109 p=0.029  Holm=0.737  BH q=0.100
+  Other social         phys  b=+0.239 p=0.002  Holm=0.070  BH q=0.025
+  Other social         dep   b=+0.273 p=0.004  Holm=0.120  BH q=0.031
+  Governance           dep   b=-0.108 p=0.059  Holm=1.000  BH q=0.149
+  Productive           net   b=+0.132 p=0.009  Holm=0.260  BH q=0.047
+  Env./multisector     dep   b=-0.818 p=0.000  Holm=0.000  BH q=0.000
+  Transport infra      phys  b=+0.187 p=0.010  Holm=0.267  BH q=0.047
+  Humanitarian         phys  b=-0.144 p=0.030  Holm=0.737  BH q=0.100
+  Humanitarian         net   b=-0.171 p=0.041  Holm=0.892  BH q=0.111
+  ICT component        dep   b=-0.483 p=0.000  Holm=0.009  BH q=0.005
+  Non-ICT              net   b=+0.071 p=0.036  Holm=0.831  BH q=0.108

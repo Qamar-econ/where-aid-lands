@@ -1,0 +1,718 @@
+<title>Where Aid Lands</title>
+<meta name="description" content="Where Aid Lands: Roads, Connectivity, or Need? Evidence from Cambodia. Tae Yoon Moon (University of Seoul) and Claude Opus 5.5.">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Public+Sans:wght@400;500;600&family=Hahmlet:wght@400;500;600&family=Gothic+A1:wght@400;500;600&display=swap">
+<style>
+/* Layout: a white journal-style page; one reading column with figures that break out to full width.
+   Subject: where development projects land in Cambodia — night lights, laterite roads, mobile signal. */
+:root{
+  --paper:#ffffff; --surface:#ffffff; --ink:#1a1a1a; --ink-2:#444b52; --ink-3:#6f777e; --rule:#e2e4e6; --tint:#f6f7f8;
+  --teal:#0b6b6b; --teal-soft:#e1efed; --laterite:#a8461f; --night:#0e1527;
+  --eu:#e8590c; --cn:#c2255c; --wb:#1c6fbf; --ns:#a3adb5;
+  --f-display:"Spectral",Georgia,"Times New Roman",serif;
+  --f-body:"Spectral",Georgia,"Times New Roman",serif;
+  --f-ui:"Public Sans","Helvetica Neue",Arial,"Malgun Gothic",sans-serif;
+  --f-mono:var(--f-ui);
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:#fff;color:var(--ink);font-family:var(--f-body);font-size:18px;line-height:1.65;font-variant-numeric:lining-nums;-webkit-font-smoothing:antialiased}
+html[lang="ko"] body{font-family:"Spectral","Hahmlet",serif;word-break:keep-all;line-height:1.75}
+html[lang="ko"]{--f-ui:"Public Sans","Gothic A1","Malgun Gothic",sans-serif}
+.pad{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.col{max-width:700px;margin:0 auto}
+.wide{max-width:1180px;margin:0 auto}
+a{color:var(--teal)}
+/* top bar */
+.bar{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--rule);padding-top:env(safe-area-inset-top,0px)}
+.bar .wide{display:flex;gap:18px;align-items:center;min-height:48px}
+.bar .mark{font-family:var(--f-display);font-weight:600;color:var(--ink);font-size:17px;white-space:nowrap}
+.bar nav{display:flex;gap:2px;margin-left:auto;overflow-x:auto;scrollbar-width:none}
+.bar nav a{color:var(--ink-2);text-decoration:none;font-family:var(--f-ui);font-size:14.5px;padding:6px 9px;white-space:nowrap}
+.bar nav a:hover,.bar nav a.on{color:var(--ink);text-decoration:underline;text-underline-offset:5px;text-decoration-color:var(--laterite)}
+.lang{display:flex;border:1px solid var(--rule);border-radius:3px;overflow:hidden;flex:none}
+.bar nav + .lang{margin-left:6px}
+.lang button{font-family:var(--f-ui);font-size:13.5px;border:0;background:#fff;color:var(--ink-2);padding:4px 10px;cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--ink);color:#fff}
+/* hero */
+.hero{padding-block:72px 48px;border-bottom:1px solid var(--rule)}
+.kicker{font-family:var(--f-ui);font-size:15px;color:var(--ink-3)}
+.hero h1{font-family:var(--f-display);font-weight:600;font-size:clamp(38px,6.4vw,68px);line-height:1.05;letter-spacing:-.01em;margin:12px 0 20px;text-wrap:balance}
+.hero h1 em{font-style:italic;color:var(--laterite)}
+.hero .dek{font-size:clamp(19px,2.2vw,22px);color:var(--ink-2);max-width:62ch;margin:0}
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin-top:40px;border-top:1px solid var(--ink)}
+.facts div{padding:16px 18px 0 0;border-right:1px solid var(--rule);margin-right:18px}
+.facts div:last-child{border-right:0}
+.facts b{display:block;font-family:var(--f-display);font-weight:600;font-size:clamp(28px,3.6vw,40px);line-height:1.1;color:var(--ink)}
+.facts span{font-family:var(--f-ui);font-size:15px;color:var(--ink-3);display:block;margin-top:6px}
+.byline{margin-top:32px;font-family:var(--f-ui);font-size:14.5px;color:var(--ink-3);display:flex;flex-wrap:wrap;gap:6px 22px}
+/* chapters */
+section{padding-block:72px 8px;scroll-margin-top:60px}
+.chap{font-family:var(--f-display);font-style:italic;font-size:19px;color:var(--laterite)}
+h2{font-family:var(--f-display);font-weight:600;font-size:clamp(30px,4.2vw,42px);line-height:1.12;letter-spacing:-.005em;margin:6px 0 18px;text-wrap:balance}
+h3{font-family:var(--f-display);font-weight:600;font-size:clamp(23px,2.8vw,28px);line-height:1.22;margin:56px 0 12px;text-wrap:balance}
+p{margin:0 0 16px}
+.lead{font-size:21px;line-height:1.55;color:var(--ink)}
+.note{font-family:var(--f-ui);font-size:15px;color:var(--ink-3)}
+.pull{font-family:var(--f-display);font-style:italic;font-size:clamp(22px,2.6vw,26px);line-height:1.4;border-left:3px solid var(--laterite);padding:4px 0 4px 20px;margin:28px 0;color:var(--ink)}
+strong{font-weight:600}
+.num{font-variant-numeric:tabular-nums lining-nums}
+html:not([lang="ko"]) .ko{display:none!important}
+html[lang="ko"] .en{display:none!important}
+.authors{font-family:var(--f-ui);font-size:17px;color:var(--ink);margin:26px 0 0}
+.authors span{color:var(--ink-3)}/* figures */
+figure{margin:28px auto 36px}
+.fig{background:var(--surface);border:1px solid var(--rule);border-radius:4px;padding:20px}
+figcaption{font-family:var(--f-ui);font-size:14.5px;color:var(--ink-3);margin-top:10px;max-width:80ch}
+figcaption b{color:var(--ink-2);font-weight:600}
+.figtitle{font-family:var(--f-ui);font-weight:600;font-size:16.5px;margin:0 0 4px}
+.figsub{font-family:var(--f-ui);font-size:14.5px;color:var(--ink-3);margin:0 0 14px}
+svg text{fill:var(--ink-2);font-family:var(--f-ui);font-variant-numeric:tabular-nums}
+svg .axis path,svg .axis line{stroke:var(--rule)}
+.chart{display:block;width:100%;height:auto}
+/* map */
+.mapwrap{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:24px;align-items:start}
+.mapframe{position:relative;border-radius:4px;overflow:hidden;background:var(--surface)}
+#map{display:block;width:100%;height:auto}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.tabs button,.chips button{font-family:var(--f-ui);font-size:14.5px;border:1px solid var(--rule);background:var(--surface);color:var(--ink-2);padding:6px 12px;border-radius:3px;cursor:pointer}
+.tabs button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.chips button[aria-pressed="false"]{opacity:.45}
+.tabs button:focus-visible,.chips button:focus-visible,.dl:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;vertical-align:0}
+.side h4{font-family:var(--f-display);font-weight:600;font-size:22px;margin:0 0 6px;line-height:1.25}
+.side p{font-family:var(--f-ui);font-size:15px;color:var(--ink-2)}
+.side .stat{font-family:var(--f-ui);font-size:14.5px;color:var(--ink-2);border-top:1px solid var(--rule);padding-top:10px;margin-top:10px}
+.ramp{height:8px;border-radius:4px;margin:6px 0 2px}
+.rampl{display:flex;justify-content:space-between;font-family:var(--f-ui);font-size:13px;color:var(--ink-3)}
+#tip{position:fixed;z-index:60;pointer-events:none;max-width:320px;background:var(--surface);color:var(--ink);border:1px solid var(--rule);border-radius:6px;
+  box-shadow:0 10px 30px rgba(10,15,25,.22);padding:10px 12px;font-family:var(--f-ui);font-size:14px;line-height:1.5}
+#tip b{display:block;font-weight:600;margin-bottom:4px}
+#tip .k{color:var(--ink-3)}
+/* tables */
+.tbl{overflow-x:auto;margin:16px 0 24px}
+table{border-collapse:collapse;width:100%;font-family:var(--f-ui);font-size:15.5px;font-variant-numeric:tabular-nums lining-nums}
+th{font-size:14.5px;color:var(--ink-2);font-weight:600;text-align:left;padding:8px 10px;border-bottom:1.5px solid var(--ink)}
+td{padding:9px 10px;border-bottom:1px solid var(--rule);vertical-align:top}
+td.r,th.r{text-align:right}
+td.m{white-space:nowrap}
+.yes{color:var(--teal);font-weight:600}
+/* cards */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin:20px 0}
+.card{background:var(--surface);border:1px solid var(--rule);border-radius:4px;padding:18px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.card h4{margin:0;font-family:var(--f-ui);font-size:17px;font-weight:600}
+.card p{margin:0;font-family:var(--f-ui);font-size:15px;color:var(--ink-2)}
+.card .src{font-family:var(--f-ui);font-size:13.5px;color:var(--ink-3)}
+.card .act{margin-top:auto;display:flex;gap:8px;flex-wrap:wrap;padding-top:6px}
+.dl,.lnk{font-family:var(--f-ui);font-size:14px;border:1px solid var(--ink);background:transparent;color:var(--ink);padding:5px 12px;border-radius:3px;cursor:pointer;text-decoration:none}
+.dl:hover,.lnk:hover{background:var(--ink);color:var(--paper)}
+.dl::before{content:"↓ "}
+.lnk::after{content:" ↗"}
+.steps{counter-reset:s;display:grid;gap:14px;margin:20px 0;padding:0;list-style:none}
+.steps li{display:grid;grid-template-columns:44px minmax(0,1fr);gap:12px;align-items:start}
+.steps li::before{counter-increment:s;content:counter(s) ".";font-family:var(--f-display);font-weight:600;font-size:18px;color:var(--laterite);text-align:right}
+.formula{font-family:var(--f-display);font-size:clamp(20px,2.6vw,26px);text-align:center;padding:22px 12px;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);margin:24px 0;overflow-x:auto;white-space:nowrap}
+.formula{font-size:clamp(16px,2vw,21px);scrollbar-width:none}
+.formula::-webkit-scrollbar{display:none}
+@media (min-width:980px){.col .formula{margin-left:-110px;margin-right:-110px}}
+.formula i{font-style:italic}
+.formula mjx-container{margin:0!important}
+mjx-container{color:var(--ink)}
+.formula{text-align:center}
+table.work td,table.work th{padding:7px 8px}
+tr.sum td{border-top:1.5px solid var(--ink);font-weight:600}
+main ul{padding-left:22px}
+main ul li{margin:8px 0}
+.split{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:28px}
+footer{margin-top:90px;border-top:1px solid var(--ink);color:var(--ink-3);padding-block:32px 48px;font-family:var(--f-ui);font-size:14.5px}
+footer b{color:var(--ink);font-weight:600}
+#dlnote{font-family:var(--f-ui);font-size:15px;color:var(--laterite)}
+@media (max-width:920px){.mapwrap{grid-template-columns:minmax(0,1fr)}.facts{grid-template-columns:repeat(2,minmax(0,1fr))}.facts div:nth-child(2){border-right:0}.bar nav{display:none}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+
+<header class="bar pad"><div class="wide">
+  <span class="mark">Where Aid Lands</span>
+  <nav aria-label="Chapters">
+    <a href="#question" class="en">Question</a><a href="#question" class="ko">질문</a><a href="#literature" class="en">Literature</a><a href="#literature" class="ko">선행연구</a><a href="#method" class="en">Method</a><a href="#method" class="ko">방법</a><a href="#data" class="en">Data</a><a href="#data" class="ko">데이터</a>
+    <a href="#findings" class="en">Findings</a><a href="#findings" class="ko">결과</a><a href="#limits" class="en">Limits</a><a href="#limits" class="ko">한계</a><a href="#reproduce" class="en">Reproduce</a><a href="#reproduce" class="ko">재현</a><a href="#ai" class="en">AI use</a><a href="#ai" class="ko">AI 사용</a>
+  </nav>
+  <div class="lang" role="group" aria-label="Language"><button data-lang="en" aria-pressed="true">EN</button><button data-lang="ko" aria-pressed="false">한국어</button></div>
+</div></header>
+
+<div class="hero pad"><div class="wide">
+  <div class="en kicker">Where Aid Lands: Roads, Connectivity, or Need? Evidence from Cambodia · projects starting 2017–2020</div><div class="ko kicker">Where Aid Lands: Roads, Connectivity, or Need? Evidence from Cambodia · 2017–2020년 착수 사업</div>
+  <h1 class="en">Aid follows the <em>road</em>,<br>not the need.</h1><h1 class="ko">원조는 <em>필요</em>가 아니라<br><em>길</em>을 따라간다.</h1>
+  <p class="en dek">We mapped 323 geocoded development projects onto Cambodia's 141 districts and asked what predicts where they land: roads, mobile signal, economic activity, or poverty. Travel time on the road network explains the most. Poverty points the other way.</p><p class="ko dek">지오코딩된 개발협력 사업 323건을 캄보디아 141개 군(district)에 배치하고, 사업이 어디로 가는지를 무엇이 예측하는지 물었습니다. 도로, 모바일 신호, 경제활동, 빈곤 가운데 도로망 이동시간의 설명력이 가장 컸고, 빈곤은 반대 방향을 가리켰습니다.</p>
+  <div class="facts">
+    <div><b>+175%</b><span class="en">more projects per standard deviation of road access, within the same province</span><span class="ko">같은 주(province) 안에서 도로 접근성이 1표준편차 높을 때 늘어나는 사업 수</span></div>
+    <div><b>36%</b><span class="en">of the explained variation is carried by road access, more than any other factor</span><span class="ko">설명된 변동 중 도로 접근성이 차지하는 몫, 다른 어떤 요인보다 큼</span></div>
+    <div><b>−53%</b><span class="en">fewer projects per standard deviation of poverty, entangled with remoteness</span><span class="ko">빈곤 1표준편차당 줄어드는 사업 수 (외딴 정도와 얽혀 있음)</span></div>
+    <div><b>0</b><span class="en">detectable pull of earlier infrastructure on later projects in an event study</span><span class="ko">사건연구에서 이전 인프라 사업이 이후 사업을 끌어들인 효과는 검출되지 않음</span></div>
+  </div>
+  <p class="authors en">Tae Yoon Moon <span>(University of Seoul)</span> &nbsp;·&nbsp; Claude Opus 5.5 <span>(Anthropic)</span></p><p class="authors ko">Tae Yoon Moon <span>(서울시립대학교)</span> &nbsp;·&nbsp; Claude Opus 5.5 <span>(Anthropic)</span></p>
+  <div class="en byline"><span>Data: GODAD · IPUMS · Ookla · OSM · WorldPop · Meta RWI</span><span>Model: PPML, province fixed effects</span><span>Status: working results, census merge pending</span></div><div class="ko byline"><span>데이터: GODAD · IPUMS · Ookla · OSM · WorldPop · Meta RWI</span><span>모형: PPML, 주 고정효과</span><span>상태: 잠정 결과, 센서스 결합 대기</span></div>
+</div></div>
+
+<main>
+<section id="question" class="pad"><div class="col">
+  <div class="en chap">1 · The question</div><div class="ko chap">1 · 연구 질문</div>
+  <h2 class="en">Reachable is not the same as needed</h2><h2 class="ko">닿기 쉬운 곳과 필요한 곳은 다르다</h2>
+  <p class="en lead">Aid is meant to go where people are poorest. Field workers have long suspected it goes where it is easiest to reach.</p><p class="ko lead">원조는 가장 가난한 곳으로 가야 합니다. 그러나 현장에서는 오래전부터 원조가 가장 닿기 쉬운 곳으로 간다고 의심해 왔습니다.</p>
+  <p class="en">Robert Chambers called it <strong>tarmac bias</strong> in 1983: visitors see the villages along the paved road and draw conclusions about everyone else. Four decades later, studies of geocoded aid keep finding that projects within a country favour richer places (Briggs 2017, 2018, 2021; Öhler et al. 2019). What none of them separate is <em>which kind</em> of reachability matters.</p><p class="ko">Robert Chambers는 1983년 이를 <strong>포장도로 편향(tarmac bias)</strong>이라 불렀습니다. 방문자는 포장도로변 마을만 보고 나머지 모두에 대해 결론을 내린다는 것입니다. 40년이 지난 지금도 지오코딩된 원조 연구들은 국가 내 사업이 더 부유한 곳을 선호한다는 결과를 반복해서 내놓습니다(Briggs 2017, 2018, 2021; Öhler et al. 2019). 그러나 <em>어떤 종류의</em> 접근성이 중요한지를 구분한 연구는 없습니다.</p>
+  <p class="en">In 2020 a place can be reachable by road, reachable by phone, or simply prosperous and visible from space at night. These overlap, but they are different things, and they call for different policy responses. This project measures each one separately and lets them compete.</p><p class="ko">2020년의 어떤 곳은 도로로 닿을 수도, 전화로 닿을 수도, 혹은 그저 번영해서 밤에 우주에서 보일 수도 있습니다. 셋은 겹치지만 서로 다른 것이고, 정책적 함의도 다릅니다. 이 연구는 각각을 따로 측정해 서로 경쟁시킵니다.</p>
+  <div class="tbl"><table>
+    <thead><tr><th class="en">We ask</th><th class="ko">질문</th><th class="en">Measured by</th><th class="ko">측정</th></tr></thead>
+    <tbody>
+      <tr><td class="en">Do projects cluster where roads are good?</td><td class="ko">사업은 도로가 좋은 곳에 몰리는가?</td><td class="en">Network travel-time index (10 components)</td><td class="ko">도로망 이동시간 지수 (10개 구성요소)</td></tr>
+      <tr><td class="en">Where the mobile signal is strong?</td><td class="ko">모바일 신호가 강한 곳에?</td><td class="en">Ookla speed and usage density; census phone ownership (pending)</td><td class="ko">Ookla 속도와 이용 밀도; 센서스 휴대전화 보유율 (대기)</td></tr>
+      <tr><td class="en">Where economic activity is high?</td><td class="ko">경제활동이 활발한 곳에?</td><td class="en">Night lights per person</td><td class="ko">1인당 야간 불빛</td></tr>
+      <tr><td class="en">Where people are poorest?</td><td class="ko">가장 가난한 곳에?</td><td class="en">Meta Relative Wealth Index; census deprivation (pending)</td><td class="ko">Meta 상대적 부 지수(RWI); 센서스 박탈 지수 (대기)</td></tr>
+      <tr><td class="en">Does earlier infrastructure pull later aid in?</td><td class="ko">이전 인프라가 이후 원조를 끌어들이는가?</td><td class="en">Transport/energy projects 2010–16; stacked event study</td><td class="ko">2010–16년 교통·에너지 사업; 누적(stacked) 사건연구</td></tr>
+      <tr><td class="en">Do project counts and money go to the same places?</td><td class="ko">사업 수와 사업액은 같은 곳으로 가는가?</td><td class="en">Two outcomes: number of projects and commitments</td><td class="ko">두 결과변수: 사업 수와 약정액</td></tr>
+    </tbody></table></div>
+</div></section>
+
+<section id="literature" class="pad"><div class="col">
+  <div class="en chap">2 · What we already know</div><div class="ko chap">2 · 선행연구</div>
+  <h2 class="en">Need has been studied. Reachability has not.</h2><h2 class="ko">필요는 연구되었다. 접근성은 아니다.</h2>
+  <p class="en">We coded eighteen core studies of where aid goes within countries. Need and politics are well covered. Physical access appears mostly as a control variable, measured as distance to the capital. We found no study that uses digital connectivity to explain where projects are placed.</p><p class="ko">국가 내 원조 배분에 관한 핵심 연구 18편을 코딩했습니다. 필요와 정치는 충분히 다뤄졌습니다. 물리적 접근성은 주로 수도까지의 거리 같은 통제변수로만 등장합니다. 디지털 연결성으로 사업 입지를 설명한 연구는 찾지 못했습니다.</p>
+  <div class="tbl"><table>
+    <thead><tr><th class="en">Construct</th><th class="ko">구성개념</th><th class="en">Coverage</th><th class="ko">다뤄진 정도</th><th class="en">Key studies</th><th class="ko">주요 연구</th></tr></thead>
+    <tbody>
+      <tr><td class="en">Need (poverty)</td><td class="ko">필요 (빈곤)</td><td class="en">Extensive</td><td class="ko">많음</td><td>Briggs 2017 <i>IO</i>, 2018 <i>WD</i>, 2021 <i>ISQ</i>; Öhler et al. 2019 <i>PLoS ONE</i>; Öhler &amp; Nunnenkamp 2014 <i>Kyklos</i>; Nunnenkamp et al. 2017 <i>RDE</i></td></tr>
+      <tr><td class="en">Politics</td><td class="ko">정치</td><td class="en">Extensive</td><td class="ko">많음</td><td>Dreher et al. 2019 <i>JDE</i>; Bommer et al. 2022 <i>JPubE</i>; Bomprezzi et al. 2025; Jablonski 2014 <i>World Politics</i></td></tr>
+      <tr><td class="en">Physical access</td><td class="ko">물리적 접근성</td><td class="en">As a control</td><td class="ko">통제변수로만</td><td class="en">Öhler et al. 2019 (travel time to capital); Weiss et al. 2018 <i>Nature</i> (accessibility surface)</td><td class="ko">Öhler et al. 2019 (수도까지 이동시간); Weiss et al. 2018 <i>Nature</i> (접근성 지도)</td></tr>
+      <tr><td class="en">Digital connectivity</td><td class="ko">디지털 연결성</td><td class="en">Essentially absent</td><td class="ko">사실상 없음</td><td class="en">Related work asks other questions: phone data for targeting (Aiken et al. 2022 <i>Nature</i>), where ICT aid goes</td><td class="ko">관련 연구는 다른 질문을 다룸: 대상 선정용 전화 데이터(Aiken et al. 2022 <i>Nature</i>), ICT 원조의 행선지</td></tr>
+      <tr><td class="en">Donor clustering</td><td class="ko">공여자 군집</td><td class="en">Partial</td><td class="ko">일부</td><td class="en">Öhler 2013 (Cambodia); AidData Malawi studies</td><td class="ko">Öhler 2013 (캄보디아); AidData 말라위 연구</td></tr>
+      <tr><td class="en">Scale (θ)</td><td class="ko">규모 (θ)</td><td class="en">Cross-country only</td><td class="ko">국가 간 연구만</td><td>Alesina &amp; Dollar 2000</td></tr>
+    </tbody></table></div>
+  <p class="en note">Based on a structured web search; the claim that no connectivity study exists will be re-checked in Scopus and Web of Science before submission. The full review is in the downloads.</p><p class="ko note">구조화된 웹 검색에 기반했습니다. 연결성 연구가 없다는 주장은 투고 전 Scopus와 Web of Science에서 다시 확인합니다. 전체 검토는 다운로드에 있습니다.</p>
+</div></section>
+
+<section id="method" class="pad"><div class="col">
+  <div class="en chap">3 · How we measured</div><div class="ko chap">3 · 측정 방법</div>
+  <h2 class="en">One question per model</h2><h2 class="ko">모형 하나에 질문 하나</h2>
+  <p class="en">The model is deliberately plain. Each regression contains one district characteristic, population, and a fixed effect for the province, so every comparison is between districts in the same province.</p><p class="ko">모형은 일부러 단순하게 만들었습니다. 각 회귀식에는 군의 특성 하나, 인구, 그리고 주 고정효과만 들어가므로, 모든 비교는 같은 주 안의 군끼리 이루어집니다.</p>
+  <div class="formula">\[ \mathbb{E}\left[N_d \mid X_d, \mathrm{Pop}_d, p\right] = \exp\!\left(\alpha_{p(d)} + \beta_X X_d + \theta \ln \mathrm{Pop}_d\right) \]</div>
+  <p class="en note">Estimated by PPML, which solves the Poisson score equations \( \sum_d \big(N_d - \hat\mu_d\big)\,\mathbf{x}_d = \mathbf{0} \) with \( \hat\mu_d = \exp(\mathbf{x}_d'\hat{\boldsymbol\beta}) \). Only the conditional mean has to be right; the counts need not be Poisson, integers or equidispersed (Santos Silva &amp; Tenreyro 2006). The effect we report is \( 100\,(e^{\beta_X}-1) \) percent per standard deviation of \( X \).</p><p class="ko note">PPML로 추정하며, 포아송 스코어 방정식 \( \sum_d \big(N_d - \hat\mu_d\big)\,\mathbf{x}_d = \mathbf{0} \) (단 \( \hat\mu_d = \exp(\mathbf{x}_d'\hat{\boldsymbol\beta}) \))을 풉니다. 조건부 평균만 맞으면 되고, 종속변수가 포아송 분포이거나 정수이거나 등분산일 필요는 없습니다(Santos Silva &amp; Tenreyro 2006). 보고하는 효과는 \(X\)의 1표준편차당 \( 100\,(e^{\beta_X}-1) \) 퍼센트입니다.</p>
+  <div class="split">
+    <div>
+      <p class="en"><strong>\(N_d\)</strong> counts new projects in district \(d\): \( N_d = \sum_j w_{jd} \), where \( w_{jd} = 1/K_j \) if project \(j\) lists district \(d\) among its \(K_j\) districts. Each project therefore adds exactly one to the total. Projects start 2017–2020 and are located reliably at district level; ICT projects are excluded to avoid reverse causality with connectivity.</p><p class="ko"><strong>\(N_d\)</strong>는 군 \(d\)의 신규 사업 수입니다: \( N_d = \sum_j w_{jd} \). 사업 \(j\)가 \(K_j\)개 군을 기재했다면 \( w_{jd} = 1/K_j \)이므로 사업 하나는 합계에 정확히 1을 더합니다. 2017–2020년 착수, 군 단위로 신뢰성 있게 위치가 확인된 사업이며, 연결성과의 역인과를 피하려 ICT 사업은 제외했습니다.</p>
+      <p class="en"><strong>\(X_d\)</strong> is one standardised construct, \( X_d = (x_d - \bar x)/s_x \). We never put correlated indicators in the same model, because earlier work in Nepal showed that doing so flips signs.</p><p class="ko"><strong>\(X_d\)</strong>는 표준화된 구성개념 하나입니다, \( X_d = (x_d - \bar x)/s_x \). 네팔 분석에서 상관된 지표를 함께 넣었을 때 부호가 뒤집혔기 때문에, 상관된 지표는 한 모형에 같이 넣지 않습니다.</p>
+    </div>
+    <div>
+      <p class="en"><strong>\(\theta\)</strong> is the population elasticity. Projects per person scale as \( N_d/\mathrm{Pop}_d \propto \mathrm{Pop}_d^{\,\theta-1} \), so \( \theta = 1 \) means projects follow people and \( \theta &lt; 1 \) means small districts get more per head.</p><p class="ko"><strong>\(\theta\)</strong>는 인구 탄력성입니다. 1인당 사업 수는 \( N_d/\mathrm{Pop}_d \propto \mathrm{Pop}_d^{\,\theta-1} \)이므로, \( \theta = 1 \)이면 사업이 인구를 따르고 \( \theta &lt; 1 \)이면 작은 군이 1인당 더 많이 받습니다.</p>
+      <p class="en"><strong>\(\alpha_p\)</strong> is a province fixed effect (19 provinces contribute), so every comparison is between districts of the same province.</p><p class="ko"><strong>\(\alpha_p\)</strong>는 주 고정효과입니다(19개 주가 기여). 따라서 모든 비교는 같은 주의 군끼리입니다.</p>
+      <p class="en"><strong>Estimator.</strong> Poisson pseudo-maximum likelihood, the standard for counts with many zeros. It is equivalent to a location-choice model in which each project picks a district.</p><p class="ko"><strong>추정량.</strong> 0이 많은 개수 자료의 표준인 포아송 유사최대우도(PPML)입니다. 각 사업이 군 하나를 고르는 입지선택 모형과 동등합니다.</p>
+    </div>
+  </div>
+  <h3 class="en">What earlier attempts taught us</h3><h3 class="ko">앞선 시도에서 배운 것</h3>
+  <ol class="steps">
+    <li><div class="en"><strong>Align the timing.</strong> Attaching one year's connectivity to twenty years of projects produced a spurious effect in Nepal (+0.40) that vanished once timing matched.</div><div class="ko"><strong>시점을 맞춘다.</strong> 한 해의 연결성을 20년치 사업에 붙였더니 네팔에서 가짜 효과(+0.40)가 나왔고, 시점을 맞추자 사라졌습니다.</div></li>
+    <li><div class="en"><strong>One construct per model.</strong> In Nepal, road access and population correlate at 0.85; entered together, the coefficients were unstable.</div><div class="ko"><strong>모형당 구성개념 하나.</strong> 네팔에서는 도로 접근성과 인구의 상관이 0.85였고, 함께 넣으면 계수가 불안정했습니다.</div></li>
+    <li><div class="en"><strong>Use published geocodes.</strong> We replaced our own text geocoding with GODAD, whose authors report 89% extraction accuracy and a 5% error rate.</div><div class="ko"><strong>공개된 지오코딩을 쓴다.</strong> 직접 만든 텍스트 지오코딩 대신 GODAD를 썼습니다. 저자들은 추출 정확도 89%, 오류율 5%를 보고합니다.</div></li>
+    <li><div class="en"><strong>Fix the model before the results.</strong> The specification was written before estimation; later additions are labelled as such.</div><div class="ko"><strong>결과보다 모형을 먼저 고정한다.</strong> 명세는 추정 전에 작성했고, 이후 추가한 분석은 그렇다고 표시했습니다.</div></li>
+  </ol>
+  <h3 class="en">How we judge significance</h3><h3 class="ko">유의성 판단 방식</h3>
+  <p class="en">Nineteen provinces are too few to trust one kind of standard error. Every coefficient gets three p-values, and we report the <strong>most conservative</strong> of them.</p><p class="ko">19개 주는 한 가지 표준오차만 믿기에는 너무 적습니다. 모든 계수에 p값 세 개를 구하고, 그중 <strong>가장 보수적인</strong> 값을 보고합니다.</p>
+  <ul>
+    <li class="en"><strong>Province-clustered</strong> sandwich errors.</li><li class="ko"><strong>주 단위 군집</strong> 샌드위치 표준오차.</li>
+    <li class="en"><strong>Conley spatial errors</strong> with a Bartlett kernel at 50 and 100 km, which let nearby districts share shocks:
+      \[ \hat V = \hat B^{-1}\Big(\sum_d\sum_{d'} k(\mathrm{dist}_{dd'})\,\hat s_d \hat s_{d'}'\Big)\hat B^{-1},\qquad k(u)=\max\!\Big(0,\,1-\frac{u}{c}\Big),\qquad \hat s_d=\mathbf{x}_d\,(N_d-\hat\mu_d) \]</li><li class="ko"><strong>Conley 공간 표준오차</strong>: 50 km, 100 km Bartlett 커널로 가까운 군끼리 충격을 공유하도록 허용합니다:
+      \[ \hat V = \hat B^{-1}\Big(\sum_d\sum_{d'} k(\mathrm{dist}_{dd'})\,\hat s_d \hat s_{d'}'\Big)\hat B^{-1},\qquad k(u)=\max\!\Big(0,\,1-\frac{u}{c}\Big),\qquad \hat s_d=\mathbf{x}_d\,(N_d-\hat\mu_d) \]</li>
+    <li class="en"><strong>Freedman–Lane randomisation inference</strong>: regress \(X\) on province effects and \(\ln \mathrm{Pop}\), shuffle the residuals within each province 2,000 times, add them back, and refit. The p-value is the share of shuffled \(|\hat\beta^{(b)}|\) at least as large as the observed \(|\hat\beta|\).</li><li class="ko"><strong>Freedman–Lane 무작위화 추론</strong>: \(X\)를 주 효과와 \(\ln \mathrm{Pop}\)에 회귀한 뒤, 잔차를 주 안에서 2,000번 섞어 다시 더하고 재추정합니다. p값은 섞은 \(|\hat\beta^{(b)}|\)가 관측된 \(|\hat\beta|\) 이상인 비율입니다.</li>
+  </ul>
+  <p class="en">The three confirmatory tests carry a Holm correction. Each estimate comes with its minimum detectable effect at 5% size and 80% power, \( \mathrm{MDE} = 100\,(e^{2.8\,\mathrm{SE}}-1) \).</p><p class="ko">세 가지 확증 검정에는 Holm 보정을 적용합니다. 각 추정치에는 유의수준 5%, 검정력 80%의 최소검출효과 \( \mathrm{MDE} = 100\,(e^{2.8\,\mathrm{SE}}-1) \)를 함께 제시합니다.</p>
+
+  <h3 class="en">The road-access index</h3><h3 class="ko">도로 접근성 지수</h3>
+  <p class="en">The index turns a road network into one number per district in four steps.</p><p class="ko">이 지수는 네 단계를 거쳐 도로망을 군마다 숫자 하나로 바꿉니다.</p>
+  <p class="en"><strong>1. Speed on every road segment.</strong> Each OpenStreetMap segment \(e\) gets a base speed by road class (45 km/h for primary roads, 25 for tertiary, 3.5 for footpaths), reduced on unpaved surface and on steep grades \(g_e\), and again in the wet season:</p><p class="ko"><strong>1. 모든 도로 구간의 속도.</strong> OpenStreetMap 구간 \(e\)마다 도로 등급별 기본 속도(1차 도로 45 km/h, 3차 25, 보행로 3.5)를 주고, 비포장과 급경사 \(g_e\)에서 줄이며, 우기에는 한 번 더 줄입니다:</p>
+  <div class="formula">\[ \begin{aligned} v_e^{\mathrm{dry}} &= v_{\mathrm{class}(e)}\cdot \pi_e \cdot \min\!\big(1,\max(0.4,\,1-2g_e)\big)\\ v_e^{\mathrm{wet}} &= v_e^{\mathrm{dry}}\cdot\begin{cases}0.85 & \text{paved}\\ 0.5\,(\times0.7 \text{ if slope}>25^\circ) & \text{unpaved}\end{cases} \end{aligned} \]</div>
+  <p class="en note">\( \pi_e = 1 \) for paved segments; unpaved segments are capped at 25 km/h and multiplied by 0.7.</p><p class="ko note">포장 구간은 \( \pi_e = 1 \), 비포장 구간은 최대 25 km/h에 0.7을 곱합니다.</p>
+  <p class="en"><strong>2. Travel time from every square kilometre.</strong> For each populated 1 km cell \(i\), walk to the nearest network node at 3.5 km/h (with a 1.3 detour factor), then take the shortest path to the nearest destination:</p><p class="ko"><strong>2. 1 km² 격자마다 이동시간.</strong> 사람이 사는 1 km 격자 \(i\)에서 가장 가까운 도로망 노드까지 3.5 km/h로 걷고(우회계수 1.3), 이어서 가장 가까운 목적지까지 최단 경로를 탑니다:</p>
+  <div class="formula">\[ t_i = \frac{1.3\, \mathrm{dist}(i,\text{network})}{3.5\ \mathrm{km/h}} + \min_{\text{path } i\to\text{dest}}\ \sum_{e\in\text{path}} \frac{\ell_e}{v_e} \]</div>
+  <p class="en"><strong>3. Population-weighted district averages.</strong> With WorldPop counts \(P_i\):</p><p class="ko"><strong>3. 인구 가중 군 평균.</strong> WorldPop 인구 \(P_i\)로:</p>
+  <div class="formula">\[ T_d = \frac{\sum_{i\in d} P_i\, t_i}{\sum_{i\in d} P_i} \]</div>
+  <p class="en"><strong>4. One index from ten components.</strong> Each component \(c_{dk}\) is signed so that higher means better access (for example \( c = -\ln T \)), standardised, weighted by the first principal component's loadings \(w_k\), and standardised again:</p><p class="ko"><strong>4. 10개 구성요소를 지수 하나로.</strong> 각 구성요소 \(c_{dk}\)는 클수록 접근성이 좋도록 부호를 맞추고(예: \( c = -\ln T \)), 표준화한 뒤, 제1주성분 적재값 \(w_k\)로 가중합하고, 다시 표준화합니다:</p>
+  <div class="formula">\[ z_{dk} = \frac{c_{dk}-\bar c_k}{s_k},\qquad S_d = \sum_{k=1}^{10} w_k\, z_{dk},\qquad \mathrm{Access}_d = \frac{S_d - \bar S}{s_S} \]</div>
+  <p class="en">The first component explains 63% of the variation in the ten measures. Travel-time measures carry almost equal weights (0.38–0.39), followed by road density (0.34) and the share within 30 minutes' walk (0.31).</p><p class="ko">제1주성분은 10개 지표 변동의 63%를 설명합니다. 이동시간 지표들이 거의 같은 가중치(0.38–0.39)를 갖고, 도로 밀도(0.34), 도보 30분 내 비율(0.31)이 뒤를 잇습니다.</p>
+
+  <h3 class="en">A worked example: two districts</h3><h3 class="ko">계산 예시: 두 군</h3>
+  <p class="en">Krong Battambang is a provincial city on National Road 5. Andoung Meas–Koun Mom–Ou Chum is a rural unit in Ratanakiri, in the north-east. Here is how each reaches its index value.</p><p class="ko">Krong Battambang은 국도 5호선의 주도(州都)이고, Andoung Meas–Koun Mom–Ou Chum은 북동부 라타나끼리의 농촌 단위입니다. 각각이 지수 값에 이르는 과정입니다.</p>
+  <div class="tbl"><table class="work">
+    <thead><tr><th class="en">Component \(k\)</th><th class="ko">구성요소 \(k\)</th><th class="r">\(w_k\)</th><th class="en r">Battambang raw</th><th class="ko r">Battambang 원값</th><th class="r">\(z\)</th><th class="r">\(w_k z\)</th><th class="en r">Koun Mom raw</th><th class="ko r">Koun Mom 원값</th><th class="r">\(z\)</th><th class="r">\(w_k z\)</th></tr></thead>
+    <tbody>
+      <tr><td class="en">Time to town ≥20k, dry (min)</td><td class="ko">인구 2만+ 도시까지, 건기 (분)</td><td class="r m">0.379</td><td class="r m">10.1</td><td class="r m">2.24</td><td class="r m">0.850</td><td class="r m">265.7</td><td class="r m">−1.26</td><td class="r m">−0.478</td></tr>
+      <tr><td class="en">Time to town ≥20k, wet (min)</td><td class="ko">인구 2만+ 도시까지, 우기 (분)</td><td class="r m">0.380</td><td class="r m">13.6</td><td class="r m">2.35</td><td class="r m">0.891</td><td class="r m">356.9</td><td class="r m">−1.20</td><td class="r m">−0.457</td></tr>
+      <tr><td class="en">Time to provincial/district seat (min)</td><td class="ko">주·군청 소재지까지 (분)</td><td class="r m">0.386</td><td class="r m">9.9</td><td class="r m">2.01</td><td class="r m">0.778</td><td class="r m">88.8</td><td class="r m">−0.68</td><td class="r m">−0.263</td></tr>
+      <tr><td class="en">Time to hospital (min)</td><td class="ko">병원까지 (분)</td><td class="r m">0.388</td><td class="r m">7.8</td><td class="r m">2.07</td><td class="r m">0.801</td><td class="r m">106.0</td><td class="r m">−0.72</td><td class="r m">−0.279</td></tr>
+      <tr><td class="en">Walk to road (min)</td><td class="ko">도로까지 도보 (분)</td><td class="r m">0.378</td><td class="r m">1.3</td><td class="r m">2.08</td><td class="r m">0.786</td><td class="r m">19.1</td><td class="r m">−0.53</td><td class="r m">−0.199</td></tr>
+      <tr><td class="en">Share within 30 min walk</td><td class="ko">도보 30분 내 비율</td><td class="r m">0.307</td><td class="r m">1.00</td><td class="r m">0.85</td><td class="r m">0.261</td><td class="r m">0.81</td><td class="r m">−0.42</td><td class="r m">−0.128</td></tr>
+      <tr><td class="en">Road density (km/km²)</td><td class="ko">도로 밀도 (km/km²)</td><td class="r m">0.342</td><td class="r m">6.57</td><td class="r m">1.61</td><td class="r m">0.551</td><td class="r m">0.45</td><td class="r m">−0.67</td><td class="r m">−0.228</td></tr>
+      <tr><td class="en">Paved share</td><td class="ko">포장 비율</td><td class="r m">0.215</td><td class="r m">0.23</td><td class="r m">1.22</td><td class="r m">0.262</td><td class="r m">0.07</td><td class="r m">−0.41</td><td class="r m">−0.087</td></tr>
+      <tr><td class="en">Wet-season penalty (share)</td><td class="ko">우기 감속 (비율)</td><td class="r m">0.067</td><td class="r m">0.18</td><td class="r m">1.08</td><td class="r m">0.072</td><td class="r m">0.25</td><td class="r m">0.36</td><td class="r m">0.024</td></tr>
+      <tr><td class="en">Steep-terrain share</td><td class="ko">급경사 지형 비율</td><td class="r m">0.080</td><td class="r m">0.00</td><td class="r m">0.36</td><td class="r m">0.029</td><td class="r m">0.00</td><td class="r m">0.32</td><td class="r m">0.026</td></tr>
+      <tr class="sum"><td class="en">Sum \(S_d\)</td><td class="ko">합계 \(S_d\)</td><td></td><td></td><td></td><td class="r m">5.281</td><td></td><td></td><td class="r m">−2.069</td></tr>
+      <tr class="sum"><td class="en">Index \( (S_d-\bar S)/s_S \), with \( \bar S = 0,\ s_S = 2.507 \)</td><td class="ko">지수 \( (S_d-\bar S)/s_S \), \( \bar S = 0,\ s_S = 2.507 \)</td><td></td><td></td><td></td><td class="r m yes">+2.11</td><td></td><td></td><td class="r m">−0.83</td></tr>
+    </tbody></table></div>
+  <p class="en note">The \(z\) column is computed on the signed component, for example \( z = (-\ln 10.1 - \bar c)/s \) for travel times; that is why short times give positive \(z\). The two districts sit about three standard deviations apart, which the model translates into roughly \( e^{1.01\times 2.94} \approx 19\times \) as many projects for equal population and province, before any other factor.</p><p class="ko note">\(z\)는 부호를 맞춘 구성요소로 계산합니다. 예컨대 이동시간은 \( z = (-\ln 10.1 - \bar c)/s \)이므로 시간이 짧을수록 \(z\)가 양수입니다. 두 군은 약 3표준편차 떨어져 있고, 모형은 이를 인구와 주가 같을 때 다른 요인 없이 약 \( e^{1.01\times 2.94} \approx 19 \)배의 사업 수로 번역합니다.</p>
+</div></section>
+
+<section id="data" class="pad"><div class="wide">
+  <div class="col">
+    <div class="en chap">4 · The data</div><div class="ko chap">4 · 데이터</div>
+    <h2 class="en">Public sources, rebuilt at district level</h2><h2 class="ko">공개 자료를 군 단위로 재구성</h2>
+    <p class="en">Every input is openly available. The district tables and project assignments we built are downloadable here.</p><p class="ko">모든 입력 자료는 공개되어 있습니다. 직접 만든 군 단위 표와 사업 배정 자료는 여기서 내려받을 수 있습니다.</p>
+  </div>
+  <div class="cards">
+    <div class="card"><h4 class="en">GODAD · project locations</h4><h4 class="ko">GODAD · 사업 위치</h4><p class="en">Geocoded OECD aid records: 18 European donors and the US to 2020, the World Bank to 2023, China to 2021. In Cambodia, 73% of 1,524 projects locate at district level or finer.</p><p class="ko">지오코딩된 OECD 원조 기록: 유럽 18개 공여국과 미국(2020년까지), 세계은행(2023년까지), 중국(2021년까지). 캄보디아 사업 1,524건 중 73%가 군 단위 이상으로 위치가 확인됩니다.</p><div class="src">Bomprezzi et al. 2025</div><div class="act"><a class="en lnk" href="https://godad.uni-goettingen.de/home/" target="_blank" rel="noopener">Source</a><a class="ko lnk" href="https://godad.uni-goettingen.de/home/" target="_blank" rel="noopener">출처</a></div></div>
+    <div class="card"><h4 class="en">IPUMS GEO2_KH · districts</h4><h4 class="ko">IPUMS GEO2_KH · 군 경계</h4><p class="en">143 district units harmonised across the 1998–2019 censuses, so census indicators can be added later.</p><p class="ko">1998–2019 센서스에 걸쳐 조화된 143개 군 단위. 나중에 센서스 지표를 붙일 수 있습니다.</p><div class="src">IPUMS International</div><div class="act"><a class="en lnk" href="https://international.ipums.org/international-action/variables/GEO2_KH" target="_blank" rel="noopener">Source</a><a class="ko lnk" href="https://international.ipums.org/international-action/variables/GEO2_KH" target="_blank" rel="noopener">출처</a></div></div>
+    <div class="card"><h4 class="en">Ookla Open Data · signal</h4><h4 class="ko">Ookla Open Data · 신호</h4><p class="en">Mobile and fixed speed tests on ~600 m tiles. 300,546 mobile tests between 2019 Q1 and 2020 Q1; every district has at least 30.</p><p class="ko">약 600 m 타일의 모바일·유선 속도 측정. 2019년 1분기–2020년 1분기 모바일 측정 300,546건, 모든 군이 30건 이상.</p><div class="src">Ookla for Good</div><div class="act"><a class="en lnk" href="https://github.com/teamookla/ookla-open-data" target="_blank" rel="noopener">Source</a><a class="ko lnk" href="https://github.com/teamookla/ookla-open-data" target="_blank" rel="noopener">출처</a></div></div>
+    <div class="card"><h4 class="en">OSM · Copernicus · WorldPop · roads</h4><h4 class="ko">OSM · Copernicus · WorldPop · 도로</h4><p class="en">Road network, 90 m terrain and 1 km population for travel times. Hospitals from OSM, towns and seats from GeoNames.</p><p class="ko">이동시간 계산용 도로망, 90 m 지형, 1 km 인구. 병원은 OSM, 도시와 행정 소재지는 GeoNames.</p><div class="src">OpenStreetMap · Copernicus GLO-90 · WorldPop</div></div>
+    <div class="card"><h4 class="en">Night lights · RWI · need</h4><h4 class="ko">야간 불빛 · RWI · 필요</h4><p class="en">Harmonised DMSP–VIIRS lights (2008, 2015, 2019). Meta's Relative Wealth Index at ~2.4 km, population-weighted.</p><p class="ko">조화된 DMSP–VIIRS 야간 불빛(2008, 2015, 2019). Meta 상대적 부 지수(약 2.4 km, 인구 가중).</p><div class="src">Li et al. 2020 · Chi et al. 2022</div></div>
+    <div class="card"><h4 class="en">OECD DAC2A · coverage</h4><h4 class="ko">OECD DAC2A · 포괄 범위</h4><p class="en">Total ODA to Cambodia 2017–2020, used to show that GODAD's donors account for 33% of it.</p><p class="ko">2017–2020년 캄보디아 총 ODA. GODAD 공여자가 그중 33%를 차지함을 보이는 데 사용.</p><div class="src">OECD Data Explorer</div></div>
+  </div>
+  <div class="col">
+    <h3 class="en">Built for this project</h3><h3 class="ko">이 연구를 위해 만든 자료</h3>
+    <div class="tbl"><table>
+      <thead><tr><th class="en">File</th><th class="ko">파일</th><th class="en">Contents</th><th class="ko">내용</th><th></th></tr></thead>
+      <tbody>
+        <tr><td class="m">kh_access.csv</td><td class="en">Travel times (town, seat, hospital, Phnom Penh; dry and wet), walking, road density, paved share, access index</td><td class="ko">이동시간(도시, 행정 소재지, 병원, 프놈펜; 건기·우기), 도보, 도로 밀도, 포장 비율, 접근성 지수</td><td><button class="dl" data-f="dl/data/kh_access.csv">CSV</button></td></tr>
+        <tr><td class="m">kh_covariates.csv</td><td class="en">Population 2008/2015/2019, night lights, Ookla tests and speeds (raw and shrunk)</td><td class="ko">인구 2008/2015/2019, 야간 불빛, Ookla 측정 수와 속도(원값·축소 추정)</td><td><button class="dl" data-f="dl/data/kh_covariates.csv">CSV</button></td></tr>
+        <tr><td class="m">kh_projects.csv</td><td class="en">Projects starting 2017–2020 with donor group, sector, precision and number of districts</td><td class="ko">2017–2020년 착수 사업: 공여 그룹, 분야, 위치 정밀도, 군 개수</td><td><button class="dl" data-f="dl/data/kh_projects.csv">CSV</button></td></tr>
+        <tr><td class="m">districts.geojson</td><td class="en">Simplified district boundaries carrying every district measure</td><td class="ko">모든 군 지표를 담은 단순화 군 경계</td><td><button class="dl" data-f="data/districts.geojson" data-name="cambodia_districts.json">JSON</button></td></tr>
+        <tr><td class="m">cambodia_data.zip</td><td class="en">All of the above plus project-to-district weights, RWI, the GODAD Cambodia extract and full boundaries</td><td class="ko">위 전부와 사업–군 가중치, RWI, GODAD 캄보디아 추출본, 원본 경계</td><td><button class="dl" data-bundle="data" data-name="cambodia_data.zip">ZIP</button></td></tr>
+      </tbody></table></div>
+  </div>
+</div></section>
+
+<section id="findings" class="pad"><div class="wide">
+  <div class="col">
+    <div class="en chap">5 · Findings</div><div class="ko chap">5 · 결과</div>
+    <h2 class="en">Three ways to be reachable</h2><h2 class="ko">닿을 수 있는 세 가지 방식</h2>
+    <p class="en lead">Start with the map. Each dot is a project location; the background is one kind of reachability.</p><p class="ko lead">지도부터 봅시다. 점 하나가 사업 위치 하나이고, 배경은 접근성의 한 종류입니다.</p>
+    <p class="en">Switch between lights, roads and signal. The bars on the right compare districts by quintile of that background, counting projects per 100,000 people.</p><p class="ko">불빛, 도로, 신호를 바꿔 보세요. 오른쪽 막대는 그 배경 값의 5분위별로 군을 나눠 인구 10만 명당 사업 수를 비교합니다.</p>
+  </div>
+  <figure>
+    <div class="tabs" role="group" aria-label="Background">
+      <button data-layer="night" aria-pressed="true" class="en">Night lights</button><button data-layer="night" aria-pressed="true" class="ko">야간 불빛</button>
+      <button data-layer="access" aria-pressed="false" class="en">Road access</button><button data-layer="access" aria-pressed="false" class="ko">도로 접근성</button>
+      <button data-layer="signal" aria-pressed="false" class="en">Mobile signal</button><button data-layer="signal" aria-pressed="false" class="ko">모바일 신호</button>
+    </div>
+    <div class="mapwrap">
+      <div class="mapframe"><svg id="map" viewBox="0 0 1800 1503" role="img" aria-label="Map of Cambodia with aid project locations over the selected background"></svg></div>
+      <div class="side" id="side">
+        <h4 id="sideTitle"></h4>
+        <p id="sideText"></p>
+        <div id="ramp"></div>
+        <svg id="quint" class="chart" viewBox="0 0 300 190" role="img" aria-label="Projects per 100,000 people by district quintile"></svg>
+        <div class="stat" id="sideStat"></div>
+        <div class="chips" role="group" aria-label="Donor groups">
+          <button data-donor="EU/US" aria-pressed="true" class="en"><span class="dot" style="background:var(--eu)"></span>EU &amp; US</button><button data-donor="EU/US" aria-pressed="true" class="ko"><span class="dot" style="background:var(--eu)"></span>유럽·미국</button>
+          <button data-donor="China" aria-pressed="true" class="en"><span class="dot" style="background:var(--cn)"></span>China</button><button data-donor="China" aria-pressed="true" class="ko"><span class="dot" style="background:var(--cn)"></span>중국</button>
+          <button data-donor="World Bank" aria-pressed="true" class="en"><span class="dot" style="background:var(--wb)"></span>World Bank</button><button data-donor="World Bank" aria-pressed="true" class="ko"><span class="dot" style="background:var(--wb)"></span>세계은행</button>
+        </div>
+      </div>
+    </div>
+    <figcaption id="mapcap" class="en"><b>Hover a dot</b> to see the project; hover a district for its values. Most locations are district representative points, so dots sharing a point are fanned out slightly. Projects listed at more than ten locations are drawn smaller.</figcaption><figcaption class="ko"><b>점에 마우스를 올리면</b> 사업이, 군에 올리면 그 군의 값이 보입니다. 대부분의 위치는 군 대표점이라, 같은 점을 공유하는 사업은 살짝 퍼뜨려 그렸습니다. 위치가 10곳을 넘는 사업은 작게 그렸습니다.</figcaption>
+  </figure>
+
+  <div class="col">
+    <h3 class="en">Roads explain the most</h3><h3 class="ko">도로의 설명력이 가장 크다</h3>
+    <p class="en">Put each characteristic into its own model and roads stand out. A district one standard deviation better connected by road receives about <strong>175% more projects</strong> than a comparable district in the same province. The result holds under all three ways of computing uncertainty.</p><p class="ko">특성을 하나씩 모형에 넣으면 도로가 두드러집니다. 도로 연결이 1표준편차 좋은 군은 같은 주의 비슷한 군보다 사업을 약 <strong>175% 더 많이</strong> 받습니다. 세 가지 불확실성 계산 방식 모두에서 유지됩니다.</p>
+  </div>
+  <figure class="wide"><div class="fig">
+    <p class="en figtitle">Effect on new projects, one characteristic per model</p><p class="ko figtitle">신규 사업에 대한 효과, 모형당 특성 하나</p>
+    <p class="en figsub">Percent change per standard deviation, with 95% intervals from the most conservative standard error</p><p class="ko figsub">1표준편차당 변화율(%), 가장 보수적인 표준오차의 95% 구간</p>
+    <svg id="forest" class="chart" role="img" aria-label="Effects with confidence intervals"></svg>
+  </div><figcaption class="en"><b>Teal</b> marks estimates whose most conservative p-value is below 0.05. Mobile speed is significant with clustered errors (p = 0.002) but not under randomisation inference (p = 0.063).</figcaption><figcaption class="ko"><b>청록색</b>은 가장 보수적인 p값이 0.05 미만인 추정치입니다. 모바일 속도는 군집 표준오차로는 유의하지만(p = 0.002) 무작위화 추론에서는 아닙니다(p = 0.063).</figcaption></figure>
+  <div class="col"><div class="tbl"><table id="maintab">
+    <thead><tr><th class="en">Characteristic</th><th class="ko">특성</th><th class="en r">Effect</th><th class="ko r">효과</th><th class="en r">p cluster</th><th class="ko r">p 군집</th><th class="r">p Conley</th><th class="en r">p RI</th><th class="ko r">p 무작위화</th><th class="en r">p used</th><th class="ko r">채택 p</th><th class="r">MDE</th></tr></thead><tbody></tbody></table></div></div>
+
+  <div class="col">
+    <h3 class="en">All factors in one model</h3><h3 class="ko">모든 요인을 한 모형에</h3>
+    <p class="en">Single-factor models answer "does this matter?". To ask "how much does each matter, holding the others fixed?" we also fit a multiple regression with every factor at once:</p><p class="ko">단일 요인 모형은 "이것이 중요한가?"에 답합니다. "다른 요인을 고정했을 때 각각 얼마나 중요한가?"를 묻기 위해 모든 요인을 동시에 넣은 다중회귀도 추정했습니다:</p>
+    <div class="formula">\[ \begin{aligned} \mathbb{E}[N_d] = \exp\!\big(&\alpha_{p(d)} + \beta_L\,\mathrm{Lights}_d + \beta_A\,\mathrm{Access}_d + \beta_C\,\mathrm{Signal}_d\\ &+ \beta_I\,\mathrm{PriorInfra}_d + \beta_N\,\mathrm{Poverty}_d + \theta\ln\mathrm{Pop}_d\big) \end{aligned} \]</div>
+    <p class="en">This is defensible in Cambodia, unlike in Nepal, because most correlations are low. The exception is poverty, which moves with road access (\(r=-0.84\)). We therefore show the model with and without it.</p><p class="ko">캄보디아에서는 네팔과 달리 대부분의 상관이 낮아 이 방식이 가능합니다. 예외는 빈곤으로, 도로 접근성과 함께 움직입니다(\(r=-0.84\)). 그래서 빈곤을 넣은 모형과 뺀 모형을 모두 보입니다.</p>
+    <div class="tbl"><table>
+      <thead><tr><th class="en">Factor (per SD; prior infra = yes/no)</th><th class="ko">요인 (1SD당; 이전 인프라는 유무)</th><th class="en r">Four factors</th><th class="ko r">4요인</th><th class="r">p</th><th class="en r">Five factors</th><th class="ko r">5요인</th><th class="r">p</th><th class="r">VIF</th></tr></thead>
+      <tbody>
+        <tr><td class="en">Night lights per person</td><td class="ko">1인당 야간 불빛</td><td class="r m yes">+99%</td><td class="r m">&lt;0.001</td><td class="r m yes">+114%</td><td class="r m">0.037</td><td class="r m">1.5</td></tr>
+        <tr><td class="en">Road access</td><td class="ko">도로 접근성</td><td class="r m yes">+79%</td><td class="r m">0.001</td><td class="r m">+229%</td><td class="r m">0.296</td><td class="r m">3.9</td></tr>
+        <tr><td class="en">Mobile speed</td><td class="ko">모바일 속도</td><td class="r m yes">+42%</td><td class="r m">0.031</td><td class="r m">+26%</td><td class="r m">0.131</td><td class="r m">1.0</td></tr>
+        <tr><td class="en">Earlier infrastructure (2010–16)</td><td class="ko">이전 인프라 (2010–16)</td><td class="r m">+162%</td><td class="r m">0.064</td><td class="r m">+176%</td><td class="r m">0.054</td><td class="r m">1.3</td></tr>
+        <tr><td class="en">Poverty (−RWI)</td><td class="ko">빈곤 (−RWI)</td><td class="r m">–</td><td class="r m"></td><td class="r m">+70%</td><td class="r m">0.609</td><td class="r m">4.6</td></tr>
+        <tr class="sum"><td class="en">Pseudo-R² (population + province alone: 0.39)</td><td class="ko">유사 R² (인구 + 주만: 0.39)</td><td class="r m">0.69</td><td></td><td class="r m">0.71</td><td></td><td></td></tr>
+      </tbody></table></div>
+    <p class="en">With four factors, each keeps its own effect: roads, lights and signal all matter at once. Adding poverty leaves road access and poverty fighting over the same variation, so neither is precise. This is the collinearity problem in action, and it is why the headline estimates come from single-factor models.</p><p class="ko">4요인 모형에서는 도로, 불빛, 신호가 모두 동시에 유효합니다. 빈곤을 더하면 도로 접근성과 빈곤이 같은 변동을 두고 다투어 둘 다 정밀하지 않게 됩니다. 이것이 다중공선성 문제이며, 대표 추정치를 단일 요인 모형에서 가져오는 이유입니다.</p>
+    <h3 class="en">Splitting the explained share fairly</h3><h3 class="ko">설명력을 공정하게 나누기</h3>
+    <p class="en">Coefficients have different units, so they cannot rank importance on their own. Instead we ask how much each factor adds to explained deviance, averaged over every order in which the factors could enter. This is the Shapley value:</p><p class="ko">계수는 단위가 달라 그 자체로 중요도를 비교할 수 없습니다. 대신 각 요인이 설명된 이탈도(deviance)에 얼마나 더하는지를, 요인이 들어갈 수 있는 모든 순서에 걸쳐 평균합니다. 이것이 Shapley 값입니다:</p>
+    <div class="formula">\[ \phi_j = \sum_{S\subseteq F\setminus\{j\}} \frac{|S|!\,\big(|F|-|S|-1\big)!}{|F|!}\,\Big[v\big(S\cup\{j\}\big)-v(S)\Big] \] \[ v(S)=\frac{D_0-D_S}{D_{\mathrm{null}}} \]</div>
+    <p class="en note">\(F\) is the set of five factors, \(D_S\) the Poisson deviance of the model with factors \(S\) plus population and province effects, \(D_0\) the deviance with population and province only, and \(D_{\mathrm{null}}\) the intercept-only deviance. The shares \( \phi_j/\sum_k\phi_k \) add to 100%; with five factors there are \(5! = 120\) orderings.</p><p class="ko note">\(F\)는 다섯 요인의 집합, \(D_S\)는 요인 \(S\)와 인구·주 효과를 넣은 모형의 포아송 이탈도, \(D_0\)는 인구와 주만 넣은 이탈도, \(D_{\mathrm{null}}\)은 절편만 있는 이탈도입니다. 몫 \( \phi_j/\sum_k\phi_k \)의 합은 100%이고, 다섯 요인이면 순서는 \(5! = 120\)가지입니다.</p>
+  </div>
+  <figure class="wide"><div class="fig">
+    <p class="en figtitle">Who explains where projects go</p><p class="ko figtitle">사업 입지를 누가 설명하나</p>
+    <p class="en figsub">Share of the 32.1 points of pseudo-R² added by five factors (full model pseudo-R² = 0.71)</p><p class="ko figsub">다섯 요인이 더한 유사 R² 32.1%p의 배분 (전체 모형 유사 R² = 0.71)</p>
+    <svg id="shap" class="chart" role="img" aria-label="Shapley decomposition"></svg>
+  </div><figcaption class="en">Poverty and road access overlap heavily, so the decomposition splits their shared part between them.</figcaption><figcaption class="ko">빈곤과 도로 접근성은 많이 겹치므로, 분해는 공유 부분을 둘에게 나눕니다.</figcaption></figure>
+
+  <div class="col">
+    <h3 class="en">Need points the other way</h3><h3 class="ko">필요는 반대 방향을 가리킨다</h3>
+    <p class="en">If aid followed need, poorer districts would receive more. They receive less. One standard deviation of poverty (measured as negative wealth on Meta's index) means <strong>53% fewer projects</strong> (p = 0.014), and 68% fewer among social-sector projects.</p><p class="ko">원조가 필요를 따른다면 가난한 군이 더 많이 받아야 합니다. 실제로는 덜 받습니다. 빈곤(Meta 지수의 음의 부) 1표준편차는 <strong>사업 53% 감소</strong>(p = 0.014), 사회 분야 사업에서는 68% 감소를 뜻합니다.</p>
+    <p class="en pull">But in Cambodia, poor and remote are nearly the same place.</p><p class="ko pull">그러나 캄보디아에서 가난한 곳과 외딴 곳은 거의 같은 곳입니다.</p>
+    <p class="en">The poverty measure and road access correlate at −0.84. Once road access is held fixed, the poverty effect disappears (+29%, p = 0.68). With these data we cannot tell whether donors avoid poverty or avoid remoteness. The census deprivation index, built from different sources, is the test we are waiting for.</p><p class="ko">빈곤 지표와 도로 접근성의 상관은 −0.84입니다. 도로 접근성을 고정하면 빈곤 효과는 사라집니다(+29%, p = 0.68). 이 자료로는 공여자가 빈곤을 피하는지 외딴 곳을 피하는지 구분할 수 없습니다. 다른 출처로 만든 센서스 박탈 지수가 기다리는 검정입니다.</p>
+  </div>
+  <figure class="wide"><div class="fig">
+    <p class="en figtitle">Poverty and road access move together</p><p class="ko figtitle">빈곤과 도로 접근성은 함께 움직인다</p>
+    <p class="en figsub">Each circle is a district; area shows projects 2017–2020</p><p class="ko figsub">원 하나가 군 하나, 면적은 2017–2020년 사업 수</p>
+    <svg id="scatter" class="chart" role="img" aria-label="District poverty against road access"></svg>
+  </div></figure>
+
+  <div class="col">
+    <h3 class="en">Infrastructure does not pull aid in</h3><h3 class="ko">인프라는 원조를 끌어들이지 않는다</h3>
+    <p class="en">Districts that received a road or energy project in 2010–16 got far more non-infrastructure projects in 2017–20 (+188% after controls, p = 0.044). It looks like infrastructure opens the door. Two checks say otherwise.</p><p class="ko">2010–16년에 도로·에너지 사업을 받은 군은 2017–20년 비인프라 사업을 훨씬 많이 받았습니다(통제 후 +188%, p = 0.044). 인프라가 문을 연 것처럼 보이지만, 두 가지 점검은 다르게 말합니다.</p>
+    <p class="en">First, districts with earlier <em>social</em> projects show an even larger association (+1,216%). Second, following the same districts over time in a stacked event study, the arrival of a first transport or energy project changes nothing afterwards, and there is no difference beforehand either.</p><p class="ko">첫째, 이전에 <em>사회</em> 분야 사업을 받은 군은 더 큰 연관(+1,216%)을 보입니다. 둘째, 같은 군을 시간에 따라 추적한 누적 사건연구에서 첫 교통·에너지 사업의 도착은 이후 아무것도 바꾸지 않았고, 이전에도 차이가 없었습니다.</p>
+    <div class="formula">\[ \begin{aligned} \mathbb{E}[N^{\text{non-infra}}_{d,t,c}] = \exp\!\Big(&\mu_{d,c} + \lambda_{t,c}\\ &+ \sum_{k\neq -1}\beta_k\,\mathbf{1}\!\left[t-g_d=k\right]\cdot \mathrm{Treated}_{d,c}\Big) \end{aligned} \]</div>
+    <p class="en note">For each cohort \(c\) of districts whose first transport or energy project started in year \(g\) (2008–2016), we stack the treated districts with clean controls that had none within the window \(g-5\) to \(g+4\). \(\mu_{d,c}\) and \(\lambda_{t,c}\) are district-by-cohort and year-by-cohort effects, so each cohort is compared only with its own controls (Cengiz et al. 2019). Standard errors are clustered by district.</p><p class="ko note">첫 교통·에너지 사업이 \(g\)년(2008–2016)에 시작된 군의 코호트 \(c\)마다, 처치군을 \(g-5\)~\(g+4\) 기간에 그런 사업이 없던 깨끗한 통제군과 쌓습니다. \(\mu_{d,c}\)와 \(\lambda_{t,c}\)는 군×코호트, 연도×코호트 효과이므로 각 코호트는 자기 통제군과만 비교됩니다(Cengiz et al. 2019). 표준오차는 군 단위 군집.</p>
+  </div>
+  <figure class="wide"><div class="fig">
+    <p class="en figtitle">Later non-infrastructure projects around the first transport or energy project</p><p class="ko figtitle">첫 교통·에너지 사업 전후의 비인프라 사업</p>
+    <p class="en figsub">Percent change relative to the year before; 41 treated and 36 clean control districts</p><p class="ko figsub">직전 연도 대비 변화율; 처치 41개 군, 깨끗한 통제 36개 군</p>
+    <svg id="event" class="chart" role="img" aria-label="Event study"></svg>
+  </div><figcaption class="en">Stacked event study, PPML with district×cohort and year×cohort fixed effects. Joint test of pre-period coefficients: p = 0.63. Intervals above +300% are clipped.</figcaption><figcaption class="ko">누적 사건연구, 군×코호트 및 연도×코호트 고정효과 PPML. 사전 기간 계수 결합검정 p = 0.63. +300% 넘는 구간은 잘라 표시.</figcaption></figure>
+  <div class="col">
+    <p class="en">The association is persistence of place, not momentum: districts that attract projects keep attracting all kinds of them. The infrastructure projects themselves follow a different logic, tilting toward poorer and less accessible districts, though only 17 are located precisely enough to test.</p><p class="ko">이 연관은 모멘텀이 아니라 장소의 지속성입니다. 사업을 끌어들이는 군은 모든 종류의 사업을 계속 끌어들입니다. 인프라 사업 자체는 다른 논리를 따라 더 가난하고 접근성 낮은 군으로 기울지만, 정밀하게 위치가 잡힌 사업이 17건뿐이라 검정력이 약합니다.</p>
+    <div class="tbl"><table>
+      <thead><tr><th class="en">Per standard deviation</th><th class="ko">1표준편차당</th><th class="en r">Social projects</th><th class="ko r">사회 분야</th><th class="en r">Infrastructure</th><th class="ko r">인프라</th><th class="en r">Difference p</th><th class="ko r">차이 p</th></tr></thead><tbody id="infra1"></tbody></table></div>
+
+    <h3 class="en">Signal matters, mostly for social projects</h3><h3 class="ko">신호는 주로 사회 분야 사업에서 중요하다</h3>
+    <p class="en">Speed alone is fragile, but a connectivity index built from four Ookla measures holds even after controlling for road access (+162%). The effect concentrates in social projects such as health and education (+301%, against +62% elsewhere). The index weighs usage density more than speed, so it partly captures where people and activity are; census phone ownership will test that.</p><p class="ko">속도만으로는 취약하지만, Ookla 지표 네 개로 만든 연결성 지수는 도로 접근성을 통제해도 유지됩니다(+162%). 효과는 보건·교육 같은 사회 분야 사업에 집중됩니다(+301%, 그 외 +62%). 지수가 속도보다 이용 밀도에 더 큰 가중을 두므로 사람과 활동이 있는 곳을 일부 반영합니다. 센서스 휴대전화 보유율로 검증할 예정입니다.</p>
+    <div class="tbl"><table>
+      <thead><tr><th class="en">Connectivity measure</th><th class="ko">연결성 지표</th><th class="en r">Effect</th><th class="ko r">효과</th><th class="r">p</th></tr></thead><tbody id="conntab"></tbody></table></div>
+
+    <h3 class="en">Counts follow roads; money does not</h3><h3 class="ko">사업 수는 도로를 따르고, 돈은 그렇지 않다</h3>
+    <p class="en">Everything above counts projects. Weighting by committed dollars erases the pattern: none of the factors predicts where the money goes, because a handful of large projects dominates the total. Where donors put their flags and where they put their budgets are different questions, and we saw the same split in Nepal.</p><p class="ko">위의 모든 분석은 사업 수를 셉니다. 약정액으로 가중하면 패턴이 사라집니다. 소수의 대형 사업이 총액을 지배하기 때문에 어떤 요인도 돈의 행선지를 예측하지 못합니다. 공여자가 깃발을 꽂는 곳과 예산을 넣는 곳은 다른 질문이며, 네팔에서도 같은 분리를 보았습니다.</p>
+    <div class="formula">\[ M_d = \sum_j w_{jd}\,\frac{\mathrm{Commitment}_j}{10^6} \quad\text{(US\$ million, 2014 prices)} \] \[ \mathbb{E}[M_d] = \exp\!\big(\alpha_{p(d)}+\beta_X X_d+\theta\ln\mathrm{Pop}_d\big) \]</div>
+  </div>
+  <figure class="wide"><div class="fig">
+    <p class="en figtitle">Project counts versus committed dollars</p><p class="ko figtitle">사업 수 대 약정액</p>
+    <p class="en figsub">Percent change per standard deviation, one characteristic per model</p><p class="ko figsub">1표준편차당 변화율, 모형당 특성 하나</p>
+    <svg id="tracks" class="chart" role="img" aria-label="Counts versus amounts"></svg>
+  </div></figure>
+</div></section>
+
+<section id="limits" class="pad"><div class="wide">
+  <div class="col">
+    <div class="en chap">6 · What could be wrong</div><div class="ko chap">6 · 무엇이 틀릴 수 있나</div>
+    <h2 class="en">The biggest threat is where the dots come from</h2><h2 class="ko">가장 큰 위협은 점이 어디서 왔느냐다</h2>
+    <p class="en">GODAD's authors state plainly that no geocoder places small villages consistently. If projects in remote villages are missed or pushed up to province level, the road effect would be inflated. We tested how far that could go.</p><p class="ko">GODAD 저자들은 어떤 지오코더도 작은 마을을 일관되게 찾지 못한다고 분명히 밝힙니다. 외딴 마을의 사업이 누락되거나 주 단위로 올려졌다면 도로 효과는 부풀려집니다. 그 정도가 얼마나 될 수 있는지 검정했습니다.</p>
+  </div>
+  <figure class="wide"><div class="fig">
+    <p class="en figtitle">The road-access effect under different assumptions about missing locations</p><p class="ko figtitle">누락된 위치에 대한 가정별 도로 접근성 효과</p>
+    <p class="en figsub">Percent change per standard deviation; filled teal = p &lt; 0.05</p><p class="ko figsub">1표준편차당 변화율; 채운 청록색 = p &lt; 0.05</p>
+    <svg id="bounds" class="chart" role="img" aria-label="Geocoding bias scenarios"></svg>
+  </div><figcaption class="en">The extreme scenarios move all 109 province-only projects into the single least (or most) accessible district of their province.</figcaption><figcaption class="ko">극단 시나리오는 주 단위로만 위치가 잡힌 사업 109건 전부를 해당 주에서 가장 접근성이 낮은(또는 높은) 군 하나로 옮깁니다.</figcaption></figure>
+  <div class="col">
+    <p class="en">Projects with long, detailed descriptions, which geocode most reliably, show a slightly <em>larger</em> road effect. Spreading province-level projects by population keeps it at +136%. Only the deliberately extreme case, where every unlocated project sat in the remotest district, pushes it down to +61% and out of significance. We therefore report a range of <strong>+122% to +188%</strong> under realistic assumptions.</p><p class="ko">설명이 길고 자세해 가장 신뢰성 있게 지오코딩되는 사업에서는 도로 효과가 오히려 약간 <em>더 큽니다</em>. 주 단위 사업을 인구 비례로 나누면 +136%가 유지됩니다. 위치 미상 사업이 모두 가장 외딴 군에 있었다는 의도적 극단 가정에서만 +61%로 떨어져 유의성을 잃습니다. 따라서 현실적 가정하의 범위로 <strong>+122%~+188%</strong>를 보고합니다.</p>
+    <div class="tbl"><table>
+      <thead><tr><th class="en">Limitation</th><th class="ko">한계</th><th class="en">What we did</th><th class="ko">대응</th></tr></thead>
+      <tbody>
+        <tr><td class="en">Geocoding misses remote places</td><td class="ko">지오코딩이 외딴 곳을 놓침</td><td class="en">Worst and best-case bounds; well-described projects only; population-weighted spreading; precision vs. access check (ρ = +0.30)</td><td class="ko">최악·최선 경계; 설명이 충실한 사업만; 인구 가중 분배; 정밀도–접근성 점검(ρ = +0.30)</td></tr>
+        <tr><td class="en">GODAD covers 33% of ODA</td><td class="ko">GODAD는 ODA의 33%만 포괄</td><td class="en">Computed from OECD DAC2A and stated. Missing: Japan 19%, ADB 17%, EU institutions 9%, Korea 7%, Australia 5%</td><td class="ko">OECD DAC2A로 계산해 명시. 누락: 일본 19%, ADB 17%, EU 기관 9%, 한국 7%, 호주 5%</td></tr>
+        <tr><td class="en">Poverty and remoteness overlap (r = −0.84)</td><td class="ko">빈곤과 외딴 정도가 겹침 (r = −0.84)</td><td class="en">Census deprivation from different sources, pending IPUMS approval</td><td class="ko">다른 출처의 센서스 박탈 지수 (IPUMS 승인 대기)</td></tr>
+        <tr><td class="en">Cross-sectional design</td><td class="ko">횡단면 설계</td><td class="en">Stacked event study; 2008→2019 long difference with census phone ownership (pending)</td><td class="ko">누적 사건연구; 센서스 휴대전화 보유율로 2008→2019 장기 차분 (대기)</td></tr>
+        <tr><td class="en">Ookla captures usage, not just quality</td><td class="ko">Ookla는 품질뿐 아니라 이용량을 반영</td><td class="en">Speed, usage density and fixed broadband reported separately; census cross-check pending</td><td class="ko">속도, 이용 밀도, 유선 광대역을 따로 보고; 센서스 교차 확인 대기</td></tr>
+        <tr><td class="en">Politics unobserved</td><td class="ko">정치 요인 미관측</td><td class="en">Province fixed effects absorb province-level politics; stated as a limit</td><td class="ko">주 고정효과가 주 단위 정치를 흡수; 한계로 명시</td></tr>
+        <tr><td class="en">Few provinces (19)</td><td class="ko">주가 적음 (19개)</td><td class="en">Conley and randomisation inference alongside clustered errors; most conservative p used</td><td class="ko">군집 표준오차와 함께 Conley·무작위화 추론; 가장 보수적인 p 채택</td></tr>
+      </tbody></table></div>
+  </div>
+</div></section>
+
+<section id="reproduce" class="pad"><div class="wide">
+  <div class="col">
+    <div class="en chap">7 · Reproduce it</div><div class="ko chap">7 · 재현</div>
+    <h2 class="en">Code, data and tables</h2><h2 class="ko">코드, 데이터, 표</h2>
+    <p class="en">The full pipeline runs from raw downloads to every figure on this page.</p><p class="ko">전체 파이프라인이 원자료 다운로드부터 이 페이지의 모든 그림까지 이어집니다.</p>
+  </div>
+  <div class="cards">
+    <div class="card"><h4 class="en">Analysis code</h4><h4 class="ko">분석 코드</h4><p class="en">Fourteen Python scripts: boundaries, project assignment, covariates, road network, models, maps, ladder, event study, geocoding checks, RWI and this site's exports.</p><p class="ko">Python 스크립트 14개: 경계, 사업 배정, 공변량, 도로망, 모형, 지도, 모형 사다리, 사건연구, 지오코딩 점검, RWI, 이 사이트용 내보내기.</p><div class="act"><button class="dl" data-bundle="code" data-name="cambodia_code.zip">Code ZIP</button></div></div>
+    <div class="card"><h4 class="en">Result tables</h4><h4 class="ko">결과 표</h4><p class="en">Main estimates, robustness, heterogeneity, model ladder, infrastructure tests, event study, geocoding checks, need, Shapley.</p><p class="ko">주요 추정, 강건성, 이질성, 모형 사다리, 인프라 검정, 사건연구, 지오코딩 점검, 필요, Shapley.</p><div class="act"><button class="dl" data-bundle="tables" data-name="cambodia_results_tables.zip">Tables ZIP</button></div></div>
+  </div>
+  <p id="dlnote" class="en col" hidden>Downloads are not available in this view. Open the page on claude.ai to save files.</p><p class="ko col" hidden>이 화면에서는 다운로드할 수 없습니다. claude.ai에서 페이지를 열어 저장하세요.</p>
+</div></section>
+<section id="ai" class="pad"><div class="col">
+  <div class="chap en">8 · Use of AI</div><div class="chap ko">8 · AI 사용</div>
+  <h2 class="en">How this project used AI</h2><h2 class="ko">이 연구에서 AI를 어떻게 썼나</h2>
+  <p class="en">This project was carried out by one researcher working with an AI model, Claude Opus 5.5, inside Claude Code. We list both names above because most of the code, estimation and writing on this page was produced in that collaboration. The division of labour is below.</p>
+  <p class="ko">이 연구는 연구자 한 명이 Claude Code 안에서 AI 모델 Claude Opus 5.5와 함께 수행했습니다. 이 페이지의 코드, 추정, 글의 대부분이 그 협업에서 나왔기 때문에 위에 두 이름을 함께 적었습니다. 역할 분담은 아래와 같습니다.</p>
+  <div class="tbl"><table>
+    <thead><tr><th class="en">Task</th><th class="ko">작업</th><th class="en">Who</th><th class="ko">담당</th></tr></thead>
+    <tbody>
+      <tr><td class="en">Research question, country choice, hypotheses</td><td class="ko">연구 질문, 국가 선정, 가설</td><td class="en">Tae Yoon Moon, drawing on fieldwork experience in Timor-Leste</td><td class="ko">Tae Yoon Moon (동티모르 현장 경험 기반)</td></tr>
+      <tr><td class="en">Design rules: one construct per model, counts and money as two tracks, OECD sector categories, 2017–2020 window</td><td class="ko">설계 원칙: 모형당 구성개념 하나, 사업 수·사업액 투 트랙, OECD 분야 분류, 2017–2020 착수 기준</td><td class="en">Tae Yoon Moon</td><td class="ko">Tae Yoon Moon</td></tr>
+      <tr><td class="en">Data download scripts, cleaning, road-network travel times, model estimation, figures</td><td class="ko">데이터 수집 스크립트, 정제, 도로망 이동시간 계산, 모형 추정, 그림</td><td class="en">Claude Opus 5.5, at the author's direction</td><td class="ko">Claude Opus 5.5 (연구자 지시에 따라)</td></tr>
+      <tr><td class="en">Writing of this page, Korean and English versions</td><td class="ko">이 페이지 작성, 한국어·영어판</td><td class="en">Claude Opus 5.5, revised on the author's feedback</td><td class="ko">Claude Opus 5.5 (연구자 피드백 반영)</td></tr>
+      <tr><td class="en">Critique of the specification and preliminary figures</td><td class="ko">모형 명세와 예비 그림에 대한 비판적 검토</td><td class="en">Google Gemini, used as an outside reviewer</td><td class="ko">Google Gemini (외부 검토자로 활용)</td></tr>
+      <tr><td class="en">Literature search</td><td class="ko">선행연구 검색</td><td class="en">AI-assisted web search; to be re-checked in Scopus and Web of Science</td><td class="ko">AI 보조 웹 검색 (Scopus·Web of Science로 재확인 예정)</td></tr>
+    </tbody></table></div>
+  <h3 class="en">Safeguards</h3><h3 class="ko">안전장치</h3>
+  <ul class="en">
+    <li><strong>Model fixed first.</strong> The specification was written before estimation, which limits how far an AI, or a person, can tune results after seeing them.</li>
+    <li><strong>Everything regenerates.</strong> Every number on this page comes from the published scripts, so anyone can rerun and check it.</li>
+    <li><strong>AI reviews are checked against data.</strong> For example, an outside AI review read a U-shape into the road-access quintiles; the data showed it came from small population denominators, and the map panel now says so.</li>
+    <li><strong>Citations are verified separately.</strong> AI tools can invent or misattribute references, so every citation will be checked against the original before submission.</li>
+  </ul>
+  <ul class="ko">
+    <li><strong>모형을 먼저 고정.</strong> 추정 전에 명세서를 작성해, 결과를 본 뒤 AI나 사람이 결과를 조정할 여지를 줄였습니다.</li>
+    <li><strong>모든 수치는 재생성 가능.</strong> 이 페이지의 모든 숫자는 공개된 스크립트에서 나오므로 누구나 다시 돌려 확인할 수 있습니다.</li>
+    <li><strong>AI 검토도 데이터로 확인.</strong> 예컨대 외부 AI 검토는 도로 접근성 5분위 그래프에서 U자형을 읽었지만, 데이터를 보니 인구가 적은 군의 작은 분모 때문이었고, 지도 패널에 그 설명을 넣었습니다.</li>
+    <li><strong>인용은 따로 검증.</strong> AI 도구는 참고문헌을 지어내거나 잘못 귀속할 수 있으므로, 투고 전 모든 인용을 원문과 대조합니다.</li>
+  </ul>
+  <p class="note en">On authorship: most journals, following COPE and ICMJE guidance, do not accept AI systems as authors, because an author must be able to take responsibility for the work. In a submitted paper, Claude's role would be described in the methods or acknowledgements, and Tae Yoon Moon is responsible for the content.</p>
+  <p class="note ko">저자 표기에 관해: COPE·ICMJE 지침을 따르는 대부분의 학술지는 AI를 저자로 인정하지 않습니다. 저자는 연구에 대한 책임을 질 수 있어야 하기 때문입니다. 실제 투고 논문에서는 Claude의 역할을 방법론이나 감사의 글에 밝히고, 내용에 대한 책임은 Tae Yoon Moon에게 있습니다.</p>
+</div></section>
+</main>
+
+<footer class="pad"><div class="wide">
+  <span class="en"><b>Where Aid Lands</b> · Tae Yoon Moon (University of Seoul) and Claude Opus 5.5 (Anthropic) · Working results, 1 November 2026. Census (IPUMS) indicators are pending and will update this page.</span><span class="ko"><b>Where Aid Lands</b> · Tae Yoon Moon (서울시립대학교), Claude Opus 5.5 (Anthropic) · 2026년 11월 1일 잠정 결과. 센서스(IPUMS) 지표는 승인 후 반영 예정입니다.</span><br>
+  <span class="en">Sources: GODAD (Bomprezzi et al. 2025), IPUMS International, Ookla Open Data, OpenStreetMap, Copernicus, WorldPop, Meta RWI (Chi et al. 2022), harmonised night lights (Li et al. 2020), OECD DAC.</span><span class="ko">자료: GODAD (Bomprezzi et al. 2025), IPUMS International, Ookla Open Data, OpenStreetMap, Copernicus, WorldPop, Meta RWI (Chi et al. 2022), 조화 야간 불빛 (Li et al. 2020), OECD DAC.</span>
+</div></footer>
+<div id="tip" hidden></div>
+
+<script>window.MathJax = {tex: {inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']]}, svg: {fontCache: 'global'}};</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script>
+(function(){
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const KO = () => document.documentElement.lang === 'ko', tr = (e, k) => KO() ? k : e;
+let DATA = null, repaint = () => {};
+function setLang(l){ document.documentElement.lang = l; try { localStorage.setItem('lang', l); } catch (e) {}
+  document.querySelectorAll('[data-lang]').forEach(b => b.setAttribute('aria-pressed', b.dataset.lang === l));
+  if (DATA) { repaint(); renderCharts(); } }
+document.querySelectorAll('[data-lang]').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
+try { if (localStorage.getItem('lang') === 'ko') setLang('ko'); } catch (e) {}
+const tip = document.getElementById('tip');
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const pct = v => v == null || isNaN(v) ? '–' : (v > 0 ? '+' : '') + Math.round(v) + '%';
+const fp = p => p == null || isNaN(p) ? '–' : (p < 0.001 ? '<0.001' : p.toFixed(3));
+function showTip(h, ev){ tip.innerHTML = h; tip.hidden = false; const w = tip.offsetWidth, hh = tip.offsetHeight;
+  let x = ev.clientX + 14, y = ev.clientY + 14; if (x + w > innerWidth - 8) x = ev.clientX - w - 14; if (y + hh > innerHeight - 8) y = ev.clientY - hh - 14;
+  tip.style.left = Math.max(8, x) + 'px'; tip.style.top = Math.max(8, y) + 'px'; }
+const hideTip = () => { tip.hidden = true; };
+document.addEventListener('scroll', hideTip, {passive: true});
+
+/* chapter highlight */
+const links = [...document.querySelectorAll('.bar nav a')];
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) links.forEach(a => a.classList.toggle('on', a.hash === '#' + e.target.id)); }), {rootMargin: '-45% 0px -50% 0px'});
+document.querySelectorAll('main section').forEach(s => io.observe(s));
+
+/* downloads (zips assembled in the browser) */
+let downloads = null, manifest = null;
+(async () => { try { downloads = window.claude ? await window.claude.use('downloads') : null; } catch (e) { downloads = null; }
+  })();
+fetch('data/manifest.json').then(r => r.json()).then(m => { manifest = m; }).catch(() => {});
+// claude.ai offers a save dialog through the downloads capability; elsewhere (GitHub Pages, local) a plain browser download
+async function save(filename, blob){ if (downloads) return downloads.save({filename, data: blob});
+  const u = URL.createObjectURL(blob), a = Object.assign(document.createElement('a'), {href: u, download: filename}); document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(u), 4000); }
+async function bundle(key){ const z = new JSZip();
+  await Promise.all((manifest[key] || []).map(async p => { const r = await fetch(p); if (!r.ok) throw new Error(p); z.file(p.split('/').slice(2).join('/'), await r.blob()); }));
+  return z.generateAsync({type: 'blob', compression: 'DEFLATE'}); }
+document.querySelectorAll('.dl').forEach(b => b.addEventListener('click', async () => {
+  const name = b.dataset.name || b.dataset.f.split('/').pop(), label = b.textContent; b.disabled = true; b.textContent = tr('Preparing…', '준비 중…');
+  try { const blob = b.dataset.bundle ? await bundle(b.dataset.bundle) : await (await fetch(b.dataset.f)).blob(); await save(name, blob); }
+  catch (e) { if (!(e && e.code === 'declined')) { const n = document.getElementById('dlnote'); n.textContent = tr('The download did not complete (', '다운로드가 완료되지 않았습니다 (') + ((e && (e.code || e.message)) || 'error') + tr('). Try again in a moment.', '). 잠시 후 다시 시도하세요.'); n.hidden = false; } }
+  finally { b.disabled = false; b.textContent = label; }
+}));
+
+Promise.all(['data/districts.geojson', 'data/projects.json', 'data/results.json'].map(u => fetch(u).then(r => r.json())))
+.then(([geo, pts, res]) => { DATA = {geo, res}; buildMap(geo, pts); renderCharts(); })
+.catch(e => { document.getElementById('mapcap').textContent = 'The data could not be loaded: ' + e; });
+
+function renderCharts(){ const {geo, res} = DATA;
+  ['#forest', '#shap', '#scatter', '#event', '#tracks', '#bounds'].forEach(q => d3.select(q).selectAll('*').remove());
+  forest(res.main); mainTable(res.main); shap(res.shapley5); scatter(geo); eventChart(res.event); tracks(res.ladder); bounds(res); tables(res); }
+
+/* ---------------- map ---------------- */
+const X0 = 102.3, X1 = 107.7, Y0 = 10.35, Y1 = 14.75, W = 1800, H = 1503;
+const sx = lon => (lon - X0) / (X1 - X0) * W, sy = lat => (Y1 - lat) / (Y1 - Y0) * H;
+const LAYERS = {
+  night: {img: 'img/bg_night.png', key: 'ntl_pc_2019', title: 'Night lights', name: 'night lights per person',
+    text: 'Harmonised DMSP–VIIRS lights for 2019. Phnom Penh, Siem Reap and Battambang glow; most of the country is dark. Projects cluster near light, but Phnom Penh itself receives few projects per person, which weakens the overall link.',
+    title_ko: '야간 불빛', name_ko: '1인당 야간 불빛', text_ko: '2019년 조화 DMSP–VIIRS 야간 불빛. 프놈펜, 시엠립, 바탐방이 밝고 나라 대부분은 어둡습니다. 사업은 불빛 가까이 모이지만 프놈펜 자체는 1인당 사업이 적어 전체 상관을 약하게 만듭니다.', lo_ko: '어두움', hi_ko: '밝음',
+    ramp: ['#1b1440', '#7a1f6f', '#e2475c', '#fdba74', '#fcfdbf'], lo: 'dark', hi: 'bright', stroke: '#0e1527'},
+  access: {img: 'img/bg_access.png', key: 'access_pc1', title: 'Road access', name: 'road access',
+    text: 'Travel time to the nearest town of 20,000+ on the road network, dry season, every square kilometre. Dark blue corridors are the national roads. Tonle Sap lake is grey. Projects trace the corridors.',
+    title_ko: '도로 접근성', name_ko: '도로 접근성', text_ko: '건기 기준, 1 km² 격자마다 도로망으로 인구 2만+ 도시까지 걸리는 시간. 짙은 파란 회랑이 국도이고 톤레삽 호수는 회색입니다. 사업이 회랑을 따라 찍힙니다.', lo_ko: '5분', hi_ko: '600분+',
+    ramp: ['#081d58', '#225ea8', '#41b6c4', '#c7e9b4', '#ffffd9'], lo: '5 min', hi: '600+ min', stroke: '#ffffff'},
+  signal: {img: 'img/bg_signal.png', key: 'mob_mbps_shrunk', title: 'Mobile signal', name: 'mobile speed',
+    text: 'Ookla mobile speed tests on ~600 m tiles, 2019 Q1–2020 Q1. Tests trace roads and towns; empty areas are not necessarily without coverage, only without testers.',
+    title_ko: '모바일 신호', name_ko: '모바일 속도', text_ko: '약 600 m 타일의 Ookla 모바일 속도 측정, 2019년 1분기–2020년 1분기. 측정은 도로와 도시를 따라 찍히며, 빈 곳은 커버리지가 없다기보다 측정자가 없는 곳일 수 있습니다.', lo_ko: '1 Mbps', hi_ko: '60 Mbps',
+    ramp: ['#f2f0f7', '#bcbddc', '#807dba', '#54278f', '#3f007d'], lo: '1 Mbps', hi: '60 Mbps', stroke: '#ffffff'}
+};
+let layer = 'night'; const on = new Set(['EU/US', 'China', 'World Bank']);
+function buildMap(geo, pts){
+  const svg = d3.select('#map');
+  const img = svg.append('image').attr('x', 0).attr('y', 0).attr('width', W).attr('height', H).attr('preserveAspectRatio', 'none');
+  const path = d3.geoPath(d3.geoTransform({point(x, y){ this.stream.point(sx(x), sy(y)); }}));
+  const feats = geo.features.filter(f => f.properties.pop_2019 > 1000 && !/Lake/i.test(f.properties.name));
+  const dist = svg.append('g').selectAll('path').data(geo.features).join('path').attr('d', path).attr('fill', 'transparent').attr('stroke-width', 1.1)
+    .on('mousemove', (ev, d) => { const p = d.properties, L = LAYERS[layer], v = p[L.key];
+      showTip(`<b>${esc(p.name)}</b><span class="k">${tr('Projects 2017–20', '사업 2017–20')}</span> ${(p.N ?? 0).toFixed(1)} · <span class="k">${tr('per 100k', '10만 명당')}</span> ${(p.pc100k ?? 0).toFixed(2)}<br><span class="k">${tr('Population', '인구')}</span> ${Math.round(p.pop_2019 || 0).toLocaleString()}<br><span class="k">${tr(L.name, L.name_ko)}</span> ${v == null ? '–' : (+v).toFixed(3)}`, ev); })
+    .on('mouseleave', hideTip);
+  const nloc = d3.rollup(pts, v => v.length, p => p.id);
+  const placed = [];
+  d3.group(pts, p => p.x + ',' + p.yy).forEach(arr => { const cx = sx(arr[0].x), cy = sy(arr[0].yy);
+    arr.forEach((p, i) => { const r = i ? 8.5 * Math.sqrt(i) : 0, a = i * 2.39996; placed.push(Object.assign({}, p, {px: cx + r * Math.cos(a), py: cy + r * Math.sin(a), n: nloc.get(p.id)})); }); });
+  placed.sort((a, b) => (a.g === 'World Bank' ? 0 : 1) - (b.g === 'World Bank' ? 0 : 1));
+  const col = g => g === 'China' ? css('--cn') : g === 'World Bank' ? css('--wb') : css('--eu');
+  const rad = d => d.n > 10 ? 6 : 9.5;
+  const dots = svg.append('g').selectAll('circle').data(placed).join('circle').attr('cx', d => d.px).attr('cy', d => d.py).attr('r', rad).attr('fill', d => col(d.g)).attr('stroke-width', 2)
+    .on('mousemove', (ev, d) => { d3.select(ev.currentTarget).attr('r', 15).raise();
+      showTip(`<b>${esc(d.t)}</b><span class="k">${tr('Donor', '공여자')}</span> ${esc(d.d)}<br><span class="k">${tr('Start', '착수')}</span> ${d.y} · <span class="k">${tr('Sector', '분야')}</span> ${esc(tr(d.s, d.sk))}<br><span class="k">${tr('Commitment', '약정액')}</span> ${d.c == null ? '–' : 'US$' + d.c.toLocaleString() + 'M'}${d.n > 1 ? ` · <span class="k">${d.n}${tr(' locations', '곳')}</span>` : ''}`, ev); })
+    .on('mouseleave', (ev, d) => { d3.select(ev.currentTarget).attr('r', rad(d)); hideTip(); });
+  const SEC = {'사회': 'Social', '인프라(교통·에너지)': 'Infrastructure (transport, energy)', '생산': 'Production', '기타': 'Other'};
+  placed.forEach(p => { p.sk = p.s; p.s = SEC[p.s] || p.s; });
+  // backgrounds go through fetch (as the data files do) and are handed to the SVG as data URLs
+  const BG = {};
+  Object.entries(LAYERS).forEach(([k, L]) => fetch(L.img).then(r => r.ok ? r.blob() : Promise.reject(r.status))
+    .then(b => new Promise((ok, no) => { const fr = new FileReader(); fr.onload = () => ok(fr.result); fr.onerror = no; fr.readAsDataURL(b); }))
+    .then(u => { BG[k] = u; if (k === layer) img.attr('href', u); }).catch(() => {}));
+  function paint(){ const L = LAYERS[layer];
+    img.attr('href', BG[layer] || L.img);
+    dist.attr('stroke', L.stroke).attr('stroke-opacity', layer === 'night' ? .35 : .8);
+    dots.attr('stroke', L.stroke).attr('display', d => on.has(d.g) ? null : 'none');
+    document.getElementById('sideTitle').textContent = tr(L.title, L.title_ko);
+    document.getElementById('sideText').textContent = tr(L.text, L.text_ko);
+    document.getElementById('ramp').innerHTML = `<div class="ramp" style="background:linear-gradient(90deg,${L.ramp.join(',')})"></div><div class="rampl"><span>${tr(L.lo, L.lo_ko)}</span><span>${tr(L.hi, L.hi_ko)}</span></div>`;
+    quint(feats, L);
+  }
+  document.querySelectorAll('[data-layer]').forEach(b => b.addEventListener('click', () => { layer = b.dataset.layer;
+    document.querySelectorAll('[data-layer]').forEach(x => x.setAttribute('aria-pressed', x.dataset.layer === layer)); paint(); }));
+  document.querySelectorAll('[data-donor]').forEach(b => b.addEventListener('click', () => { const g = b.dataset.donor;
+    on.has(g) ? on.delete(g) : on.add(g); document.querySelectorAll('[data-donor]').forEach(x => x.setAttribute('aria-pressed', on.has(x.dataset.donor))); paint(); }));
+  paint(); repaint = paint;
+}
+function rank(a){ const idx = a.map((v, i) => [v, i]).sort((x, y) => x[0] - y[0]); const r = Array(a.length); idx.forEach(([v, i], k) => r[i] = k); return r; }
+function spearman(x, y){ const rx = rank(x), ry = rank(y), mx = d3.mean(rx), my = d3.mean(ry);
+  return d3.sum(rx.map((v, i) => (v - mx) * (ry[i] - my))) / Math.sqrt(d3.sum(rx.map(v => (v - mx) ** 2)) * d3.sum(ry.map(v => (v - my) ** 2))); }
+function quint(feats, L){
+  const f = feats.filter(d => d.properties[L.key] != null).map(d => d.properties);
+  const order = f.slice().sort((a, b) => a[L.key] - b[L.key]); const q = order.map((d, i) => Math.floor(i * 5 / order.length));
+  const rate = d3.range(5).map(k => { const s = order.filter((d, i) => q[i] === k); return d3.sum(s, d => d.N) / d3.sum(s, d => d.pop_2019) * 1e5; });
+  const natl = d3.sum(f, d => d.N) / d3.sum(f, d => d.pop_2019) * 1e5;
+  const svg = d3.select('#quint'); svg.selectAll('*').remove();
+  const x = d3.scaleBand().domain(d3.range(5)).range([30, 290]).padding(.25), y = d3.scaleLinear().domain([0, d3.max(rate) * 1.1]).range([160, 14]);
+  svg.append('g').attr('class', 'axis').attr('transform', 'translate(30,0)').call(d3.axisLeft(y).ticks(4).tickSize(-260)).call(g => g.select('.domain').remove()).call(g => g.selectAll('line').attr('stroke', css('--rule'))).selectAll('text').attr('font-size', 10.5);
+  const mx = d3.maxIndex(rate);
+  svg.selectAll('rect').data(rate).join('rect').attr('x', (d, i) => x(i)).attr('width', x.bandwidth()).attr('y', d => y(d)).attr('height', d => 160 - y(d)).attr('fill', (d, i) => i === mx ? css('--ink') : css('--ns'));
+  svg.append('line').attr('x1', 30).attr('x2', 290).attr('y1', y(natl)).attr('y2', y(natl)).attr('stroke', css('--laterite')).attr('stroke-dasharray', '4 3');
+  svg.append('text').attr('x', 288).attr('y', y(natl) - 4).attr('text-anchor', 'end').attr('font-size', 10.5).style('fill', css('--laterite')).text(tr('national', '전국'));
+  (KO() ? ['최저', '2', '3', '4', '최고'] : ['lowest', '2', '3', '4', 'highest']).forEach((t, i) => svg.append('text').attr('x', x(i) + x.bandwidth() / 2).attr('y', 178).attr('text-anchor', 'middle').attr('font-size', 10.5).text(t));
+  const rho = spearman(f.map(d => d[L.key]), f.map(d => d.N / d.pop_2019));
+  const rs = (rho >= 0 ? '+' : '') + rho.toFixed(2);
+  document.getElementById('sideStat').innerHTML = KO()
+    ? `${L.name_ko} 5분위별 인구 10만 명당 사업 수.<br>Spearman ρ = ${rs} · ${f.length}개 군<br><span style="opacity:.75">통제 전 수치입니다. 인구가 적은 군은 1인당 비율이 크게 출렁입니다(인구 3만 군에 사업 하나면 10만 명당 3.3). 그래서 끝 분위의 튀는 값은 대부분 작은 분모 때문입니다. 모형은 대신 사업 수, 인구, 주 효과를 씁니다.</span>`
+    : `Projects per 100k people by district quintile of ${L.name}.<br>Spearman ρ = ${rs} · ${f.length} districts<br><span style="opacity:.75">Unadjusted. Per-capita rates jump around in thinly populated districts (one project in a district of 30k reads as 3.3 per 100k), so a bump at the far end is mostly small denominators. The models use counts, population and province effects instead.</span>`;
+}
+
+/* ---------------- charts ---------------- */
+function dotChart(sel, rows, o){
+  const Wd = 900, rh = 38, M = {l: o.left || 230, r: 120, t: 10, b: 44}, Hh = M.t + M.b + rows.length * rh;
+  const svg = d3.select(sel).attr('viewBox', `0 0 ${Wd} ${Hh}`);
+  const ext = d3.extent(rows.flatMap(r => [r.lo ?? r.v, r.hi ?? r.v, 0]));
+  const x = d3.scaleLinear().domain(o.domain || ext).nice().range([M.l, Wd - M.r]);
+  svg.append('g').attr('class', 'axis').attr('transform', `translate(0,${Hh - M.b})`).call(d3.axisBottom(x).ticks(6).tickFormat(v => (v > 0 ? '+' : '') + v + '%')).selectAll('text').attr('font-size', 13);
+  svg.append('line').attr('x1', x(0)).attr('x2', x(0)).attr('y1', 0).attr('y2', Hh - M.b).attr('stroke', css('--ink-3')).attr('stroke-dasharray', '3 3');
+  rows.forEach((r, i) => { const y = M.t + i * rh + rh / 2, c = r.sig ? css('--teal') : css('--ns');
+    svg.append('text').attr('x', M.l - 14).attr('y', y).attr('dy', '.35em').attr('text-anchor', 'end').attr('font-size', 14.5).style('fill', css('--ink')).text(r.label);
+    if (r.lo != null) svg.append('line').attr('x1', x(Math.max(r.lo, x.domain()[0]))).attr('x2', x(Math.min(r.hi, x.domain()[1]))).attr('y1', y).attr('y2', y).attr('stroke', c).attr('stroke-width', 3).attr('stroke-linecap', 'round');
+    svg.append('circle').attr('cx', x(r.v)).attr('cy', y).attr('r', 7).attr('fill', r.sig ? c : css('--surface')).attr('stroke', c).attr('stroke-width', 2.5);
+    svg.append('text').attr('x', Wd - M.r + 12).attr('y', y).attr('dy', '.35em').attr('font-size', 13).style('font-family', css('--f-mono')).style('fill', css('--ink-2')).text(r.note || pct(r.v));
+  });
+}
+const LAB_EN = {combined: 'Combined access (roads + signal)', phys: 'Road access', conn: 'Mobile speed', ntl: 'Night lights per person'};
+const LAB_KO = {combined: '통합 접근성 (도로 + 신호)', phys: '도로 접근성', conn: '모바일 속도', ntl: '1인당 야간 불빛'};
+let LAB = LAB_EN;
+function forest(main){ LAB = KO() ? LAB_KO : LAB_EN; dotChart('#forest', main.map(r => ({label: LAB[r.var] || r.var, v: r.pct, lo: r.ci_lo_pct, hi: r.ci_hi_pct, sig: r.p_conservative < .05, note: pct(r.pct) + '  p ' + fp(r.p_conservative)})), {left: 260}); }
+function mainTable(main){ document.querySelector('#maintab tbody').innerHTML = main.map(r => `<tr><td>${LAB[r.var] || r.var}</td><td class="r m ${r.p_conservative < .05 ? 'yes' : ''}">${pct(r.pct)}</td><td class="r m">${fp(r.p_cluster)}</td><td class="r m">${fp(r.p_conley100)}</td><td class="r m">${fp(r.p_ri)}</td><td class="r m">${fp(r.p_conservative)}</td><td class="r m">${pct(r.mde_pct)}</td></tr>`).join(''); }
+function shap(sh){
+  const lab = KO() ? {access: '도로 접근성', need: '빈곤', lights: '야간 불빛', prior_infra: '이전 인프라', conn: '모바일 속도'} : {access: 'Road access', need: 'Poverty', lights: 'Night lights', prior_infra: 'Earlier infrastructure', conn: 'Mobile speed'};
+  const cols = [css('--teal'), css('--laterite'), css('--ink-2'), css('--wb'), css('--cn')];
+  const Wd = 900, svg = d3.select('#shap').attr('viewBox', `0 0 ${Wd} 120`); const x = d3.scaleLinear().domain([0, 100]).range([0, Wd]); let x0 = 0;
+  sh.forEach((r, i) => { const w = x(r.share_pct);
+    svg.append('rect').attr('x', x0).attr('y', 10).attr('width', Math.max(0, w - 3)).attr('height', 50).attr('fill', cols[i]);
+    svg.append('text').attr('x', x0 + 10).attr('y', 42).attr('font-size', 20).attr('font-weight', 600).style('fill', '#fff').style('font-family', css('--f-display')).text(Math.round(r.share_pct) + '%');
+    svg.append('text').attr('x', x0 + 2).attr('y', 84).attr('font-size', 14).style('fill', css('--ink')).text(lab[r.factor] || r.factor);
+    svg.append('text').attr('x', x0 + 2).attr('y', 104).attr('font-size', 12).style('fill', css('--ink-3')).style('font-family', css('--f-mono')).text('+' + r.pp.toFixed(1) + tr(' pts', '%p'));
+    x0 += w; });
+}
+function scatter(geo){
+  const d = geo.features.map(f => f.properties).filter(p => p.rwi != null && p.access_pc1 != null && p.pop_2019 > 1000 && !/Lake/i.test(p.name));
+  const Wd = 900, Hh = 380, M = {l: 70, r: 20, t: 16, b: 50}, svg = d3.select('#scatter').attr('viewBox', `0 0 ${Wd} ${Hh}`);
+  const x = d3.scaleLinear().domain(d3.extent(d, p => p.access_pc1)).nice().range([M.l, Wd - M.r]);
+  const y = d3.scaleLinear().domain(d3.extent(d, p => -p.rwi)).nice().range([Hh - M.b, M.t]);
+  const r = d3.scaleSqrt().domain([0, d3.max(d, p => p.N)]).range([2.5, 18]);
+  svg.append('g').attr('class', 'axis').attr('transform', `translate(0,${Hh - M.b})`).call(d3.axisBottom(x).ticks(7)).selectAll('text').attr('font-size', 12);
+  svg.append('g').attr('class', 'axis').attr('transform', `translate(${M.l},0)`).call(d3.axisLeft(y).ticks(6)).selectAll('text').attr('font-size', 12);
+  svg.append('g').selectAll('circle').data(d.sort((a, b) => b.N - a.N)).join('circle').attr('cx', p => x(p.access_pc1)).attr('cy', p => y(-p.rwi)).attr('r', p => r(p.N))
+    .attr('fill', css('--teal')).attr('fill-opacity', .35).attr('stroke', css('--teal')).attr('stroke-width', 1)
+    .on('mousemove', (ev, p) => showTip(`<b>${esc(p.name)}</b><span class="k">${tr('Road access', '도로 접근성')}</span> ${p.access_pc1.toFixed(2)} · <span class="k">RWI</span> ${p.rwi.toFixed(2)}<br><span class="k">${tr('Projects 2017–20', '사업 2017–20')}</span> ${p.N.toFixed(1)}`, ev)).on('mouseleave', hideTip);
+  svg.append('text').attr('x', (M.l + Wd - M.r) / 2).attr('y', Hh - 10).attr('text-anchor', 'middle').attr('font-size', 13).text(tr('Road-access index (SD) →  better connected', '도로 접근성 지수 (SD) →  연결이 좋음'));
+  svg.append('text').attr('transform', `translate(18,${(M.t + Hh - M.b) / 2}) rotate(-90)`).attr('text-anchor', 'middle').attr('font-size', 13).text(tr('Poverty (−RWI) → poorer', '빈곤 (−RWI) → 더 가난함'));
+  svg.append('text').attr('x', Wd - M.r - 6).attr('y', M.t + 14).attr('text-anchor', 'end').attr('font-size', 14).style('fill', css('--laterite')).style('font-family', css('--f-mono')).text('r = −0.84');
+}
+function eventChart(ev){
+  const rows = ev.concat([{k: -1, b: 0, se: 0}]).sort((a, b) => a.k - b.k);
+  const Wd = 900, Hh = 320, M = {l: 70, r: 20, t: 16, b: 46}, svg = d3.select('#event').attr('viewBox', `0 0 ${Wd} ${Hh}`), P = b => 100 * (Math.exp(b) - 1);
+  const x = d3.scaleLinear().domain([-5.5, 4.5]).range([M.l, Wd - M.r]), y = d3.scaleLinear().domain([-100, 300]).range([Hh - M.b, M.t]);
+  svg.append('rect').attr('x', x(-5.5)).attr('y', M.t).attr('width', x(-0.5) - x(-5.5)).attr('height', Hh - M.b - M.t).attr('fill', css('--teal-soft'));
+  svg.append('text').attr('x', x(-5.3)).attr('y', M.t + 18).attr('font-size', 12.5).style('fill', css('--teal')).text(tr('before: no difference (p = 0.63)', '사전: 차이 없음 (p = 0.63)'));
+  svg.append('g').attr('class', 'axis').attr('transform', `translate(0,${Hh - M.b})`).call(d3.axisBottom(x).ticks(10).tickFormat(d3.format('d'))).selectAll('text').attr('font-size', 12);
+  svg.append('g').attr('class', 'axis').attr('transform', `translate(${M.l},0)`).call(d3.axisLeft(y).ticks(5).tickFormat(v => (v > 0 ? '+' : '') + v + '%')).selectAll('text').attr('font-size', 12);
+  svg.append('line').attr('x1', M.l).attr('x2', Wd - M.r).attr('y1', y(0)).attr('y2', y(0)).attr('stroke', css('--ink-3')).attr('stroke-dasharray', '3 3');
+  svg.append('line').attr('x1', x(-0.5)).attr('x2', x(-0.5)).attr('y1', M.t).attr('y2', Hh - M.b).attr('stroke', css('--laterite')).attr('stroke-width', 1.5);
+  svg.append('text').attr('x', x(-0.5) + 8).attr('y', M.t + 18).attr('font-size', 12.5).style('fill', css('--laterite')).text(tr('first transport or energy project', '첫 교통·에너지 사업'));
+  rows.forEach(r => { const cx = x(r.k), lo = Math.max(-100, P(r.b - 1.96 * r.se)), hi = Math.min(300, P(r.b + 1.96 * r.se));
+    if (r.se) svg.append('line').attr('x1', cx).attr('x2', cx).attr('y1', y(lo)).attr('y2', y(hi)).attr('stroke', css('--ns')).attr('stroke-width', 2.5);
+    svg.append('circle').attr('cx', cx).attr('cy', y(P(r.b))).attr('r', 6).attr('fill', r.k === -1 ? css('--ink-3') : css('--ink')); });
+  svg.append('text').attr('x', (M.l + Wd - M.r) / 2).attr('y', Hh - 8).attr('text-anchor', 'middle').attr('font-size', 13).text(tr('Years relative to the first transport or energy project', '첫 교통·에너지 사업 기준 연도'));
+}
+function tracks(ladder){
+  const get = (track, m, key) => { const r = ladder.find(x => x.track === track && x.model.startsWith(m)); return r ? r[key] : null; };
+  const rows = [[tr('Night lights', '야간 불빛'), 'M1', 'lights'], [tr('Road access', '도로 접근성'), 'M2', 'access'], [tr('Mobile speed', '모바일 속도'), 'M3', 'conn'], [tr('Earlier infrastructure', '이전 인프라'), 'M4', 'prior_infra']].map(([l, m, k]) => ({
+    l, c: get('count', m, k + '_pct'), cp: get('count', m, k + '_p'), a: get('amount ($m)', m, k + '_pct'), ap: get('amount ($m)', m, k + '_p')}));
+  const Wd = 900, rh = 46, M = {l: 220, r: 30, t: 30, b: 40}, Hh = M.t + M.b + rows.length * rh, svg = d3.select('#tracks').attr('viewBox', `0 0 ${Wd} ${Hh}`);
+  const x = d3.scaleLinear().domain([-50, 400]).range([M.l, Wd - M.r]);
+  svg.append('g').attr('class', 'axis').attr('transform', `translate(0,${Hh - M.b})`).call(d3.axisBottom(x).ticks(6).tickFormat(v => (v > 0 ? '+' : '') + v + '%')).selectAll('text').attr('font-size', 12);
+  svg.append('line').attr('x1', x(0)).attr('x2', x(0)).attr('y1', M.t - 10).attr('y2', Hh - M.b).attr('stroke', css('--ink-3'));
+  [[tr('Project count', '사업 수'), css('--teal')], [tr('Committed dollars', '약정액'), css('--laterite')]].forEach(([t, c], i) => { svg.append('rect').attr('x', M.l + i * 170).attr('y', 4).attr('width', 12).attr('height', 12).attr('fill', c);
+    svg.append('text').attr('x', M.l + 18 + i * 170).attr('y', 14).attr('font-size', 13).text(t); });
+  rows.forEach((r, i) => { const y0 = M.t + i * rh;
+    svg.append('text').attr('x', M.l - 14).attr('y', y0 + rh / 2).attr('dy', '.35em').attr('text-anchor', 'end').attr('font-size', 14.5).style('fill', css('--ink')).text(r.l);
+    [[r.c, r.cp, css('--teal'), 8], [r.a, r.ap, css('--laterite'), 24]].forEach(([v, p, c, dy]) => { if (v == null) return; const vv = Math.max(-50, Math.min(400, v));
+      svg.append('rect').attr('x', Math.min(x(0), x(vv))).attr('y', y0 + dy - 6).attr('width', Math.abs(x(vv) - x(0))).attr('height', 13).attr('fill', c).attr('fill-opacity', p < .05 ? 1 : .35);
+      svg.append('text').attr('x', x(vv) + (vv >= 0 ? 6 : -6)).attr('y', y0 + dy + 4).attr('text-anchor', vv >= 0 ? 'start' : 'end').attr('font-size', 11.5).style('font-family', css('--f-mono')).text(pct(v) + (p < .05 ? '' : ' n.s.')); }); });
+}
+function bounds(res){
+  const g = res.geobias, b = res.bounds, pick = (a, s) => a.find(r => (r.check || r.scenario || '').startsWith(s));
+  const rows = [[tr('Observed (district-precise only)', '관측 (군 단위 정밀 사업만)'), pick(g, 'all district')], [tr('Well-described projects (≥ median text)', '설명 충실 사업 (중위수 이상)'), pick(g, 'well-reported: text >= median')],
+    [tr('Very well-described (top quartile)', '설명 매우 충실 (상위 25%)'), pick(g, 'well-reported: text >= 75th')], [tr('Province-only spread by population', '주 단위 사업 인구 비례 분배'), pick(g, 'province-only projects spread by population')],
+    [tr('Province-only spread equally', '주 단위 사업 균등 분배'), pick(g, 'province-only projects spread equally')], [tr('Extreme: all to remotest district', '극단: 모두 가장 외딴 군으로'), pick(b, 'worst case')], [tr('Extreme: all to best-connected', '극단: 모두 가장 연결 좋은 군으로'), pick(b, 'best case')]]
+    .filter(r => r[1]).map(([label, r]) => { const p = r.access_p ?? r.p; return {label, v: r.access_pct, sig: p < .05, note: pct(r.access_pct) + '  p ' + fp(p)}; });
+  dotChart('#bounds', rows, {left: 300, domain: [0, 300]});
+}
+function tables(res){
+  const lab = KO() ? {access: '도로 접근성', conn: '모바일 속도', lights: '야간 불빛'} : {access: 'Road access', conn: 'Mobile speed', lights: 'Night lights'};
+  document.getElementById('infra1').innerHTML = res.infra1.map(r => `<tr><td>${lab[r.construct] || r.construct}</td><td class="r m ${r.social_p < .05 ? 'yes' : ''}">${pct(r.social_pct)}</td><td class="r m">${pct(r.infra_pct)}</td><td class="r m">${fp(r.difference_p)}</td></tr>`).join('');
+  const want = [['alone: conn_index', tr('Connectivity index (4 Ookla measures)', '연결성 지수 (Ookla 지표 4개)')], ['conn_index controlling physical access', tr('Index, controlling road access', '지수, 도로 접근성 통제')], ['alone: c_speed', tr('Mobile speed alone', '모바일 속도 단독')],
+    ['alone: c_tests', tr('Tests per person', '1인당 측정 수')], ['alone: c_fixed', tr('Fixed broadband speed', '유선 광대역 속도')], ['social vs other: social-sector conn effect', tr('Social projects (p = difference)', '사회 분야 사업 (p = 차이)')], ['social vs other: other-sector conn effect', tr('Other projects', '그 외 사업')]];
+  document.getElementById('conntab').innerHTML = want.map(([k, l]) => { const r = res.conn.find(x => x.model === k); return r ? `<tr><td>${l}</td><td class="r m ${r.p < .05 ? 'yes' : ''}">${pct(r.pct)}</td><td class="r m">${fp(r.p)}</td></tr>` : ''; }).join('');
+}
+})();
+</script>

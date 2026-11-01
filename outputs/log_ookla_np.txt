@@ -1,0 +1,12 @@
+﻿mobile 2020 NP tiles: 26575 tests: 220203
+mobile 2021 NP tiles: 28497 tests: 235237
+mobile 2022 NP tiles: 26270 tests: 147089
+mobile 2023 NP tiles: 29441 tests: 226963
+mobile 2024 NP tiles: 26127 tests: 159152
+fixed 2019 NP tiles: 6338 tests: 103012
+fixed 2020 NP tiles: 6238 tests: 100428
+fixed 2021 NP tiles: 6184 tests: 94529
+fixed 2022 NP tiles: 21892 tests: 577527
+fixed 2023 NP tiles: 18336 tests: 340691
+fixed 2024 NP tiles: 19607 tests: 297052
+fixed 2025 NP tiles: 18270 tests: 209417
