@@ -88,6 +88,13 @@ figure:has(.mapwrap){max-width:1080px;margin-left:auto;margin-right:auto}
 .tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
 .tabs button,.chips button{font-family:var(--f-ui);font-size:13.5px;border:1px solid var(--rule);background:var(--surface);color:var(--ink-2);padding:6px 12px;border-radius:3px;cursor:pointer}
 .tabs button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.tabgroup{display:inline-flex;align-items:center;gap:4px;border:1px solid var(--rule);border-radius:4px;padding:2px 3px 2px 9px;background:var(--tint)}
+.tabgroup .glab{font-family:var(--f-ui);font-size:12.5px;color:var(--ink-3);margin-right:4px}
+.tabgroup .gsep{font-family:var(--f-ui);font-size:12px;color:var(--ink-3)}
+.mapbadge{position:absolute;left:10px;top:10px;max-width:68%;font-family:var(--f-ui);font-size:12px;line-height:1.4;padding:5px 9px;border-radius:3px;background:rgba(255,255,255,.92);color:var(--ink-2);border:1px solid var(--rule);pointer-events:auto}
+.mapbadge b{font-weight:600;color:var(--ink)}
+.mapbadge.own b{color:var(--teal)}
+.mapbadge a{color:inherit}
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
 .chips button[aria-pressed="false"]{opacity:.45}
 .tabs button:focus-visible,.chips button:focus-visible,.dl:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
@@ -310,12 +317,11 @@ footer b{color:var(--ink);font-weight:600}
   <figure>
     <div class="tabs" role="group" aria-label="Background">
       <button data-layer="night" aria-pressed="true" class="en">Night lights</button><button data-layer="night" aria-pressed="true" class="ko">야간 불빛</button>
-      <button data-layer="access" aria-pressed="false" class="en">Travel time</button><button data-layer="access" aria-pressed="false" class="ko">이동시간</button>
-      <button data-layer="index" aria-pressed="false" class="en">Road-access index</button><button data-layer="index" aria-pressed="false" class="ko">도로 접근성 지수</button>
+      <span class="tabgroup" role="group" aria-label="Road access"><span class="glab en">Road access</span><span class="glab ko">도로 접근성</span><button data-layer="access" aria-pressed="false" class="en">Travel time</button><button data-layer="access" aria-pressed="false" class="ko">이동시간</button><span class="gsep" aria-hidden="true">→</span><button data-layer="index" aria-pressed="false" class="en">Index</button><button data-layer="index" aria-pressed="false" class="ko">지수</button></span>
       <button data-layer="signal" aria-pressed="false" class="en">Mobile signal</button><button data-layer="signal" aria-pressed="false" class="ko">모바일 신호</button>
     </div>
     <div class="mapwrap">
-      <div class="mapframe"><svg id="map" viewBox="0 0 1800 1503" role="img" aria-label="Map of Cambodia with aid project locations over the selected background"></svg></div>
+      <div class="mapframe"><div class="mapbadge" id="mapbadge"></div><svg id="map" viewBox="0 0 1800 1503" role="img" aria-label="Map of Cambodia with aid project locations over the selected background"></svg></div>
       <div class="side" id="side">
         <h4 id="sideTitle"></h4>
         <p id="sideText"></p>
@@ -621,6 +627,12 @@ const LAYERS = {
     title_ko: '모바일 신호', name_ko: '모바일 속도', text_ko: '약 600 m 타일의 Ookla 모바일 속도 측정, 2019년 1분기–2020년 1분기. 측정은 도로와 도시를 따라 찍히며, 빈 곳은 커버리지가 없다기보다 측정자가 없는 곳일 수 있습니다.', lo_ko: '1 Mbps', hi_ko: '60 Mbps',
     ramp: ['#f2f0f7', '#bcbddc', '#807dba', '#54278f', '#3f007d'], lo: '1 Mbps', hi: '60 Mbps', stroke: '#ffffff', dline: ['#2d2346', .25, .4], pline: ['#2d2346', .6, .9]}
 };
+const BADGE = {
+  night: {own: false, en: 'Source: harmonised DMSP–VIIRS night lights, 2015 (<a href="https://doi.org/10.1038/s41597-020-0510-y" target="_blank" rel="noopener">Li et al. 2020</a>)', ko: '출처: 통합 DMSP–VIIRS 야간 불빛, 2015년 (<a href="https://doi.org/10.1038/s41597-020-0510-y" target="_blank" rel="noopener">Li et al. 2020</a>)'},
+  access: {own: true, en: '<b>Computed for this study</b> · 1 km travel time on the 2017 OSM network (<a href="https://github.com/Qamar-econ/where-aid-lands/blob/main/scripts/kh_s03_access.py" target="_blank" rel="noopener">code</a>)', ko: '<b>이 연구에서 직접 계산</b> · 2017년 OSM 도로망 기준 1 km 격자 이동시간 (<a href="https://github.com/Qamar-econ/where-aid-lands/blob/main/scripts/kh_s03_access.py" target="_blank" rel="noopener">코드</a>)'},
+  index: {own: true, en: '<b>Computed for this study</b> · district index from ten measures, 2017 network (<a href="https://github.com/Qamar-econ/where-aid-lands/blob/main/scripts/kh_s03_access.py" target="_blank" rel="noopener">code</a>)', ko: '<b>이 연구에서 직접 계산</b> · 10개 지표로 만든 군 단위 지수, 2017년 도로망 (<a href="https://github.com/Qamar-econ/where-aid-lands/blob/main/scripts/kh_s03_access.py" target="_blank" rel="noopener">코드</a>)'},
+  signal: {own: false, en: 'Source: <a href="https://github.com/teamookla/ookla-open-data" target="_blank" rel="noopener">Ookla Open Data</a>, mobile tests 2019 Q1–2020 Q1, test-weighted average', ko: '출처: <a href="https://github.com/teamookla/ookla-open-data" target="_blank" rel="noopener">Ookla Open Data</a>, 2019년 1분기–2020년 1분기 모바일 측정, 측정 건수 가중 평균'}
+};
 let layer = 'night'; const on = new Set(['EU/US', 'China', 'World Bank']);
 function buildMap(geo, pts){
   const svg = d3.select('#map');
@@ -659,6 +671,7 @@ function buildMap(geo, pts){
     dist.attr('stroke', L.dline[0]).attr('stroke-opacity', L.dline[1]).attr('stroke-width', L.dline[2]);
     provG.selectAll('path').attr('stroke', L.pline[0]).attr('stroke-opacity', L.pline[1]).attr('stroke-width', L.pline[2]);
     dots.attr('stroke', L.stroke).attr('display', d => on.has(d.g) ? null : 'none');
+    const bd = document.getElementById('mapbadge'), Bg = BADGE[layer]; bd.className = 'mapbadge' + (Bg.own ? ' own' : ''); bd.innerHTML = tr(Bg.en, Bg.ko);
     document.getElementById('sideTitle').textContent = tr(L.title, L.title_ko);
     document.getElementById('sideText').textContent = tr(L.text, L.text_ko);
     document.getElementById('ramp').innerHTML = `<div class="ramp" style="background:linear-gradient(90deg,${L.ramp.join(',')})"></div><div class="rampl"><span>${tr(L.lo, L.lo_ko)}</span><span>${tr(L.hi, L.hi_ko)}</span></div>`;
