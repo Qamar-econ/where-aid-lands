@@ -74,6 +74,10 @@ figcaption b{color:var(--ink-2);font-weight:600}
 svg text{fill:var(--ink-2);font-family:var(--f-ui);font-variant-numeric:tabular-nums}
 svg .axis path,svg .axis line{stroke:var(--rule)}
 .chart{display:block;width:100%;height:auto}
+/* charts are drawn on a 900-unit canvas; cap them so their text stays near body size on laptop screens */
+figure.wide{max-width:920px}
+.fig .chart{max-width:760px;margin:0 auto}
+figure:has(.mapwrap){max-width:1080px;margin-left:auto;margin-right:auto}
 /* map */
 .mapwrap{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:24px;align-items:start}
 .mapframe{position:relative;border-radius:4px;overflow:hidden;background:var(--surface)}
@@ -675,16 +679,17 @@ function eventChart(ev){
   const Wd = 900, Hh = 320, M = {l: 70, r: 20, t: 16, b: 46}, svg = d3.select('#event').attr('viewBox', `0 0 ${Wd} ${Hh}`), P = b => 100 * (Math.exp(b) - 1);
   const x = d3.scaleLinear().domain([-5.5, 4.5]).range([M.l, Wd - M.r]), y = d3.scaleLinear().domain([-100, 300]).range([Hh - M.b, M.t]);
   svg.append('rect').attr('x', x(-5.5)).attr('y', M.t).attr('width', x(-0.5) - x(-5.5)).attr('height', Hh - M.b - M.t).attr('fill', css('--teal-soft'));
-  svg.append('text').attr('x', x(-5.3)).attr('y', M.t + 18).attr('font-size', 12.5).style('fill', css('--teal')).text(tr('before: no difference (p = 0.63)', '사전: 차이 없음 (p = 0.63)'));
+  svg.append('text').attr('x', x(-5.3)).attr('y', M.t + 18).attr('font-size', 12.5).style('fill', css('--teal')).style('paint-order', 'stroke').attr('stroke', css('--teal-soft')).attr('stroke-width', 6).attr('stroke-linejoin', 'round').text(tr('before: no difference (p = 0.63)', '사전: 차이 없음 (p = 0.63)'));
   svg.append('g').attr('class', 'axis').attr('transform', `translate(0,${Hh - M.b})`).call(d3.axisBottom(x).ticks(10).tickFormat(d3.format('d'))).selectAll('text').attr('font-size', 12);
   svg.append('g').attr('class', 'axis').attr('transform', `translate(${M.l},0)`).call(d3.axisLeft(y).ticks(5).tickFormat(v => (v > 0 ? '+' : '') + v + '%')).selectAll('text').attr('font-size', 12);
   svg.append('line').attr('x1', M.l).attr('x2', Wd - M.r).attr('y1', y(0)).attr('y2', y(0)).attr('stroke', css('--ink-3')).attr('stroke-dasharray', '3 3');
   svg.append('line').attr('x1', x(-0.5)).attr('x2', x(-0.5)).attr('y1', M.t).attr('y2', Hh - M.b).attr('stroke', css('--laterite')).attr('stroke-width', 1.5);
-  svg.append('text').attr('x', x(-0.5) + 8).attr('y', M.t + 18).attr('font-size', 12.5).style('fill', css('--laterite')).text(tr('first transport or energy project', '첫 교통·에너지 사업'));
+  svg.append('text').attr('x', x(-0.5) + 8).attr('y', M.t + 18).attr('font-size', 12.5).style('fill', css('--laterite')).style('paint-order', 'stroke').attr('stroke', '#fff').attr('stroke-width', 6).attr('stroke-linejoin', 'round').text(tr('first transport or energy project', '첫 교통·에너지 사업'));
   rows.forEach(r => { const cx = x(r.k), lo = Math.max(-100, P(r.b - 1.96 * r.se)), hi = Math.min(300, P(r.b + 1.96 * r.se));
     if (r.se) svg.append('line').attr('x1', cx).attr('x2', cx).attr('y1', y(lo)).attr('y2', y(hi)).attr('stroke', css('--ns')).attr('stroke-width', 2.5);
     svg.append('circle').attr('cx', cx).attr('cy', y(P(r.b))).attr('r', 6).attr('fill', r.k === -1 ? css('--ink-3') : css('--ink')); });
   svg.append('text').attr('x', (M.l + Wd - M.r) / 2).attr('y', Hh - 8).attr('text-anchor', 'middle').attr('font-size', 13).text(tr('Years relative to the first transport or energy project', '첫 교통·에너지 사업 기준 연도'));
+  svg.selectAll('text[stroke]').raise();  // haloed labels sit above the interval lines
 }
 function tracks(ladder){
   const get = (track, m, key) => { const r = ladder.find(x => x.track === track && x.model.startsWith(m)); return r ? r[key] : null; };
