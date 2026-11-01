@@ -35,7 +35,7 @@ N = cur.groupby("unit").w.sum()
 DF["N"] = DF.unit.map(N).fillna(0)
 DF["pc100k"] = DF.N / DF.pop_2019 * 1e5
 geo = U[["unit", "ADMIN_NAME", "geometry"]].merge(
-    DF[["unit", "PARENT", "pop_2019", "N", "pc100k", "ntl_pc_2019", "access", "access_pc1", "conn_index", "mob_mbps_shrunk", "rwi", "tt_town_dry", "prior_infra"]],
+    DF[["unit", "PARENT", "pop_2019", "N", "pc100k", "ntl_pc_2015", "ntl_pc_2019", "access", "access_pc1", "conn_index", "mob_mbps_shrunk", "rwi", "tt_town_dry", "prior_infra"]],
     on="unit", how="left")
 geo["geometry"] = geo.geometry.simplify(0.004, preserve_topology=True)
 for c in geo.columns:
@@ -46,7 +46,7 @@ geo.to_file(SITE / "data/districts.geojson", driver="GeoJSON", COORDINATE_PRECIS
 
 # project locations for the hover layer
 K["adm2"] = np.where(K.dgroup == "EU/US", K.precision_crs == 3, K.precision_code <= 3)
-P = K[K.startyear.between(2017, 2020) & K.adm2 & (K.family != "ict")].copy()
+P = K[K.startyear.between(2017, 2020) & K.adm2 & (K.family != "ict")].drop_duplicates(["project_id", "longitude", "latitude"]).copy()  # one point per activity location
 FAM = {"social": "사회", "infra": "인프라(교통·에너지)", "production": "생산", "other": "기타"}
 pts = [{"id": str(r.project_id), "t": str(r.title)[:160], "d": r.donor, "g": r.dgroup, "y": int(r.startyear),
         "s": FAM.get(r.family, "기타"), "c": None if pd.isna(r.comm) else round(float(r.comm) / 1e6, 2),

@@ -1,6 +1,6 @@
 """High-resolution map backgrounds for the archive site (plate carree, fixed bbox so the page can overlay points exactly).
 bbox lon 102.3-107.7, lat 10.35-14.75; image 1800 x 1503 px (aspect = 5.4*cos(12.5 deg) / 4.4). Transparent outside Cambodia.
-site/img/bg_night.png   harmonized DMSP-VIIRS night lights 2019 on a night-blue country fill
+site/img/bg_night.png   harmonized DMSP-VIIRS night lights 2015 on a night-blue country fill
 site/img/bg_access.png  travel time to the nearest town >= 20k (1 km cells), lake in grey
 site/img/bg_signal.png  Ookla mobile speed tiles (2019 Q1-2020 Q1) on a pale fill
 """
@@ -48,7 +48,7 @@ def grid_from_points(lon, lat, val, res):
 # night lights
 fig, ax = canvas()
 gpd.GeoSeries([KH]).plot(ax=ax, color="#0e1527", edgecolor="none", zorder=0)
-with rasterio.open(RAW / "ntl/ntl_2019_KHM.tif") as s:
+with rasterio.open(RAW / "ntl/ntl_2015_KHM.tif") as s:
     a, tr = mask(s, [KH], crop=True, filled=True, nodata=0); a = a[0].astype(float)
     ext = (tr.c, tr.c + tr.a * a.shape[1], tr.f + tr.e * a.shape[0], tr.f)
 a[a <= 0] = np.nan

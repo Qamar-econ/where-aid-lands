@@ -19,8 +19,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 RAW, OUT = ROOT / "data" / "raw" / "cambodia", ROOT / "data" / "processed" / "cambodia"
-# KH_OSM_SNAPSHOT=170101 builds the index on Geofabrik's 1 January 2017 extract (pre-period); outputs then carry a _170101 suffix
-SNAP = os.environ.get("KH_OSM_SNAPSHOT", ""); SUF = f"_{SNAP}" if SNAP else ""; OSM_FILE = f"cambodia-{SNAP}.osm.pbf" if SNAP else "cambodia-latest.osm.pbf"
+# KH_OSM_SNAPSHOT=latest builds the comparison index on the current extract; its outputs carry a _latest suffix
+SNAP = os.environ.get("KH_OSM_SNAPSHOT", "170101")   # default since spec 9-6: the network as it stood before the 2017-2020 projects
+SUF = "" if SNAP == "170101" else f"_{SNAP}"; OSM_FILE = f"cambodia-{SNAP}.osm.pbf"
 D = gpd.read_file(OUT / "kh_units.gpkg").rename(columns={"GEOLEVEL2": "k"})
 D["area_km2"] = D.to_crs(32648).area / 1e6
 BASE = {"motorway": 60, "trunk": 50, "primary": 45, "secondary": 35, "tertiary": 25, "unclassified": 20, "residential": 15,

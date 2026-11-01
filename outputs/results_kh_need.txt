@@ -1,27 +1,27 @@
 RWI points 14399 | districts with RWI 140 of 141
 correlations:
              need  access  conn  lights  prior_infra  lnpop
-need         1.00   -0.84 -0.04   -0.38        -0.25  -0.31
-access      -0.84    1.00  0.07    0.11         0.20   0.27
-conn        -0.04    0.07  1.00    0.04         0.08  -0.03
-lights      -0.38    0.11  0.04    1.00         0.28  -0.01
-prior_infra -0.25    0.20  0.08    0.28         1.00   0.35
-lnpop       -0.31    0.27 -0.03   -0.01         0.35   1.00
+need         1.00   -0.84 -0.04   -0.28        -0.25  -0.31
+access      -0.84    1.00  0.05    0.00         0.16   0.22
+conn        -0.04    0.05  1.00    0.02         0.08  -0.03
+lights      -0.28    0.00  0.02    1.00         0.21   0.03
+prior_infra -0.25    0.16  0.08    0.21         1.00   0.35
+lnpop       -0.31    0.22 -0.03    0.03         0.35   1.00
 NEED (= -RWI; % change in projects per SD more poverty):
                                            spec  need_pct     p  projects
-                             need alone (count)   -52.863 0.014     304.9
-                         need + physical access    28.705 0.681     304.9
-                            need + night lights   -45.150 0.027     304.9
-                need, excluding Phnom Penh core   -51.055 0.057     229.2
-                        need, amount track ($m)    27.734 0.333    5355.1
-                           need, sector: Social   -67.883 0.000     173.5
+                             need alone (count)   -49.152 0.006     196.9
+                         need + physical access    92.157 0.378     196.9
+                            need + night lights   -42.372 0.006     196.9
+                need, excluding Phnom Penh core   -45.886 0.054     140.7
+                        need, amount track ($m)    27.535 0.334    5359.9
+                           need, sector: Social   -60.751 0.000     111.0
 need, sector: Infrastructure (transport/energy)    35.764 0.081      17.0
-                       need, sector: Production   -59.598 0.018      38.2
-RACE (all five): need +70% (p 0.609), lights +114% (p 0.037), access +229% (p 0.296), conn +26% (p 0.131), prior_infra +176% (p 0.054) | VIF {'need': np.float64(4.6), 'lights': np.float64(1.48), 'access': np.float64(3.91), 'conn': np.float64(1.01), 'prior_infra': np.float64(1.27), 'lnpop': np.float64(1.28)}
-SHAPLEY (five factors explain 32.1 pp beyond population + province; full pseudo-R2 0.707):
+                       need, sector: Production   -41.407 0.112      17.9
+RACE (all five): need +259% (p 0.071), lights +159% (p 0.000), access +631% (p 0.011), conn +36% (p 0.010), prior_infra +98% (p 0.024) | VIF {'need': np.float64(5.07), 'lights': np.float64(1.43), 'access': np.float64(4.47), 'conn': np.float64(1.01), 'prior_infra': np.float64(1.22), 'lnpop': np.float64(1.24)}
+SHAPLEY (five factors explain 34.1 pp beyond population + province; full pseudo-R2 0.747):
      factor  share_pct   pp
-     access       35.7 11.5
-       need       18.3  5.9
-     lights       16.9  5.4
-prior_infra       15.7  5.0
-       conn       13.5  4.3
+     access       38.9 13.3
+       need       19.5  6.6
+     lights       16.4  5.6
+       conn       15.7  5.3
+prior_infra        9.5  3.2

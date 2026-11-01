@@ -26,8 +26,9 @@ DF = pd.read_csv(PROC / "kh_covariates.csv").merge(pd.read_csv(PROC / "kh_access
 A = pd.read_csv(PROC / "kh_assign.csv")
 DF["N"] = DF.unit.map(A[A.level == "adm2"].groupby("unit").w.sum()).fillna(0)
 DK = DF[~DF.exclude].copy()
-K = pd.read_csv(RAW / "godad_khm.csv", low_memory=False)
-K["dgroup"] = np.select([K.donor.eq("World Bank"), K.donor.str.contains("China", na=False)], ["World Bank", "China"], "EU/US")
+import sys; sys.path.insert(0, str(Path(__file__).resolve().parent))
+from kh_common import activityize
+K = activityize(pd.read_csv(RAW / "godad_khm.csv", low_memory=False))   # activities, dated by first commitment
 K["adm2"] = np.where(K.dgroup == "EU/US", K.precision_crs == 3, K.precision_code <= 3)
 pts = K[K.startyear.between(2017, 2020) & K.adm2].copy()
 pts["xy"] = pts.longitude.round(3).astype(str) + "_" + pts.latitude.round(3).astype(str)
@@ -74,15 +75,15 @@ def quintiles(axb, axn, var, label, low="low", high="high", extra=""):
 
 
 # ---- M1 night lights
-fig, ax, axb, axn = layout("Aid projects and night lights", "Harmonized DMSP–VIIRS night lights 2019 (clipped to Cambodia) · dots: GODAD project locations, district-precise")
-with rasterio.open(RAW / "ntl/ntl_2019_KHM.tif") as s:
+fig, ax, axb, axn = layout("Aid projects and night lights", "Harmonized DMSP–VIIRS night lights 2015 (clipped to Cambodia) · dots: GODAD project locations, district-precise")
+with rasterio.open(RAW / "ntl/ntl_2015_KHM.tif") as s:
     a, tr = mask(s, [KH], crop=True, filled=True, nodata=0); a = a[0].astype(float)
     ext = (tr.c, tr.c + tr.a * a.shape[1], tr.f + tr.e * a.shape[0], tr.f)
 a[a <= 0] = np.nan
 U.plot(ax=ax, color="#10162a", edgecolor="none", zorder=1)
 ax.imshow(a, extent=ext, cmap="magma", norm=LogNorm(vmin=1, vmax=np.nanpercentile(a, 99.5)), zorder=2, interpolation="nearest")
 base_map(ax, dark=True)
-quintiles(axb, axn, "ntl_pc_2019", "night lights per person")
+quintiles(axb, axn, "ntl_pc_2015", "night lights per person")
 fig.savefig(OUT / "M1_nightlights.png", facecolor="white"); plt.close(fig)
 
 # ---- M2 physical access

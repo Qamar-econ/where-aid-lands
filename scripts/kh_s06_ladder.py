@@ -37,18 +37,19 @@ U = gpd.read_file(PROC / "kh_units.gpkg").rename(columns={"GEOLEVEL2": "unit"})
 U["unit"] = U.unit.astype("int64")  # gpkg stores the code as text; covariate tables use integers
 DF = DF[~DF.exclude].reset_index(drop=True)
 DF["lnpop"] = np.log(DF.pop_2019); DF["prov"] = DF.PARENT.astype(str)
-DF["lights"] = z(np.log1p(DF.ntl_pc_2019 * 1000)); DF["access"] = z(DF.access_pc1); DF["conn"] = z(np.log(DF.mob_mbps_shrunk))
+DF["lights"] = z(np.log1p(DF.ntl_pc_2015 * 1000)); DF["access"] = z(DF.access_pc1); DF["conn"] = z(np.log(DF.mob_mbps_shrunk))  # lights: pre-period 2015 (spec 9-8)
 DF["capital"] = DF.unit.isin({116008004, 116008005, 116008007, 116008011})  # pure Phnom Penh khans (GEO2_KH parent 8 = PP + Kandal)
 
 # ---------------- projects (all GODAD years, district-reliable) ----------------
-K = pd.read_csv(RAW / "godad_khm.csv", low_memory=False)
-K["dgroup"] = np.select([K.donor.eq("World Bank"), K.donor.str.contains("China", na=False)], ["World Bank", "China"], "EU/US")
+import sys; sys.path.insert(0, str(Path(__file__).resolve().parent if "__file__" in globals() else ROOT / "scripts"))
+from kh_common import activityize, assign_units
+K = activityize(pd.read_csv(RAW / "godad_khm.csv", low_memory=False))   # activities, dated by first commitment (spec 9-5, 9-7)
 K["adm2"] = np.where(K.dgroup == "EU/US", K.precision_crs == 3, K.precision_code <= 3)
 K["sec3"] = pd.to_numeric(K.sector_codes.astype(str).str.extract(r"(\d{3})")[0], errors="coerce")
 K["family"] = np.select([K.sec3.isin([210, 230]), K.sec3.eq(220), K.sec3.between(110, 169), K.sec3.between(310, 339)],
                         ["infra", "ict", "social", "production"], "other")
-g = gpd.sjoin(gpd.GeoDataFrame(K[K.adm2], geometry=gpd.points_from_xy(K[K.adm2].longitude, K[K.adm2].latitude), crs=4326),
-              U[["unit", "geometry"]], predicate="within")
+g = assign_units(K[K.adm2], U[["unit", "geometry"]]).dropna(subset=["unit"])
+g["unit"] = g.unit.astype("int64")
 L = g.groupby(["project_id", "unit"]).agg(start=("startyear", "first"), family=("family", "first"), comm=("comm", "first"), dgroup=("dgroup", "first")).reset_index()
 L["w"] = 1 / L.groupby("project_id").unit.transform("nunique")
 prior = L[L.start.between(2010, 2016)]

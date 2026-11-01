@@ -58,15 +58,19 @@ AA = acts.explode("units").rename(columns={"units": "unit"})
 AA["unit"] = AA.unit.astype("int64"); AA["w"] = 1 / AA.n_units
 acts.drop(columns="units").to_csv(OUT / "kh_activities.csv", index=False, encoding="utf-8-sig")
 
-base = A[A.level == "adm2"]
-defs = {"D0 records (current)": outcome(base),
+# since spec 9-7 kh_assign.csv is activity level; the CRS-record version is kh_assign_records.csv
+Ar = pd.read_csv(OUT / "kh_assign_records.csv").merge(pd.read_csv(OUT / "kh_projects_records.csv")[["project_id", "comm"]], on="project_id")
+base = Ar[Ar.level == "adm2"]
+mainA = A[A.level == "adm2"]
+defs = {"D0 records": outcome(base),
+        "Main (kh_s01: activities starting 2017-20, 10 km snap)": outcome(mainA),
         "D1 activities": outcome(AA),
         "D2 activities new in 2017-20": outcome(AA[AA.first_ever >= 2017]),
         "D1 activities, binary (1 per district)": outcome(AA.assign(one=1.0), "one")}
 money = {"D0 records, US$m": outcome(base.assign(um=base.comm.fillna(0).clip(lower=0) * base.w / 1e6), "um"),
          "D1 activities, US$m": outcome(AA.assign(um=AA.comm * AA.w / 1e6), "um")}
 
-summ = [{"definition": "D0 records (current)", "units_counted": base.project_id.nunique(), "total_N": round(defs["D0 records (current)"].N.sum(), 1)},
+summ = [{"definition": "D0 records", "units_counted": base.project_id.nunique(), "total_N": round(defs["D0 records"].N.sum(), 1)},
         {"definition": "D1 activities", "units_counted": acts.shape[0], "total_N": round(defs["D1 activities"].N.sum(), 1)},
         {"definition": "D2 activities new in 2017-20", "units_counted": int((acts.first_ever >= 2017).sum()), "total_N": round(defs["D2 activities new in 2017-20"].N.sum(), 1)}]
 print(pd.DataFrame(summ).to_string(index=False))
@@ -74,7 +78,7 @@ print("records per activity (EU/US):", acts[acts.dgroup == "EU/US"].n_records.de
 print("top activities by records:\n", acts.nlargest(8, "n_records")[["donor", "title", "n_records", "first_ever", "n_units"]].to_string(index=False))
 print("activities started before 2017 (continuations):", int((acts.first_ever < 2017).sum()), "| by donor group:",
       acts[acts.first_ever < 2017].dgroup.value_counts().to_dict())
-d0, d1 = defs["D0 records (current)"], defs["D1 activities"]
+d0, d1 = defs["D0 records"], defs["D1 activities"]
 print("district N correlation D0 vs D1:", round(d0.N.corr(d1.N), 3), "| spearman", round(d0.N.corr(d1.N, method="spearman"), 3))
 
 rows = []

@@ -1,5 +1,5 @@
 scenario,access_pct,p,projects
-observed (district-precise only),175.34264867101658,0.0037834700743680496,304.9
-worst case: province-only -> least accessible district,60.72135336654911,0.12270819573727475,413.9
-best case: province-only -> most accessible district,259.0029490187176,0.00012880895289725142,413.9
-"precision check: Spearman(share district-precise, province access) over 21 provinces",,0.2968496421583402,
+observed (district-precise only),165.2073874638039,0.0008126956641115815,196.9
+worst case: province-only -> least accessible district,68.42382735837036,0.06294152025427155,245.9
+best case: province-only -> most accessible district,236.57073654505552,1.2203183592165277e-05,245.9
+"precision check: Spearman(share district-precise, province access) over 21 provinces",,0.10847678389593611,

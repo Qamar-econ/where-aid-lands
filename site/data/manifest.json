@@ -13,6 +13,7 @@
   "dl/tables/kh_access2017_main.csv",
   "dl/tables/kh_access_pca.csv",
   "dl/tables/kh_access_pca_170101.csv",
+  "dl/tables/kh_access_pca_latest.csv",
   "dl/tables/kh_dedup_main.csv",
   "dl/tables/kh_dedup_summary.csv",
   "dl/tables/kh_ext_A_bounds.csv",
@@ -31,6 +32,7 @@
   "dl/tables/kh_shapley5.csv"
  ],
  "code": [
+  "dl/code/kh_common.py",
   "dl/code/kh_fetch.py",
   "dl/code/kh_s00_boundaries.py",
   "dl/code/kh_s01_projects.py",

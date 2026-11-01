@@ -38,7 +38,8 @@ DF["phys"] = z(DF.access_pc1)
 DF["conn"] = z(np.log(DF.mob_mbps_shrunk))
 DF["conn_tests"] = z(np.log1p(DF.mob_tests_pc))
 DF["conn_fixed"] = z(np.log(DF.fix_mbps_shrunk))
-DF["ntl"] = z(np.log1p(DF.ntl_pc_2019 * 1000))
+DF["ntl"] = z(np.log1p(DF.ntl_pc_2015 * 1000))        # pre-period lights (spec 9-8); 2019 kept as robustness R10
+DF["ntl19"] = z(np.log1p(DF.ntl_pc_2019 * 1000))
 comb = DF[["phys", "conn", "conn_tests", "conn_fixed"]]
 w_, V = np.linalg.eigh(np.cov(comb.T)); pc = V[:, -1] * np.sign(V[:, -1].sum())
 DF["combined"] = z(comb.values @ pc)
@@ -151,7 +152,9 @@ RB = [{"spec": "R0 main", **quick(d0)},
       {"spec": "R5 starts 2017-2019", **quick(outcome(base[base.startyear <= 2019]))},
       {"spec": "R6 projects in <= 5 districts", **quick(outcome(base[base.n_units <= 5]))},
       {"spec": "R9 connectivity = tests per capita", **quick(d0, ("conn_tests",))},
-      {"spec": "R9 connectivity = fixed speed", **quick(d0, ("conn_fixed",))}]
+      {"spec": "R9 connectivity = fixed speed", **quick(d0, ("conn_fixed",))},
+      {"spec": "R10 night lights 2019 instead of 2015", **quick(d0, ("ntl19",))},
+      {"spec": "R11 starts 2019-2020 only (Ookla period)", **quick(outcome(base[base.startyear >= 2019]))}]
 nb = {}
 for v in ["combined", "phys", "conn", "ntl"]:
     try:

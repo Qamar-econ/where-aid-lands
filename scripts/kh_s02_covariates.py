@@ -62,6 +62,7 @@ for typ, ab in [("mobile", "mob"), ("fixed", "fix")]:
     C[ab + "_tests_pc"] = n / C.pop_2019 * 1000
 C["exclude"] = C.ADMIN_NAME.str.contains("Lake", case=False) | (C.pop_2019 < 1000)
 C["ntl_pc_2019"] = C.get("ntl_2019", np.nan) / C.pop_2019
+C["ntl_pc_2015"] = C.get("ntl_2015", np.nan) / C.pop_2015   # main since spec 9-8: measured before the 2017-2020 projects
 C.to_csv(OUT / "kh_covariates.csv", index=False)
 print(C.drop(columns=["ADMIN_NAME"]).describe().round(2).T[["mean", "min", "50%", "max"]].to_string())
 for ab in ["mob", "fix"]:
