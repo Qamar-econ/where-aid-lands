@@ -41,7 +41,7 @@ a{color:var(--teal)}
 .hero{padding-block:72px 48px;border-bottom:1px solid var(--rule)}
 .kicker{font-family:var(--f-ui);font-size:15px;color:var(--ink-3)}
 .hero h1{font-family:var(--f-title);font-weight:600;font-size:clamp(38px,6.4vw,68px);line-height:1.05;letter-spacing:-.01em;margin:12px 0 20px;text-wrap:balance}
-.hero h1 .sub{display:block;font-weight:400;font-style:italic;font-size:.46em;line-height:1.25;letter-spacing:0;color:var(--ink-2);margin-top:14px}
+.hero h1 .sub{display:block;font-weight:400;font-style:italic;font-size:.46em;line-height:1.25;letter-spacing:0;color:var(--ink-2);margin-top:2px}
 .standfirst{font-family:var(--f-display);font-weight:500;font-size:clamp(24px,3vw,32px);line-height:1.25;margin:0 0 14px;color:var(--ink)}
 .standfirst em{font-style:italic;color:var(--laterite)}
 .hero .dek{font-size:clamp(19px,2.2vw,22px);color:var(--ink-2);max-width:62ch;margin:0}
@@ -552,18 +552,18 @@ function renderCharts(){ const {geo, res} = DATA;
 const X0 = 102.3, X1 = 107.7, Y0 = 10.35, Y1 = 14.75, W = 1800, H = 1503;
 const sx = lon => (lon - X0) / (X1 - X0) * W, sy = lat => (Y1 - lat) / (Y1 - Y0) * H;
 const LAYERS = {
-  night: {img: 'img/bg_night.png', key: 'ntl_pc_2019', title: 'Night lights', name: 'night lights per person',
+  night: {img: 'img/bg_night.png?v=3', key: 'ntl_pc_2019', title: 'Night lights', name: 'night lights per person',
     text: 'Harmonised DMSP–VIIRS lights for 2019. Phnom Penh, Siem Reap and Battambang glow; most of the country is dark. Projects cluster near light, but Phnom Penh itself receives few projects per person, which weakens the overall link.',
     title_ko: '야간 불빛', name_ko: '1인당 야간 불빛', text_ko: '2019년 조화 DMSP–VIIRS 야간 불빛. 프놈펜, 시엠립, 바탐방이 밝고 나라 대부분은 어둡습니다. 사업은 불빛 가까이 모이지만 프놈펜 자체는 1인당 사업이 적어 전체 상관을 약하게 만듭니다.', lo_ko: '어두움', hi_ko: '밝음',
-    ramp: ['#1b1440', '#7a1f6f', '#e2475c', '#fdba74', '#fcfdbf'], lo: 'dark', hi: 'bright', stroke: '#0e1527', dline: ['#000000', .55, .5], pline: ['#000000', .85, 1.3]},
-  access: {img: 'img/bg_access.png', key: 'access_pc1', title: 'Road access', name: 'road access',
+    ramp: ['#1b1440', '#7a1f6f', '#e2475c', '#fdba74', '#fcfdbf'], lo: 'dark', hi: 'bright', stroke: '#0e1527', dline: ['#ffffff', .28, .45], pline: ['#ffffff', .75, 1]},
+  access: {img: 'img/bg_access.png?v=3', key: 'access_pc1', title: 'Road access', name: 'road access',
     text: 'Travel time to the nearest town of 20,000+ on the road network, dry season, every square kilometre. Dark blue corridors are the national roads. Tonle Sap lake is grey. Projects trace the corridors.',
     title_ko: '도로 접근성', name_ko: '도로 접근성', text_ko: '건기 기준, 1 km² 격자마다 도로망으로 인구 2만+ 도시까지 걸리는 시간. 짙은 파란 회랑이 국도이고 톤레삽 호수는 회색입니다. 사업이 회랑을 따라 찍힙니다.', lo_ko: '5분', hi_ko: '600분+',
-    ramp: ['#081d58', '#225ea8', '#41b6c4', '#c7e9b4', '#ffffd9'], lo: '5 min', hi: '600+ min', stroke: '#ffffff', dline: ['#1d2b36', .3, .45], pline: ['#1d2b36', .75, 1.1]},
-  signal: {img: 'img/bg_signal.png', key: 'mob_mbps_shrunk', title: 'Mobile signal', name: 'mobile speed',
+    ramp: ['#081d58', '#225ea8', '#41b6c4', '#c7e9b4', '#ffffd9'], lo: '5 min', hi: '600+ min', stroke: '#ffffff', dline: ['#1d2b36', .25, .4], pline: ['#1d2b36', .6, .9]},
+  signal: {img: 'img/bg_signal.png?v=3', key: 'mob_mbps_shrunk', title: 'Mobile signal', name: 'mobile speed',
     text: 'Ookla mobile speed tests on ~600 m tiles, 2019 Q1–2020 Q1. Tests trace roads and towns; empty areas are not necessarily without coverage, only without testers.',
     title_ko: '모바일 신호', name_ko: '모바일 속도', text_ko: '약 600 m 타일의 Ookla 모바일 속도 측정, 2019년 1분기–2020년 1분기. 측정은 도로와 도시를 따라 찍히며, 빈 곳은 커버리지가 없다기보다 측정자가 없는 곳일 수 있습니다.', lo_ko: '1 Mbps', hi_ko: '60 Mbps',
-    ramp: ['#f2f0f7', '#bcbddc', '#807dba', '#54278f', '#3f007d'], lo: '1 Mbps', hi: '60 Mbps', stroke: '#ffffff', dline: ['#2d2346', .3, .45], pline: ['#2d2346', .75, 1.1]}
+    ramp: ['#f2f0f7', '#bcbddc', '#807dba', '#54278f', '#3f007d'], lo: '1 Mbps', hi: '60 Mbps', stroke: '#ffffff', dline: ['#2d2346', .25, .4], pline: ['#2d2346', .6, .9]}
 };
 let layer = 'night'; const on = new Set(['EU/US', 'China', 'World Bank']);
 function buildMap(geo, pts){
