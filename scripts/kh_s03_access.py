@@ -22,10 +22,16 @@ RAW, OUT = ROOT / "data" / "raw" / "cambodia", ROOT / "data" / "processed" / "ca
 # KH_OSM_SNAPSHOT=latest builds the comparison index on the current extract; its outputs carry a _latest suffix
 SNAP = os.environ.get("KH_OSM_SNAPSHOT", "170101")   # default since spec 9-6: the network as it stood before the 2017-2020 projects
 SUF = "" if SNAP == "170101" else f"_{SNAP}"; OSM_FILE = f"cambodia-{SNAP}.osm.pbf"
+# speed-assumption sensitivity (kh_s16): unpaved multiplier (default 0.7) and a scale on minor-road speeds (default 1)
+UNPAVED_F = float(os.environ.get("KH_UNPAVED", "0.7")); MINOR_S = float(os.environ.get("KH_MINOR_SCALE", "1"))
+if os.environ.get("KH_TAG"):
+    SUF += "_" + os.environ["KH_TAG"]
 D = gpd.read_file(OUT / "kh_units.gpkg").rename(columns={"GEOLEVEL2": "k"})
 D["area_km2"] = D.to_crs(32648).area / 1e6
 BASE = {"motorway": 60, "trunk": 50, "primary": 45, "secondary": 35, "tertiary": 25, "unclassified": 20, "residential": 15,
         "living_street": 10, "service": 12, "road": 15, "track": 10, "path": 3.5, "footway": 3.5, "bridleway": 3.5, "steps": 2}
+for k in ["tertiary", "unclassified", "residential", "living_street", "service", "road", "track"]:
+    BASE[k] *= MINOR_S
 for k in list(BASE):
     BASE[k + "_link"] = BASE[k]
 PAVED = {"asphalt", "concrete", "paved", "paving_stones", "concrete:plates", "chipseal", "sett", "metal"}
@@ -76,7 +82,7 @@ gy, gx = np.gradient(z)
 slope = np.degrees(np.arctan(np.hypot(gx / (tr.a * 111320 * np.cos(np.radians(latc)))[:, None], gy / (abs(tr.e) * 110570)))); del gx, gy
 ls = slope[ix((E.x1 + E.x2) / 2, (E.y1 + E.y2) / 2)]
 v = E.hw.map(BASE).astype(float).values
-v = np.where(E.paved, v, np.minimum(v, 25) * 0.7) * np.clip(1 - 2.0 * E.grade.values, 0.4, 1)
+v = np.where(E.paved, v, np.minimum(v, 25) * UNPAVED_F) * np.clip(1 - 2.0 * E.grade.values, 0.4, 1)
 E["v_dry"], E["v_wet"] = v, v * np.where(E.paved, 0.85, 0.5) * np.where(ls > 25, 0.7, 1.0)
 ids = pd.Index(pd.unique(np.r_[E.a.values, E.b.values])); ai, bi = ids.get_indexer(E.a), ids.get_indexer(E.b); n = len(ids)
 coords = pd.concat([pd.DataFrame({"n": E.a, "x": E.x1, "y": E.y1}), pd.DataFrame({"n": E.b, "x": E.x2, "y": E.y2})]).drop_duplicates("n").set_index("n").loc[ids]

@@ -14,13 +14,14 @@ fixed effects.
 
 | Path | Contents |
 |---|---|
-| `scripts/kh_*.py` | Cambodia pipeline, run in order `kh_fetch` → `kh_s00` … `kh_s15` |
+| `scripts/kh_*.py` | Cambodia pipeline, run in order `kh_fetch` → `kh_s00` … `kh_s16` (`kh_common.py` holds the shared project and location rules) |
 | `scripts/` (other) | Earlier Timor-Leste and Nepal analyses that shaped the design |
 | `data/processed/` | District tables and project assignments built by the scripts |
 | `outputs/tables/` | Every result table (`kh_main.csv`, `kh_dedup_main.csv`, `kh_access2017_main.csv`, …) |
 | `site/` | The project website (static; deployed by `.github/workflows/pages.yml`) |
 | `모형명세서_캄보디아.md` | Model specification, written before estimation; later amendments are labelled (9-1 … 9-6) |
 | `보고서_*.md`, `paper/` | Results reports, literature review, geocoding-bias review (Korean) |
+| `사전등록_센서스분석.md` | Census (IPUMS) analysis plan, fixed before the data were opened; the commit date is the registration date |
 
 ## Reproduce
 
