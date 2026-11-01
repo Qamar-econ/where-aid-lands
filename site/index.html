@@ -8,16 +8,16 @@
 /* Layout: a white journal-style page; one reading column with figures that break out to full width.
    Subject: where development projects land in Cambodia — night lights, laterite roads, mobile signal. */
 :root{
-  /* dark navy page */
-  --paper:#0d1626; --surface:#142035; --ink:#e9eef5; --ink-2:#bcc6d4; --ink-3:#8795a8; --rule:#26344d; --tint:#18253c;
-  --teal:#4cc3bd; --teal-soft:#123638; --laterite:#ec8a5c; --night:#0e1527;
-  --eu:#f2711f; --cn:#e2457f; --wb:#3d8fe0; --ns:#5b6a80;
+  /* light ivory page */
+  --paper:#faf7ef; --surface:#fffdf7; --ink:#1d1b17; --ink-2:#47443d; --ink-3:#77726a; --rule:#e5dfd1; --tint:#f3eee2;
+  --teal:#0b6b6b; --teal-soft:#e2eee8; --laterite:#a8461f; --night:#0e1527;
+  --eu:#e8590c; --cn:#c2255c; --wb:#1c6fbf; --ns:#aaa79f;
   --f-title:"Spectral",Georgia,"Times New Roman",serif;
   --f-display:"Source Serif 4",Georgia,"Times New Roman",serif;
   --f-body:"Source Serif 4",Georgia,"Times New Roman",serif;
   --f-ui:"Source Sans 3","Helvetica Neue",Arial,"Malgun Gothic",sans-serif;
   --f-mono:var(--f-ui);
-  color-scheme:dark;
+  color-scheme:light;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -29,7 +29,7 @@ html[lang="ko"]{--f-ui:"Source Sans 3","Noto Sans KR","Malgun Gothic",sans-serif
 .wide{max-width:1180px;margin:0 auto}
 a{color:var(--teal)}
 /* top bar */
-.bar{position:sticky;top:0;z-index:20;background:rgba(13,22,38,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--rule);padding-top:env(safe-area-inset-top,0px)}
+.bar{position:sticky;top:0;z-index:20;background:rgba(250,247,239,.95);backdrop-filter:blur(6px);border-bottom:1px solid var(--rule);padding-top:env(safe-area-inset-top,0px)}
 .bar .wide{display:flex;gap:18px;align-items:center;min-height:48px}
 .bar .mark{font-family:var(--f-title);font-weight:600;color:var(--ink);font-size:17.5px;white-space:nowrap;display:flex;align-items:center;gap:8px;text-decoration:none}
 .bar nav{display:flex;gap:2px;margin-left:auto;overflow-x:auto;scrollbar-width:none}
