@@ -310,7 +310,8 @@ footer b{color:var(--ink);font-weight:600}
   <figure>
     <div class="tabs" role="group" aria-label="Background">
       <button data-layer="night" aria-pressed="true" class="en">Night lights</button><button data-layer="night" aria-pressed="true" class="ko">야간 불빛</button>
-      <button data-layer="access" aria-pressed="false" class="en">Road access</button><button data-layer="access" aria-pressed="false" class="ko">도로 접근성</button>
+      <button data-layer="access" aria-pressed="false" class="en">Travel time</button><button data-layer="access" aria-pressed="false" class="ko">이동시간</button>
+      <button data-layer="index" aria-pressed="false" class="en">Road-access index</button><button data-layer="index" aria-pressed="false" class="ko">도로 접근성 지수</button>
       <button data-layer="signal" aria-pressed="false" class="en">Mobile signal</button><button data-layer="signal" aria-pressed="false" class="ko">모바일 신호</button>
     </div>
     <div class="mapwrap">
@@ -607,10 +608,14 @@ const LAYERS = {
     text: 'Harmonised DMSP–VIIRS lights for 2015, before the projects. Phnom Penh, Siem Reap and Battambang glow; most of the country is dark. Projects cluster near light, but Phnom Penh itself receives few projects per person, which weakens the overall link.',
     title_ko: '야간 불빛', name_ko: '1인당 야간 불빛', text_ko: '사업 이전인 2015년 DMSP–VIIRS 통합 야간 불빛. 프놈펜, 시엠립, 바탐방이 밝고 나라 대부분은 어둡습니다. 사업은 불빛 가까이 모이지만 프놈펜 자체는 1인당 사업이 적어 전체 상관을 약하게 만듭니다.', lo_ko: '어두움', hi_ko: '밝음',
     ramp: ['#1b1440', '#7a1f6f', '#e2475c', '#fdba74', '#fcfdbf'], lo: 'dark', hi: 'bright', stroke: '#0e1527', dline: ['#ffffff', .28, .45], pline: ['#ffffff', .75, 1]},
-  access: {img: 'img/bg_access.png?v=4', key: 'access_pc1', title: 'Road access', name: 'road access',
-    text: 'Travel time to the nearest town of 20,000+ on the road network, dry season, every square kilometre. Dark blue corridors are the national roads. Tonle Sap lake is grey. Projects trace the corridors.',
-    title_ko: '도로 접근성', name_ko: '도로 접근성', text_ko: '건기 기준, 1 km² 격자마다 도로망으로 인구 2만+ 도시까지 걸리는 시간. 짙은 파란 회랑이 국도이고 톤레삽 호수는 회색입니다. 사업이 회랑을 따라 찍힙니다.', lo_ko: '5분', hi_ko: '600분+',
+  access: {img: 'img/bg_access.png?v=4', key: 'access_pc1', title: 'Travel time to town', name: 'road-access index',
+    text: 'Travel time to the nearest town of 20,000+ on the 2017 road network, dry season, for every square kilometre. This is one of the ten inputs to the road-access index. Dark blue corridors are the national roads; Tonle Sap lake is grey. Projects trace the corridors.',
+    title_ko: '도시까지 이동시간', name_ko: '도로 접근성 지수', text_ko: '2017년 도로망에서 건기 기준, 1 km² 격자마다 인구 2만+ 도시까지 걸리는 시간. 도로 접근성 지수를 이루는 10개 구성요소 중 하나입니다. 짙은 파란 회랑이 국도이고 톤레삽 호수는 회색입니다. 사업이 회랑을 따라 찍힙니다.', lo_ko: '5분', hi_ko: '600분+',
     ramp: ['#081d58', '#225ea8', '#41b6c4', '#c7e9b4', '#ffffd9'], lo: '5 min', hi: '600+ min', stroke: '#ffffff', dline: ['#1d2b36', .25, .4], pline: ['#1d2b36', .6, .9]},
+  index: {img: null, choro: true, key: 'access_pc1', title: 'Road-access index', name: 'road-access index',
+    text: 'The index used in every model: one number per district, combining ten measures (travel times to town, seat and hospital, walking time to a road, road density and others) on the 2017 network. Darker districts are better connected. Projects pile up in the dark band from Phnom Penh to Battambang and Siem Reap.',
+    title_ko: '도로 접근성 지수', name_ko: '도로 접근성 지수', text_ko: '모든 모형에 쓰는 지수입니다. 2017년 도로망에서 도시·군청·병원까지 이동시간, 도로까지 도보 시간, 도로 밀도 등 10개 지표를 합쳐 군마다 숫자 하나로 만들었습니다. 색이 짙을수록 연결이 좋습니다. 사업은 프놈펜에서 바탐방·시엠립으로 이어지는 짙은 띠에 몰립니다.', lo_ko: '낮음 (외딴 곳)', hi_ko: '높음 (연결 좋음)',
+    ramp: ['#ffffd9', '#c7e9b4', '#41b6c4', '#225ea8', '#081d58'], lo: 'low (remote)', hi: 'high (well connected)', stroke: '#ffffff', dline: ['#ffffff', .85, .6], pline: ['#1d2b36', .7, 1.1]},
   signal: {img: 'img/bg_signal.png?v=3', key: 'mob_mbps_shrunk', title: 'Mobile signal', name: 'mobile speed',
     text: 'Ookla mobile speed tests on ~600 m tiles, 2019 Q1–2020 Q1. Tests trace roads and towns; empty areas are not necessarily without coverage, only without testers.',
     title_ko: '모바일 신호', name_ko: '모바일 속도', text_ko: '약 600 m 타일의 Ookla 모바일 속도 측정, 2019년 1분기–2020년 1분기. 측정은 도로와 도시를 따라 찍히며, 빈 곳은 커버리지가 없다기보다 측정자가 없는 곳일 수 있습니다.', lo_ko: '1 Mbps', hi_ko: '60 Mbps',
@@ -644,11 +649,13 @@ function buildMap(geo, pts){
   placed.forEach(p => { p.sk = p.s; p.s = SEC[p.s] || p.s; });
   // backgrounds go through fetch (as the data files do) and are handed to the SVG as data URLs
   const BG = {};
-  Object.entries(LAYERS).forEach(([k, L]) => fetch(L.img).then(r => r.ok ? r.blob() : Promise.reject(r.status))
+  Object.entries(LAYERS).filter(([k, L]) => L.img).forEach(([k, L]) => fetch(L.img).then(r => r.ok ? r.blob() : Promise.reject(r.status))
     .then(b => new Promise((ok, no) => { const fr = new FileReader(); fr.onload = () => ok(fr.result); fr.onerror = no; fr.readAsDataURL(b); }))
     .then(u => { BG[k] = u; if (k === layer) img.attr('href', u); }).catch(() => {}));
   function paint(){ const L = LAYERS[layer];
-    img.attr('href', BG[layer] || L.img);
+    img.attr('href', L.img ? (BG[layer] || L.img) : null).attr('display', L.img ? null : 'none');
+    const shade = d3.scaleSequential(d3.interpolateRgbBasis(L.ramp)).domain([-2.2, 2.2]).clamp(true);
+    dist.attr('fill', d => { if (!L.choro) return 'transparent'; const v = d.properties[L.key]; return v == null || /Lake/i.test(d.properties.name) ? '#d9dee3' : shade(v); });
     dist.attr('stroke', L.dline[0]).attr('stroke-opacity', L.dline[1]).attr('stroke-width', L.dline[2]);
     provG.selectAll('path').attr('stroke', L.pline[0]).attr('stroke-opacity', L.pline[1]).attr('stroke-width', L.pline[2]);
     dots.attr('stroke', L.stroke).attr('display', d => on.has(d.g) ? null : 'none');
