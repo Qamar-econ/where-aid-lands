@@ -40,7 +40,9 @@ a{color:var(--teal)}
 .hero{padding-block:72px 48px;border-bottom:1px solid var(--rule)}
 .kicker{font-family:var(--f-ui);font-size:15px;color:var(--ink-3)}
 .hero h1{font-family:var(--f-display);font-weight:600;font-size:clamp(38px,6.4vw,68px);line-height:1.05;letter-spacing:-.01em;margin:12px 0 20px;text-wrap:balance}
-.hero h1 em{font-style:italic;color:var(--laterite)}
+.hero h1 .sub{display:block;font-weight:400;font-style:italic;font-size:.46em;line-height:1.25;letter-spacing:0;color:var(--ink-2);margin-top:14px}
+.standfirst{font-family:var(--f-display);font-weight:500;font-size:clamp(24px,3vw,32px);line-height:1.25;margin:0 0 14px;color:var(--ink)}
+.standfirst em{font-style:italic;color:var(--laterite)}
 .hero .dek{font-size:clamp(19px,2.2vw,22px);color:var(--ink-2);max-width:62ch;margin:0}
 .facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin-top:40px;border-top:1px solid var(--ink)}
 .facts div{padding:16px 18px 0 0;border-right:1px solid var(--rule);margin-right:18px}
@@ -144,8 +146,9 @@ footer b{color:var(--ink);font-weight:600}
 </div></header>
 
 <div class="hero pad"><div class="wide">
-  <div class="en kicker">Where Aid Lands: Roads, Connectivity, or Need? Evidence from Cambodia · projects starting 2017–2020</div><div class="ko kicker">Where Aid Lands: Roads, Connectivity, or Need? Evidence from Cambodia · 2017–2020년 착수 사업</div>
-  <h1 class="en">Aid follows the <em>road</em>,<br>not the need.</h1><h1 class="ko">원조는 <em>필요</em>가 아니라<br><em>길</em>을 따라간다.</h1>
+  <div class="en kicker">Working paper · Subnational aid allocation · Cambodia, projects starting 2017–2020</div><div class="ko kicker">워킹 페이퍼 · 국가 내 원조 배분 · 캄보디아, 2017–2020년 착수 사업</div>
+  <h1>Where Aid Lands<span class="sub">Roads, Connectivity, or Need? Evidence from Cambodia</span></h1>
+  <p class="standfirst en">Aid follows the <em>road</em>, not the need.</p><p class="standfirst ko">원조는 <em>필요</em>가 아니라 <em>길</em>을 따라간다.</p>
   <p class="en dek">We mapped 323 geocoded development projects onto Cambodia's 141 districts and asked what predicts where they land: roads, mobile signal, economic activity, or poverty. Travel time on the road network explains the most. Poverty points the other way.</p><p class="ko dek">지오코딩된 개발협력 사업 323건을 캄보디아 141개 군(district)에 배치하고, 사업이 어디로 가는지를 무엇이 예측하는지 물었습니다. 도로, 모바일 신호, 경제활동, 빈곤 가운데 도로망 이동시간의 설명력이 가장 컸고, 빈곤은 반대 방향을 가리켰습니다.</p>
   <div class="facts">
     <div><b>+175%</b><span class="en">more projects per standard deviation of road access, within the same province</span><span class="ko">같은 주(province) 안에서 도로 접근성이 1표준편차 높을 때 늘어나는 사업 수</span></div>
