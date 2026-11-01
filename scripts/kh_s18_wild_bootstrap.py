@@ -8,9 +8,11 @@ variance carried by each province, and leave-one-province-out estimates. When on
 null-imposed version loses power and the unrestricted one over-rejects (MacKinnon and Webb 2018), so both are shown.
 This is an added robustness check; the pre-registered decision rule (most conservative of clustered, Conley and
 randomisation-inference p) is unchanged.
-Output: outputs/tables/kh_wild_bootstrap.csv
+Also: the road-access model without the two most influential provinces, and a province-by-province sign test.
+Output: outputs/tables/kh_wild_bootstrap.csv, kh_province_check.csv
 """
-import numpy as np, pandas as pd, statsmodels.api as sm
+import numpy as np, pandas as pd, statsmodels.api as sm, statsmodels.formula.api as smf
+from scipy.stats import spearmanr, binomtest
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -66,3 +68,22 @@ R = pd.DataFrame(rows)
 R.to_csv(T / "kh_wild_bootstrap.csv", index=False)
 print(f"Webb weights, B = {B}, clusters = {R.clusters.iloc[0]}")
 print(R.round(4).to_string(index=False))
+
+# ---------- does any province carry the result? ----------
+fitp = lambda dd: smf.glm("N ~ phys + lnpop + C(prov)", data=dd, family=sm.families.Poisson()).fit(
+    cov_type="cluster", cov_kwds={"groups": pd.factorize(dd.prov)[0]}, maxiter=300)
+top2 = [k.strip().split(":")[0] for k in R.loc[R["var"] == "phys", "top2_province_score_share"].iloc[0].split(",")]
+rows = []
+for lab, dd in [("all provinces", d0)] + [(f"without province {k}", d0[d0.prov != k]) for k in top2] + [("without both", d0[~d0.prov.isin(top2)])]:
+    r = fitp(dd); rows.append({"check": lab, "pct": 100 * (np.exp(r.params["phys"]) - 1), "p_cluster": r.pvalues["phys"], "districts": len(dd)})
+pos = tot = 0
+for k, g in d0.groupby("prov"):
+    if len(g) < 3 or g.N.sum() == 0:
+        continue
+    rho = spearmanr(g.phys, g.N / g.pop_2019).correlation
+    if not np.isnan(rho):
+        tot += 1; pos += rho > 0
+rows.append({"check": f"provinces where better-connected districts get more projects per person: {pos} of {tot}",
+             "pct": np.nan, "p_cluster": binomtest(pos, tot, 0.5).pvalue, "districts": np.nan})
+PC = pd.DataFrame(rows); PC.to_csv(T / "kh_province_check.csv", index=False)
+print(PC.round(4).to_string(index=False))

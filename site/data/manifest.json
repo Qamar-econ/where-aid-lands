@@ -32,6 +32,7 @@
   "dl/tables/kh_main.csv",
   "dl/tables/kh_need.csv",
   "dl/tables/kh_ols_simple.csv",
+  "dl/tables/kh_province_check.csv",
   "dl/tables/kh_robustness.csv",
   "dl/tables/kh_sample_located.csv",
   "dl/tables/kh_shapley.csv",
