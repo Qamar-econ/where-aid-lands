@@ -157,6 +157,32 @@ footer{margin-top:90px;border-top:1px solid var(--ink);color:var(--ink-3);paddin
 footer b{color:var(--ink);font-weight:600}
 #dlnote{font-family:var(--f-ui);font-size:15px;color:var(--laterite)}
 @media (max-width:920px){.mapwrap{grid-template-columns:minmax(0,1fr)}.facts{grid-template-columns:repeat(2,minmax(0,1fr))}.facts div:nth-child(2){border-right:0}.bar nav{display:none}}
+/* links into the research pipeline (pipeline.html) */
+.cta{margin-top:26px}
+.cta a{display:inline-flex;align-items:center;gap:10px;font-family:var(--f-ui);font-size:15.5px;font-weight:600;color:var(--paper);background:var(--ink);padding:10px 16px;border-radius:4px;text-decoration:none}
+.cta a:hover{background:var(--teal)}
+.cta a::after{content:"→"}
+.flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin:34px 0 8px;font-family:var(--f-ui)}
+.flow a{position:relative;display:flex;flex-direction:column;gap:6px;padding:14px 16px 16px;text-decoration:none;color:var(--ink);border:1px solid var(--rule);border-top-width:4px;margin-right:22px;border-radius:3px;transition:transform .12s,box-shadow .12s}
+.flow a:last-child{margin-right:0}
+.flow a:not(:last-child)::after{content:"→";position:absolute;right:-19px;top:50%;transform:translateY(-50%);color:var(--ink-3);font-size:16px}
+.flow a:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(36,33,27,.10)}
+.flow .s0{background:#f6f3ec;border-top-color:#8f8676} .flow .s1{background:#e9f2ee;border-top-color:#0b6b6b}
+.flow .s2{background:#f8ece5;border-top-color:#a8461f} .flow .s3{background:#2d2a24;border-color:#2d2a24;border-top-color:#d6a35c;color:#f3f0e8}
+.flow .n{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+.flow .s1 .n{color:#0b6b6b} .flow .s2 .n{color:#a8461f} .flow .s3 .n{color:#d6a35c}
+.flow b{font-size:16.5px;font-weight:600;line-height:1.25}
+.flow span.t{font-size:14px;line-height:1.45;color:var(--ink-2)} .flow .s3 span.t{color:#d9d3c6}
+.flow .go{margin-top:auto;font-size:13px;color:var(--teal)} .flow .s3 .go{color:#d6a35c}
+@media (min-width:1000px){.col .flow{margin-left:-130px;margin-right:-130px}}
+.flowcap{font-family:var(--f-ui);font-size:14px;color:var(--ink-3);margin:6px 0 0}
+@media (max-width:760px){.flow{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.flow a{margin-right:0}.flow a::after{display:none}}
+.trace{margin:10px 0 22px;font-family:var(--f-ui);font-size:14.5px}
+.trace a{color:var(--teal);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--teal) 40%,transparent)}
+.trace a::before{content:"↳ ";color:var(--ink-3)}
+.trace a::after{content:" →"}
+.trace a:hover{border-bottom-color:var(--teal)}
+.dlrow{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 4px}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
 
@@ -185,6 +211,7 @@ footer b{color:var(--ink);font-weight:600}
   </div>
   <p class="authors en">Tae Yoon Moon <span>(University of Seoul)</span> &nbsp;·&nbsp; Claude Opus 5.5 <span>(Anthropic)</span></p><p class="authors ko">Tae Yoon Moon <span>(서울시립대학교)</span> &nbsp;·&nbsp; Claude Opus 5.5 <span>(Anthropic)</span></p>
   <div class="en byline"><span>Data: GODAD · IPUMS · Ookla · OSM · <a class="cite" href="https://www.worldpop.org/" target="_blank" rel="noopener">WorldPop</a> · Meta RWI</span><span>Model: PPML, province fixed effects</span><span>Status: working results, census merge pending</span></div><div class="ko byline"><span>데이터: GODAD · IPUMS · Ookla · OSM · <a class="cite" href="https://www.worldpop.org/" target="_blank" rel="noopener">WorldPop</a> · Meta RWI</span><span>모형: PPML, 주 고정효과</span><span>상태: 잠정 결과, 센서스 결합 대기</span></div>
+  <p class="cta"><a class="en" href="pipeline.html">See how every number was made: data, code and checks</a><a class="ko" href="pipeline.html">모든 숫자가 만들어진 과정 보기: 자료, 코드, 확인 방법</a></p>
 </div></div>
 
 <main>
@@ -204,6 +231,14 @@ footer b{color:var(--ink);font-weight:600}
       <tr><td class="en">Does earlier infrastructure pull later aid in?</td><td class="ko">이전 인프라가 이후 원조를 끌어들이는가?</td><td class="en">Transport/energy projects 2010–16; stacked event study</td><td class="ko">2010–16년 교통·에너지 사업; 누적(stacked) 사건연구</td></tr>
       <tr><td class="en">Do project counts and money go to the same places?</td><td class="ko">사업 수와 사업액은 같은 곳으로 가는가?</td><td class="en">Two outcomes: number of projects and commitments</td><td class="ko">두 결과변수: 사업 수와 약정액</td></tr>
     </tbody></table></div>
+
+  <nav class="flow" aria-label="Research pipeline">
+    <a class="s0" href="pipeline.html#godad"><span class="n"><span class="en">1 · Data</span><span class="ko">1 · 데이터</span></span><b><span class="en">Ten public sources</span><span class="ko">공개 자료 10종</span></b><span class="t"><span class="en">Aid locations, district boundaries, the 2017 road network, terrain, population, speed tests, night lights, a wealth index</span><span class="ko">원조 위치, 군 경계, 2017년 도로망, 지형, 인구, 속도 측정, 야간 불빛, 부 지수</span></span><span class="go"><span class="en">Sources and downloads</span><span class="ko">출처와 다운로드</span></span></a>
+    <a class="s1" href="pipeline.html#phys"><span class="n"><span class="en">2 · Indicators</span><span class="ko">2 · 지표</span></span><b><span class="en">Built for this study</span><span class="ko">이 연구에서 계산</span></b><span class="t"><span class="en">Projects per district, the physical-access index, digital access, economic activity, poverty</span><span class="ko">군별 사업 수, 물리적 접근성 지수, 디지털 접근성, 경제활동, 빈곤</span></span><span class="go"><span class="en">Formulas, files and code</span><span class="ko">수식, 파일, 코드</span></span></a>
+    <a class="s2" href="pipeline.html#ppml"><span class="n"><span class="en">3 · Models</span><span class="ko">3 · 통계 모형</span></span><b><span class="en">PPML, one factor per model</span><span class="ko">PPML, 모형당 요인 하나</span></b><span class="t"><span class="en">Province fixed effects; the most conservative of four p-values; a joint test and a decomposition</span><span class="ko">주 고정효과, 네 가지 p 중 가장 보수적인 값, 결합 검정과 분해</span></span><span class="go"><span class="en">Estimation code</span><span class="ko">추정 코드</span></span></a>
+    <a class="s3" href="pipeline.html#rmain"><span class="n"><span class="en">4 · Results</span><span class="ko">4 · 결과</span></span><b><span class="en">Physical access +165%</span><span class="ko">물리적 접근성 +165%</span></b><span class="t"><span class="en">Poverty −49%, entangled with remoteness; the four factors jointly p = 0.002</span><span class="ko">빈곤 −49%(오지와 겹침), 네 요인 결합 p = 0.002</span></span><span class="go"><span class="en">Re-estimate it yourself</span><span class="ko">직접 다시 추정하기</span></span></a>
+  </nav>
+  <p class="flowcap en">Select a step to open it in the interactive pipeline, with its files, Python code and a way to check it.</p><p class="flowcap ko">단계를 누르면 인터랙티브 연구 흐름에서 그 단계의 파일, Python 코드, 확인 방법이 열립니다.</p>
 </div></section>
 
 <section id="literature" class="pad"><div class="col">
@@ -239,15 +274,8 @@ footer b{color:var(--ink);font-weight:600}
   </div>
   <div class="col">
     <h3 class="en">Built for this project</h3><h3 class="ko">이 연구를 위해 만든 자료</h3>
-    <div class="tbl"><table>
-      <thead><tr><th class="en">File</th><th class="ko">파일</th><th class="en">Contents</th><th class="ko">내용</th><th></th></tr></thead>
-      <tbody>
-        <tr><td class="m">kh_access.csv</td><td class="en">Travel times (town, seat, hospital, Phnom Penh; dry and wet), walking, road density, paved share, access index</td><td class="ko">이동시간(도시, 행정 소재지, 병원, 프놈펜; 건기·우기), 도보, 도로 밀도, 포장 비율, 접근성 지수</td><td><button class="dl" data-f="dl/data/kh_access.csv">CSV</button></td></tr>
-        <tr><td class="m">kh_covariates.csv</td><td class="en">Population 2008/2015/2019, night lights, Ookla tests and speeds (raw and shrunk)</td><td class="ko">인구 2008/2015/2019, 야간 불빛, Ookla 측정 수와 속도(원값·축소 추정)</td><td><button class="dl" data-f="dl/data/kh_covariates.csv">CSV</button></td></tr>
-        <tr><td class="m">kh_projects.csv</td><td class="en">Projects starting 2017–2020 with donor group, sector, precision and number of districts</td><td class="ko">2017–2020년 착수 사업: 공여 그룹, 분야, 위치 정밀도, 군 개수</td><td><button class="dl" data-f="dl/data/kh_projects.csv">CSV</button></td></tr>
-        <tr><td class="m">districts.geojson</td><td class="en">Simplified district boundaries carrying every district measure</td><td class="ko">모든 군 지표를 담은 단순화 군 경계</td><td><button class="dl" data-f="data/districts.geojson" data-name="cambodia_districts.json">JSON</button></td></tr>
-        <tr><td class="m">cambodia_data.zip</td><td class="en">All of the above plus project-to-district weights, RWI, the GODAD Cambodia extract and full boundaries</td><td class="ko">위 전부와 사업–군 가중치, RWI, GODAD 캄보디아 추출본, 원본 경계</td><td><button class="dl" data-bundle="data" data-name="cambodia_data.zip">ZIP</button></td></tr>
-      </tbody></table></div>
+    <p class="en">From these sources we built district tables for projects, travel times, covariates and wealth, plus one analysis table with every model input. Each table, the script that makes it and a way to check it are in the <a href="pipeline.html">interactive pipeline</a>.</p><p class="ko">이 자료들로 사업, 이동시간, 공변량, 부 지수의 군별 표와 모든 모형 입력을 담은 분석용 표를 만들었습니다. 각 표, 그 표를 만든 스크립트, 확인 방법은 <a href="pipeline.html">인터랙티브 연구 흐름</a>에 있습니다.</p>
+    <div class="dlrow"><button class="dl" data-bundle="data" data-name="cambodia_data.zip">All data (ZIP)</button><button class="dl" data-f="data/districts.geojson" data-name="cambodia_districts.json">District map (JSON)</button></div>
   </div>
 </div></section>
 
@@ -258,6 +286,7 @@ footer b{color:var(--ink);font-weight:600}
 
   <h3 class="en">Sample and outcome</h3><h3 class="ko">표본과 결과변수</h3>
   <p class="en">The unit of analysis is the district: 141 units whose boundaries IPUMS harmonises across the 1998–2019 censuses, so census measures can be added later. <strong>\(N_d\)</strong> counts new projects in district \(d\): \( N_d = \sum_j w_{jd} \), where \( w_{jd} = 1/K_j \) if project \(j\) lists district \(d\) among its \(K_j\) districts, so each project adds exactly one to the total. A project is an aid activity: the yearly and sector-split CRS records of one donor activity are counted once and dated by the first commitment. The sample is projects starting in 2017–2020 and located at district level or finer; ICT projects are excluded to avoid reverse causality with digital access.</p><p class="ko">분석 단위는 군입니다. IPUMS가 1998–2019년 센서스에 걸쳐 경계를 통일한 141개 군을 쓰므로, 나중에 센서스 지표를 붙일 수 있습니다. <strong>\(N_d\)</strong>는 군 \(d\)의 신규 사업 수입니다: \( N_d = \sum_j w_{jd} \). 사업 \(j\)가 \(K_j\)개 군을 기재했다면 \( w_{jd} = 1/K_j \)이므로, 사업 하나는 합계에 정확히 1을 더합니다. 사업은 원조 활동 단위로 셉니다. 한 공여 활동이 CRS에 연도별·분야별로 나뉘어 보고된 기록들은 하나로 묶고, 첫 약정 연도를 착수 연도로 봅니다. 표본은 2017–2020년에 착수했고 군 단위 이상으로 위치가 확인된 사업이며, 디지털 접근성과의 역인과를 피하려고 ICT 사업은 뺐습니다.</p>
+  <p class="trace"><a href="pipeline.html#N"><span class="en">How projects are counted: files and code</span><span class="ko">사업을 세는 방법: 파일과 코드</span></a></p>
 
   <h3 class="en">Five candidate explanations</h3><h3 class="ko">다섯 가지 설명 요인</h3>
   <p class="en">Each characteristic is standardised across districts, \( X_d = (x_d - \bar x)/s_x \), so every effect is read per standard deviation.</p><p class="ko">각 특성은 군 사이에서 표준화합니다. \( X_d = (x_d - \bar x)/s_x \)이므로 모든 효과는 1표준편차당으로 읽습니다.</p>
@@ -271,11 +300,15 @@ footer b{color:var(--ink);font-weight:600}
       <tr><td class="en">Earlier infrastructure</td><td class="ko">이전 인프라</td><td class="en">Any transport or energy project in the district (yes/no)</td><td class="ko">교통·에너지 사업 유무 (예/아니오)</td><td class="en">GODAD, 2010–2016</td><td class="ko">GODAD, 2010–2016년</td></tr>
     </tbody></table></div>
 
+
+  <p class="trace"><a href="pipeline.html#table"><span class="en">The analysis table with every input, one row per district</span><span class="ko">모든 입력을 담은 군별 분석용 표</span></a></p>
   <h3 class="en">Estimation</h3><h3 class="ko">추정</h3>
   <div class="formula">\[ \mathbb{E}\left[N_d \mid X_d, \mathrm{Pop}_d, p\right] = \exp\!\left(\alpha_{p(d)} + \beta_X X_d + \theta \ln \mathrm{Pop}_d\right) \]</div>
   <p class="en">\(\alpha_p\) is a province fixed effect (19 provinces contribute), and \(\theta\) is the population elasticity: projects per person scale as \( N_d/\mathrm{Pop}_d \propto \mathrm{Pop}_d^{\,\theta-1} \), so \( \theta = 1 \) means projects follow people and \( \theta &lt; 1 \) means small districts get more per head. Population is the 2019 WorldPop estimate.</p><p class="ko">\(\alpha_p\)는 주 고정효과(추정에 실제로 쓰이는 주는 19개)이고, \(\theta\)는 인구 탄력성입니다. 1인당 사업 수는 \( N_d/\mathrm{Pop}_d \propto \mathrm{Pop}_d^{\,\theta-1} \)이므로, \( \theta = 1 \)이면 사업이 인구를 따르고 \( \theta &lt; 1 \)이면 작은 군이 1인당 더 많이 받습니다. 인구는 2019년 WorldPop 추정치입니다.</p>
   <p class="en note">We estimate by Poisson pseudo-maximum likelihood (PPML), the standard for counts with many zeros, which solves \( \sum_d \big(N_d - \hat\mu_d\big)\,\mathbf{x}_d = \mathbf{0} \) with \( \hat\mu_d = \exp(\mathbf{x}_d'\hat{\boldsymbol\beta}) \). Only the conditional mean has to be right; the counts need not be Poisson, integers or equidispersed (<a class="cite" href="https://doi.org/10.1162/rest.88.4.641" target="_blank" rel="noopener">Santos Silva &amp; Tenreyro 2006</a>). The model is equivalent to a location-choice model in which each project picks a district. We report \( 100\,(e^{\beta_X}-1) \), the percent change in expected projects per standard deviation of \( X \).</p><p class="ko note">0이 많은 개수 자료의 표준인 포아송 유사최대우도(PPML)로 추정하며, \( \sum_d \big(N_d - \hat\mu_d\big)\,\mathbf{x}_d = \mathbf{0} \) (단 \( \hat\mu_d = \exp(\mathbf{x}_d'\hat{\boldsymbol\beta}) \))을 풉니다. 조건부 평균만 맞으면 되고, 종속변수가 포아송 분포이거나 정수이거나 등분산일 필요는 없습니다(<a class="cite" href="https://doi.org/10.1162/rest.88.4.641" target="_blank" rel="noopener">Santos Silva &amp; Tenreyro 2006</a>). 이 모형은 각 사업이 군 하나를 고르는 입지선택 모형과 같습니다. 보고하는 효과는 \( 100\,(e^{\beta_X}-1) \), 즉 \(X\)가 1표준편차 높을 때 기대 사업 수의 변화율(%)입니다.</p>
 
+
+  <p class="trace"><a href="pipeline.html#ppml"><span class="en">Estimation code, and a script to re-estimate it yourself</span><span class="ko">추정 코드와 직접 다시 추정하는 스크립트</span></a></p>
   <h3 class="en">Design choices</h3><h3 class="ko">설계 원칙</h3>
   <ol class="steps">
     <li><div class="en"><strong>Characteristics precede projects.</strong> Roads are measured on 1 January 2017 and lights in 2015, before any project in the sample starts. Mobile tests begin only in 2019, so digital access is the one measure that overlaps the project window, and we read it with more caution.</div><div class="ko"><strong>특성은 사업보다 먼저 측정한다.</strong> 도로는 2017년 1월 1일, 불빛은 2015년 값으로, 표본의 어떤 사업보다도 앞섭니다. 모바일 측정은 2019년에야 시작되므로 디지털 접근성만 사업 기간과 겹치며, 그만큼 조심해서 해석합니다.</div></li>
@@ -295,6 +328,8 @@ footer b{color:var(--ink);font-weight:600}
   </ul>
   <p class="en">The three confirmatory tests (physical access, digital access, economic activity) carry a <a class="cite" href="https://www.jstor.org/stable/4615733" target="_blank" rel="noopener">Holm correction</a>. Each estimate comes with its minimum detectable effect at 5% size and 80% power, \( \mathrm{MDE} = 100\,(e^{2.8\,\mathrm{SE}}-1) \). A wild cluster bootstrap, added after the first results, is reported in Section 6.</p><p class="ko">세 가지 확증 검정(물리적 접근성, 디지털 접근성, 경제활동)에는 <a class="cite" href="https://www.jstor.org/stable/4615733" target="_blank" rel="noopener">Holm 보정</a>을 적용합니다. 각 추정치에는 유의수준 5%, 검정력 80%의 최소검출효과 \( \mathrm{MDE} = 100\,(e^{2.8\,\mathrm{SE}}-1) \)를 함께 제시합니다. 1차 결과 이후 추가한 wild cluster 부트스트랩은 6장에 보고합니다.</p>
 
+
+  <p class="trace"><a href="pipeline.html#inf"><span class="en">How each p-value is computed</span><span class="ko">p값을 계산하는 방법</span></a></p>
   <h3 class="en">The physical-access index</h3><h3 class="ko">물리적 접근성 지수</h3>
   <p class="en">The index summarises how easily people in a district reach towns and services by road. It combines ten measures, all computed for this study from the 2017 network:</p><p class="ko">이 지수는 군 주민이 도로로 도시와 서비스에 얼마나 쉽게 닿는지를 요약합니다. 2017년 도로망으로 직접 계산한 10개 지표를 합칩니다:</p>
   <div class="tbl"><table>
@@ -336,6 +371,7 @@ footer b{color:var(--ink);font-weight:600}
       <tr class="sum"><td class="en">Index \( (S_d-\bar S)/s_S \), with \( \bar S = 0,\ s_S = 2.475 \)</td><td class="ko">지수 \( (S_d-\bar S)/s_S \), \( \bar S = 0,\ s_S = 2.475 \)</td><td></td><td></td><td></td><td class="r m yes">+1.93</td><td></td><td></td><td class="r m">−0.71</td></tr>
     </tbody></table></div>
   <p class="en note">The \(z\) column is computed on the signed component, for example \( z = (-\ln 14.8 - \bar c)/s \) for travel times; that is why short times give positive \(z\). The two districts sit about 2.6 standard deviations apart, which the model translates into roughly \( e^{0.98\times 2.64} \approx 13\times \) as many projects for equal population and province, before any other factor.</p><p class="ko note">\(z\)는 부호를 맞춘 구성요소로 계산합니다. 예컨대 이동시간은 \( z = (-\ln 14.8 - \bar c)/s \)이므로 시간이 짧을수록 \(z\)가 양수입니다. 두 군은 약 2.6표준편차 떨어져 있고, 모형에 따르면 이는 인구와 주가 같을 때, 다른 요인을 빼고도 사업 수 약 \( e^{0.98\times 2.64} \approx 13 \)배 차이에 해당합니다.</p>
+  <p class="trace"><a href="pipeline.html#phys"><span class="en">How this index is built: inputs, code and checks</span><span class="ko">이 지수를 만든 입력 자료, 코드, 확인 방법</span></a></p>
 </div></section>
 
 <section id="findings" class="pad"><div class="wide">
@@ -381,6 +417,7 @@ footer b{color:var(--ink);font-weight:600}
   </div><figcaption class="en"><b>Teal</b> marks estimates whose most conservative p-value is below 0.05. Digital access (mobile speed) is significant with clustered errors (p < 0.001) but not under randomisation inference (p = 0.060). Night lights are measured in 2015, before the projects.</figcaption><figcaption class="ko"><b>청록색</b>은 가장 보수적인 p값이 0.05 미만인 추정치입니다. 디지털 접근성(모바일 속도)은 군집 표준오차로는 유의하지만(p < 0.001) 무작위화 추론에서는 아닙니다(p = 0.060). 야간 불빛은 사업 이전인 2015년 값입니다.</figcaption></figure>
   <div class="col"><div class="tbl"><table id="maintab">
     <thead><tr><th class="en">Characteristic</th><th class="ko">특성</th><th class="en r">Effect</th><th class="ko r">효과</th><th class="en r">p cluster</th><th class="ko r">p 군집</th><th class="r">p Conley</th><th class="en r">p RI</th><th class="ko r">p 무작위화</th><th class="en r">p used</th><th class="ko r">채택 p</th><th class="r">MDE</th></tr></thead><tbody></tbody></table></div></div>
+  <div class="col"><p class="trace"><a href="pipeline.html#rmain"><span class="en">Check these estimates against the data</span><span class="ko">이 추정치를 자료로 직접 확인하기</span></a></p></div>
 
   <div class="col">
     <h3 class="en">All factors in one model</h3><h3 class="ko">모든 요인을 한 모형에</h3>
@@ -397,6 +434,7 @@ footer b{color:var(--ink);font-weight:600}
         <tr class="sum"><td class="en">All four jointly (pseudo-R² 0.41 → 0.69)</td><td class="ko">네 요인 결합 검정 (유사 R² 0.41 → 0.69)</td><td></td><td class="r m yes">0.002</td><td></td></tr>
       </tbody></table></div>
     <p class="en">Every estimate stays positive and close to its single-factor size. Together the four clearly add explanatory power (joint test, most conservative p = 0.002), but no single one clears 5% on its own: clustered and spatial errors give p &lt; 0.01 for lights, physical access and digital access, while randomisation inference does not (physical access p = 0.064). With 19 provinces, the data show that these factors matter together more firmly than they separate them. The headline estimates therefore come from single-factor models, and relative importance from the decomposition below.</p><p class="ko">모든 추정치가 양(+)이고 단일 요인 모형과 크기가 비슷합니다. 네 요인은 함께 설명력을 분명히 높이지만(결합 검정, 가장 보수적인 p = 0.002), 하나씩 보면 5% 수준을 넘는 요인이 없습니다. 군집·공간 표준오차로는 불빛, 물리적 접근성, 디지털 접근성 모두 p &lt; 0.01이지만 무작위화 추론에서는 그렇지 않습니다(물리적 접근성 p = 0.064). 19개 주로는 이 요인들이 함께 작용한다는 것은 분명히 보이지만, 각각을 떼어 내기는 어렵습니다. 그래서 대표 추정치는 단일 요인 모형에서, 상대적 중요도는 아래의 분해에서 가져옵니다.</p>
+    <p class="trace"><a href="pipeline.html#joint"><span class="en">Joint test and decomposition: code and tables</span><span class="ko">결합 검정과 분해: 코드와 표</span></a></p>
     <h3 class="en">Splitting the explained share fairly</h3><h3 class="ko">설명력을 공정하게 나누기</h3>
     <p class="en">Coefficients are in different units, so we rank factors by what each adds to explained deviance, averaged over every order of entry (the <a class="cite" href="https://en.wikipedia.org/wiki/Shapley_value" target="_blank" rel="noopener">Shapley value</a>):</p><p class="ko">계수는 단위가 달라 직접 비교할 수 없으므로, 각 요인이 설명된 이탈도에 더하는 몫을 모든 투입 순서에 걸쳐 평균했습니다(<a class="cite" href="https://en.wikipedia.org/wiki/Shapley_value" target="_blank" rel="noopener">Shapley 값</a>):</p>
     <div class="formula">\[ \phi_j = \sum_{S\subseteq F\setminus\{j\}} \frac{|S|!\,\big(|F|-|S|-1\big)!}{|F|!}\,\Big[v\big(S\cup\{j\}\big)-v(S)\Big] \] \[ v(S)=\frac{D_0-D_S}{D_{\mathrm{null}}} \]</div>
@@ -441,6 +479,7 @@ footer b{color:var(--ink);font-weight:600}
     <p class="en">Speed alone does not survive randomisation inference (p = 0.060). An index of four Ookla measures predicts projects on its own (+142%, p &lt; 0.001) but not once physical access is held fixed (+122%, p = 0.14): with these data the two cannot be separated. The index is strongest for social projects such as health and education (+220%, p &lt; 0.001, against +67%, p = 0.068, elsewhere). Census phone ownership will test whether this reflects digital access or simply where people live.</p><p class="ko">속도만으로는 무작위화 추론을 통과하지 못합니다(p = 0.060). Ookla 지표 네 개로 만든 지수는 단독으로는 사업을 예측하지만(+142%, p &lt; 0.001), 물리적 접근성을 고정하면 유의하지 않습니다(+122%, p = 0.14). 이 자료로는 둘을 떼어 낼 수 없습니다. 지수는 보건·교육 같은 사회 분야 사업에서 가장 강합니다(+220%, p &lt; 0.001; 그 외 +67%, p = 0.068). 이것이 디지털 접근성인지 단지 사람이 사는 곳인지는 센서스 휴대전화 보유율로 검정합니다.</p>
     <div class="tbl"><table>
       <thead><tr><th class="en">Digital-access measure</th><th class="ko">디지털 접근성 지표</th><th class="en r">Effect</th><th class="ko r">효과</th><th class="en r">p (most conservative)</th><th class="ko r">p (가장 보수적)</th></tr></thead><tbody id="conntab"></tbody></table></div>
+    <p class="trace"><a href="pipeline.html#conn"><span class="en">How digital access is measured</span><span class="ko">디지털 접근성을 재는 방법</span></a></p>
 
     <h3 class="en">Counts follow roads; money does not</h3><h3 class="ko">사업 수는 도로를 따르고, 돈은 그렇지 않다</h3>
     <p class="en">Weighting by committed dollars erases the pattern. A handful of large projects dominates the total, and no factor predicts where the money goes. Where donors open projects and where they spend are separate questions.</p><p class="ko">약정액으로 가중하면 패턴이 사라집니다. 소수의 대형 사업이 총액을 좌우해 어떤 요인도 돈의 행선지를 예측하지 못합니다. 사업을 여는 곳과 돈을 쓰는 곳은 별개의 문제입니다.</p>
@@ -498,6 +537,7 @@ footer b{color:var(--ink);font-weight:600}
         <tr><td class="en">Index construction choices</td><td class="ko">지수 구성 방식</td><td class="en">20 variants (weights, components, speed assumptions, 2026 network): +131% to +177%, all with clustered and Conley p ≤ 0.006. An audit of the inputs found GeoNames town populations that are partly wrong, surface tags on only about a fifth of roads, and spurious grades on very short segments; correcting all three gives +159%, and ignoring surface tags altogether, with speeds set by road class only as in global accessibility maps, gives +166% (correlations with the main index 0.99)</td><td class="ko">20가지 변형(가중치, 구성요소, 속도 가정, 2026년 도로망): +131%~+177%, 군집·Conley p 모두 0.006 이하. 입력 자료 점검에서 GeoNames 도시 인구 일부 오류, 도로의 약 5분의 1에만 있는 포장 태그, 매우 짧은 구간의 가짜 경사를 확인했고, 셋을 모두 보정해도 +159%, 포장 태그를 아예 쓰지 않고 세계 접근성 지도처럼 도로 등급별 속도만 써도 +166%(원 지수와 상관 0.99)</td></tr>
         <tr><td class="en">Few provinces (19)</td><td class="ko">주가 적음 (19개)</td><td class="en">Conley and randomisation inference alongside clustered errors; most conservative p used. Wild cluster score bootstrap (Webb weights): physical access p = 0.077 null-imposed, &lt;0.001 unrestricted; two provinces carry 78% of the score variance, yet without both the effect is +147% and 14 of 17 provinces show the same direction</td><td class="ko">군집 표준오차와 함께 Conley·무작위화 추론; 가장 보수적인 p 채택. Wild cluster 스코어 부트스트랩(Webb 가중치): 물리적 접근성 귀무 부과 p = 0.077, 비부과 &lt;0.001; 두 주가 스코어 분산의 78%를 차지하지만, 두 주를 빼도 +147%이고 17개 주 중 14개가 같은 방향</td></tr>
       </tbody></table></div>
+    <p class="trace"><a href="pipeline.html#rob"><span class="en">All robustness checks and audits, with code</span><span class="ko">모든 강건성 점검과 자료 점검, 코드 포함</span></a></p>
   </div>
 </div></section>
 
@@ -529,6 +569,7 @@ footer b{color:var(--ink);font-weight:600}
   <p class="note ko">이 결과는 같은 주 안에서의 연관이지 인과 효과가 아닙니다. 캄보디아 원조의 약 3분의 1(GODAD 공여국)과 중국을 포괄하며, 일본, 아시아개발은행, 한국은 빠져 있습니다. 공여자가 외딴 곳을 피하는지 빈곤 자체를 피하는지는 사전등록한 센서스 분석이 다음 검정입니다.</p>
   <p class="en">Four decades after <a class="cite" href="https://doi.org/10.4324/9781315835815" target="_blank" rel="noopener">Chambers</a> described visitors who see only the villages along the paved road, the bias has moved from what visitors see to where projects are placed.</p>
   <p class="ko"><a class="cite" href="https://doi.org/10.4324/9781315835815" target="_blank" rel="noopener">Chambers</a>가 포장도로변 마을만 보는 방문자를 묘사한 지 40년, 그 편향은 방문자가 보는 것에서 사업이 놓이는 곳으로 옮겨 왔습니다.</p>
+  <p class="trace"><a href="pipeline.html#concl"><span class="en">Trace this conclusion back to the data</span><span class="ko">이 결론을 자료까지 거슬러 확인하기</span></a></p>
 </div></section>
 
 <section id="reproduce" class="pad"><div class="wide">
@@ -537,9 +578,12 @@ footer b{color:var(--ink);font-weight:600}
     <h2 class="en">Code, data and tables</h2><h2 class="ko">코드, 데이터, 표</h2>
     <p class="en">The full pipeline runs from raw downloads to every figure on this page. <a href="pipeline.html"><strong>Open the interactive pipeline</strong></a> to follow it step by step, with each step's files and Python code, and a script that re-estimates the headline results from the data.</p><p class="ko">전체 파이프라인이 원자료 다운로드부터 이 페이지의 모든 그림까지 이어집니다. <a href="pipeline.html"><strong>인터랙티브 연구 흐름</strong></a>에서 단계별 파일과 Python 코드를 받고, 자료로 대표 결과를 다시 추정하는 스크립트로 직접 확인할 수 있습니다.</p>
   </div>
-  <div class="cards">
-    <div class="card"><h4 class="en">Analysis code</h4><h4 class="ko">분석 코드</h4><p class="en">Python scripts kh_fetch and kh_s00–s15: boundaries, project assignment, covariates, road network, models, maps, ladder, event study, geocoding checks, RWI, activity-level and 2017-network checks, and this site's exports.</p><p class="ko">Python 스크립트 kh_fetch, kh_s00–s15: 경계, 사업 배정, 공변량, 도로망, 모형, 지도, 모형 사다리, 사건연구, 지오코딩 점검, RWI, 활동 단위·2017년 도로망 점검, 이 사이트용 내보내기.</p><div class="act"><button class="dl" data-bundle="code" data-name="cambodia_code.zip">Code ZIP</button></div></div>
-    <div class="card"><h4 class="en">Result tables</h4><h4 class="ko">결과 표</h4><p class="en">Main estimates, robustness, heterogeneity, model ladder, infrastructure tests, event study, geocoding checks, poverty, Shapley.</p><p class="ko">주요 추정, 강건성, 이질성, 모형 사다리, 인프라 검정, 사건연구, 지오코딩 점검, 빈곤, Shapley.</p><div class="act"><button class="dl" data-bundle="tables" data-name="cambodia_results_tables.zip">Tables ZIP</button></div></div>
+  <div class="col">
+    <h3 class="en">Check it in ten minutes</h3><h3 class="ko">10분 안에 확인하기</h3>
+    <p class="en">Put these four files in one folder and run <code>python kh_replicate.py</code>. It rebuilds the physical-access index and re-estimates every headline model from the data, then sets your numbers beside the published ones.</p><p class="ko">이 파일 네 개를 한 폴더에 받아 <code>python kh_replicate.py</code>를 실행하세요. 물리적 접근성 지수를 다시 만들고 대표 모형을 자료에서 모두 다시 추정한 뒤, 그 값을 발표값과 나란히 보여 줍니다.</p>
+    <div class="dlrow"><a class="dl" href="dl/data/kh_analysis.csv" download>kh_analysis.csv</a><a class="dl" href="dl/data/kh_access.csv" download>kh_access.csv</a><a class="dl" href="dl/data/kh_published.csv" download>kh_published.csv</a><a class="dl" href="dl/code/kh_replicate.py" download>kh_replicate.py</a></div>
+    <h3 class="en">Everything at once</h3><h3 class="ko">한꺼번에 받기</h3>
+    <div class="dlrow"><button class="dl" data-bundle="data" data-name="cambodia_data.zip">Data ZIP</button><button class="dl" data-bundle="tables" data-name="cambodia_results_tables.zip">Tables ZIP</button><button class="dl" data-bundle="code" data-name="cambodia_code.zip">Code ZIP</button><a class="dl" href="dl/code/README_pipeline.md" download>README</a></div>
   </div>
   <p id="dlnote" class="en col" hidden>The download could not start in this view.</p><p class="ko col" hidden>이 화면에서는 다운로드를 시작하지 못했습니다.</p>
 </div></section>

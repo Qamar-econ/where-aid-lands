@@ -379,6 +379,7 @@ function related(id){ const up = new Set([id]), dn = new Set([id]); let ch = tru
   while (ch) { ch = false; E.forEach(([a, b]) => { if (up.has(b) && !up.has(a)) { up.add(a); ch = true; } if (dn.has(a) && !dn.has(b)) { dn.add(b); ch = true; } }); }
   return new Set([...up, ...dn]); }
 function select(id){ cur = id; const R = id ? related(id) : null;
+  try { history.replaceState(null, '', id ? '#' + id : location.pathname + location.search); } catch (e) {}
   N.forEach(n => { n.el.classList.toggle('sel', n.id === id); n.el.classList.toggle('dim', !!R && !R.has(n.id)); });
   svg.querySelectorAll('path').forEach(p => { const on = R && R.has(p.dataset.a) && R.has(p.dataset.b); p.classList.toggle('on', !!on); p.classList.toggle('dim', !!R && !on); });
   render(); }
@@ -417,7 +418,12 @@ function setLang(l){ document.documentElement.lang = l; try { localStorage.setIt
 document.querySelectorAll('[data-lang]').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
 let lang0 = 'en'; try { if (localStorage.getItem('lang') === 'ko') lang0 = 'ko'; } catch (e) {}
 
-const go = () => { setLang(lang0); requestAnimationFrame(() => { layout(); home(); render(); }); };
+// pipeline.html#phys opens with that step selected and centred (the main page links to steps this way)
+function focusStep(id){ const t = byId[id]; if (!t) return; select(id);
+  tx = vp.clientWidth / 2 - (t.x + W / 2) * s; ty = vp.clientHeight / 2 - (t.y + t.h / 2) * s; clampPan(); apply();
+  document.querySelector('.stage').scrollIntoView({block: 'start'}); scrollBy(0, -60); }
+const go = () => { setLang(lang0); requestAnimationFrame(() => { layout(); home(); render(); const h = location.hash.slice(1); if (byId[h]) focusStep(h); }); };
+addEventListener('hashchange', () => { const h = location.hash.slice(1); if (byId[h] && h !== cur) focusStep(h); });
 (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(go);
 addEventListener('resize', () => { clampPan(); apply(); });
 })();
