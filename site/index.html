@@ -343,13 +343,14 @@ footer b{color:var(--ink);font-weight:600}
     <div class="en chap">5 · Findings</div><div class="ko chap">5 · 결과</div>
     <h2 class="en">Three ways to be reachable</h2><h2 class="ko">접근성의 세 가지 얼굴</h2>
     <p class="en lead">Start with the map. Each dot is a project location; the background is one kind of reachability.</p><p class="ko lead">지도부터 봅시다. 점 하나가 사업 위치 하나이고, 배경은 접근성 지표 하나입니다.</p>
-    <p class="en">Switch between night lights, physical access and digital access. The bars on the right compare districts by quintile of that background, counting projects per 100,000 people.</p><p class="ko">야간 불빛, 물리적 접근성, 디지털 접근성을 바꿔 보세요. 오른쪽 막대는 그 배경 값의 5분위별로 군을 나눠 인구 10만 명당 사업 수를 비교합니다.</p>
+    <p class="en">Switch between night lights, physical access, digital access and poverty. The bars on the right compare districts by quintile of that background, counting projects per 100,000 people.</p><p class="ko">야간 불빛, 물리적 접근성, 디지털 접근성, 빈곤을 바꿔 보세요. 오른쪽 막대는 그 배경 값의 5분위별로 군을 나눠 인구 10만 명당 사업 수를 비교합니다.</p>
   </div>
   <figure>
     <div class="tabs" role="group" aria-label="Background">
       <button data-layer="night" aria-pressed="true" class="en">Night lights</button><button data-layer="night" aria-pressed="true" class="ko">야간 불빛</button>
       <span class="tabgroup" role="group" aria-label="Physical access"><span class="glab en">Physical access</span><span class="glab ko">물리적 접근성</span><button data-layer="access" aria-pressed="false" class="en">Travel time</button><button data-layer="access" aria-pressed="false" class="ko">이동시간</button><span class="gsep" aria-hidden="true">→</span><button data-layer="index" aria-pressed="false" class="en">Index</button><button data-layer="index" aria-pressed="false" class="ko">지수</button></span>
       <button data-layer="signal" aria-pressed="false" class="en">Digital access</button><button data-layer="signal" aria-pressed="false" class="ko">디지털 접근성</button>
+      <button data-layer="poverty" aria-pressed="false" class="en">Poverty</button><button data-layer="poverty" aria-pressed="false" class="ko">빈곤</button>
     </div>
     <div class="mapwrap">
       <div class="mapframe"><div class="mapbadge" id="mapbadge"></div><svg id="map" viewBox="0 0 1800 1503" role="img" aria-label="Map of Cambodia with aid project locations over the selected background"></svg></div>
@@ -656,13 +657,18 @@ const LAYERS = {
   signal: {img: 'img/bg_signal.png?v=3', key: 'mob_mbps_shrunk', title: 'Mobile signal', name: 'digital access (mobile speed)',
     text: 'Ookla mobile speed tests on ~600 m tiles, 2019 Q1–2020 Q1. Tests trace roads and towns; empty areas are not necessarily without coverage, only without testers.',
     title_ko: '모바일 신호', name_ko: '디지털 접근성 (모바일 속도)', text_ko: '약 600 m 타일의 Ookla 모바일 속도 측정, 2019년 1분기–2020년 1분기. 측정은 도로와 도시를 따라 찍히며, 빈 곳은 커버리지가 없다기보다 측정자가 없는 곳일 수 있습니다.', lo_ko: '1 Mbps', hi_ko: '60 Mbps',
-    ramp: ['#f2f0f7', '#bcbddc', '#807dba', '#54278f', '#3f007d'], lo: '1 Mbps', hi: '60 Mbps', stroke: '#ffffff', dline: ['#2d2346', .25, .4], pline: ['#2d2346', .6, .9]}
+    ramp: ['#f2f0f7', '#bcbddc', '#807dba', '#54278f', '#3f007d'], lo: '1 Mbps', hi: '60 Mbps', stroke: '#ffffff', dline: ['#2d2346', .25, .4], pline: ['#2d2346', .6, .9]},
+  poverty: {img: null, choro: true, key: 'poverty_z', title: 'Poverty (Meta wealth index)', name: 'poverty (−RWI, SD)',
+    text: 'Meta\'s Relative Wealth Index, averaged over each district with population weights and reversed so that darker means poorer. Poverty and physical access correlate at −0.84: the poorest districts are the remote ones in the north and east, and they host the fewest projects per person.',
+    title_ko: '빈곤 (Meta 부 지수)', name_ko: '빈곤 (−RWI, 표준화)', text_ko: 'Meta 상대적 부 지수를 군마다 인구 가중 평균하고 부호를 뒤집어, 색이 짙을수록 가난하게 나타냈습니다. 빈곤과 물리적 접근성의 상관은 −0.84입니다. 가장 가난한 군은 북부와 동부의 외딴 군이고, 이곳의 인구 대비 사업 수가 가장 적습니다.', lo_ko: '덜 가난함', hi_ko: '더 가난함',
+    ramp: ['#f7f4ef', '#ddd0bb', '#b39470', '#7d5b3a', '#3f2a17'], lo: 'less poor', hi: 'poorer', stroke: '#ffffff', dline: ['#ffffff', .85, .6], pline: ['#1d2b36', .7, 1.1]}
 };
 const BADGE = {
   night: {own: false, en: 'Source: <a href="https://doi.org/10.1038/s41597-020-0510-y" target="_blank" rel="noopener">Li et al. (2020)</a>, 2015', ko: '출처: <a href="https://doi.org/10.1038/s41597-020-0510-y" target="_blank" rel="noopener">Li et al. (2020)</a>, 2015년'},
   access: {own: true, en: '<b>Computed for this study</b> (<a href="https://github.com/Qamar-econ/where-aid-lands/blob/main/scripts/kh_s03_access.py" target="_blank" rel="noopener">code</a>)', ko: '<b>직접 계산</b> (<a href="https://github.com/Qamar-econ/where-aid-lands/blob/main/scripts/kh_s03_access.py" target="_blank" rel="noopener">코드</a>)'},
   index: {own: true, en: '<b>Computed for this study</b> (<a href="https://github.com/Qamar-econ/where-aid-lands/blob/main/scripts/kh_s03_access.py" target="_blank" rel="noopener">code</a>)', ko: '<b>직접 계산</b> (<a href="https://github.com/Qamar-econ/where-aid-lands/blob/main/scripts/kh_s03_access.py" target="_blank" rel="noopener">코드</a>)'},
-  signal: {own: false, en: 'Source: <a href="https://github.com/teamookla/ookla-open-data" target="_blank" rel="noopener">Ookla Open Data</a>, 2019–2020', ko: '출처: <a href="https://github.com/teamookla/ookla-open-data" target="_blank" rel="noopener">Ookla Open Data</a>, 2019–2020년'}
+  signal: {own: false, en: 'Source: <a href="https://github.com/teamookla/ookla-open-data" target="_blank" rel="noopener">Ookla Open Data</a>, 2019–2020', ko: '출처: <a href="https://github.com/teamookla/ookla-open-data" target="_blank" rel="noopener">Ookla Open Data</a>, 2019–2020년'},
+  poverty: {own: false, en: 'Source: Meta Relative Wealth Index (<a href="https://doi.org/10.1073/pnas.2113658119" target="_blank" rel="noopener">Chi et al. 2022</a>); district averages computed for this study', ko: '출처: Meta 상대적 부 지수(<a href="https://doi.org/10.1073/pnas.2113658119" target="_blank" rel="noopener">Chi et al. 2022</a>); 군 평균은 직접 계산'}
 };
 let layer = 'night'; const on = new Set(['EU/US', 'China', 'World Bank']);
 function buildMap(geo, pts){
@@ -670,6 +676,9 @@ function buildMap(geo, pts){
   const img = svg.append('image').attr('x', 0).attr('y', 0).attr('width', W).attr('height', H).attr('preserveAspectRatio', 'none');
   const path = d3.geoPath(d3.geoTransform({point(x, y){ this.stream.point(sx(x), sy(y)); }}));
   const feats = geo.features.filter(f => f.properties.pop_2019 > 1000 && !/Lake/i.test(f.properties.name));
+  // poverty layer: -RWI standardised over the mapped districts, so it shares the choropleth's SD scale
+  const rw = feats.map(f => f.properties.rwi).filter(v => v != null), rm = d3.mean(rw), rsd = d3.deviation(rw);
+  geo.features.forEach(f => { const v = f.properties.rwi; f.properties.poverty_z = v == null ? null : -(v - rm) / rsd; });
   const dist = svg.append('g').selectAll('path').data(geo.features).join('path').attr('d', path).attr('fill', 'transparent').attr('stroke-width', 1.1)
     .on('mousemove', (ev, d) => { const p = d.properties, L = LAYERS[layer], v = p[L.key];
       showTip(`<b>${esc(p.name)}</b><span class="k">${tr('Projects 2017–20', '사업 2017–20')}</span> ${(p.N ?? 0).toFixed(1)} · <span class="k">${tr('per 100k', '10만 명당')}</span> ${(p.pc100k ?? 0).toFixed(2)}<br><span class="k">${tr('Population', '인구')}</span> ${Math.round(p.pop_2019 || 0).toLocaleString()}<br><span class="k">${tr(L.name, L.name_ko)}</span> ${v == null ? '–' : (+v).toFixed(3)}`, ev); })
