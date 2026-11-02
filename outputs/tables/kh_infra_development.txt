@@ -1,0 +1,12 @@
+panel: 141 districts x years 2003-2020 (18 years)
+stacked event study: treated 61, clean controls 70, obs 5720
+  lights pre-trend joint p = 0.358 | average post effect = -8.8% (95% CI -41.0% to +41.0%)
+  pop    pre-trend joint p = 0.605 | average post effect = +0.8% (95% CI -2.0% to +3.8%)
+long difference 2008 -> 2019, any transport/energy project starting 2010-2016 (province FE, clustered by province):
+  night lights with 2008 level   +134.5% more growth (95% CI +38.1% to +298.2%), p = 0.002, n = 141
+  night lights + physical access +137.2% more growth (95% CI +44.2% to +290.3%), p = 0.001, n = 141
+  population   with 2008 level     -4.7% more growth (95% CI -13.1% to +4.6%), p = 0.312, n = 141
+  population   + physical access   -2.4% more growth (95% CI -10.1% to +5.9%), p = 0.556, n = 141
+  districts with a 2010-16 project: transport 57, energy 12, both 4
+  night lights, transport and energy together: transport +153.6% (95% CI +46.0% to +340.8%, p 0.001) | energy +58.1% (95% CI -15.9% to +197.4%, p 0.155)
+  population, transport and energy together: transport -2.5% (95% CI -10.7% to +6.3%, p 0.562) | energy +3.2% (95% CI -7.8% to +15.4%, p 0.585)
