@@ -34,6 +34,10 @@ for lat in range(10, 15):
         dl("dem", n + ".tif", f"https://copernicus-dem-90m.s3.amazonaws.com/{n}/{n}.tif")
 dl("osm", "cambodia-latest.osm.pbf", "https://download.geofabrik.de/asia/cambodia-latest.osm.pbf")
 dl("osm", "cambodia-170101.osm.pbf", "https://download.geofabrik.de/asia/cambodia-170101.osm.pbf")   # main network (spec 9-6)
+# Ministry of Health facility list (2010, HDX), for the hospital check (kh_s28, spec 9-17)
+z = dl("moh_health", "health_facility.zip", "https://data.humdata.org/dataset/1803994d-6218-4b98-ac3a-30c7f85c6dbc/resource/f30b0f4b-1c40-45f3-986d-2820375ea8dd/download/health_facility.zip")
+if z and not (RAW / "moh_health/Health").exists():
+    zipfile.ZipFile(z).extractall(RAW / "moh_health")
 g = RAW / "geonames" / "KH.txt"
 if not g.exists():
     g.parent.mkdir(parents=True, exist_ok=True)

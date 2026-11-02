@@ -223,7 +223,7 @@ const N = [
  {id:'osm', col:0, k:'data', t:['OpenStreetMap · roads, 1 Jan 2017','OpenStreetMap · 도로, 2017년 1월 1일'],
   d:['The road network as it stood before the projects; hospitals tagged in OSM.','사업 이전 시점의 도로망과 OSM에 표시된 병원.'],
   src:[['Geofabrik cambodia-170101.osm.pbf','https://download.geofabrik.de/asia/cambodia.html']], code:['kh_fetch.py'],
-  how:['569,893 road segments on the largest connected network. Speeds come from the road class (highway tag); surface tags cover only about a fifth of road length, so a variant ignores them.','가장 큰 연결 도로망의 구간 569,893개. 속도는 도로 등급(highway 태그)으로 정합니다. 포장 태그는 도로 길이의 약 5분의 1에만 있어, 태그를 쓰지 않는 변형도 계산했습니다.']},
+  how:['569,893 road segments on the largest connected network. Speeds come from the road class (highway tag); surface tags cover only about a fifth of road length, so a variant ignores them. OSM 2017 marks fewer than half of the 76 Ministry of Health referral hospitals; using the ministry list instead gives +168% (correlation with the main index 0.998).','가장 큰 연결 도로망의 구간 569,893개. 속도는 도로 등급(highway 태그)으로 정합니다. 포장 태그는 도로 길이의 약 5분의 1에만 있어, 태그를 쓰지 않는 변형도 계산했습니다. OSM 2017에는 보건부 군 병원 76곳 중 절반 이상이 빠져 있지만, 보건부 목록으로 바꿔도 +168%(원 지수와 상관 0.998)입니다.']},
  {id:'dem', col:0, k:'data', t:['Copernicus GLO-90 · terrain','Copernicus GLO-90 · 지형'],
   d:['90 m elevation, for road grades and steep terrain.','90 m 고도. 도로 경사와 급경사 지형 계산용.'],
   src:[['Copernicus DEM','https://dataspace.copernicus.eu/explore-data/data-collections/copernicus-contributing-missions/collections-description/COP-DEM']], code:['kh_fetch.py']},

@@ -78,6 +78,9 @@ class H(osmium.SimpleHandler):
 
 h = H(); h.apply_file(str(RAW / "osm" / OSM_FILE), locations=True)
 E = pd.DataFrame(h.e, columns=["a", "b", "x1", "y1", "x2", "y2", "hw", "paved"]); HOSP = np.array(h.hosp); del h
+if os.environ.get("KH_HOSP") == "moh":   # input-audit variant: Ministry of Health referral hospitals (2010, HDX) instead of OSM tags
+    _m = gpd.read_file(RAW / "moh_health/Health/khm_hltfacp_referral_gov.shp").to_crs(4326)
+    HOSP = np.c_[_m.geometry.x, _m.geometry.y]
 print("edges", len(E), "| hospitals", len(HOSP), flush=True)
 lat_m = np.radians((E.y1 + E.y2) / 2)
 E["km"] = np.hypot((E.x2 - E.x1) * 111.32 * np.cos(lat_m), (E.y2 - E.y1) * 110.57)

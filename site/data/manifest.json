@@ -23,6 +23,7 @@
   "dl/tables/kh_access_pca_latest.csv",
   "dl/tables/kh_access_pca_minor08.csv",
   "dl/tables/kh_access_pca_minor12.csv",
+  "dl/tables/kh_access_pca_mohhosp.csv",
   "dl/tables/kh_access_pca_secpaved.csv",
   "dl/tables/kh_access_pca_towncap.csv",
   "dl/tables/kh_access_pca_unp05.csv",
@@ -86,6 +87,7 @@
   "dl/code/kh_s25_joint_test.py",
   "dl/code/kh_s26_analysis_dataset.py",
   "dl/code/kh_s27_need_conservative.py",
+  "dl/code/kh_s28_hospital_check.py",
   "dl/code/README_pipeline.md"
  ]
 }
