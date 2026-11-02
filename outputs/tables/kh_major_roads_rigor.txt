@@ -1,0 +1,24 @@
+major road projects: 11 | treated districts: 40 | panel 94 districts x 21 years
+== A. five-year response of new social activities
+  major roads, lags 1-5:            +372% (95% CI +63% to +1261%, p 0.004)
+  placebo, leads 1-2:               +5% (95% CI -54% to +141%, p 0.904)
+  + GODAD transport/energy control: +349% (95% CI +28% to +1469%, p 0.019) | GODAD infra +47% (95% CI -37% to +239%, p 0.372)
+== C. randomisation inference: project start years shuffled among the projects (999 draws)
+  observed five-year response +372% | share of 999 shuffles at least as large: p = 0.082 (two-sided |b|: 0.138)
+== D. timing by completion or opening year
+  6 projects with a documented end year: lags 1-5 -14% (95% CI -89% to +549%, p 0.882) | leads +46% (95% CI -44% to +284%, p 0.443)
+== E. leave one project out (lags 1-5)
+  without ADB 1659 Phnom Penh-HCMC Highway                   +423% (95% CI +76% to +1458%, p 0.003)
+  without ADB 1697 Primary Roads Restoration                 +81% (95% CI -26% to +345%, p 0.196)
+  without Japan Kizuna Bridge                                +372% (95% CI +63% to +1261%, p 0.004)
+  without Japan NR7 Kampong Cham section                     +403% (95% CI +72% to +1370%, p 0.003)
+  without ADB 1945 Road Improvement                          +235% (95% CI -8% to +1117%, p 0.067)
+  without Japan NR1 Phnom Penh-Neak Loeung                   +384% (95% CI +66% to +1312%, p 0.004)
+  without ADB 2539 NR56                                      +413% (95% CI +68% to +1461%, p 0.004)
+  without Japan Neak Loeung Bridge                           +392% (95% CI +70% to +1322%, p 0.003)
+  without JICA NR5 Battambang-Sisophon                       +539% (95% CI +65% to +2376%, p 0.007)
+  without JICA NR5 Prek Kdam-Thlea Ma'am                     +465% (95% CI +91% to +1575%, p 0.002)
+  without JICA NR5 Thlea Ma'am-Battambang, Sisophon-Poipet   +473% (95% CI +32% to +2383%, p 0.020)
+== B. event time (percent vs the year before the first major road; ends binned)
+  k=-5: +101% | k=-4: +259% | k=-3: +10% | k=-2: +62% | k=-1: +0% | k=0: -89% | k=1: +8% | k=2: +95% | k=3: +34% | k=4: +21% | k=5: +57% | k=6: -32%
+  NR56 districts, new social projects per year: 2000:1.0, 2001:1.0, 2002:0.0, 2003:1.0, 2004:0.0, 2005:0.0, 2006:0.2, 2007:0.0, 2008:0.2, 2009:0.0, 2010:0.0, 2011:0.0, 2012:0.0, 2013:0.0, 2014:1.0, 2015:0.0, 2016:0.8, 2017:0.6, 2018:0.5, 2019:0.0, 2020:0.0

@@ -1,17 +1,22 @@
 """Major national-road projects of donors missing from GODAD (ADB, Japan), coded by hand from official documents.
 
 Each project is a road number and a section given by two end towns. The section is traced on the 2017 OSM network as the
-shortest path along ways carrying that road number (ref tag), and every district the path crosses is treated. The year is
-the loan approval or grant/loan agreement year, matching how GODAD dates activities by first commitment.
+shortest path along ways carrying that road number (ref tag), and every district the path crosses is treated. Two dates:
+start = loan approval or grant/loan agreement (as GODAD dates activities by first commitment); end = completion or opening
+where a document states it (blank otherwise), used in a timing check.
 Sources (all checked 2026-11-03):
-  ADB 1659  Phnom Penh-Ho Chi Minh City Highway, approved 15 Dec 1998 (ADB approved-loans list; IED evaluation). Cambodian
-            section coded as NR1 Neak Loeung-Bavet, the part east of the Mekong not covered by Japan's grant (assumption).
+  ADB 1659  Phnom Penh-Ho Chi Minh City Highway, approved 15 Dec 1998 (ADB approved-loans list); NR1 Neak Loeung-Bavet
+            (JICA ex-post evaluation 2020: "the section from Neak Loeung to Bavet was improved"); completed Nov 2006 (OECD/ADB).
   ADB 1697  Primary Roads Restoration, approved Sep 1999 (IED PPER 2009): NR5 Pursat-Battambang, NR6 Kampong Thom-Siem Reap
-            provincial border (coded to Stoung), NR7 Tonle Bet-Kratie.
-  ADB 1945  Road Improvement, approved Nov 2002 (ADB approved-loans list): NR5/NR6 Siem Reap-Poipet.
-  ADB 2539  GMS Northwest? (PCR 42358-013), approved 29 Aug 2009: NR56 Sisophon-Samraong.
+            provincial border (coded to Stoung), NR7 Tonle Bet-Kratie; civil works completed 2004-2005 (PPER).
+  ADB 1945  Road Improvement, approved 26 Nov 2002 (ADB approved-loans list): NR5/NR6 Siem Reap-Poipet; completed 2011
+            (PCR 42358-013, footnote 15).
+  ADB 2539  NR56 Sisophon-Samraong (PCR 42358-013), approved 29 Aug 2009; road works completed Oct 2015 (PCR).
+  Japan     Kizuna Bridge, Kampong Cham, grant; construction 1999, opened 2001 (Embassy of Japan ODA list): districts within
+            3 km of the bridge; NR7 Kampong Cham section east of the bridge, about 11 km, grant notes exchanged 2001.
   Japan     NR1 Phnom Penh-Neak Loeung grant, first agreement 2005 (Embassy of Japan ODA map; JICA ex-post evaluation 2020).
-  Japan     Neak Loeung Bridge grant, agreement June 2010 (JICA ex-post evaluation 2020): districts within 3 km of Neak Loeung.
+  Japan     Neak Loeung Bridge grant, agreement June 2010, opened April 2015 (JICA ex-post evaluation 2020; Embassy press
+            release 2015): districts within 3 km of Neak Loeung.
   JICA      NR5 Battambang-Sri Sophorn (Sisophon) loan, phase I May 2013 (JICA ex-ante evaluation 2017).
   JICA      NR5 Prek Kdam-Thlea Ma'am loan, phase I 10 Jul 2014 (JICA loan agreement).
   JICA      NR5 Thlea Ma'am-Battambang and Sri Sophorn-Poipet loan, phase I 30 Mar 2015 (JICA ex-ante evaluation).
@@ -27,21 +32,23 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 RAW, PROCD = ROOT / "data/raw/cambodia", ROOT / "data/processed/cambodia"
-PROJECTS = [  # (project, donor, year, [(road number, from town, to town), ...])
-    ("ADB 1659 Phnom Penh-HCMC Highway", "ADB", 1998, [("1", "Neak Loeung", "Bavet")]),
-    ("ADB 1697 Primary Roads Restoration", "ADB", 1999, [("5", "Pursat", "Battambang"), ("6", "Kampong Thom", "Stoung"), ("7", "Tonle Bet", "Kratie")]),
-    ("ADB 1945 Road Improvement", "ADB", 2002, [("6", "Siem Reap", "Sisophon"), ("5", "Sisophon", "Poipet")]),
-    ("Japan NR1 Phnom Penh-Neak Loeung", "Japan", 2005, [("1", "Phnom Penh", "Neak Loeung")]),
-    ("ADB 2539 NR56", "ADB", 2009, [("56", "Sisophon", "Samraong")]),
-    ("Japan Neak Loeung Bridge", "Japan", 2010, [("bridge", "Neak Loeung", None)]),
-    ("JICA NR5 Battambang-Sisophon", "Japan", 2013, [("5", "Battambang", "Sisophon")]),
-    ("JICA NR5 Prek Kdam-Thlea Ma'am", "Japan", 2014, [("5", "Prek Kdam", "Thlea Ma'am")]),
-    ("JICA NR5 Thlea Ma'am-Battambang, Sisophon-Poipet", "Japan", 2015, [("5", "Thlea Ma'am", "Battambang"), ("5", "Sisophon", "Poipet")]),
+PROJECTS = [  # (project, donor, start year, end year or None, [(road number, from town, to town or cut km), ...])
+    ("ADB 1659 Phnom Penh-HCMC Highway", "ADB", 1998, 2006, [("1", "Neak Loeung", "Bavet")]),
+    ("ADB 1697 Primary Roads Restoration", "ADB", 1999, 2005, [("5", "Pursat", "Battambang"), ("6", "Kampong Thom", "Stoung"), ("7", "Tonle Bet", "Kratie")]),
+    ("Japan Kizuna Bridge", "Japan", 1999, 2001, [("bridge", "Kampong Cham", None)]),
+    ("Japan NR7 Kampong Cham section", "Japan", 2001, None, [("7", "Tonle Bet", "Suong", 11.0)]),
+    ("ADB 1945 Road Improvement", "ADB", 2002, 2011, [("6", "Siem Reap", "Sisophon"), ("5", "Sisophon", "Poipet")]),
+    ("Japan NR1 Phnom Penh-Neak Loeung", "Japan", 2005, None, [("1", "Phnom Penh", "Neak Loeung")]),
+    ("ADB 2539 NR56", "ADB", 2009, 2015, [("56", "Sisophon", "Samraong")]),
+    ("Japan Neak Loeung Bridge", "Japan", 2010, 2015, [("bridge", "Neak Loeung", None)]),
+    ("JICA NR5 Battambang-Sisophon", "Japan", 2013, None, [("5", "Battambang", "Sisophon")]),
+    ("JICA NR5 Prek Kdam-Thlea Ma'am", "Japan", 2014, None, [("5", "Prek Kdam", "Thlea Ma'am")]),
+    ("JICA NR5 Thlea Ma'am-Battambang, Sisophon-Poipet", "Japan", 2015, None, [("5", "Thlea Ma'am", "Battambang"), ("5", "Sisophon", "Poipet")]),
 ]
 TOWNS = {"Neak Loeung": ["Neak Loeung", "Neak Luong", "Neak Leung", "Nak Loeung"], "Bavet": ["Bavet"], "Pursat": ["Pursat"],
          "Battambang": ["Battambang"], "Kampong Thom": ["Kampong Thom"], "Stoung": ["Stoung", "Stung"], "Tonle Bet": ["Tonle Bet", "Tonlé Bet"],
          "Kratie": ["Kratie", "Kratié"], "Siem Reap": ["Siem Reap"], "Sisophon": ["Sisophon", "Serei Saophoan"], "Poipet": ["Paoy Paet", "Poipet"],
-         "Phnom Penh": ["Phnom Penh"], "Samraong": ["Samraong"]}
+         "Phnom Penh": ["Phnom Penh"], "Samraong": ["Samraong"], "Kampong Cham": ["Kampong Cham"], "Suong": ["Suong"]}
 
 cols = ["geonameid", "name", "asciiname", "alt", "lat", "lon", "fclass", "fcode", "cc", "cc2", "a1", "a2", "a3", "a4", "pop", "elev", "dem", "tz", "mod"]
 GN = pd.read_csv(RAW / "geonames/KH.txt", sep="\t", names=cols, quoting=3, low_memory=False)
@@ -110,18 +117,19 @@ def trace(num, t0, t1, cut_km=None):
 _, msg, LOC["Thlea Ma'am"] = trace("5", "Prek Kdam", "Pursat", cut_km=118.7)
 print("Thlea Ma'am placed at", tuple(round(v, 4) for v in LOC["Thlea Ma'am"]), "|", msg)
 rows = []
-for proj, donor, year, sections in PROJECTS:
-    for num, t0, t1 in sections:
+for proj, donor, year, end, sections in PROJECTS:
+    for sec in sections:
+        num, t0, t1 = sec[:3]; cut = sec[3] if len(sec) > 3 else None
         if num == "bridge":
             geom = gpd.GeoSeries(gpd.points_from_xy([LOC[t0][0]], [LOC[t0][1]]), crs=4326).to_crs(32648).buffer(3000).to_crs(4326).iloc[0]; msg = f"bridge at {t0} (3 km)"
         else:
-            geom, msg, _ = trace(num, t0, t1)
+            geom, msg, _ = trace(num, t0, t1, cut_km=cut)
         print(f"{proj:<52s} {msg}")
         if geom is None:
             continue
         hit = U[U.intersects(geom)]
         for u in hit.unit:
-            rows.append({"project": proj, "donor": donor, "start_year": year, "section": f"{num}:{t0}-{t1}", "unit": u})
+            rows.append({"project": proj, "donor": donor, "start_year": year, "end_year": end, "section": f"{num}:{t0}-{t1}", "unit": u})
 R = pd.DataFrame(rows).drop_duplicates(["project", "unit"])
 R.to_csv(PROCD / "kh_major_roads_units.csv", index=False)
 print(R.groupby("project").unit.nunique().to_string(), "\ndistrict-project pairs:", len(R), "| distinct districts:", R.unit.nunique())
