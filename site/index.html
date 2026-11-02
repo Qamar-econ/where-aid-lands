@@ -183,7 +183,13 @@ footer b{color:var(--ink);font-weight:600}
 .trace a::after{content:" →"}
 .trace a:hover{border-bottom-color:var(--teal)}
 .dlrow{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 4px}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+/* map tabs carry the colour of their layer */
+.tabs button[data-layer="night"]{--acc:#8e2a5e} .tabs button[data-layer="access"],.tabs button[data-layer="index"]{--acc:#225ea8}
+.tabs button[data-layer="signal"]{--acc:#5b3fa0} .tabs button[data-layer="poverty"]{--acc:#7d5b3a}
+.tabs button[data-layer]{color:var(--acc);border-color:color-mix(in srgb,var(--acc) 40%,var(--rule));background:color-mix(in srgb,var(--acc) 6%,var(--surface))}
+.tabs button[data-layer][aria-pressed="true"]{background:var(--acc);border-color:var(--acc);color:#fff}
+.tabgroup .glab{color:#225ea8}
+.tabgroup{border-color:color-mix(in srgb,#225ea8 30%,var(--rule));background:color-mix(in srgb,#225ea8 5%,var(--tint))}@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
 
 <header class="bar pad"><div class="wide">
@@ -233,10 +239,10 @@ footer b{color:var(--ink);font-weight:600}
     </tbody></table></div>
 
   <nav class="flow" aria-label="Research pipeline">
-    <a class="s0" href="pipeline.html#godad"><span class="n"><span class="en">1 · Data</span><span class="ko">1 · 데이터</span></span><b><span class="en">Ten public sources</span><span class="ko">공개 자료 10종</span></b><span class="t"><span class="en">Aid locations, district boundaries, the 2017 road network, terrain, population, speed tests, night lights, a wealth index</span><span class="ko">원조 위치, 군 경계, 2017년 도로망, 지형, 인구, 속도 측정, 야간 불빛, 부 지수</span></span><span class="go"><span class="en">Sources and downloads</span><span class="ko">출처와 다운로드</span></span></a>
-    <a class="s1" href="pipeline.html#phys"><span class="n"><span class="en">2 · Indicators</span><span class="ko">2 · 지표</span></span><b><span class="en">Built for this study</span><span class="ko">이 연구에서 계산</span></b><span class="t"><span class="en">Projects per district, the physical-access index, digital access, economic activity, poverty</span><span class="ko">군별 사업 수, 물리적 접근성 지수, 디지털 접근성, 경제활동, 빈곤</span></span><span class="go"><span class="en">Formulas, files and code</span><span class="ko">수식, 파일, 코드</span></span></a>
-    <a class="s2" href="pipeline.html#ppml"><span class="n"><span class="en">3 · Models</span><span class="ko">3 · 통계 모형</span></span><b><span class="en">PPML, one factor per model</span><span class="ko">PPML, 모형당 요인 하나</span></b><span class="t"><span class="en">Province fixed effects; the most conservative of four p-values; a joint test and a decomposition</span><span class="ko">주 고정효과, 네 가지 p 중 가장 보수적인 값, 결합 검정과 분해</span></span><span class="go"><span class="en">Estimation code</span><span class="ko">추정 코드</span></span></a>
-    <a class="s3" href="pipeline.html#rmain"><span class="n"><span class="en">4 · Results</span><span class="ko">4 · 결과</span></span><b><span class="en">Physical access +165%</span><span class="ko">물리적 접근성 +165%</span></b><span class="t"><span class="en">Poverty −49%, entangled with remoteness; the four factors jointly p = 0.002</span><span class="ko">빈곤 −49%(오지와 겹침), 네 요인 결합 p = 0.002</span></span><span class="go"><span class="en">Re-estimate it yourself</span><span class="ko">직접 다시 추정하기</span></span></a>
+    <a class="s0" href="pipeline.html#data"><span class="n"><span class="en">1 · Data</span><span class="ko">1 · 데이터</span></span><b><span class="en">Ten public sources</span><span class="ko">공개 자료 10종</span></b><span class="t"><span class="en">Aid locations, district boundaries, the 2017 road network, terrain, population, speed tests, night lights, a wealth index</span><span class="ko">원조 위치, 군 경계, 2017년 도로망, 지형, 인구, 속도 측정, 야간 불빛, 부 지수</span></span><span class="go"><span class="en">Sources and downloads</span><span class="ko">출처와 다운로드</span></span></a>
+    <a class="s1" href="pipeline.html#ind"><span class="n"><span class="en">2 · Indicators</span><span class="ko">2 · 지표</span></span><b><span class="en">Built for this study</span><span class="ko">이 연구에서 계산</span></b><span class="t"><span class="en">Projects per district, the physical-access index, digital access, economic activity, poverty</span><span class="ko">군별 사업 수, 물리적 접근성 지수, 디지털 접근성, 경제활동, 빈곤</span></span><span class="go"><span class="en">Formulas, files and code</span><span class="ko">수식, 파일, 코드</span></span></a>
+    <a class="s2" href="pipeline.html#model"><span class="n"><span class="en">3 · Models</span><span class="ko">3 · 통계 모형</span></span><b><span class="en">PPML, one factor per model</span><span class="ko">PPML, 모형당 요인 하나</span></b><span class="t"><span class="en">Province fixed effects; the most conservative of four p-values; a joint test and a decomposition</span><span class="ko">주 고정효과, 네 가지 p 중 가장 보수적인 값, 결합 검정과 분해</span></span><span class="go"><span class="en">Estimation code</span><span class="ko">추정 코드</span></span></a>
+    <a class="s3" href="pipeline.html#res"><span class="n"><span class="en">4 · Results</span><span class="ko">4 · 결과</span></span><b><span class="en">Physical access +165%</span><span class="ko">물리적 접근성 +165%</span></b><span class="t"><span class="en">Poverty −49%, entangled with remoteness; the four factors jointly p = 0.002</span><span class="ko">빈곤 −49%(오지와 겹침), 네 요인 결합 p = 0.002</span></span><span class="go"><span class="en">Re-estimate it yourself</span><span class="ko">직접 다시 추정하기</span></span></a>
   </nav>
   <p class="flowcap en">Select a step to open it in the interactive pipeline, with its files, Python code and a way to check it.</p><p class="flowcap ko">단계를 누르면 인터랙티브 연구 흐름에서 그 단계의 파일, Python 코드, 확인 방법이 열립니다.</p>
 </div></section>

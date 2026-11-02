@@ -72,6 +72,21 @@ h1{font-family:var(--f-title);font-weight:600;font-size:clamp(32px,4.6vw,48px);l
 .tool button{font-family:var(--f-ui);font-size:14px;border:0;background:transparent;color:var(--ink);min-width:30px;height:28px;border-radius:3px;cursor:pointer}
 .tool button:hover{background:var(--tint)}
 .tool .z{font-family:var(--f-ui);font-size:12.5px;color:var(--ink-3);min-width:44px;text-align:center;font-variant-numeric:tabular-nums}
+/* stage tabs: jump to a column and list everything in it, no dragging needed */
+.colnav{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-bottom:1px solid var(--rule);background:var(--surface)}
+.colnav button{font-family:var(--f-ui);font-size:14.5px;font-weight:600;border:0;border-top:4px solid transparent;background:transparent;color:var(--ink-2);padding:9px 10px 8px;cursor:pointer;text-align:left}
+.colnav button:hover{background:var(--tint)}
+.colnav .c0{border-top-color:#8f8676} .colnav .c1{border-top-color:#0b6b6b} .colnav .c2{border-top-color:#a8461f} .colnav .c3{border-top-color:#d6a35c}
+.colnav button[aria-selected="true"].c0{background:#f6f3ec} .colnav button[aria-selected="true"].c1{background:#e9f2ee;color:#0b6b6b}
+.colnav button[aria-selected="true"].c2{background:#f8ece5;color:#a8461f} .colnav button[aria-selected="true"].c3{background:#2d2a24;color:#f3f0e8}
+.node.fade{opacity:.5}
+.panel .item{border-top:1px solid var(--rule);padding:10px 0}
+.panel .item > button{font-family:var(--f-ui);font-size:15px;font-weight:600;color:var(--ink);background:none;border:0;padding:0;cursor:pointer;text-align:left}
+.panel .item > button:hover{color:var(--teal);text-decoration:underline}
+.panel .item p{margin:3px 0 6px;font-size:14px}
+.panel .item .act{gap:5px}
+.panel .item .dl,.panel .item .lnk{font-size:12px;padding:2px 7px}
+.panel table.spec td:first-child{color:var(--ink-3);width:34%;vertical-align:top}
 .hint{position:absolute;left:12px;bottom:10px;z-index:3;font-family:var(--f-ui);font-size:12.5px;color:var(--ink-3);background:rgba(250,248,243,.9);padding:2px 6px;border-radius:3px}
 .colhead{position:absolute;top:18px;font-family:var(--f-display);font-style:italic;font-size:22px;color:var(--laterite);white-space:nowrap}
 .colhead small{display:block;font-family:var(--f-ui);font-style:normal;font-size:13px;color:var(--ink-3)}
@@ -159,6 +174,9 @@ footer{border-top:1px solid var(--ink);color:var(--ink-3);padding-block:24px 40p
 
 <section class="pad"><div class="wide stage">
   <div class="board">
+    <div class="colnav" role="tablist" aria-label="Pipeline stages">
+      <button data-col="0" class="c0"><span class="en">1 · Data</span><span class="ko">1 · 데이터</span></button><button data-col="1" class="c1"><span class="en">2 · Indicators</span><span class="ko">2 · 지표</span></button><button data-col="2" class="c2"><span class="en">3 · Models</span><span class="ko">3 · 통계 모형</span></button><button data-col="3" class="c3"><span class="en">4 · Results</span><span class="ko">4 · 결과</span></button>
+    </div>
     <div class="tool" role="toolbar" aria-label="Zoom">
       <button id="zout" aria-label="Zoom out">−</button><span class="z" id="zlab">100%</span><button id="zin" aria-label="Zoom in">+</button>
       <button id="zfit" class="en">Fit</button><button id="zfit2" class="ko">전체</button>
@@ -357,7 +375,7 @@ function zoomAt(f, cx, cy){ const ns = Math.min(2.2, Math.max(.3, s * f)); tx = 
 function fit(){ const W0 = vp.clientWidth; s = Math.min(1, Math.max(.3, W0 / cv.offsetWidth));
   tx = (W0 - cv.offsetWidth * s) / 2; ty = 8; clampPan(); apply(); }
 // first view: readable text, starting from the data column; "Fit" shows the whole pipeline
-function home(){ const W0 = vp.clientWidth; s = Math.min(1, Math.max(.72, W0 / cv.offsetWidth)); tx = 0; ty = 0; clampPan(); apply(); }
+function home(){ const W0 = vp.clientWidth; s = Math.min(1, Math.max(.85, W0 / cv.offsetWidth)); tx = 0; ty = 0; clampPan(); apply(); }
 document.getElementById('zin').onclick = () => zoomAt(1.2, vp.clientWidth / 2, vp.clientHeight / 2);
 document.getElementById('zout').onclick = () => zoomAt(1 / 1.2, vp.clientWidth / 2, vp.clientHeight / 2);
 document.getElementById('zfit').onclick = fit; document.getElementById('zfit2').onclick = fit;
@@ -380,18 +398,63 @@ vp.addEventListener('keydown', e => { const st = 60; if (e.key === 'ArrowLeft') 
   e.preventDefault(); clampPan(); apply(); });
 
 /* ---------------- selection and detail panel ---------------- */
-let cur = null;
+let cur = null, curCol = null;
+const COLKEY = ['data', 'ind', 'model', 'res'];
+const COLINFO = [
+  [['Data: ten public sources','데이터: 공개 자료 10종'],
+   ['Raw files are downloaded from their publishers by kh_fetch.py and are not redistributed here. Dates are fixed so that inputs precede the 2017–2020 projects: roads on 1 January 2017, night lights 2015; mobile tests (2019 Q1–2020 Q1) are the exception.',
+    '원자료는 kh_fetch.py가 제공 기관에서 직접 받으며 여기서 재배포하지 않습니다. 입력이 2017–2020년 사업보다 앞서도록 시점을 고정했습니다: 도로 2017년 1월 1일, 야간 불빛 2015년. 모바일 측정(2019년 1분기–2020년 1분기)만 예외입니다.']],
+  [['Indicators: district-level constructs','지표: 군 단위 구성개념'],
+   ['Built for the 141 analysis districts and standardised over them (mean 0, SD 1). Each model contains one construct, population and province fixed effects.',
+    '분석 대상 141개 군에서 만들고 그 안에서 표준화했습니다(평균 0, 표준편차 1). 모형마다 구성개념 하나, 인구, 주 고정효과만 들어갑니다.']],
+  [['Statistical models','통계 모형'],
+   ['PPML with province fixed effects; every reported p-value is the largest of four. The joint model, decomposition and robustness checks are secondary to the single-factor estimates.',
+    '주 고정효과 PPML이며, 보고하는 p값은 네 가지 중 가장 큰 값입니다. 동시 투입 모형, 분해, 강건성 점검은 단일 요인 추정의 보조입니다.']],
+  [['Results','결과'],
+   ['Single-factor estimates first, then the joint test and decomposition, then how far the main estimate moves under alternative assumptions.',
+    '단일 요인 추정, 결합 검정과 분해, 그리고 다른 가정에서 대표 추정치가 얼마나 움직이는지 순서입니다.']]];
+const SPEC = [
+  ['Unit','분석 단위','District (IPUMS GEO2_KH), n = 141; 19 provinces with within-province variation','군(IPUMS GEO2_KH), n = 141; 군 간 변동이 있는 주 19개'],
+  ['Outcome','결과변수','New aid activities starting 2017–2020, located at district level, ICT excluded; a project listed in K districts adds 1/K to each (total 196.9)','2017–2020년 착수, 군 단위로 위치가 확인된 원조 활동 수(ICT 제외); K개 군에 걸친 사업은 각 군에 1/K (합계 196.9)'],
+  ['Regressor','설명변수','One standardised construct per model: physical access, digital access, night lights or poverty','모형당 표준화 구성개념 하나: 물리적 접근성, 디지털 접근성, 야간 불빛, 빈곤'],
+  ['Estimator','추정량','PPML with province fixed effects and ln population; effect = 100(e^β − 1)% per SD','주 고정효과와 ln 인구를 넣은 PPML; 효과 = 1표준편차당 100(e^β − 1)%'],
+  ['Inference','추론','Largest of: province-clustered SE; Conley SE, Bartlett kernel, 50 and 100 km; Freedman–Lane randomisation inference, 2,000 within-province permutations','다음 중 가장 큰 p: 주 단위 군집 표준오차; Conley 표준오차(Bartlett 커널, 50·100 km); Freedman–Lane 무작위화 추론(주 안 순열 2,000회)'],
+  ['Multiplicity','다중검정','Holm correction over the three confirmatory tests','확증 검정 세 개에 Holm 보정'],
+  ['Further checks','추가 점검','Wild cluster score bootstrap (Webb weights); joint test of four factors; Shapley decomposition; stacked event study; geocoding bounds; 20 index variants','Wild cluster 스코어 부트스트랩(Webb 가중치); 네 요인 결합 검정; Shapley 분해; 누적 사건연구; 지오코딩 경계; 지수 변형 20개'],
+  ['Pre-specification','사전 명세','Specification fixed before estimation; later analyses labelled exploratory and logged as amendments','추정 전에 명세를 고정; 이후 분석은 탐색적으로 표시하고 수정 기록으로 남김'],
+  ['Interpretation','해석','Associations within provinces, not causal effects','같은 주 안의 연관이며 인과 효과가 아님']];
+function setTabs(c){ document.querySelectorAll('.colnav button').forEach(b => b.setAttribute('aria-selected', String(+b.dataset.col === c))); }
+function selectCol(c, pan = true){ cur = null; curCol = c; setTabs(c);
+  try { history.replaceState(null, '', '#' + COLKEY[c]); } catch (e) {}
+  N.forEach(n => { n.el.classList.remove('sel', 'dim'); n.el.classList.toggle('fade', n.col !== c); });
+  svg.querySelectorAll('path').forEach(p => { const on = byId[p.dataset.a].col === c || byId[p.dataset.b].col === c; p.classList.toggle('on', on); p.classList.toggle('dim', !on); });
+  if (pan) { const top = Math.min(...N.filter(n => n.col === c).map(n => n.y));   // bring the column's first box near the top
+    tx = -(COLX[c] - 24) * s; ty = -(top - 70) * s; clampPan(); apply(); }
+  render(); }
+document.querySelectorAll('.colnav button').forEach(b => b.addEventListener('click', () => selectCol(+b.dataset.col)));
 function related(id){ const up = new Set([id]), dn = new Set([id]); let ch = true;
   while (ch) { ch = false; E.forEach(([a, b]) => { if (up.has(b) && !up.has(a)) { up.add(a); ch = true; } if (dn.has(a) && !dn.has(b)) { dn.add(b); ch = true; } }); }
   return new Set([...up, ...dn]); }
-function select(id){ cur = id; const R = id ? related(id) : null;
+function select(id){ cur = id; curCol = null; const R = id ? related(id) : null; setTabs(id ? byId[id].col : -1);
+  N.forEach(n => n.el.classList.remove('fade'));
   try { history.replaceState(null, '', id ? '#' + id : location.pathname + location.search); } catch (e) {}
   N.forEach(n => { n.el.classList.toggle('sel', n.id === id); n.el.classList.toggle('dim', !!R && !R.has(n.id)); });
   svg.querySelectorAll('path').forEach(p => { const on = R && R.has(p.dataset.a) && R.has(p.dataset.b); p.classList.toggle('on', !!on); p.classList.toggle('dim', !!R && !on); });
   render(); }
 const esc = t => String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;');
 function render(){ const P = document.getElementById('panel');
-  if (!cur) { P.innerHTML = `<div class="kind">${T('How to read','읽는 법')}</div><h3>${T('Select a box','상자를 선택하세요')}</h3>
+  const L0 = KO() ? 1 : 0;
+  const files = n => [...(n.src || []).map(x => `<a class="lnk" href="${x[1]}" target="_blank" rel="noopener">${esc(x[0])}</a>`),
+    ...(n.files || []).map(f => `<a class="dl" href="${f[1]}" download>${f[0]}</a>`), ...(n.code || []).map(c => `<a class="dl code" href="${C(c)}" download>${c}</a>`)].join('');
+  if (curCol !== null) { const ci = COLINFO[curCol];
+    P.innerHTML = `<div class="kind">${T('Stage','단계')} ${curCol + 1} / 4</div><h3>${ci[0][L0]}</h3><p>${ci[1][L0]}</p>` +
+      (curCol === 2 ? `<table class="spec">${SPEC.map(r => `<tr><td>${r[L0]}</td><td>${r[2 + L0]}</td></tr>`).join('')}</table>` : '') +
+      N.filter(n => n.col === curCol).map(n => `<div class="item"><button data-go="${n.id}">${n.t[L0]} →</button><p>${n.d[L0]}</p>${files(n) ? `<div class="act">${files(n)}</div>` : ''}</div>`).join('');
+    P.querySelectorAll('[data-go]').forEach(b => b.addEventListener('click', () => focusStep(b.dataset.go, false)));
+    return; }
+  if (!cur) { P.innerHTML = `<div class="kind">${T('Specification at a glance','모형 명세 요약')}</div><h3>${T('What was estimated','무엇을 추정했나')}</h3>
+    <table class="spec">${SPEC.map(r => `<tr><td>${r[L0]}</td><td>${r[2 + L0]}</td></tr>`).join('')}</table>
+    <h4>${T('How to read the diagram','다이어그램 읽는 법')}</h4>
     <p>${T('Grey boxes are public sources, teal boxes indicators built for this study, rust boxes statistical models, black boxes results. Lines show what feeds what; selecting a box highlights everything upstream and downstream of it.','회색은 공개 자료, 청록은 이 연구에서 만든 지표, 적갈색은 통계 모형, 검정은 결과입니다. 선은 무엇이 무엇에 쓰였는지 보여 주고, 상자를 고르면 그 앞뒤로 연결된 단계가 모두 강조됩니다.')}</p>
     <p>${T('Each box lists the files it produced and the script that made them. Files are the published versions; your own run of the script should reproduce them, and kh_compare.py shows any difference.','상자마다 결과 파일과 그 파일을 만든 스크립트가 있습니다. 파일은 발표본이며, 스크립트를 직접 실행하면 같은 파일이 나와야 합니다. 차이는 kh_compare.py로 확인할 수 있습니다.')}</p>`; return; }
   const n = byId[cur], L = KO() ? 1 : 0;
@@ -420,16 +483,18 @@ function setLang(l){ document.documentElement.lang = l; try { localStorage.setIt
   document.querySelectorAll('.kotxt-h').forEach(t => t.style.display = l === 'ko' ? '' : 'none');
   document.querySelectorAll('.entxt-h').forEach(t => t.style.display = l === 'ko' ? 'none' : '');
   N.forEach(n => { const tg = n.el.querySelector('.tags'); if (tg) tg.innerHTML = tg.innerHTML.replace(/source|출처/, T('source', '출처')); });
-  requestAnimationFrame(() => { layout(); if (cur) select(cur); render(); }); }
+  requestAnimationFrame(() => { layout(); if (cur) select(cur); else if (curCol !== null) selectCol(curCol, false); render(); }); }
 document.querySelectorAll('[data-lang]').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
 let lang0 = 'en'; try { if (localStorage.getItem('lang') === 'ko') lang0 = 'ko'; } catch (e) {}
 
 // pipeline.html#phys opens with that step selected and centred (the main page links to steps this way)
-function focusStep(id){ const t = byId[id]; if (!t) return; select(id);
+function focusStep(id, scroll = true){ const t = byId[id]; if (!t) return; select(id);
   tx = vp.clientWidth / 2 - (t.x + W / 2) * s; ty = vp.clientHeight / 2 - (t.y + t.h / 2) * s; clampPan(); apply();
-  document.querySelector('.stage').scrollIntoView({block: 'start'}); scrollBy(0, -60); }
-const go = () => { setLang(lang0); requestAnimationFrame(() => { layout(); home(); render(); const h = location.hash.slice(1); if (byId[h]) focusStep(h); }); };
-addEventListener('hashchange', () => { const h = location.hash.slice(1); if (byId[h] && h !== cur) focusStep(h); });
+  if (scroll) { document.querySelector('.stage').scrollIntoView({block: 'start'}); scrollBy(0, -60); } }
+function openHash(){ const h = location.hash.slice(1), c = COLKEY.indexOf(h);
+  if (c >= 0) { selectCol(c); document.querySelector('.stage').scrollIntoView({block: 'start'}); scrollBy(0, -60); } else if (byId[h] && h !== cur) focusStep(h); }
+const go = () => { setLang(lang0); requestAnimationFrame(() => { layout(); home(); render(); openHash(); }); };
+addEventListener('hashchange', openHash);
 (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(go);
 addEventListener('resize', () => { clampPan(); apply(); });
 })();
