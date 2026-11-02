@@ -1,0 +1,10 @@
+component,loading,pc1_var_share
+neg_ln_tt_town_dry,0.382,0.685
+neg_ln_tt_town_wet,0.38,0.685
+neg_ln_tt_hq,0.39,0.685
+neg_ln_tt_hosp,0.38,0.685
+neg_ln_walk,0.39,0.685
+share_walk30,0.357,0.685
+ln_road_density,0.351,0.685
+neg_wet_penalty,0.002,0.685
+neg_steep_share,0.102,0.685

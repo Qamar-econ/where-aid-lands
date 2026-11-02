@@ -33,6 +33,7 @@ for lat in range(10, 15):
         n = f"Copernicus_DSM_COG_30_N{lat:02d}_00_E{lon:03d}_00_DEM"
         dl("dem", n + ".tif", f"https://copernicus-dem-90m.s3.amazonaws.com/{n}/{n}.tif")
 dl("osm", "cambodia-latest.osm.pbf", "https://download.geofabrik.de/asia/cambodia-latest.osm.pbf")
+dl("osm", "cambodia-170101.osm.pbf", "https://download.geofabrik.de/asia/cambodia-170101.osm.pbf")   # main network (spec 9-6)
 g = RAW / "geonames" / "KH.txt"
 if not g.exists():
     g.parent.mkdir(parents=True, exist_ok=True)

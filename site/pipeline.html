@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Research Pipeline · Where Aid Lands</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg?v=3">
+<meta name="description" content="Where Aid Lands, from raw data to conclusions: every source, indicator, model and result, with the files and Python code to check each step.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,500;0,600;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400;1,8..60,600&family=Source+Sans+3:wght@400;600&family=Noto+Serif+KR:wght@400;600&family=Noto+Sans+KR:wght@400;600&display=swap">
+<style>
+:root{
+  --paper:#f3f0e8; --surface:#faf8f3; --ink:#24211b; --ink-2:#47423a; --ink-3:#6e675b; --rule:#e2dccf; --tint:#ece7db;
+  --teal:#0b6b6b; --teal-soft:#e0ece6; --laterite:#a8461f;
+  --k-data:#6e675b; --k-ind:#0b6b6b; --k-model:#a8461f; --k-res:#24211b;
+  --f-title:"Spectral",Georgia,serif; --f-display:"Source Serif 4",Georgia,serif; --f-body:"Source Serif 4",Georgia,serif;
+  --f-ui:"Source Sans 3","Helvetica Neue",Arial,"Malgun Gothic",sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:18px;line-height:1.6;-webkit-font-smoothing:antialiased}
+html[lang="ko"] body{font-family:"Source Serif 4","Noto Serif KR",serif;word-break:keep-all}
+html[lang="ko"]{--f-ui:"Source Sans 3","Noto Sans KR","Malgun Gothic",sans-serif;--f-display:"Source Serif 4","Noto Serif KR",serif;--f-title:"Spectral","Noto Serif KR",serif}
+html:not([lang="ko"]) .ko{display:none!important}
+html[lang="ko"] .en{display:none!important}
+a{color:var(--teal)}
+.pad{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wide{max-width:1380px;margin:0 auto}
+/* top bar, as on the main page */
+.bar{position:sticky;top:0;z-index:20;background:rgba(243,240,232,.95);backdrop-filter:blur(6px);border-bottom:1px solid var(--rule)}
+.bar .wide{display:flex;gap:18px;align-items:center;min-height:48px}
+.bar .mark{font-family:var(--f-title);font-weight:600;color:var(--ink);font-size:17.5px;white-space:nowrap;text-decoration:none}
+.bar .back{margin-left:auto;font-family:var(--f-ui);font-size:14.5px;color:var(--ink-2);text-decoration:none}
+.bar .back:hover{text-decoration:underline;text-decoration-color:var(--laterite);text-underline-offset:5px}
+.lang{display:flex;border:1px solid var(--rule);border-radius:3px;overflow:hidden;flex:none}
+.lang button{font-family:var(--f-ui);font-size:13.5px;border:0;background:var(--surface);color:var(--ink-2);padding:4px 10px;cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+/* intro */
+.intro{padding-block:44px 18px}
+.chap{font-family:var(--f-display);font-style:italic;font-size:19px;color:var(--laterite)}
+h1{font-family:var(--f-title);font-weight:600;font-size:clamp(32px,4.6vw,48px);line-height:1.08;margin:6px 0 14px}
+.lead{font-size:19px;line-height:1.55;max-width:72ch;color:var(--ink-2);margin:0 0 22px}
+.entries{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.entry{background:var(--surface);border:1px solid var(--rule);border-radius:4px;padding:16px 18px;font-family:var(--f-ui);font-size:15px;color:var(--ink-2)}
+.entry h2{font-family:var(--f-ui);font-size:16.5px;font-weight:600;color:var(--ink);margin:0 0 6px}
+.entry p{margin:0 0 10px}
+.entry code{font-size:13.5px;background:var(--tint);padding:1px 5px;border-radius:3px}
+.act{display:flex;flex-wrap:wrap;gap:8px}
+.dl,.lnk{font-family:var(--f-ui);font-size:13.5px;border:1px solid var(--ink);background:transparent;color:var(--ink);padding:4px 10px;border-radius:3px;cursor:pointer;text-decoration:none;white-space:nowrap}
+.dl:hover,.lnk:hover{background:var(--ink);color:var(--paper)}
+.dl::before{content:"↓ "}
+.lnk::after{content:" ↗"}
+.dl.code::before{content:"↓ .py  "}
+.dl:focus-visible,.lnk:focus-visible,.node:focus-visible,.tool button:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+/* canvas + panel */
+.stage{display:grid;grid-template-columns:minmax(0,1fr) 400px;gap:18px;align-items:start;padding-block:10px 40px}
+@media (max-width:1100px){.stage{grid-template-columns:minmax(0,1fr)}}
+.board{position:relative;background:var(--surface);border:1px solid var(--rule);border-radius:4px;overflow:hidden}
+.vp{position:relative;height:min(74vh,780px);overflow:hidden;cursor:grab;touch-action:none;outline:none}
+.vp.drag{cursor:grabbing}
+.cv{position:absolute;left:0;top:0;transform-origin:0 0}
+.tool{position:absolute;right:10px;bottom:10px;z-index:3;display:flex;gap:4px;align-items:center;background:rgba(250,248,243,.94);border:1px solid var(--rule);border-radius:4px;padding:3px}
+.tool button{font-family:var(--f-ui);font-size:14px;border:0;background:transparent;color:var(--ink);min-width:30px;height:28px;border-radius:3px;cursor:pointer}
+.tool button:hover{background:var(--tint)}
+.tool .z{font-family:var(--f-ui);font-size:12.5px;color:var(--ink-3);min-width:44px;text-align:center;font-variant-numeric:tabular-nums}
+.hint{position:absolute;left:12px;bottom:10px;z-index:3;font-family:var(--f-ui);font-size:12.5px;color:var(--ink-3);background:rgba(250,248,243,.9);padding:2px 6px;border-radius:3px}
+.colhead{position:absolute;top:18px;font-family:var(--f-display);font-style:italic;font-size:22px;color:var(--laterite);white-space:nowrap}
+.colhead small{display:block;font-family:var(--f-ui);font-style:normal;font-size:13px;color:var(--ink-3)}
+svg.edges{position:absolute;left:0;top:0;overflow:visible;pointer-events:none}
+svg.edges path{fill:none;stroke:#cfc7b6;stroke-width:1.4}
+svg.edges path.on{stroke:var(--laterite);stroke-width:2.2}
+svg.edges path.dim{stroke:#e6e0d4}
+.node{position:absolute;width:300px;text-align:left;background:#fffdf8;border:1px solid var(--rule);border-left:4px solid var(--k-data);border-radius:4px;padding:11px 13px 12px;
+  font-family:var(--f-ui);color:var(--ink);cursor:pointer;box-shadow:0 1px 0 rgba(36,33,27,.04);transition:opacity .15s,box-shadow .15s}
+.node:hover{box-shadow:0 4px 14px rgba(36,33,27,.10)}
+.node.k-ind{border-left-color:var(--k-ind)} .node.k-model{border-left-color:var(--k-model)} .node.k-res{border-left-color:var(--k-res)}
+.node .kind{display:block;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);margin-bottom:2px}
+.node b{display:block;font-size:16px;font-weight:600;line-height:1.3}
+.node .d{display:block;font-size:13.5px;line-height:1.45;color:var(--ink-2);margin-top:4px}
+.node .tags{display:flex;gap:5px;margin-top:8px;flex-wrap:wrap}
+.node .tags span{font-size:11.5px;color:var(--ink-3);border:1px solid var(--rule);border-radius:2px;padding:0 5px}
+.node .big{display:block;font-family:var(--f-display);font-weight:600;font-size:30px;line-height:1.1;margin-top:4px}
+.node.sel{border-color:var(--laterite);box-shadow:0 0 0 2px var(--laterite)}
+.node.dim{opacity:.38}
+.node svg text{font-family:var(--f-ui);fill:var(--ink-2)}
+/* panel */
+.panel{position:sticky;top:62px;background:var(--surface);border:1px solid var(--rule);border-radius:4px;padding:18px 20px;max-height:calc(100vh - 80px);overflow:auto;font-family:var(--f-ui);font-size:15px;color:var(--ink-2)}
+@media (max-width:1100px){.panel{position:static;max-height:none}}
+.panel .kind{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+.panel h3{font-family:var(--f-display);font-weight:600;font-size:23px;line-height:1.2;color:var(--ink);margin:4px 0 10px}
+.panel h4{font-family:var(--f-ui);font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3);margin:18px 0 6px;font-weight:600}
+.panel p{margin:0 0 10px;line-height:1.55}
+.panel ol,.panel ul{margin:0 0 10px;padding-left:20px} .panel li{margin:4px 0}
+.panel .fx{overflow-x:auto;padding:6px 0;margin:4px 0 10px;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);text-align:center}
+.panel .chips{display:flex;flex-wrap:wrap;gap:6px}
+.panel .chips button{font-family:var(--f-ui);font-size:13px;border:1px solid var(--rule);background:#fffdf8;color:var(--ink-2);padding:3px 9px;border-radius:3px;cursor:pointer}
+.panel .chips button:hover{border-color:var(--ink)}
+.panel .dl{white-space:normal;word-break:break-all;text-align:left}
+.panel code{font-size:13px;background:var(--tint);padding:1px 5px;border-radius:3px;word-break:break-all}
+.panel table{border-collapse:collapse;width:100%;font-size:14px;font-variant-numeric:tabular-nums}
+.panel td{padding:5px 6px;border-bottom:1px solid var(--rule)} .panel td.r{text-align:right;white-space:nowrap}
+.panel .check{background:var(--teal-soft);border-radius:3px;padding:10px 12px;color:var(--ink)}
+footer{border-top:1px solid var(--ink);color:var(--ink-3);padding-block:24px 40px;font-family:var(--f-ui);font-size:14px}
+@media (prefers-reduced-motion:reduce){.node{transition:none}}
+</style>
+</head>
+<body>
+<header class="bar pad"><div class="wide">
+  <a class="mark" href="index.html">Where Aid Lands</a>
+  <a class="back en" href="index.html">← Back to the paper</a><a class="back ko" href="index.html">← 본문으로</a>
+  <div class="lang" role="group" aria-label="Language"><button data-lang="en" aria-pressed="true">EN</button><button data-lang="ko" aria-pressed="false">한국어</button></div>
+</div></header>
+
+<main>
+<section class="intro pad"><div class="wide">
+  <div class="chap en">Research pipeline</div><div class="chap ko">연구 흐름</div>
+  <h1 class="en">From raw data to conclusions</h1><h1 class="ko">원자료에서 결론까지</h1>
+  <p class="lead en">Every step of the study, left to right: the public sources, the indicators built from them, the models, and the results. Select a box to see how it was made, the files it produced and the Python code that made it. Drag to move, scroll or pinch to zoom.</p>
+  <p class="lead ko">연구의 모든 단계를 왼쪽에서 오른쪽으로 보여 줍니다. 공개 자료, 그 자료로 만든 지표, 통계 모형, 결과 순서입니다. 상자를 누르면 만드는 방법, 결과 파일, 그 파일을 만든 Python 코드가 나옵니다. 끌어서 움직이고, 스크롤하거나 두 손가락으로 확대·축소할 수 있습니다.</p>
+  <div class="entries">
+    <div class="entry">
+      <h2 class="en">A. Check the models in ten minutes</h2><h2 class="ko">A. 10분 안에 모형 확인하기</h2>
+      <p class="en">Download four files into one folder and run <code>python kh_replicate.py</code>. It rebuilds the index and re-estimates every headline model from the data, then sets your numbers beside ours.</p>
+      <p class="ko">파일 네 개를 한 폴더에 받아 <code>python kh_replicate.py</code>를 실행합니다. 자료에서 지수를 다시 만들고 대표 모형을 모두 다시 추정한 뒤, 그 값을 우리 발표값과 나란히 보여 줍니다.</p>
+      <div class="act"><a class="dl" href="dl/data/kh_analysis.csv" download>kh_analysis.csv</a><a class="dl" href="dl/data/kh_access.csv" download>kh_access.csv</a><a class="dl" href="dl/data/kh_published.csv" download>kh_published.csv</a><a class="dl code" href="dl/code/kh_replicate.py" download>kh_replicate.py</a></div>
+    </div>
+    <div class="entry">
+      <h2 class="en">B. Rebuild everything from the raw sources</h2><h2 class="ko">B. 원자료부터 전부 다시 만들기</h2>
+      <p class="en">Follow the boxes from left to right. Each one lists the script to run and the published table to compare against with <code>kh_compare.py</code>. The order and folder layout are in the README.</p>
+      <p class="ko">상자를 왼쪽부터 따라갑니다. 상자마다 실행할 스크립트와, <code>kh_compare.py</code>로 대조할 발표 파일이 있습니다. 실행 순서와 폴더 구조는 README에 있습니다.</p>
+      <div class="act"><a class="dl" href="dl/code/README_pipeline.md" download>README_pipeline.md</a><a class="dl code" href="dl/code/kh_compare.py" download>kh_compare.py</a><a class="dl code" href="dl/code/kh_fetch.py" download>kh_fetch.py</a></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="pad"><div class="wide stage">
+  <div class="board">
+    <div class="tool" role="toolbar" aria-label="Zoom">
+      <button id="zout" aria-label="Zoom out">−</button><span class="z" id="zlab">100%</span><button id="zin" aria-label="Zoom in">+</button>
+      <button id="zfit" class="en">Fit</button><button id="zfit2" class="ko">전체</button>
+    </div>
+    <div class="vp" id="vp" tabindex="0" aria-label="Pipeline diagram">
+      <div class="cv" id="cv"><svg class="edges" id="edges"></svg></div>
+    </div>
+    <div class="hint en">Drag to move · scroll or pinch to zoom · select a box</div><div class="hint ko">끌어서 이동 · 스크롤·두 손가락으로 확대 · 상자 선택</div>
+  </div>
+  <aside class="panel" id="panel" aria-live="polite"></aside>
+</div></section>
+</main>
+
+<footer class="pad"><div class="wide">
+  <span class="en">Tae Yoon Moon (University of Seoul) and Claude Opus 5.5. Code and data: </span><span class="ko">Tae Yoon Moon (서울시립대학교), Claude Opus 5.5. 코드와 자료: </span><a href="https://github.com/Qamar-econ/where-aid-lands" target="_blank" rel="noopener">github.com/Qamar-econ/where-aid-lands</a>
+</div></footer>
+
+<script>window.MathJax = {tex: {inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']]}, svg: {fontCache: 'global'}, startup: {typeset: false}};</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.min.js"></script>
+<script>
+(function(){
+const KO = () => document.documentElement.lang === 'ko';
+const T = (en, ko) => KO() ? ko : en;
+const C = f => `dl/code/${f}`, D = f => `dl/data/${f}`, TB = f => `dl/tables/${f}`;
+
+/* ---------------- the pipeline ---------------- */
+// col: 0 data, 1 indicators, 2 models, 3 results. files: [label, href]; code: script names; src: [label, url]
+const N = [
+ {id:'godad', col:0, k:'data', t:['GODAD · project locations','GODAD · 사업 위치'],
+  d:['Geocoded OECD aid records; 1,524 Cambodian projects, 73% located at district level or finer.','지오코딩된 OECD 원조 기록. 캄보디아 사업 1,524건 중 73%가 군 단위 이상으로 위치 확인.'],
+  src:[['Bomprezzi et al. 2025','https://godad.uni-goettingen.de/home/']], files:[['godad_khm.csv',D('godad_khm.csv')]],
+  how:['European donors and the US to 2020, the World Bank to 2023, China to 2021. We use the Cambodia extract as published; the file here is our copy of it.','유럽 공여국과 미국은 2020년, 세계은행은 2023년, 중국은 2021년까지 포함합니다. 공개된 캄보디아 추출본을 그대로 쓰며, 여기 파일은 그 사본입니다.'],
+  check:['Download the extract from the GODAD site and compare it with ours: python kh_compare.py yours.csv godad_khm.csv record_id','GODAD 사이트에서 받은 추출본을 우리 사본과 대조: python kh_compare.py yours.csv godad_khm.csv record_id']},
+ {id:'ipums', col:0, k:'data', t:['IPUMS GEO2_KH · districts','IPUMS GEO2_KH · 군 경계'],
+  d:['143 district units harmonised across the 1998–2019 censuses.','1998–2019년 센서스에 걸쳐 통일한 143개 군 단위.'],
+  src:[['IPUMS International','https://international.ipums.org/international-action/variables/GEO2_KH']], files:[['kh_units.geojson',D('kh_units.geojson')]], code:['kh_s00_boundaries.py'],
+  how:['The harmonised units let census measures be added later. 141 units with at least 1,000 people (the Tonle Sap lake unit excluded) form the sample.','통일 경계라 나중에 센서스 지표를 붙일 수 있습니다. 인구 1,000명 이상인 141개 군(톤레삽 호수 단위 제외)이 표본입니다.']},
+ {id:'osm', col:0, k:'data', t:['OpenStreetMap · roads, 1 Jan 2017','OpenStreetMap · 도로, 2017년 1월 1일'],
+  d:['The road network as it stood before the projects; hospitals tagged in OSM.','사업 이전 시점의 도로망과 OSM에 표시된 병원.'],
+  src:[['Geofabrik cambodia-170101.osm.pbf','https://download.geofabrik.de/asia/cambodia.html']], code:['kh_fetch.py'],
+  how:['569,893 road segments on the largest connected network. Speeds come from the road class (highway tag); surface tags cover only about a fifth of road length, so a variant ignores them.','가장 큰 연결 도로망의 구간 569,893개. 속도는 도로 등급(highway 태그)으로 정합니다. 포장 태그는 도로 길이의 약 5분의 1에만 있어, 태그를 쓰지 않는 변형도 계산했습니다.']},
+ {id:'dem', col:0, k:'data', t:['Copernicus GLO-90 · terrain','Copernicus GLO-90 · 지형'],
+  d:['90 m elevation, for road grades and steep terrain.','90 m 고도. 도로 경사와 급경사 지형 계산용.'],
+  src:[['Copernicus DEM','https://dataspace.copernicus.eu/explore-data/data-collections/copernicus-contributing-missions/collections-description/COP-DEM']], code:['kh_fetch.py']},
+ {id:'pop', col:0, k:'data', t:['WorldPop · population, 1 km','WorldPop · 인구, 1 km'],
+  d:['Gridded population 2015, 2019 and 2020 (UN-adjusted).','격자 인구 2015·2019·2020년 (UN 보정).'],
+  src:[['WorldPop','https://www.worldpop.org/']], code:['kh_fetch.py'],
+  how:['Weights for every district average (travel time, lights, wealth) and the population control.','모든 군 평균(이동시간, 불빛, 부)의 가중치이자 인구 통제변수입니다.']},
+ {id:'geon', col:0, k:'data', t:['GeoNames · towns and seats','GeoNames · 도시와 행정 소재지'],
+  d:['Places of 20,000+ people and district seats, as travel-time destinations.','인구 2만+ 도시와 군청 소재지. 이동시간의 목적지.'],
+  src:[['GeoNames KH','https://download.geonames.org/export/dump/']], code:['kh_fetch.py'],
+  how:['Known errors: some town populations are wrong (Takeo carries a provincial total) and 48 districts have no listed seat, so their centroid is used. Replacing towns with the 25 provincial capitals gives +157%.','알려진 오류: 일부 도시 인구가 틀리고(타케오에 주 인구가 들어감), 48개 군은 소재지가 없어 중심점을 씁니다. 도시를 25개 주도로 바꾸면 +157%입니다.']},
+ {id:'ookla', col:0, k:'data', t:['Ookla Open Data · speed tests','Ookla Open Data · 속도 측정'],
+  d:['Mobile and fixed tests on ~600 m tiles, 2019 Q1–2020 Q1; 300,546 mobile tests.','약 600 m 타일의 모바일·유선 측정, 2019년 1분기–2020년 1분기, 모바일 300,546건.'],
+  src:[['Ookla for Good','https://github.com/teamookla/ookla-open-data']], code:['kh_fetch.py']},
+ {id:'ntl', col:0, k:'data', t:['Night lights · DMSP–VIIRS','야간 불빛 · DMSP–VIIRS'],
+  d:['Harmonised annual lights; 2015 is used, before the projects.','통합 연간 야간 불빛. 사업 이전인 2015년 값 사용.'],
+  src:[['Li et al. 2020','https://doi.org/10.1038/s41597-020-0510-y']], code:['kh_fetch.py']},
+ {id:'rwi', col:0, k:'data', t:['Meta Relative Wealth Index','Meta 상대적 부 지수'],
+  d:['Estimated wealth on a ~2.4 km grid.','약 2.4 km 격자의 추정 부.'],
+  src:[['Chi et al. 2022','https://doi.org/10.1073/pnas.2113658119']], code:['kh_s10_rwi.py']},
+ {id:'dac', col:0, k:'data', t:['OECD DAC2A · total aid','OECD DAC2A · 전체 원조'],
+  d:['Total aid to Cambodia 2017–2020, to measure GODAD’s coverage (33%).','2017–2020년 캄보디아 전체 원조. GODAD 포괄 범위(33%) 계산용.'],
+  src:[['OECD Data Explorer','https://data-explorer.oecd.org/']]},
+
+ {id:'N', col:1, k:'ind', t:['Outcome: new projects per district','결과변수: 군별 신규 사업 수'],
+  d:['Aid activities starting 2017–2020, located at district level; ICT excluded. 199 activities.','2017–2020년 착수, 군 단위로 위치가 확인된 원조 활동. ICT 제외. 199건.'],
+  from:['godad','ipums'], code:['kh_s01_projects.py','kh_common.py'], files:[['kh_projects.csv',D('kh_projects.csv')],['kh_assign.csv',D('kh_assign.csv')]],
+  fx:'N_d = \\sum_j w_{jd},\\qquad w_{jd} = 1/K_j',
+  how:['Yearly and sector-split CRS records of one donor activity are merged into one activity and dated by its first commitment. A project listed in K districts adds 1/K to each, so every project counts once. Points up to 10 km outside the boundary are snapped to the nearest district.','한 공여 활동이 CRS에 연도별·분야별로 나뉜 기록은 하나로 묶고 첫 약정 연도로 날짜를 정합니다. K개 군에 걸친 사업은 각 군에 1/K씩 더해 사업 하나가 한 번만 셉니다. 경계 밖 10 km 이내 점은 가장 가까운 군에 붙입니다.'],
+  check:['Sum of N over the 141 districts: 196.9 (199 activities, some partly outside the sample). Compare: python kh_compare.py kh_assign.csv (yours) kh_assign.csv','141개 군의 N 합계는 196.9 (활동 199건, 일부는 표본 밖에 걸침). 대조: python kh_compare.py kh_assign.csv(직접 만든 것) kh_assign.csv']},
+ {id:'phys', col:1, k:'ind', t:['Physical-access index','물리적 접근성 지수'],
+  d:['Ten road-network measures in one number per district (PC1, 61% of variation).','도로망 지표 10개를 군마다 숫자 하나로 (제1주성분, 변동의 61%).'],
+  from:['osm','dem','pop','geon','ipums'], code:['kh_s03_access.py'], files:[['kh_access.csv',D('kh_access.csv')],['kh_access_pca.csv',D('kh_access_pca.csv')]],
+  fx:'\\begin{aligned} t_i &= \\tfrac{1.3\\,\\mathrm{dist}(i,\\text{road})}{3.5} + \\min_{\\text{path}}\\textstyle\\sum_e \\ell_e/v_e \\\\ T_d &= \\textstyle\\sum_{i\\in d}P_i t_i \\,/\\, \\sum_{i\\in d}P_i \\\\ \\mathrm{Access}_d &= \\mathrm{PC1}(z_{d1},\\dots,z_{d10}) \\end{aligned}',
+  how:['1) Each road segment gets a speed from its class, reduced for grade and in the wet season. 2) From every populated 1 km cell: walk to the road, then the shortest path to the nearest town of 20,000+, district seat and hospital. 3) Population-weighted district means. 4) Ten signed, standardised measures combined by their first principal component.','1) 도로 구간마다 등급별 속도를 주고 경사와 우기에 줄입니다. 2) 사람이 사는 1 km 격자마다 도로까지 걷고, 가장 가까운 인구 2만+ 도시·군청·병원까지 최단 경로를 구합니다. 3) 인구 가중 군 평균. 4) 부호를 맞추고 표준화한 10개 지표를 제1주성분으로 합칩니다.'],
+  check:['kh_replicate.py rebuilds the index from kh_access.csv: correlation with the published index 1.000, loadings 0.35–0.39 on travel times, walking and road density.','kh_replicate.py가 kh_access.csv로 지수를 다시 만듭니다. 원 지수와 상관 1.000, 이동시간·도보·도로 밀도 적재값 0.35–0.39.']},
+ {id:'conn', col:1, k:'ind', t:['Digital access (mobile speed)','디지털 접근성 (모바일 속도)'],
+  d:['Test-weighted mobile download speed, shrunk toward the province mean.','측정 건수로 가중한 모바일 다운로드 속도, 주 평균 쪽으로 축소.'],
+  from:['ookla','pop','ipums'], code:['kh_s02_covariates.py'], files:[['kh_covariates.csv',D('kh_covariates.csv')]],
+  fx:'\\tilde s_d = \\frac{n_d\\,\\bar s_d + 30\\,\\bar s_{p(d)}}{n_d + 30},\\qquad \\mathrm{Digital}_d = z(\\ln \\tilde s_d)',
+  how:['The only measure that overlaps the project window (tests start in 2019). District speed is noisy: half-year reliability 0.52.','사업 기간과 겹치는 유일한 지표입니다(측정이 2019년 시작). 군 단위 속도는 잡음이 큽니다(반기 간 신뢰도 0.52).']},
+ {id:'ntli', col:1, k:'ind', t:['Economic activity (lights per person)','경제활동 (1인당 야간 불빛)'],
+  d:['2015 night lights divided by 2015 population.','2015년 야간 불빛을 2015년 인구로 나눈 값.'],
+  from:['ntl','pop','ipums'], code:['kh_s02_covariates.py'], files:[['kh_covariates.csv',D('kh_covariates.csv')]],
+  fx:'\\mathrm{Lights}_d = z\\big(\\ln(1 + 1000\\cdot \\mathrm{NTL}_d/\\mathrm{Pop}_d)\\big)'},
+ {id:'pov', col:1, k:'ind', t:['Poverty (−RWI)','빈곤 (−RWI)'],
+  d:['Population-weighted Relative Wealth Index, sign reversed.','인구 가중 상대적 부 지수, 부호 반전.'],
+  from:['rwi','pop','ipums'], code:['kh_s10_rwi.py'], files:[['kh_rwi.csv',D('kh_rwi.csv')]],
+  fx:'\\mathrm{Poverty}_d = z(-\\overline{\\mathrm{RWI}}_d)',
+  how:['Correlates with physical access at −0.84, so it is never interpreted jointly with it.','물리적 접근성과 상관이 −0.84라 함께 넣어 해석하지 않습니다.']},
+ {id:'popi', col:1, k:'ind', t:['Population (control)','인구 (통제변수)'],
+  d:['ln WorldPop 2019 population; its coefficient is the population elasticity θ.','WorldPop 2019년 인구의 로그. 계수가 인구 탄력성 θ.'],
+  from:['pop','ipums'], code:['kh_s02_covariates.py'], files:[['kh_covariates.csv',D('kh_covariates.csv')]]},
+ {id:'prior', col:1, k:'ind', t:['Earlier infrastructure','이전 인프라'],
+  d:['1 if a transport or energy project started in the district in 2010–2016.','2010–2016년에 교통·에너지 사업이 착수된 군이면 1.'],
+  from:['godad','ipums'], code:['kh_s06_ladder.py']},
+
+ {id:'table', col:2, k:'model', t:['Analysis table','분석용 표'],
+  d:['One row per district with every model input: 141 rows.','모든 모형 입력을 담은 군별 한 줄, 141행.'],
+  from:['N','phys','conn','ntli','pov','popi','prior'], code:['kh_s26_analysis_dataset.py'], files:[['kh_analysis.csv',D('kh_analysis.csv')]],
+  how:['Standardised over the 141 districts (mean 0, SD 1), so every effect reads per standard deviation. Also carries district centroids for spatial standard errors.','141개 군에서 표준화(평균 0, 표준편차 1)해 모든 효과를 1표준편차당으로 읽습니다. 공간 표준오차용 군 중심 좌표도 들어 있습니다.']},
+ {id:'ppml', col:2, k:'model', t:['PPML, one factor per model','PPML, 모형당 요인 하나'],
+  d:['Poisson pseudo-maximum likelihood with province fixed effects and ln population.','주 고정효과와 ln 인구를 넣은 포아송 유사최대우도.'],
+  from:['table'], code:['kh_s04_models.py','kh_replicate.py'], files:[['kh_main.csv',TB('kh_main.csv')]],
+  fx:'\\begin{aligned} \\mathbb{E}[N_d] &= \\exp\\big(\\alpha_{p(d)} + \\beta X_d + \\theta \\ln \\mathrm{Pop}_d\\big) \\\\ \\text{effect} &= 100\\,(e^{\\beta}-1)\\% \\end{aligned}',
+  how:['Each regression holds one characteristic, so correlated measures never share a model. Comparisons are between districts of the same province (19 provinces contribute).','회귀식마다 특성 하나만 넣어, 상관된 지표가 한 모형에 같이 들어가지 않습니다. 비교는 같은 주의 군끼리입니다(19개 주).']},
+ {id:'inf', col:2, k:'model', t:['Inference: most conservative p','추론: 가장 보수적인 p'],
+  d:['Clustered, Conley 50/100 km and randomisation inference; the largest p is reported.','군집, Conley 50/100 km, 무작위화 추론 중 가장 큰 p를 보고.'],
+  from:['ppml'], code:['kh_s04_models.py','kh_s18_wild_bootstrap.py','kh_s27_need_conservative.py'], files:[['kh_wild_bootstrap.csv',TB('kh_wild_bootstrap.csv')],['kh_need_conservative.csv',TB('kh_need_conservative.csv')]],
+  fx:'\\begin{aligned} p_{\\text{reported}} = \\max\\big(&p_{\\text{cluster}},\\,p_{\\text{Conley50}}, \\\\ &p_{\\text{Conley100}},\\,p_{\\text{RI}}\\big) \\end{aligned}',
+  how:['With 19 provinces, no single standard error is trusted. Randomisation inference (Freedman–Lane, 2,000 draws) shuffles the characteristic within provinces and counts how often a coefficient this large appears by chance. Holm correction across the three confirmatory tests; a wild cluster bootstrap is reported as an extra check.','19개 주로는 한 가지 표준오차만 믿기 어렵습니다. 무작위화 추론(Freedman–Lane, 2,000회)은 같은 주 안에서 특성값을 섞어, 이만큼 큰 계수가 우연히 나오는 빈도를 셉니다. 확증 검정 세 개에 Holm 보정을 하고, wild cluster 부트스트랩을 추가 점검으로 보고합니다.']},
+ {id:'joint', col:2, k:'model', t:['Joint model and decomposition','동시 투입 모형과 분해'],
+  d:['Four factors together, a joint test, and a Shapley split of explained deviance.','네 요인 동시 투입, 결합 검정, 설명력의 Shapley 분해.'],
+  from:['table','inf'], code:['kh_s25_joint_test.py','kh_s24_conservative_p.py','kh_s07_shapley.py','kh_s10_rwi.py'], files:[['kh_joint_test.csv',TB('kh_joint_test.csv')],['kh_conservative_p.csv',TB('kh_conservative_p.csv')],['kh_shapley5.csv',TB('kh_shapley5.csv')]],
+  fx:'\\begin{aligned} &H_0:\\ \\beta_L=\\beta_A=\\beta_C=\\beta_I=0 \\\\ &\\phi_j=\\textstyle\\sum_{S}\\frac{|S|!(|F|-|S|-1)!}{|F|!}\\,[v(S\\cup j)-v(S)] \\end{aligned}',
+  how:['The joint test asks whether the four factors together add explanatory power; its randomisation version permutes all four as one block within provinces. Poverty is left out of the joint model (r = −0.84 with physical access) but included in the decomposition, which splits shared variation.','결합 검정은 네 요인이 함께 설명력을 더하는지 묻습니다. 무작위화 버전은 네 변수를 한 묶음으로 주 안에서 섞습니다. 빈곤은 물리적 접근성과 상관이 −0.84라 동시 투입 모형에서는 빼고, 공유 변동을 나눠 주는 분해에는 넣습니다.']},
+ {id:'rob', col:2, k:'model', t:['Robustness and audits','강건성과 점검'],
+  d:['Geocoding bounds, 20 index variants, input audits, event study, timing checks.','지오코딩 경계, 지수 변형 20개, 입력 점검, 사건연구, 시점 점검.'],
+  from:['table','godad','dac'], code:['kh_s09_geobias.py','kh_s08_extensions.py','kh_s16_access_sensitivity.py','kh_s19_access_audit.py','kh_s20_index_audit.py','kh_s21_speed_iv.py','kh_s22_timing_check.py','kh_s23_usage_measures.py'],
+  files:[['kh_ext_A_bounds.csv',TB('kh_ext_A_bounds.csv')],['kh_geobias_checks.csv',TB('kh_geobias_checks.csv')],['kh_access_sensitivity.csv',TB('kh_access_sensitivity.csv')],['kh_access_audit_variants.csv',TB('kh_access_audit_variants.csv')],['kh_ext_B_event.csv',TB('kh_ext_B_event.csv')]],
+  how:['Robustness checks report clustered and Conley p unless stated otherwise.','강건성 점검은 따로 밝히지 않으면 군집·Conley p를 보고합니다.']},
+
+ {id:'rmain', col:3, k:'res', t:['Single-factor effects','단일 요인 효과'], viz:'forest',
+  d:['Percent change in projects per SD; most conservative p.','1표준편차당 사업 수 변화율, 가장 보수적인 p.'],
+  from:['ppml','inf'], files:[['kh_published.csv',D('kh_published.csv')]],
+  tbl:[['Physical access','물리적 접근성','+165%','0.002'],['Digital access (speed)','디지털 접근성 (속도)','+80%','0.060'],['Night lights','야간 불빛','+101%','0.063'],['Poverty','빈곤','−49%','0.042']]},
+ {id:'rjoint', col:3, k:'res', t:['Together, and relative weight','함께 볼 때와 상대적 비중'], viz:'shap',
+  d:['Four factors jointly p = 0.002; none alone at 5%. Physical access carries 39% of explained variation.','네 요인 결합 p = 0.002, 하나씩은 5% 미달. 설명력의 39%가 물리적 접근성.'],
+  from:['joint'],
+  tbl:[['Joint test (four factors)','결합 검정 (네 요인)','χ² 146','0.002'],['Physical access, in the joint model','동시 투입 모형의 물리적 접근성','+81%','0.064'],['Shapley share: physical access','Shapley 몫: 물리적 접근성','39%',''],['Shapley share: poverty','Shapley 몫: 빈곤','20%','']]},
+ {id:'rrob', col:3, k:'res', t:['How firm is it','결과는 얼마나 단단한가'],
+  d:['Realistic geocoding bounds +123% to +199%; index variants +131% to +177%.','현실적 지오코딩 경계 +123%~+199%, 지수 변형 +131%~+177%.'],
+  from:['rob','inf'],
+  tbl:[['Geocoding bounds (realistic)','지오코딩 경계 (현실적)','+123% to +199%',''],['Worst case','최악 가정','+68%','0.063'],['20 index variants','지수 변형 20개','+131% to +177%',''],['Class speeds only','등급별 속도만','+166%','0.001'],['Without the two most influential provinces','영향 큰 두 주 제외','+147%','<0.001'],['Wild cluster bootstrap (null imposed)','Wild cluster 부트스트랩 (귀무 부과)','','0.077']]},
+ {id:'concl', col:3, k:'res', t:['Conclusion','결론'],
+  d:['Aid goes where it is easy to reach. Poverty and remoteness overlap, so the census will test which one donors avoid.','원조는 닿기 쉬운 곳으로 갑니다. 빈곤과 오지가 겹쳐, 공여자가 어느 쪽을 피하는지는 센서스로 검정합니다.'],
+  from:['rmain','rjoint','rrob'],
+  how:['Associations within provinces, not causal effects. Covers GODAD donors (about a third of aid to Cambodia) plus China.','같은 주 안의 연관이며 인과 효과가 아닙니다. GODAD 공여자(캄보디아 원조의 약 3분의 1)와 중국을 포괄합니다.']}
+];
+const byId = Object.fromEntries(N.map(n => [n.id, n]));
+const E = []; N.forEach(n => (n.from || []).forEach(f => E.push([f, n.id])));
+
+/* ---------------- layout ---------------- */
+const COLX = [40, 470, 900, 1330], W = 300, TOP = 96, GAP = 14;
+const cv = document.getElementById('cv'), vp = document.getElementById('vp'), svg = document.getElementById('edges');
+const heads = [['1 · Data','1 · 데이터','Public sources','공개 자료'],['2 · Indicators','2 · 지표','Built for this study','이 연구에서 계산'],['3 · Statistical models','3 · 통계 모형','Estimation and inference','추정과 추론'],['4 · Results','4 · 결과','What the data show','자료가 보여 주는 것']];
+heads.forEach((h, i) => { const el = document.createElement('div'); el.className = 'colhead'; el.style.left = COLX[i] + 'px';
+  el.innerHTML = `<span class="en">${h[0]}</span><span class="ko">${h[1]}</span><small class="en">${h[2]}</small><small class="ko">${h[3]}</small>`; cv.appendChild(el); });
+
+function forest(){ const rows = [['Physical','물리적',165,1],['Digital','디지털',80,0],['Lights','불빛',101,0],['Poverty','빈곤',-49,1]];
+  const x = v => 70 + (v + 60) / 240 * 196;
+  return `<svg viewBox="0 0 274 96" width="274" height="96" aria-hidden="true"><line x1="${x(0)}" x2="${x(0)}" y1="4" y2="92" stroke="#c9c1b0"/>` +
+    rows.map((r, i) => `<text x="0" y="${16 + i * 22}" font-size="12"><tspan class="en">${r[0]}</tspan></text><text x="0" y="${16 + i * 22}" font-size="12" class="kotxt">${r[1]}</text>` +
+      `<rect x="${Math.min(x(0), x(r[2]))}" y="${7 + i * 22}" width="${Math.abs(x(r[2]) - x(0))}" height="11" rx="2" fill="${r[3] ? '#0b6b6b' : '#aaa59a'}"/>` +
+      `<text x="${r[2] >= 0 ? x(r[2]) + 4 : x(r[2]) - 4}" y="${16 + i * 22}" font-size="12" text-anchor="${r[2] >= 0 ? 'start' : 'end'}">${r[2] > 0 ? '+' : '−'}${Math.abs(r[2])}%</text>`).join('') + '</svg>'; }
+function shap(){ const s = [[39,'#0b6b6b','Physical','물리적'],[20,'#a8461f','Poverty','빈곤'],[16,'#6e675b','Lights','불빛'],[16,'#aaa59a','Digital','디지털'],[9,'#d8d1c2','Prior','이전']];
+  let x = 0; return `<svg viewBox="0 0 274 40" width="274" height="40" aria-hidden="true">` + s.map(p => { const w = p[0] / 100 * 274, o = `<rect x="${x}" y="2" width="${w - 2}" height="14" fill="${p[1]}"/>` +
+    (p[0] >= 16 ? `<text x="${x}" y="32" font-size="11.5">${p[0]}% <tspan class="kotxt-h">${p[3]}</tspan><tspan class="entxt-h">${p[2]}</tspan></text>` : ''); x += w; return o; }).join('') + '</svg>'; }
+
+const KIND = {data:['Data','데이터'], ind:['Indicator','지표'], model:['Model','모형'], res:['Result','결과']};
+N.forEach(n => {
+  const b = document.createElement('button'); b.className = `node k-${n.k}`; b.dataset.id = n.id; b.type = 'button';
+  const tags = [...(n.files || []).map(() => 'CSV'), ...(n.code || []).map(() => 'PY')];
+  const tg = [tags.includes('CSV') ? `CSV ×${tags.filter(t => t === 'CSV').length}` : '', tags.includes('PY') ? `.py ×${tags.filter(t => t === 'PY').length}` : '', n.src ? T('source', '출처') : ''].filter(Boolean);
+  b.innerHTML = `<span class="kind"><span class="en">${KIND[n.k][0]}</span><span class="ko">${KIND[n.k][1]}</span></span><b><span class="en">${n.t[0]}</span><span class="ko">${n.t[1]}</span></b>` +
+    `<span class="d"><span class="en">${n.d[0]}</span><span class="ko">${n.d[1]}</span></span>` + (n.viz === 'forest' ? forest() : n.viz === 'shap' ? shap() : '') +
+    (tg.length ? `<span class="tags">${tg.map(t => `<span>${t}</span>`).join('')}</span>` : '');
+  b.addEventListener('click', ev => { if (moved) { ev.preventDefault(); return; } select(n.id); });
+  cv.appendChild(b); n.el = b;
+});
+
+function layout(){
+  const cols = [0, 1, 2, 3].map(c => N.filter(n => n.col === c));
+  const hs = cols.map(col => col.reduce((s, n) => s + n.el.offsetHeight + GAP, -GAP));
+  const H = Math.max(...hs);
+  cols.forEach((col, c) => { let y = TOP + (H - hs[c]) / 2; col.forEach(n => { n.x = COLX[c]; n.y = y; n.h = n.el.offsetHeight; n.el.style.left = n.x + 'px'; n.el.style.top = y + 'px'; y += n.h + GAP; }); });
+  cv.style.width = (COLX[3] + W + 60) + 'px'; cv.style.height = (TOP + H + 50) + 'px';
+  svg.setAttribute('width', COLX[3] + W + 60); svg.setAttribute('height', TOP + H + 50);
+  // spread ports along each side
+  const outs = {}, ins = {}; E.forEach(([a, b]) => { (outs[a] = outs[a] || []).push(b); (ins[b] = ins[b] || []).push(a); });
+  const port = (n, list, other) => { const k = list.indexOf(other), m = list.length; return n.y + n.h * (m === 1 ? .5 : .2 + .6 * k / (m - 1)); };
+  Object.values(outs).forEach(l => l.sort((p, q) => byId[p].y - byId[q].y)); Object.values(ins).forEach(l => l.sort((p, q) => byId[p].y - byId[q].y));
+  svg.innerHTML = E.map(([a, b]) => { const A = byId[a], B = byId[b], x1 = A.x + W, y1 = port(A, outs[a], b), x2 = B.x, y2 = port(B, ins[b], a), dx = Math.max(60, (x2 - x1) * .5);
+    return `<path data-a="${a}" data-b="${b}" d="M${x1},${y1} C${x1 + dx},${y1} ${x2 - dx},${y2} ${x2},${y2}"/>`; }).join('');
+}
+
+/* ---------------- pan and zoom ---------------- */
+let s = 1, tx = 0, ty = 0, moved = false;
+const zlab = document.getElementById('zlab');
+function apply(){ cv.style.transform = `translate(${tx}px,${ty}px) scale(${s})`; zlab.textContent = Math.round(s * 100) + '%'; }
+function clampPan(){ const w = cv.offsetWidth * s, h = cv.offsetHeight * s, W0 = vp.clientWidth, H0 = vp.clientHeight, m = 80;
+  tx = Math.min(m, Math.max(W0 - w - m, tx)); ty = Math.min(m, Math.max(H0 - h - m, ty)); if (w < W0) tx = (W0 - w) / 2; }
+function zoomAt(f, cx, cy){ const ns = Math.min(2.2, Math.max(.3, s * f)); tx = cx - (cx - tx) * ns / s; ty = cy - (cy - ty) * ns / s; s = ns; clampPan(); apply(); }
+function fit(){ const W0 = vp.clientWidth; s = Math.min(1, Math.max(.3, W0 / cv.offsetWidth));
+  tx = (W0 - cv.offsetWidth * s) / 2; ty = 8; clampPan(); apply(); }
+// first view: readable text, starting from the data column; "Fit" shows the whole pipeline
+function home(){ const W0 = vp.clientWidth; s = Math.min(1, Math.max(.72, W0 / cv.offsetWidth)); tx = 0; ty = 0; clampPan(); apply(); }
+document.getElementById('zin').onclick = () => zoomAt(1.2, vp.clientWidth / 2, vp.clientHeight / 2);
+document.getElementById('zout').onclick = () => zoomAt(1 / 1.2, vp.clientWidth / 2, vp.clientHeight / 2);
+document.getElementById('zfit').onclick = fit; document.getElementById('zfit2').onclick = fit;
+vp.addEventListener('wheel', e => { e.preventDefault(); const r = vp.getBoundingClientRect();
+  if (e.ctrlKey || e.metaKey) zoomAt(Math.exp(-e.deltaY * .0025), e.clientX - r.left, e.clientY - r.top);
+  else { tx -= (e.shiftKey ? e.deltaY : e.deltaX); ty -= (e.shiftKey ? 0 : e.deltaY); clampPan(); apply(); } }, {passive: false});
+const pts = new Map(); let start = null, pinch = null;
+vp.addEventListener('pointerdown', e => { pts.set(e.pointerId, [e.clientX, e.clientY]); moved = false;
+  if (pts.size === 1) start = {x: e.clientX, y: e.clientY, tx, ty};
+  if (pts.size === 2) { const [a, b] = [...pts.values()]; pinch = {d: Math.hypot(a[0] - b[0], a[1] - b[1]), s}; } });
+vp.addEventListener('pointermove', e => { if (!pts.has(e.pointerId)) return; pts.set(e.pointerId, [e.clientX, e.clientY]);
+  if (pts.size === 2 && pinch) { const [a, b] = [...pts.values()], r = vp.getBoundingClientRect(), d = Math.hypot(a[0] - b[0], a[1] - b[1]);
+    zoomAt(pinch.s * d / pinch.d / s, (a[0] + b[0]) / 2 - r.left, (a[1] + b[1]) / 2 - r.top); moved = true; return; }
+  if (start) { const dx = e.clientX - start.x, dy = e.clientY - start.y; if (Math.abs(dx) + Math.abs(dy) > 5) { moved = true; vp.classList.add('drag'); }
+    if (moved) { tx = start.tx + dx; ty = start.ty + dy; clampPan(); apply(); } } });
+const up = e => { pts.delete(e.pointerId); if (pts.size < 2) pinch = null; if (!pts.size) { start = null; vp.classList.remove('drag'); setTimeout(() => moved = false, 0); } };
+vp.addEventListener('pointerup', up); vp.addEventListener('pointercancel', up); vp.addEventListener('pointerleave', up);
+vp.addEventListener('keydown', e => { const st = 60; if (e.key === 'ArrowLeft') tx += st; else if (e.key === 'ArrowRight') tx -= st; else if (e.key === 'ArrowUp') ty += st; else if (e.key === 'ArrowDown') ty -= st;
+  else if (e.key === '+' || e.key === '=') return zoomAt(1.2, vp.clientWidth / 2, vp.clientHeight / 2); else if (e.key === '-') return zoomAt(1 / 1.2, vp.clientWidth / 2, vp.clientHeight / 2); else return;
+  e.preventDefault(); clampPan(); apply(); });
+
+/* ---------------- selection and detail panel ---------------- */
+let cur = null;
+function related(id){ const up = new Set([id]), dn = new Set([id]); let ch = true;
+  while (ch) { ch = false; E.forEach(([a, b]) => { if (up.has(b) && !up.has(a)) { up.add(a); ch = true; } if (dn.has(a) && !dn.has(b)) { dn.add(b); ch = true; } }); }
+  return new Set([...up, ...dn]); }
+function select(id){ cur = id; const R = id ? related(id) : null;
+  N.forEach(n => { n.el.classList.toggle('sel', n.id === id); n.el.classList.toggle('dim', !!R && !R.has(n.id)); });
+  svg.querySelectorAll('path').forEach(p => { const on = R && R.has(p.dataset.a) && R.has(p.dataset.b); p.classList.toggle('on', !!on); p.classList.toggle('dim', !!R && !on); });
+  render(); }
+const esc = t => String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;');
+function render(){ const P = document.getElementById('panel');
+  if (!cur) { P.innerHTML = `<div class="kind">${T('How to read','읽는 법')}</div><h3>${T('Select a box','상자를 선택하세요')}</h3>
+    <p>${T('Grey boxes are public sources, teal boxes indicators built for this study, rust boxes statistical models, black boxes results. Lines show what feeds what; selecting a box highlights everything upstream and downstream of it.','회색은 공개 자료, 청록은 이 연구에서 만든 지표, 적갈색은 통계 모형, 검정은 결과입니다. 선은 무엇이 무엇에 쓰였는지 보여 주고, 상자를 고르면 그 앞뒤로 연결된 단계가 모두 강조됩니다.')}</p>
+    <p>${T('Each box lists the files it produced and the script that made them. Files are the published versions; your own run of the script should reproduce them, and kh_compare.py shows any difference.','상자마다 결과 파일과 그 파일을 만든 스크립트가 있습니다. 파일은 발표본이며, 스크립트를 직접 실행하면 같은 파일이 나와야 합니다. 차이는 kh_compare.py로 확인할 수 있습니다.')}</p>`; return; }
+  const n = byId[cur], L = KO() ? 1 : 0;
+  let h = `<div class="kind">${KIND[n.k][L]}</div><h3>${n.t[L]}</h3><p>${n.d[L]}</p>`;
+  if (n.how) h += `<h4>${T('How it is built','만드는 방법')}</h4><p>${n.how[L]}</p>`;
+  if (n.fx) h += `<div class="fx">\\[${n.fx}\\]</div>`;
+  if (n.tbl) h += `<table>${n.tbl.map(r => `<tr><td>${r[L]}</td><td class="r">${r[2]}</td><td class="r">${r[3] ? 'p ' + r[3] : ''}</td></tr>`).join('')}</table>`;
+  const ins = E.filter(e => e[1] === n.id).map(e => e[0]), outs = E.filter(e => e[0] === n.id).map(e => e[1]);
+  if (ins.length) h += `<h4>${T('Uses','입력')}</h4><div class="chips">${ins.map(i => `<button data-go="${i}">${byId[i].t[L]}</button>`).join('')}</div>`;
+  if (outs.length) h += `<h4>${T('Feeds into','다음 단계')}</h4><div class="chips">${outs.map(i => `<button data-go="${i}">${byId[i].t[L]}</button>`).join('')}</div>`;
+  if (n.src) h += `<h4>${T('Source','출처')}</h4><div class="act">${n.src.map(s => `<a class="lnk" href="${s[1]}" target="_blank" rel="noopener">${esc(s[0])}</a>`).join('')}</div>`;
+  if (n.files) h += `<h4>${T('Files (published)','파일 (발표본)')}</h4><div class="act">${n.files.map(f => `<a class="dl" href="${f[1]}" download>${f[0]}</a>`).join('')}</div>`;
+  if (n.code) h += `<h4>${T('Code','코드')}</h4><div class="act">${n.code.map(c => `<a class="dl code" href="${C(c)}" download>${c}</a>`).join('')}</div>`;
+  if (n.check) h += `<h4>${T('Check','확인')}</h4><p class="check">${esc(n.check[L])}</p>`;
+  P.innerHTML = h;
+  P.querySelectorAll('[data-go]').forEach(b => b.addEventListener('click', () => { select(b.dataset.go); const t = byId[b.dataset.go];
+    tx = vp.clientWidth / 2 - (t.x + W / 2) * s; ty = vp.clientHeight / 2 - (t.y + t.h / 2) * s; clampPan(); apply(); }));
+  if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([P]).catch(() => {});
+}
+
+/* ---------------- language ---------------- */
+function setLang(l){ document.documentElement.lang = l; try { localStorage.setItem('lang', l); } catch (e) {}
+  document.querySelectorAll('[data-lang]').forEach(b => b.setAttribute('aria-pressed', b.dataset.lang === l));
+  document.querySelectorAll('.kotxt').forEach(t => t.style.display = l === 'ko' ? '' : 'none');
+  document.querySelectorAll('.node svg tspan.en').forEach(t => t.style.display = l === 'ko' ? 'none' : '');
+  document.querySelectorAll('.kotxt-h').forEach(t => t.style.display = l === 'ko' ? '' : 'none');
+  document.querySelectorAll('.entxt-h').forEach(t => t.style.display = l === 'ko' ? 'none' : '');
+  N.forEach(n => { const tg = n.el.querySelector('.tags'); if (tg) tg.innerHTML = tg.innerHTML.replace(/source|출처/, T('source', '출처')); });
+  requestAnimationFrame(() => { layout(); if (cur) select(cur); render(); }); }
+document.querySelectorAll('[data-lang]').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
+let lang0 = 'en'; try { if (localStorage.getItem('lang') === 'ko') lang0 = 'ko'; } catch (e) {}
+
+const go = () => { setLang(lang0); requestAnimationFrame(() => { layout(); home(); render(); }); };
+(document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(go);
+addEventListener('resize', () => { clampPan(); apply(); });
+})();
+</script>
+</body>
+</html>

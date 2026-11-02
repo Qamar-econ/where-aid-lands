@@ -65,6 +65,14 @@ res = {"main": rd("kh_main.csv")[["var", "pct", "p_conservative", "p_cluster", "
        "need": rd("kh_need.csv").round(3).to_dict("records"),
        "conn": rd("kh_ext_C_connectivity.csv").round(3).to_dict("records"),
        "ladder": rd("kh_ladder.csv").round(3).to_dict("records")}
+# most conservative p for the secondary tables (kh_s24); the page shows these instead of clustered-only p
+cp = rd("kh_conservative_p.csv").dropna(subset=["site_key"]).set_index("site_key").p_conservative.round(3)
+for r in res["conn"]:
+    r["p_conservative"] = cp.get(f"conn:{r['model']}")
+    if r["model"] == "alone: c_speed":                       # the main digital-access estimate
+        r["p_conservative"] = float(rd("kh_main.csv").set_index("var").loc["conn", "p_conservative"].round(3))
+for r in res["infra1"]:
+    r["social_p_conservative"] = cp.get(f"infra1:{r['construct']}")
 (SITE / "data/results.json").write_text(json.dumps(res, ensure_ascii=False, default=lambda x: None).replace("NaN", "null"), encoding="utf-8")
 
 # downloadable bundles

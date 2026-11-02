@@ -60,3 +60,16 @@ print(R.round(3).to_string(index=False))
 lo = R[R.variant.str.startswith("leave out")]
 print(f"\nleave-one-out range: {lo.pct.min():.0f}% to {lo.pct.max():.0f}% | all variants: {R.pct.min():.0f}% to {R.pct.max():.0f}%, "
       f"largest p_max {R.p_max.max():.3f}")
+
+# input-audit corrections (kh_s19 findings), kept in their own table so the 20-variant grid above is unchanged
+rows = []
+for tag, lab in [("towncap", "towns = 25 provincial capitals"), ("secpaved", "untagged secondary roads paved"),
+                 ("grade185", "grade over >= 185 m"), ("allfix", "all three corrections")]:
+    s = pd.read_csv(PROCD / f"kh_access_{tag}.csv").set_index("k").access_pc1
+    d = d0.assign(xv=zs(d0.unit.map(s)))
+    r = ppml("N ~ xv + lnpop + C(prov)", d); b = r.params["xv"]
+    ps = [r.pvalues["xv"]] + [2 * norm.sf(abs(b / conley_se(r, d, "xv", c))) for c in (50, 100)]
+    rows.append({"variant": lab, "pct": 100 * (np.exp(b) - 1), "p_cluster": ps[0], "p_max": max(ps),
+                 "corr_with_main": d.xv.corr(zs(d0.unit.map(V["main: PC1 of 10 components (2017 OSM)"])))})
+RA = pd.DataFrame(rows); RA.to_csv(T / "kh_access_audit_variants.csv", index=False)
+print("\ninput-audit corrections:\n" + RA.round(3).to_string(index=False))

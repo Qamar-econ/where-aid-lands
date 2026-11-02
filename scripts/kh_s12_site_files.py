@@ -16,7 +16,7 @@ bundles = {"data": [], "tables": [], "code": []}
 def put(src, sub, name=None):
     dst = DL / sub / (name or src.name); dst.parent.mkdir(parents=True, exist_ok=True); shutil.copyfile(src, dst)
     bundles[sub].append(f"dl/{sub}/{dst.name}")
-for f in ["kh_projects.csv", "kh_assign.csv", "kh_covariates.csv", "kh_access.csv", "kh_rwi.csv"]:
+for f in ["kh_projects.csv", "kh_assign.csv", "kh_covariates.csv", "kh_access.csv", "kh_rwi.csv", "kh_analysis.csv", "kh_published.csv"]:
     put(proc / f, "data")
 put(raw / "godad_khm.csv", "data")
 g = DL / "data/godad_khm.csv"  # the GODAD source text carries a few U+FFFD replacement characters; mark them as '?'
@@ -27,6 +27,7 @@ for f in sorted(tab.glob("kh_*.csv")):
     put(f, "tables")
 for f in sorted((ROOT / "scripts").glob("kh_*.py")):
     put(f, "code")
+put(ROOT / "scripts/README_pipeline.md", "code")
 # working documents (Korean) stay in the repository and are not offered on the public site
 (SITE / "data/manifest.json").write_text(json.dumps(bundles, ensure_ascii=False, indent=1), encoding="utf-8")
 files = {"data/districts.geojson": "research/site/data/districts.geojson", "data/projects.json": "research/site/data/projects.json",

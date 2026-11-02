@@ -24,6 +24,12 @@ SNAP = os.environ.get("KH_OSM_SNAPSHOT", "170101")   # default since spec 9-6: t
 SUF = "" if SNAP == "170101" else f"_{SNAP}"; OSM_FILE = f"cambodia-{SNAP}.osm.pbf"
 # speed-assumption sensitivity (kh_s16): unpaved multiplier (default 0.7) and a scale on minor-road speeds (default 1)
 UNPAVED_F = float(os.environ.get("KH_UNPAVED", "0.7")); MINOR_S = float(os.environ.get("KH_MINOR_SCALE", "1"))
+# input-audit variants (kh_s19): towns = the 25 provincial capitals instead of GeoNames places >= 20k; untagged secondary
+# roads treated as paved; grade measured over at least one DEM cell (185 m) so short segments get no spurious grade
+# KH_SURFACE=class ignores OSM surface tags (present on ~20% of 2017 road length): dry speeds by road class only, wet-season
+# factor by class group (secondary and above x0.85, below x0.5), and no paved-share component
+CLASS_ONLY = os.environ.get("KH_SURFACE") == "class"
+TOWNS = os.environ.get("KH_TOWNS", "pop20k"); SEC_PAVED = os.environ.get("KH_SEC_PAVED") == "1"; GRADE_MIN_KM = float(os.environ.get("KH_GRADE_MIN_KM", "0"))
 if os.environ.get("KH_TAG"):
     SUF += "_" + os.environ["KH_TAG"]
 D = gpd.read_file(OUT / "kh_units.gpkg").rename(columns={"GEOLEVEL2": "k"})
@@ -37,6 +43,8 @@ for k in list(BASE):
 PAVED = {"asphalt", "concrete", "paved", "paving_stones", "concrete:plates", "chipseal", "sett", "metal"}
 UNPAVED = {"unpaved", "gravel", "dirt", "ground", "earth", "compacted", "mud", "sand", "fine_gravel", "grass", "rock", "pebblestone"}
 DEF_PAVED = {"motorway", "trunk", "primary", "motorway_link", "trunk_link", "primary_link"}
+if SEC_PAVED:
+    DEF_PAVED |= {"secondary", "secondary_link"}
 
 
 class H(osmium.SimpleHandler):
@@ -58,6 +66,8 @@ class H(osmium.SimpleHandler):
             return
         surf = w.tags.get("surface")
         paved = True if surf in PAVED else (False if surf in UNPAVED else hw in DEF_PAVED)
+        if CLASS_ONLY:
+            paved = hw in DEF_PAVED | {"secondary", "secondary_link"}
         try:
             ns = [(n.ref, n.lon, n.lat) for n in w.nodes]
         except osmium.InvalidLocationError:
@@ -76,13 +86,13 @@ srcs = [rasterio.open(f) for f in sorted((RAW / "dem").glob("*.tif"))]
 dem, tr = merge(srcs, res=(1 / 600, 1 / 600)); [s.close() for s in srcs]
 z = dem[0].astype("float32")
 ix = lambda x, y: (np.clip(((y - tr.f) / tr.e).astype(int), 0, z.shape[0] - 1), np.clip(((x - tr.c) / tr.a).astype(int), 0, z.shape[1] - 1))
-E["grade"] = np.clip(np.abs(z[ix(E.x2, E.y2)] - z[ix(E.x1, E.y1)]) / (E.km * 1000), 0, 0.4)
+E["grade"] = np.clip(np.abs(z[ix(E.x2, E.y2)] - z[ix(E.x1, E.y1)]) / (np.maximum(E.km, GRADE_MIN_KM) * 1000), 0, 0.4)
 latc = tr.f + tr.e * (np.arange(z.shape[0]) + 0.5)
 gy, gx = np.gradient(z)
 slope = np.degrees(np.arctan(np.hypot(gx / (tr.a * 111320 * np.cos(np.radians(latc)))[:, None], gy / (abs(tr.e) * 110570)))); del gx, gy
 ls = slope[ix((E.x1 + E.x2) / 2, (E.y1 + E.y2) / 2)]
 v = E.hw.map(BASE).astype(float).values
-v = np.where(E.paved, v, np.minimum(v, 25) * UNPAVED_F) * np.clip(1 - 2.0 * E.grade.values, 0.4, 1)
+v = (v if CLASS_ONLY else np.where(E.paved, v, np.minimum(v, 25) * UNPAVED_F)) * np.clip(1 - 2.0 * E.grade.values, 0.4, 1)
 E["v_dry"], E["v_wet"] = v, v * np.where(E.paved, 0.85, 0.5) * np.where(ls > 25, 0.7, 1.0)
 ids = pd.Index(pd.unique(np.r_[E.a.values, E.b.values])); ai, bi = ids.get_indexer(E.a), ids.get_indexer(E.b); n = len(ids)
 coords = pd.concat([pd.DataFrame({"n": E.a, "x": E.x1, "y": E.y1}), pd.DataFrame({"n": E.b, "x": E.x2, "y": E.y2})]).drop_duplicates("n").set_index("n").loc[ids]
@@ -101,7 +111,7 @@ snap = lambda xy: np.unique(main_idx[tree.query(np.c_[xy[:, 0] * kx, xy[:, 1]])[
 cols = ["geonameid", "name", "asciiname", "alt", "lat", "lon", "fclass", "fcode", "cc", "cc2", "a1", "a2", "a3", "a4", "pop", "elev", "dem", "tz", "mod"]
 GN = pd.read_csv(RAW / "geonames/KH.txt", sep="\t", names=cols, dtype={"pop": float}, quoting=3, low_memory=False)
 GN = GN[GN.fclass == "P"]
-towns = GN[GN["pop"] >= 20000][["lon", "lat"]].values
+towns = (GN[GN.fcode.isin(["PPLA", "PPLC"])] if TOWNS == "capitals" else GN[GN["pop"] >= 20000])[["lon", "lat"]].values
 hq = gpd.GeoDataFrame(GN[GN.fcode.isin(["PPLA2", "PPLA3", "PPLA", "PPLC"])], geometry=gpd.points_from_xy(GN[GN.fcode.isin(["PPLA2", "PPLA3", "PPLA", "PPLC"])].lon,
                       GN[GN.fcode.isin(["PPLA2", "PPLA3", "PPLA", "PPLC"])].lat), crs=4326)
 hq = gpd.sjoin(hq, D[["k", "geometry"]], predicate="within")
@@ -155,6 +165,8 @@ comp = pd.DataFrame({"neg_ln_tt_town_dry": -np.log(A.tt_town_dry), "neg_ln_tt_to
                      "neg_ln_tt_hosp": -np.log(A.tt_hosp_dry), "neg_ln_walk": -np.log(A.walk_min), "share_walk30": A.share_walk30,
                      "ln_road_density": np.log(A.road_density), "paved_share": A.paved_share, "neg_wet_penalty": -A.wet_penalty_share,
                      "neg_steep_share": -A.steep_share}).replace([np.inf, -np.inf], np.nan)
+if CLASS_ONLY:
+    comp = comp.drop(columns="paved_share")
 comp = comp.fillna(comp.median())
 Zc = (comp - comp.mean()) / comp.std()
 w, V = np.linalg.eigh(np.cov(Zc.T)); pc = V[:, -1] * np.sign(V[:, -1].sum())
