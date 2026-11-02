@@ -1,0 +1,41 @@
+classes: {'TOWN': 42, 'PROVINCE': 38, 'NATIONAL': 11, 'UNCLEAR': 9} | flagged district-activity pairs: 130
+== original (as published)
+   physical access   +165% (95% CI +50% to +369%) | p cluster 0.001 | Conley50 0.000 Conley100 0.000 RI 0.002 | most conservative 0.002 | projects 196.9
+   poverty            -49% (95% CI -69% to -18%) | p cluster 0.006 | Conley50 0.000 Conley100 0.000 RI 0.038 | most conservative 0.038 | projects 192.2
+   night lights      +101% (95% CI +1% to +301%) | p cluster 0.047 | Conley50 0.008 Conley100 0.021 RI 0.061 | most conservative 0.061 | projects 196.9
+   mobile speed       +80% (95% CI +35% to +142%) | p cluster 0.000 | Conley50 0.000 Conley100 0.000 RI 0.052 | most conservative 0.052 | projects 196.9
+== MAIN: PROVINCE+UNCLEAR spread by population, NATIONAL dropped
+   physical access    +87% (95% CI +23% to +186%) | p cluster 0.003 | Conley50 0.000 Conley100 0.000 RI 0.009 | most conservative 0.009 | projects 185.9
+   poverty            -34% (95% CI -53% to -8%) | p cluster 0.015 | Conley50 0.000 Conley100 0.001 RI 0.144 | most conservative 0.144 | projects 180.7
+   night lights       +49% (95% CI -3% to +129%) | p cluster 0.070 | Conley50 0.023 Conley100 0.036 RI 0.119 | most conservative 0.119 | projects 185.9
+   mobile speed       +60% (95% CI +23% to +110%) | p cluster 0.001 | Conley50 0.000 Conley100 0.000 RI 0.030 | most conservative 0.030 | projects 185.9
+== UNCLEAR kept as town
+   physical access   +115% (95% CI +39% to +232%) | p cluster 0.001 | projects 185.9
+   poverty            -41% (95% CI -59% to -14%) | p cluster 0.007 | projects 180.7
+   night lights       +72% (95% CI -0% to +197%) | p cluster 0.052 | projects 185.9
+   mobile speed       +67% (95% CI +29% to +117%) | p cluster 0.000 | projects 185.9
+== UNCLEAR dropped
+   physical access    +95% (95% CI +25% to +206%) | p cluster 0.003 | projects 176.9
+   poverty            -36% (95% CI -56% to -8%) | p cluster 0.016 | projects 171.7
+   night lights       +52% (95% CI -5% to +143%) | p cluster 0.077 | projects 176.9
+   mobile speed       +62% (95% CI +24% to +112%) | p cluster 0.000 | projects 176.9
+== NATIONAL kept where geocoded
+   physical access    +93% (95% CI +28% to +192%) | p cluster 0.002 | projects 196.9
+   poverty            -36% (95% CI -54% to -10%) | p cluster 0.010 | projects 191.7
+   night lights       +49% (95% CI -4% to +131%) | p cluster 0.073 | projects 196.9
+   mobile speed       +67% (95% CI +28% to +118%) | p cluster 0.000 | projects 196.9
+== NATIONAL spread over Phnom Penh khans as PROVINCE
+   physical access    +96% (95% CI +29% to +200%) | p cluster 0.002 | projects 196.9
+   poverty            -37% (95% CI -56% to -10%) | p cluster 0.010 | projects 190.3
+   night lights       +44% (95% CI -10% to +130%) | p cluster 0.133 | projects 196.9
+   mobile speed       +68% (95% CI +29% to +120%) | p cluster 0.000 | projects 196.9
+== spread equally within province
+   physical access    +80% (95% CI +20% to +170%) | p cluster 0.004 | projects 185.9
+   poverty            -35% (95% CI -53% to -9%) | p cluster 0.011 | projects 180.2
+   night lights       +48% (95% CI +1% to +117%) | p cluster 0.044 | projects 185.9
+   mobile speed       +53% (95% CI +18% to +100%) | p cluster 0.002 | projects 185.9
+== worst case: PROVINCE+UNCLEAR to least accessible district
+   physical access    +35% (95% CI -21% to +131%) | p cluster 0.272 | projects 185.9
+   poverty            -32% (95% CI -50% to -5%) | p cluster 0.022 | projects 181.2
+   night lights       +60% (95% CI +12% to +129%) | p cluster 0.010 | projects 185.9
+   mobile speed       +79% (95% CI +30% to +147%) | p cluster 0.000 | projects 185.9
