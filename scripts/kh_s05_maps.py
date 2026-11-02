@@ -24,7 +24,11 @@ KH = U.union_all()
 PROV = U.dissolve("PARENT")
 DF = pd.read_csv(PROC / "kh_covariates.csv").merge(pd.read_csv(PROC / "kh_access.csv").rename(columns={"k": "unit"}), on="unit", how="left")
 A = pd.read_csv(PROC / "kh_assign.csv")
-DF["N"] = DF.unit.map(A[A.level == "adm2"].groupby("unit").w.sum()).fillna(0)
+import sys; sys.path.insert(0, str(Path(__file__).resolve().parent))
+from kh_common import reclassify_geocodes   # spec 9-26
+_u = DF[~DF.exclude]
+_u = _u.assign(prov=_u.PARENT.astype(str), capital=_u.unit.isin({116008004, 116008005, 116008007, 116008011}), access=_u.access_pc1)
+DF["N"] = DF.unit.map(reclassify_geocodes(A[A.level == "adm2"], _u, PROC).groupby("unit").w.sum()).fillna(0)
 DK = DF[~DF.exclude].copy()
 import sys; sys.path.insert(0, str(Path(__file__).resolve().parent))
 from kh_common import activityize

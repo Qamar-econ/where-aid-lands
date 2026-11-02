@@ -32,7 +32,8 @@ cc = pd.DataFrame({"s": z(np.log(DF.mob_mbps_shrunk)), "t": z(np.log1p(DF.mob_te
 w_, V_ = np.linalg.eigh(np.cov(cc.T)); pcv = V_[:, -1] * np.sign(V_[:, -1].sum())
 DF["conn_index"] = z(cc.values @ pcv)
 
-cur = L[L.start.between(2017, 2020) & (L.family != "ict")]
+from kh_common import reclassify_geocodes
+cur = reclassify_geocodes(L[L.start.between(2017, 2020) & (L.family != "ict")], DF, ROOT / "data/processed/cambodia")  # spec 9-26
 txt = K.drop_duplicates("project_id").set_index("project_id")
 tlen = (txt.title.fillna("").astype(str) + " " + txt.description.fillna("").astype(str)).str.len()
 cur = cur.assign(tlen=cur.project_id.map(tlen))

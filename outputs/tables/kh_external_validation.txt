@@ -7,10 +7,10 @@
   median district travel time to the nearest destination: ours to towns 127 min, Weiss to cities 76 min
 
 == 2. the headline model with external accessibility measures
-  our physical-access index (main)                                 +165%  p 0.001  n 141
-  -ln Weiss et al. 2018 travel time to cities (district mean)      +142%  p 0.001  n 141
-  -ln Weiss et al. 2020 travel time to healthcare                  +134%  p 0.005  n 141
+  our physical-access index (main)                                  +87%  p 0.003  n 141
+  -ln Weiss et al. 2018 travel time to cities (district mean)       +72%  p 0.007  n 141
+  -ln Weiss et al. 2020 travel time to healthcare                   +70%  p 0.031  n 141
 
 == 3. 2015 population weights
   corr with main index 0.999
-  index with 2015 WorldPop weights                                 +163%  p 0.001  n 141
+  index with 2015 WorldPop weights                                  +87%  p 0.004  n 141

@@ -2,6 +2,7 @@
 province's name, or a province name itself, with title and description, for hand classification (spec 9-26).
 Output: data/processed/cambodia/kh_geocode_flagged.csv (classification column filled by hand in kh_geocode_classified.csv)
 """
+import os; os.environ["KH_GEOCODE"] = "original"   # this script needs the sample before the spec 9-26 reclassification
 import re, pandas as pd
 from pathlib import Path
 SRC = Path(__file__).with_name("kh_s06_ladder.py"); ns = {"__file__": str(SRC)}

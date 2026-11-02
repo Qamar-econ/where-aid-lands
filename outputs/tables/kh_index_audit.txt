@@ -1,19 +1,19 @@
 == P1. physical access without surface tags
   corr with main 1.000
-  main (surface tags, untagged minor roads unpaved)             +165%  p_max 0.001  n 141
+  main (surface tags, untagged minor roads unpaved)              +87%  p_max 0.003  n 141
    loadings: neg_ln_tt_town_dry=+0.38, neg_ln_tt_town_wet=+0.37, neg_ln_tt_hq=+0.39, neg_ln_tt_hosp=+0.38, neg_ln_walk=+0.39, share_walk30=+0.35, ln_road_density=+0.35, paved_share=-0.04, neg_wet_penalty=-0.11, neg_steep_share=+0.10 | PC1 share 0.612
   corr with main 0.998
-  class speeds only, 9 components                               +166%  p_max 0.001  n 141
+  class speeds only, 9 components                                +86%  p_max 0.006  n 141
    loadings: neg_ln_tt_town_dry=+0.38, neg_ln_tt_town_wet=+0.38, neg_ln_tt_hq=+0.39, neg_ln_tt_hosp=+0.38, neg_ln_walk=+0.39, share_walk30=+0.36, ln_road_density=+0.35, neg_wet_penalty=+0.00, neg_steep_share=+0.10 | PC1 share 0.685
   corr with main 0.992
-  class speeds + provincial-capital towns + 185 m grade         +158%  p_max 0.001  n 141
+  class speeds + provincial-capital towns + 185 m grade          +83%  p_max 0.005  n 141
    loadings: neg_ln_tt_town_dry=+0.39, neg_ln_tt_town_wet=+0.38, neg_ln_tt_hq=+0.39, neg_ln_tt_hosp=+0.38, neg_ln_walk=+0.39, share_walk30=+0.35, ln_road_density=+0.35, neg_wet_penalty=+0.02, neg_steep_share=+0.10 | PC1 share 0.691
 
 == P2. missing component values filled with the median
   {'tt_town_dry': 0, 'tt_hq_dry': 0, 'tt_hosp_dry': 0, 'walk_min': 0, 'road_density': 1, 'paved_share': 1, 'steep_share': 0} | districts in index 143
 
 == P3. influence of Phnom Penh
-  physical access without province 8 (largest district's province)    +125%  p_max 0.007  n 129
+  physical access without province 8 (largest district's province)     +41%  p_max 0.125  n 129
 
 == D1. reliability of district mobile speed
   corr(log speed, first half vs second half) = 0.35 over 143 districts; Spearman-Brown reliability of the pooled measure = 0.52
@@ -21,17 +21,17 @@
 == D2. how the district value is aggregated
   share of a district's tests in its busiest tile: median 0.14, p75 0.17, max 0.52
   corr(log test-weighted, log tile-equal) 0.57 | with population-weighted 0.76
-  main: log test-weighted speed, shrunk                          +80%  p_max 0.000  n 141
-  log test-weighted speed, not shrunk                            +84%  p_max 0.000  n 141
-  log tile-equal (geometric mean over tiles)                     +78%  p_max 0.000  n 141
-  log population-weighted over tested tiles                      +76%  p_max 0.000  n 141
+  main: log test-weighted speed, shrunk                          +60%  p_max 0.001  n 141
+  log test-weighted speed, not shrunk                            +63%  p_max 0.001  n 141
+  log tile-equal (geometric mean over tiles)                     +65%  p_max 0.000  n 141
+  log population-weighted over tested tiles                      +61%  p_max 0.001  n 141
 
 == D3. test footprint (people living in a 1 km cell with any tested tile)
   footprint share: median 0.22, min 0.03, max 1.00; corr with physical access 0.84
-  test footprint share                                          +125%  p_max 0.009  n 141
+  test footprint share                                           +61%  p_max 0.051  n 141
 
 == D4. timing: 2019 Q1 only
-  log speed 2019 Q1 only (143 districts with tests)             +218%  p_max 0.019  n 141
+  log speed 2019 Q1 only (143 districts with tests)             +122%  p_max 0.036  n 141
 
 == D5. correlations (districts in the main sample)
             phys  conn  conn_tests  conn_fixed   ntl  lnpop  poverty

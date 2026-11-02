@@ -2,4 +2,4 @@ MoH referral hospitals: 76 | OSM 2017 hospital features: 110
   MoH hospitals with an OSM hospital within 2 km: 43% | OSM hospitals within 2 km of a MoH one: 54%
   MoH hospitals with an OSM hospital within 5 km: 46% | OSM hospitals within 5 km of a MoH one: 77%
   districts with at least one hospital: MoH 70 | OSM 46 | of 143
-Index with MoH hospitals: corr with main index 0.998; corr of log travel time to hospital 0.93; effect +168% (largest of clustered and Conley p = 0.001)
+Index with MoH hospitals: corr with main index 0.998; corr of log travel time to hospital 0.93; effect +88% (largest of clustered and Conley p = 0.004)

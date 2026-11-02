@@ -4,6 +4,7 @@ GODAD EU/US records with CRS precision 3 are kept as district-precise, but a pla
 for the whole province. Re-estimates the physical-access model with these activities dropped, spread over the province
 (population, equal, worst case), plus checks without province FE and for multi-district activities. Prints only.
 """
+import os; os.environ["KH_GEOCODE"] = "original"   # this script needs the sample before the spec 9-26 reclassification
 from pathlib import Path
 SRC = Path("kh_s06_ladder.py"); ns = {"__file__": str(SRC.resolve())}
 exec(SRC.read_text(encoding="utf-8").split("LADDER = [")[0], ns)

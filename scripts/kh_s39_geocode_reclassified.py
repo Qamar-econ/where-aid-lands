@@ -9,6 +9,7 @@ Main estimates get the most conservative of clustered, Conley 50/100 km and Free
 (999 draws); sensitivity scenarios report clustered p.
 Output: outputs/tables/kh_geocode_reclassified.csv, .txt
 """
+import os; os.environ["KH_GEOCODE"] = "original"   # this script needs the sample before the spec 9-26 reclassification
 import numpy as np, pandas as pd, statsmodels.api as sm, statsmodels.formula.api as smf
 from pathlib import Path
 

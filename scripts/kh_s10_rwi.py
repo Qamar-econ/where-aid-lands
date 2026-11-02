@@ -31,7 +31,8 @@ rw = g.groupby("unit").apply(lambda d: np.average(d.rwi, weights=d["pop"] + 1e-6
 rw.to_frame().to_csv(ROOT / "data/processed/cambodia/kh_rwi.csv")
 DF["rwi"] = DF.unit.map(rw)
 DF["need"] = z(-DF.rwi)
-cur = L[L.start.between(2017, 2020) & (L.family != "ict")]
+from kh_common import reclassify_geocodes
+cur = reclassify_geocodes(L[L.start.between(2017, 2020) & (L.family != "ict")], DF, ROOT / "data/processed/cambodia")  # spec 9-26
 d = outcome(cur)
 out = [f"RWI points {len(R)} | districts with RWI {d.need.notna().sum()} of {len(d)}",
        "correlations:\n" + d[["need", "access", "conn", "lights", "prior_infra", "lnpop"]].corr().round(2).to_string()]

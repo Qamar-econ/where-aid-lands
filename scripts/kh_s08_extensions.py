@@ -24,7 +24,8 @@ fitc = lambda f, d, g="prov": smf.glm(f, data=d, family=sm.families.Poisson()).f
 out = []
 
 # ======================= (A) geocoding-bias bounds =======================
-cur = L[L.start.between(2017, 2020) & (L.family != "ict")]
+from kh_common import reclassify_geocodes
+cur = reclassify_geocodes(L[L.start.between(2017, 2020) & (L.family != "ict")], DF, ROOT / "data/processed/cambodia")  # spec 9-26
 base = outcome(cur)
 K["adm1"] = np.where(K.dgroup == "EU/US", K.precision_crs == 4, K.precision_code == 4)
 prov_of = gpd.read_file(ROOT / "data/processed/cambodia/kh_units.gpkg").rename(columns={"GEOLEVEL2": "unit"})

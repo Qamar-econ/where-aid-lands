@@ -49,6 +49,7 @@ D = pd.DataFrame({"w_city": wm("w_city"), "w_hc": wm("w_hc")}).clip(lower=1)   #
 D.index = D.index.astype(float).astype(int)
 acc = pd.read_csv(PROCD / "kh_access.csv").set_index("k")
 D = D.join(acc[["tt_town_dry", "tt_hosp_dry", "access_pc1"]], how="inner")
+D[["w_city", "w_hc"]].rename_axis("unit").to_csv(PROCD / "kh_weiss_district.csv")   # used by kh_main.py
 say(f"  district level, corr(log our time to towns, log Weiss time to cities) = {np.corrcoef(np.log(D.tt_town_dry), np.log(D.w_city))[0, 1]:.2f}  ({len(D)} districts)")
 say(f"  district level, corr(log our time to hospital, log Weiss 2020 time to healthcare) = {np.corrcoef(np.log(D.tt_hosp_dry), np.log(D.w_hc))[0, 1]:.2f}")
 say(f"  district level, corr(our physical-access index, -log Weiss time to cities) = {np.corrcoef(D.access_pc1, -np.log(D.w_city))[0, 1]:.2f}")

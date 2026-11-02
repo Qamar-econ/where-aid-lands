@@ -68,7 +68,7 @@ def ri_p(dd, var, others, f, b_obs, draws=999):
             bs.append(smf.glm(f, data=dd.assign(**{var: fit_ + e}), family=sm.families.Poisson()).fit(maxiter=100).params[var])
         except Exception:
             pass
-    return float(np.mean(np.abs(bs) >= abs(b_obs)))
+    return float((1 + np.sum(np.abs(bs) >= abs(b_obs))) / (1 + len(bs)))   # observed draw included (Phipson & Smyth 2010)
 
 
 rows = []

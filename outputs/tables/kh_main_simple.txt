@@ -1,0 +1,34 @@
+districts 141 | projects 186 (weight 185.9) | corr(reach, poverty) = 0.83 | median travel time 126 min (IQR 81-186)
+== MAIN (reach: per doubling of travel time; poverty: per SD)
+  reach alone                                  reach          -36% (95% CI -51% to -17%) | p RI 0.008 | cluster 0.001 | Conley 0.000 | projects 185.9
+  poverty alone                                poverty        -34% (95% CI -53% to -8%) | p RI 0.121 | cluster 0.015 | Conley 0.001 | projects 180.7
+  both                                         reach          -54% (95% CI -83% to +24%) | p RI 0.012 | cluster 0.125 | Conley 0.062 | projects 180.7
+  both                                         poverty        +48% (95% CI -46% to +306%) | p RI 0.260 | cluster 0.444 | Conley 0.353 | projects 180.7
+  Holm-adjusted RI p: reach alone 0.017, poverty alone 0.121
+== CENSUS: kh_census.csv not found, H-C1 skipped (IPUMS extract pending)
+== WHERE THE GRADIENT COMES FROM (exploratory, spec 9-28): capital khans, provincial towns (Krong), rural districts
+  capital  districts   4 | projects   45.4 (24%) | population 3% | projects per 100,000 people 8.16 | median travel time 7 min
+  rural    districts 112 | projects   90.2 (49%) | population 77% | projects per 100,000 people 0.72 | median travel time 144 min
+  town     districts  25 | projects   50.3 (27%) | population 20% | projects per 100,000 people 1.52 | median travel time 60 min
+  district type (vs rural)                     capital_d    +1120% (95% CI +748% to +1656%) | p RI 0.026 | cluster 0.000 | Conley 0.000 | projects 185.9
+  district type (vs rural)                     town_d        +106% (95% CI -2% to +337%) | p RI 0.087 | cluster 0.058 | Conley 0.017 | projects 185.9
+  rural districts: reach alone                 reach           +9% (95% CI -15% to +40%) | p RI 0.673 | cluster 0.489 | Conley 0.464 | projects 90.2
+  rural districts: poverty alone               poverty        +37% (95% CI +2% to +84%) | p RI 0.387 | cluster 0.037 | Conley 0.081 | projects 90.2
+  rural districts: both                        reach          -17% (95% CI -59% to +68%) | p RI 0.468 | cluster 0.603 | Conley 0.515 | projects 90.2
+  rural districts: both                        poverty        +67% (95% CI -31% to +307%) | p RI 0.232 | cluster 0.257 | Conley 0.203 | projects 90.2
+== ROBUSTNESS (reach alone)
+  R1a geocodes as published (no reclassification) reach          -48% (95% CI -66% to -22%) | p RI 0.001 | cluster 0.002 | Conley 0.000 | projects 196.9
+  R1b worst case: province-level geocodes to remotest district reach          -22% (95% CI -42% to +5%) | p RI 0.184 | cluster 0.100 | Conley 0.098 | projects 185.9
+  R2a province-only projects added at remotest district reach          -23% (95% CI -41% to +2%) | p RI 0.103 | cluster 0.065 | Conley 0.038 | projects 223.9
+  R2b province-only projects added at best-reached district reach          -44% (95% CI -56% to -29%) | p RI 0.001 | cluster 0.000 | Conley 0.000 | projects 223.9
+  R3 Phnom Penh excluded                       reach          -26% (95% CI -51% to +12%) | p RI 0.030 | cluster 0.154 | Conley 0.043 | projects 140.5
+  R4 Weiss et al. (2018) travel time to cities reach_weiss    -26% (95% CI -40% to -8%) | p RI 0.025 | cluster 0.007 | Conley 0.000 | projects 185.9
+  R5 ten-component physical-access index (per SD) index          +87% (95% CI +23% to +186%) | p RI 0.008 | cluster 0.003 | Conley 0.000 | projects 185.9
+== DONOR GROUPS (reach alone)
+  donors: EU/US                                reach          -36% (95% CI -53% to -13%) | p RI 0.035 | cluster 0.004 | Conley 0.000 | projects 126.0
+    EU/US: 126 activities over 126 districts
+  donors: World Bank                           reach          -40% (95% CI -52% to -25%) | p RI 0.015 | cluster 0.000 | Conley 0.000 | projects 11.9
+    World Bank: 12 activities over 45 districts
+  donors: China                                reach          -36% (95% CI -52% to -15%) | p RI 0.020 | cluster 0.003 | Conley 0.000 | projects 48.0
+    China: 48 activities over 40 districts
+== FIGURE: projects per 100,000 people by within-province travel-time quintile (1 = closest): Q1 2.59, Q2 0.63, Q3 0.69, Q4 0.71, Q5 0.99

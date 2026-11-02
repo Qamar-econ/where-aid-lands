@@ -42,14 +42,14 @@ def score_bootstrap(d, var):
     # variance recomputed for each draw (weights change the cluster outer products for Webb weights)
     Vb = np.einsum("bg,gk,gl,k,l->b", W ** 2, Sg, Sg, Hi[0], Hi[0])
     tb = num / np.sqrt(Vb)
-    p_r = float(np.mean(np.abs(tb) >= abs(t0)))
+    p_r = float((1 + np.sum(np.abs(tb) >= abs(t0))) / (1 + len(tb)))
     # unrestricted variant: scores at the full-model estimates, observed Wald t
     r = sm.GLM(y, X, family=sm.families.Poisson()).fit(maxiter=300); mu1 = r.fittedvalues
     H1 = X.T @ (X * mu1[:, None]); H1i = np.linalg.pinv(H1); S1 = X * (y - mu1)[:, None]
     Sg1 = np.vstack([S1[g == k].sum(0) for k in range(G)])
     se1 = np.sqrt((H1i @ (Sg1.T @ Sg1) @ H1i)[0, 0]); tw = r.params[0] / se1
     num1 = (W @ Sg1) @ H1i[0]; Vb1 = np.einsum("bg,gk,gl,k,l->b", W ** 2, Sg1, Sg1, H1i[0], H1i[0])
-    p_u = float(np.mean(np.abs(num1 / np.sqrt(Vb1)) >= abs(tw)))
+    p_u = float((1 + np.sum(np.abs(num1 / np.sqrt(Vb1)) >= abs(tw))) / (1 + len(Vb1)))
     share = (Sg1 @ H1i[0]) ** 2; share = pd.Series(share / share.sum(), index=pd.factorize(d.prov)[1]).sort_values(ascending=False)
     lo = [100 * (np.exp(sm.GLM.from_formula(f"N ~ {var} + lnpop + C(prov)", data=d[d.prov != k], family=sm.families.Poisson()).fit(maxiter=300).params[var]) - 1)
           for k in np.unique(d.prov)]
