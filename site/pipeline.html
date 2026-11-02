@@ -120,6 +120,10 @@ svg.edges path.dim{stroke-opacity:.12}
 .node .big{display:block;font-family:var(--f-display);font-weight:600;font-size:30px;line-height:1.1;margin-top:4px}
 .node.sel{border-color:var(--laterite);box-shadow:0 0 0 2px var(--laterite)}
 .node.dim{opacity:.38}
+.node.plan{border-style:dashed;border-left-style:dashed;background-image:repeating-linear-gradient(135deg,transparent 0 9px,rgba(36,33,27,.025) 9px 18px)}
+.node .plan-tag{display:inline-block;margin-left:6px;font-size:10.5px;letter-spacing:.04em;padding:0 5px;border-radius:2px;background:#24211b;color:#f3f0e8;vertical-align:1px}
+.node.k-res .plan-tag{background:#d6a35c;color:#24211b}
+svg.edges path.plan{stroke-dasharray:5 4}
 .node svg text{font-family:var(--f-ui);fill:var(--ink-2)}
 /* panel */
 .panel{position:sticky;top:62px;background:var(--surface);border:1px solid var(--rule);border-radius:4px;padding:18px 20px;height:var(--stageh);overflow:auto;font-family:var(--f-ui);font-size:15px;color:var(--ink-2)}
@@ -240,6 +244,10 @@ const N = [
  {id:'rwi', col:0, k:'data', t:['Meta Relative Wealth Index','Meta 상대적 부 지수'],
   d:['Estimated wealth on a ~2.4 km grid.','약 2.4 km 격자의 추정 부.'],
   src:[['Chi et al. 2022','https://doi.org/10.1073/pnas.2113658119']], code:['kh_s10_rwi.py']},
+ {id:'census', col:0, k:'data', plan:true, t:['IPUMS census 2008 and 2019','IPUMS 센서스 2008·2019'],
+  d:['Household census samples on the same district units. Access requested; not yet opened.','같은 군 경계의 가구 센서스 표본. 이용 신청 후 승인 대기, 아직 열어 보지 않음.'],
+  src:[['IPUMS International','https://international.ipums.org/'],['Pre-registration','https://github.com/Qamar-econ/where-aid-lands/blob/main/%EC%82%AC%EC%A0%84%EB%93%B1%EB%A1%9D_%EC%84%BC%EC%84%9C%EC%8A%A4%EB%B6%84%EC%84%9D.md']],
+  how:['Household and person weights (HHWT, PERWT). Variables: electricity, water, toilet, floor, literacy, school attendance, mobile phone. The analysis plan was registered before the data arrive.','가구·개인 가중치(HHWT, PERWT). 변수: 전기, 식수, 화장실, 바닥재, 문해, 취학, 휴대전화. 분석 계획은 자료를 받기 전에 등록했습니다.']},
  {id:'dac', col:0, k:'data', t:['OECD DAC2A · total aid','OECD DAC2A · 전체 원조'],
   d:['Total aid to Cambodia 2017–2020, to measure GODAD’s coverage (33%).','2017–2020년 캄보디아 전체 원조. GODAD 포괄 범위(33%) 계산용.'],
   src:[['OECD Data Explorer','https://data-explorer.oecd.org/']]},
@@ -273,6 +281,16 @@ const N = [
  {id:'popi', col:1, k:'ind', t:['Population (control)','인구 (통제변수)'],
   d:['ln WorldPop 2019 population; its coefficient is the population elasticity θ.','WorldPop 2019년 인구의 로그. 계수가 인구 탄력성 θ.'],
   from:['pop','ipums'], code:['kh_s02_covariates.py'], files:[['kh_covariates.csv',D('kh_covariates.csv')]]},
+ {id:'depriv', col:1, k:'ind', plan:true, t:['Census deprivation index','센서스 박탈 지수'],
+  d:['Share of people in deprived households on six measures, equally weighted; 2019, with 2008 as a check.','6개 기준의 박탈 가구 인구 비율을 같은 비중으로 평균; 2019년, 2008년은 점검용.'],
+  from:['census','ipums'],
+  fx:'D_d = z\\Big(\\tfrac{1}{6}\\textstyle\\sum_{k=1}^{6} \\text{share deprived}_{dk}\\Big)',
+  how:['Deprived: no electricity; unimproved water; unimproved toilet; earth floor; no literate member aged 15+; a child aged 6–14 out of school. Measured by household survey, so it does not share the satellite and phone data behind the wealth index.','박탈 기준: 전기 없음, 개량되지 않은 식수, 개량되지 않은 화장실, 흙바닥, 15세 이상 문해자 없음, 학교에 다니지 않는 6–14세 아동. 가구 조사로 측정하므로 부 지수의 위성·휴대전화 자료와 측정 경로가 겹치지 않습니다.']},
+ {id:'phone', col:1, k:'ind', plan:true, t:['Mobile phone ownership','휴대전화 보유율'],
+  d:['Share of households with a mobile phone, 2019 and 2008 (before the projects), and its change.','휴대전화가 있는 가구 비율, 2019년과 2008년(사업 이전), 그리고 그 변화.'],
+  from:['census','ipums'],
+  fx:'P_d = \\text{share of households with a phone},\\qquad \\Delta P_d = P_{d,2019} - P_{d,2008}',
+  how:['The main measure of digital access once available: it records ownership directly, where Ookla speed is noisy and partly tracks where testers are. Ookla speed stays as a secondary measure of network quality and is not merged with it.','자료가 들어오면 디지털 접근성의 주 지표가 됩니다. 보유를 직접 재기 때문입니다. Ookla 속도는 잡음이 크고 측정자가 있는 곳을 일부 반영하므로, 망 품질의 보조 지표로 남기고 둘을 합치지 않습니다.']},
  {id:'prior', col:1, k:'ind', t:['Earlier infrastructure','이전 인프라'],
   d:['1 if a transport or energy project started in the district in 2010–2016.','2010–2016년에 교통·에너지 사업이 착수된 군이면 1.'],
   from:['godad','ipums'], code:['kh_s06_ladder.py']},
@@ -302,6 +320,12 @@ const N = [
   files:[['kh_ext_A_bounds.csv',TB('kh_ext_A_bounds.csv')],['kh_geobias_checks.csv',TB('kh_geobias_checks.csv')],['kh_access_sensitivity.csv',TB('kh_access_sensitivity.csv')],['kh_access_audit_variants.csv',TB('kh_access_audit_variants.csv')],['kh_ext_B_event.csv',TB('kh_ext_B_event.csv')]],
   how:['Robustness checks report clustered and Conley p unless stated otherwise.','강건성 점검은 따로 밝히지 않으면 군집·Conley p를 보고합니다.']},
 
+ {id:'census_m', col:2, k:'model', plan:true, t:['Census tests (pre-registered)','센서스 검정 (사전등록)'],
+  d:['Three confirmatory tests with the same PPML and inference rule, Holm-corrected.','같은 PPML과 추론 규칙의 확증 검정 세 개, Holm 보정.'],
+  from:['depriv','phone','table'],
+  fx:'\\begin{aligned} &\\text{H-C1: } X_d = D_d \\ (\\beta<0) \\\\ &\\text{H-C2: } X_d = P_d \\ (\\beta>0) \\\\ &\\text{H-C3: } \\mathbb{E}[N_{dt}]=\\exp(\\mu_d+\\lambda_t+\\beta P_{dt}) \\end{aligned}',
+  how:['H-C1b puts deprivation and physical access in one model to tell poverty from remoteness, interpreted only if their correlation is below 0.7 (fixed in advance). H-C3 compares 2009–12 and 2017–20 projects with district fixed effects, removing everything fixed about a district. Exploratory: ownership × speed.','H-C1b는 박탈과 물리적 접근성을 한 모형에 넣어 빈곤과 오지를 구분하며, 둘의 상관이 0.7 미만일 때만 해석합니다(미리 고정). H-C3는 2009–12년과 2017–20년 사업을 군 고정효과로 비교해 군의 고정된 특성을 모두 제거합니다. 탐색적 분석: 보유율 × 속도.'],
+  src:[['Pre-registration','https://github.com/Qamar-econ/where-aid-lands/blob/main/%EC%82%AC%EC%A0%84%EB%93%B1%EB%A1%9D_%EC%84%BC%EC%84%9C%EC%8A%A4%EB%B6%84%EC%84%9D.md']]},
  {id:'rmain', col:3, k:'res', t:['Single-factor effects','단일 요인 효과'], viz:'forest',
   d:['Percent change in projects per SD; most conservative p.','1표준편차당 사업 수 변화율, 가장 보수적인 p.'],
   from:['ppml','inf'], files:[['kh_published.csv',D('kh_published.csv')]],
@@ -314,9 +338,13 @@ const N = [
   d:['Realistic geocoding bounds +123% to +199%; index variants +131% to +177%.','현실적 지오코딩 경계 +123%~+199%, 지수 변형 +131%~+177%.'],
   from:['rob','inf'],
   tbl:[['Geocoding bounds (realistic)','지오코딩 경계 (현실적)','+123% to +199%',''],['Worst case','최악 가정','+68%','0.063'],['20 index variants','지수 변형 20개','+131% to +177%',''],['Class speeds only','등급별 속도만','+166%','0.001'],['Without the two most influential provinces','영향 큰 두 주 제외','+147%','<0.001'],['Wild cluster bootstrap (null imposed)','Wild cluster 부트스트랩 (귀무 부과)','','0.077']]},
+ {id:'rcensus', col:3, k:'res', plan:true, t:['Next: poverty or remoteness?','다음 단계: 빈곤인가 오지인가'],
+  d:['What the census will settle: whether donors avoid poor districts or remote ones, and whether phones matter apart from roads.','센서스로 가릴 질문: 공여자가 가난한 군을 피하는지 외딴 군을 피하는지, 통신이 도로와 별개로 중요한지.'],
+  from:['census_m'],
+  tbl:[['Deprivation matters with access held fixed','접근성을 고정해도 박탈이 유의','→ poverty avoided','→ 빈곤 회피'],['Only access matters','접근성만 유의','→ remoteness avoided','→ 오지 회피'],['Phone ownership matters apart from roads','도로와 별개로 보유율이 유의','→ digital access','→ 디지털 접근성']]},
  {id:'concl', col:3, k:'res', t:['Conclusion','결론'],
   d:['Aid goes where it is easy to reach. Poverty and remoteness overlap, so the census will test which one donors avoid.','원조는 닿기 쉬운 곳으로 갑니다. 빈곤과 오지가 겹쳐, 공여자가 어느 쪽을 피하는지는 센서스로 검정합니다.'],
-  from:['rmain','rjoint','rrob'],
+  from:['rmain','rjoint','rrob','rcensus'],
   how:['Associations within provinces, not causal effects. Covers GODAD donors (about a third of aid to Cambodia) plus China.','같은 주 안의 연관이며 인과 효과가 아닙니다. GODAD 공여자(캄보디아 원조의 약 3분의 1)와 중국을 포괄합니다.']}
 ];
 const byId = Object.fromEntries(N.map(n => [n.id, n]));
@@ -341,10 +369,10 @@ function shap(){ const s = [[39,'#0b6b6b','Physical','물리적'],[20,'#a8461f',
 
 const KIND = {data:['Data','데이터'], ind:['Indicator','지표'], model:['Model','모형'], res:['Result','결과']};
 N.forEach(n => {
-  const b = document.createElement('button'); b.className = `node k-${n.k}`; b.dataset.id = n.id; b.type = 'button';
+  const b = document.createElement('button'); b.className = `node k-${n.k}${n.plan ? ' plan' : ''}`; b.dataset.id = n.id; b.type = 'button';
   const tags = [...(n.files || []).map(() => 'CSV'), ...(n.code || []).map(() => 'PY')];
   const tg = [tags.includes('CSV') ? `CSV ×${tags.filter(t => t === 'CSV').length}` : '', tags.includes('PY') ? `.py ×${tags.filter(t => t === 'PY').length}` : '', n.src ? T('source', '출처') : ''].filter(Boolean);
-  b.innerHTML = `<span class="kind"><span class="en">${KIND[n.k][0]}</span><span class="ko">${KIND[n.k][1]}</span></span><b><span class="en">${n.t[0]}</span><span class="ko">${n.t[1]}</span></b>` +
+  b.innerHTML = `<span class="kind"><span class="en">${KIND[n.k][0]}</span><span class="ko">${KIND[n.k][1]}</span>${n.plan ? `<span class="plan-tag">${T('PLANNED', '예정')}</span>` : ''}</span><b><span class="en">${n.t[0]}</span><span class="ko">${n.t[1]}</span></b>` +
     `<span class="d"><span class="en">${n.d[0]}</span><span class="ko">${n.d[1]}</span></span>` + (n.viz === 'forest' ? forest() : n.viz === 'shap' ? shap() : '') +
     (tg.length ? `<span class="tags">${tg.map(t => `<span>${t}</span>`).join('')}</span>` : '');
   b.addEventListener('click', ev => { if (moved) { ev.preventDefault(); return; } select(n.id); });
@@ -363,7 +391,7 @@ function layout(){
   const port = (n, list, other) => { const k = list.indexOf(other), m = list.length; return n.y + n.h * (m === 1 ? .5 : .2 + .6 * k / (m - 1)); };
   Object.values(outs).forEach(l => l.sort((p, q) => byId[p].y - byId[q].y)); Object.values(ins).forEach(l => l.sort((p, q) => byId[p].y - byId[q].y));
   svg.innerHTML = E.map(([a, b]) => { const A = byId[a], B = byId[b], x1 = A.x + W, y1 = port(A, outs[a], b), x2 = B.x, y2 = port(B, ins[b], a), dx = Math.max(60, (x2 - x1) * .5);
-    return `<path class="e-${A.k}" data-a="${a}" data-b="${b}" d="M${x1},${y1} C${x1 + dx},${y1} ${x2 - dx},${y2} ${x2},${y2}"/>`; }).join('');
+    return `<path class="e-${A.k}${A.plan || B.plan ? ' plan' : ''}" data-a="${a}" data-b="${b}" d="M${x1},${y1} C${x1 + dx},${y1} ${x2 - dx},${y2} ${x2},${y2}"/>`; }).join('');
 }
 
 /* ---------------- pan and zoom ---------------- */
@@ -460,7 +488,7 @@ function render(){ const P = document.getElementById('panel');
     <p>${T('Grey boxes are public sources, teal boxes indicators built for this study, rust boxes statistical models, black boxes results. Lines show what feeds what; selecting a box highlights everything upstream and downstream of it.','회색은 공개 자료, 청록은 이 연구에서 만든 지표, 적갈색은 통계 모형, 검정은 결과입니다. 선은 무엇이 무엇에 쓰였는지 보여 주고, 상자를 고르면 그 앞뒤로 연결된 단계가 모두 강조됩니다.')}</p>
     <p>${T('Each box lists the files it produced and the script that made them. Files are the published versions; your own run of the script should reproduce them, and kh_compare.py shows any difference.','상자마다 결과 파일과 그 파일을 만든 스크립트가 있습니다. 파일은 발표본이며, 스크립트를 직접 실행하면 같은 파일이 나와야 합니다. 차이는 kh_compare.py로 확인할 수 있습니다.')}</p>`; return; }
   const n = byId[cur], L = KO() ? 1 : 0;
-  let h = `<div class="kind">${KIND[n.k][L]}</div><h3>${n.t[L]}</h3><p>${n.d[L]}</p>`;
+  let h = `<div class="kind">${KIND[n.k][L]}${n.plan ? ' · ' + T('planned, after IPUMS approval', 'IPUMS 승인 후 예정') : ''}</div><h3>${n.t[L]}</h3><p>${n.d[L]}</p>`;
   if (n.how) h += `<h4>${T('How it is built','만드는 방법')}</h4><p>${n.how[L]}</p>`;
   if (n.fx) h += `<div class="fx">\\[${n.fx}\\]</div>`;
   if (n.tbl) h += `<table>${n.tbl.map(r => `<tr><td>${r[L]}</td><td class="r">${r[2]}</td><td class="r">${r[3] ? 'p ' + r[3] : ''}</td></tr>`).join('')}</table>`;
@@ -484,6 +512,7 @@ function setLang(l){ document.documentElement.lang = l; try { localStorage.setIt
   document.querySelectorAll('.node svg tspan.en').forEach(t => t.style.display = l === 'ko' ? 'none' : '');
   document.querySelectorAll('.kotxt-h').forEach(t => t.style.display = l === 'ko' ? '' : 'none');
   document.querySelectorAll('.entxt-h').forEach(t => t.style.display = l === 'ko' ? 'none' : '');
+  N.forEach(n => { const pt = n.el.querySelector('.plan-tag'); if (pt) pt.textContent = T('PLANNED', '예정'); });
   N.forEach(n => { const tg = n.el.querySelector('.tags'); if (tg) tg.innerHTML = tg.innerHTML.replace(/source|출처/, T('source', '출처')); });
   requestAnimationFrame(() => { layout(); if (cur) select(cur); else if (curCol !== null) selectCol(curCol, false); render(); }); }
 document.querySelectorAll('[data-lang]').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
