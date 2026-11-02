@@ -38,6 +38,10 @@ dl("osm", "cambodia-170101.osm.pbf", "https://download.geofabrik.de/asia/cambodi
 z = dl("moh_health", "health_facility.zip", "https://data.humdata.org/dataset/1803994d-6218-4b98-ac3a-30c7f85c6dbc/resource/f30b0f4b-1c40-45f3-986d-2820375ea8dd/download/health_facility.zip")
 if z and not (RAW / "moh_health/Health").exists():
     zipfile.ZipFile(z).extractall(RAW / "moh_health")
+# Malaria Atlas Project accessibility maps clipped to Cambodia, for external validation (kh_s29, spec 9-18)
+for cov in ["Accessibility__201501_Global_Travel_Time_to_Cities", "Accessibility__202001_Global_Motorized_Travel_Time_to_Healthcare"]:
+    dl("map_access", cov + ".tif", "https://data.malariaatlas.org/geoserver/Accessibility/wcs?service=WCS&version=2.0.1&request=GetCoverage"
+       f"&coverageId={cov}&subset=Lat(10.3,14.8)&subset=Long(102.3,107.7)&format=image/geotiff")
 g = RAW / "geonames" / "KH.txt"
 if not g.exists():
     g.parent.mkdir(parents=True, exist_ok=True)

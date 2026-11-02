@@ -1,0 +1,16 @@
+== 1. agreement with the Malaria Atlas Project maps
+  cells with both values: 214,378 of 214,537
+  cell level, Spearman(our time to towns 20k+, Weiss 2018 time to cities 50k+) = 0.78
+  district level, corr(log our time to towns, log Weiss time to cities) = 0.83  (143 districts)
+  district level, corr(log our time to hospital, log Weiss 2020 time to healthcare) = 0.91
+  district level, corr(our physical-access index, -log Weiss time to cities) = 0.82
+  median district travel time to the nearest destination: ours to towns 127 min, Weiss to cities 76 min
+
+== 2. the headline model with external accessibility measures
+  our physical-access index (main)                                 +165%  p 0.001  n 141
+  -ln Weiss et al. 2018 travel time to cities (district mean)      +142%  p 0.001  n 141
+  -ln Weiss et al. 2020 travel time to healthcare                  +134%  p 0.005  n 141
+
+== 3. 2015 population weights
+  corr with main index 0.999
+  index with 2015 WorldPop weights                                 +163%  p 0.001  n 141

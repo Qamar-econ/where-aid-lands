@@ -130,7 +130,8 @@ for nm, xy in [("town", towns), ("hq", hq_xy), ("hosp", HOSP)]:
     T[nm + "_dry"] = dijkstra(Gd, indices=snap(xy), directed=False, min_only=True)
 T["town_wet"] = dijkstra(Gw, indices=snap(towns), directed=False, min_only=True)
 
-with rasterio.open(RAW / "worldpop/khm_ppp_2020_1km.tif") as s:
+POPYEAR = os.environ.get("KH_POPYEAR", "2020")   # weights for district means; 2015 = before the projects (audit variant)
+with rasterio.open(RAW / f"worldpop/khm_ppp_{POPYEAR}_1km.tif") as s:
     a = s.read(1); t = s.transform
 rr, cc = np.where(a > 0); xs, ys = rasterio.transform.xy(t, rr, cc)
 cells = gpd.GeoDataFrame({"pop": a[rr, cc]}, geometry=gpd.points_from_xy(xs, ys), crs=4326)
