@@ -46,7 +46,7 @@ xs = np.linspace(d.phys.min(), d.phys.max(), 50)
 ax.plot(xs, r1.params["Intercept"] + r1.params["phys"] * xs, color=RUST, lw=2, label="OLS 직선")
 ax.plot(xs, np.exp(np.log(d.N.mean()) - r5.params["phys"] * d.phys.mean() + r5.params["phys"] * xs) * 1, color=INK, lw=1.6, ls="--", label="지수 곡선 (포아송)")
 ax.axhline(0, color=GREY, lw=.8)
-ax.set_xlabel("도로 접근성 지수 (표준화, SD)"); ax.set_ylabel("군의 신규 사업 수 N")
+ax.set_xlabel("물리적 접근성 지수 (표준화, SD)"); ax.set_ylabel("군의 신규 사업 수 N")
 ax.legend(frameon=False, fontsize=9); ax.spines[["top", "right"]].set_visible(False)
 fig.tight_layout(); fig.savefig(OUT / "fig_scatter.png"); plt.close(fig)
 
@@ -64,7 +64,7 @@ for c, (k, gg) in zip(cols, d.groupby("prov").filter(lambda x: len(x) >= 9).grou
     ax.scatter(gg.phys, gg.N / gg.pop_2019 * 1e5, s=18, color=c, label={"2": "바탐방 주", "14": "프레이벵 주", "17": "시엠립 주"}.get(k, f"주 {k}"))
     z = np.polyfit(gg.phys, gg.N / gg.pop_2019 * 1e5, 1); xx = np.linspace(gg.phys.min(), gg.phys.max(), 10)
     ax.plot(xx, np.polyval(z, xx), color=c, lw=1.4)
-ax.set_xlabel("도로 접근성 지수 (SD)"); ax.set_ylabel("인구 10만 명당 사업 수")
+ax.set_xlabel("물리적 접근성 지수 (SD)"); ax.set_ylabel("인구 10만 명당 사업 수")
 ax.legend(frameon=False, fontsize=8); ax.spines[["top", "right"]].set_visible(False)
 fig.tight_layout(); fig.savefig(OUT / "fig_within.png"); plt.close(fig)
 
