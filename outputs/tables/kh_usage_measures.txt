@@ -1,0 +1,8 @@
+== reliability between half-years (districts in the sample)
+  log tests per 1,000 people   r = 0.86, pooled reliability 0.92
+  footprint share              r = 0.99, pooled reliability 1.00
+  (mobile speed, for comparison: r = 0.35, reliability 0.52; kh_s20)
+
+== effects (PPML, province FE, ln pop); p_max = larger of clustered and Conley 50/100 km
+  log tests per 1,000 people: alone +160% (p 0.002) | with physical access +80% (p 0.224), physical access +56% (p 0.359) | corr with physical access 0.61
+  footprint share: alone +125% (p 0.009) | with physical access +9% (p 0.855), physical access +142% (p 0.051) | corr with physical access 0.88
