@@ -26,6 +26,9 @@ SUF = "" if SNAP == "170101" else f"_{SNAP}"; OSM_FILE = f"cambodia-{SNAP}.osm.p
 UNPAVED_F = float(os.environ.get("KH_UNPAVED", "0.7")); MINOR_S = float(os.environ.get("KH_MINOR_SCALE", "1"))
 # input-audit variants (kh_s19): towns = the 25 provincial capitals instead of GeoNames places >= 20k; untagged secondary
 # roads treated as paved; grade measured over at least one DEM cell (185 m) so short segments get no spurious grade
+# KH_SURFACE=class ignores OSM surface tags (present on ~20% of 2017 road length): dry speeds by road class only, wet-season
+# factor by class group (secondary and above x0.85, below x0.5), and no paved-share component
+CLASS_ONLY = os.environ.get("KH_SURFACE") == "class"
 TOWNS = os.environ.get("KH_TOWNS", "pop20k"); SEC_PAVED = os.environ.get("KH_SEC_PAVED") == "1"; GRADE_MIN_KM = float(os.environ.get("KH_GRADE_MIN_KM", "0"))
 if os.environ.get("KH_TAG"):
     SUF += "_" + os.environ["KH_TAG"]
@@ -63,6 +66,8 @@ class H(osmium.SimpleHandler):
             return
         surf = w.tags.get("surface")
         paved = True if surf in PAVED else (False if surf in UNPAVED else hw in DEF_PAVED)
+        if CLASS_ONLY:
+            paved = hw in DEF_PAVED | {"secondary", "secondary_link"}
         try:
             ns = [(n.ref, n.lon, n.lat) for n in w.nodes]
         except osmium.InvalidLocationError:
@@ -87,7 +92,7 @@ gy, gx = np.gradient(z)
 slope = np.degrees(np.arctan(np.hypot(gx / (tr.a * 111320 * np.cos(np.radians(latc)))[:, None], gy / (abs(tr.e) * 110570)))); del gx, gy
 ls = slope[ix((E.x1 + E.x2) / 2, (E.y1 + E.y2) / 2)]
 v = E.hw.map(BASE).astype(float).values
-v = np.where(E.paved, v, np.minimum(v, 25) * UNPAVED_F) * np.clip(1 - 2.0 * E.grade.values, 0.4, 1)
+v = (v if CLASS_ONLY else np.where(E.paved, v, np.minimum(v, 25) * UNPAVED_F)) * np.clip(1 - 2.0 * E.grade.values, 0.4, 1)
 E["v_dry"], E["v_wet"] = v, v * np.where(E.paved, 0.85, 0.5) * np.where(ls > 25, 0.7, 1.0)
 ids = pd.Index(pd.unique(np.r_[E.a.values, E.b.values])); ai, bi = ids.get_indexer(E.a), ids.get_indexer(E.b); n = len(ids)
 coords = pd.concat([pd.DataFrame({"n": E.a, "x": E.x1, "y": E.y1}), pd.DataFrame({"n": E.b, "x": E.x2, "y": E.y2})]).drop_duplicates("n").set_index("n").loc[ids]
@@ -160,6 +165,8 @@ comp = pd.DataFrame({"neg_ln_tt_town_dry": -np.log(A.tt_town_dry), "neg_ln_tt_to
                      "neg_ln_tt_hosp": -np.log(A.tt_hosp_dry), "neg_ln_walk": -np.log(A.walk_min), "share_walk30": A.share_walk30,
                      "ln_road_density": np.log(A.road_density), "paved_share": A.paved_share, "neg_wet_penalty": -A.wet_penalty_share,
                      "neg_steep_share": -A.steep_share}).replace([np.inf, -np.inf], np.nan)
+if CLASS_ONLY:
+    comp = comp.drop(columns="paved_share")
 comp = comp.fillna(comp.median())
 Zc = (comp - comp.mean()) / comp.std()
 w, V = np.linalg.eigh(np.cov(Zc.T)); pc = V[:, -1] * np.sign(V[:, -1].sum())
