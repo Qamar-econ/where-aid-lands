@@ -1,0 +1,15 @@
+major road projects added: 9 projects, 53 district-project pairs
+panel: 129 districts x 21 years = 2709 obs | district-years with a new infrastructure activity (as lag 1): 207 | with a new social activity: 242
+ outcome                  spec                    term     pct   ci_lo   ci_hi     p  districts
+noninfra    infra lags + leads  infra, sum of lags 1-5  39.811 -16.179 133.201 0.199         99
+noninfra    infra lags + leads   infra leads (placebo)  18.686  -9.641  55.892 0.218         99
+noninfra infra and social lags  infra, sum of lags 1-5  13.160 -30.900  85.316 0.623         99
+noninfra infra and social lags social, sum of lags 1-5 -26.659 -71.060  85.867 0.513         99
+newdonor    infra lags + leads  infra, sum of lags 1-5   1.159 -66.932 209.457 0.984         93
+newdonor    infra lags + leads   infra leads (placebo)  35.846 -23.507 141.251 0.296         93
+newdonor infra and social lags  infra, sum of lags 1-5   3.533 -62.387 184.987 0.946         93
+newdonor infra and social lags social, sum of lags 1-5 -84.135 -96.945 -17.617 0.028         93
+  social    infra lags + leads  infra, sum of lags 1-5 212.974  46.029 570.776 0.003         84
+  social    infra lags + leads   infra leads (placebo)  66.500   6.337 160.701 0.026         84
+  social infra and social lags  infra, sum of lags 1-5 103.212   3.653 298.397 0.039         84
+  social infra and social lags social, sum of lags 1-5 -30.610 -79.798 138.343 0.562         84
