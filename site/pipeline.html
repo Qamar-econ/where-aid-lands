@@ -40,7 +40,11 @@ a{color:var(--teal)}
 .chap{font-family:var(--f-display);font-style:italic;font-size:19px;color:var(--laterite)}
 h1{font-family:var(--f-title);font-weight:600;font-size:clamp(32px,4.6vw,48px);line-height:1.08;margin:6px 0 14px}
 .lead{font-size:19px;line-height:1.55;max-width:72ch;color:var(--ink-2);margin:0 0 22px}
-.entries{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.introgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,560px);gap:32px;align-items:start}
+@media (max-width:1000px){.introgrid{grid-template-columns:minmax(0,1fr)}}
+.introgrid .lead{margin-bottom:0}
+.entries{display:grid;grid-template-columns:minmax(0,1fr);gap:10px}
+.entry{padding:13px 16px}
 .entry{background:var(--surface);border:1px solid var(--rule);border-radius:4px;padding:16px 18px;font-family:var(--f-ui);font-size:15px;color:var(--ink-2)}
 .entry h2{font-family:var(--f-ui);font-size:16.5px;font-weight:600;color:var(--ink);margin:0 0 6px}
 .entry p{margin:0 0 10px}
@@ -67,13 +71,25 @@ h1{font-family:var(--f-title);font-weight:600;font-size:clamp(32px,4.6vw,48px);l
 .colhead{position:absolute;top:18px;font-family:var(--f-display);font-style:italic;font-size:22px;color:var(--laterite);white-space:nowrap}
 .colhead small{display:block;font-family:var(--f-ui);font-style:normal;font-size:13px;color:var(--ink-3)}
 svg.edges{position:absolute;left:0;top:0;overflow:visible;pointer-events:none}
-svg.edges path{fill:none;stroke:#cfc7b6;stroke-width:1.4}
-svg.edges path.on{stroke:var(--laterite);stroke-width:2.2}
-svg.edges path.dim{stroke:#e6e0d4}
+/* lines take the colour of the step they leave from */
+svg.edges path{fill:none;stroke-width:1.5;stroke-opacity:.55;transition:stroke-opacity .15s}
+svg.edges path.e-data{stroke:#8f8676} svg.edges path.e-ind{stroke:#2f8a80} svg.edges path.e-model{stroke:#c0663d}
+svg.edges path.on{stroke-width:2.6;stroke-opacity:1}
+svg.edges path.dim{stroke-opacity:.12}
+.colhead.c0{color:#6e675b} .colhead.c1{color:#0b6b6b} .colhead.c2{color:#a8461f} .colhead.c3{color:#24211b}
 .node{position:absolute;width:300px;text-align:left;background:#fffdf8;border:1px solid var(--rule);border-left:4px solid var(--k-data);border-radius:4px;padding:11px 13px 12px;
   font-family:var(--f-ui);color:var(--ink);cursor:pointer;box-shadow:0 1px 0 rgba(36,33,27,.04);transition:opacity .15s,box-shadow .15s}
 .node:hover{box-shadow:0 4px 14px rgba(36,33,27,.10)}
-.node.k-ind{border-left-color:var(--k-ind)} .node.k-model{border-left-color:var(--k-model)} .node.k-res{border-left-color:var(--k-res)}
+/* one colour family per kind of step: stone for sources, teal for indicators, laterite for models, ink for results */
+.node.k-data{background:#f6f3ec;border-color:#ddd5c6;border-left-color:#8f8676}
+.node.k-ind{background:#e9f2ee;border-color:#c4dbd2;border-left-color:#0b6b6b}
+.node.k-ind .kind{color:#0b6b6b}
+.node.k-model{background:#f8ece5;border-color:#ebd0c2;border-left-color:#a8461f}
+.node.k-model .kind{color:#a8461f}
+.node.k-res{background:#2d2a24;border-color:#2d2a24;border-left-color:#d6a35c;color:#f3f0e8}
+.node.k-res .kind{color:#d6a35c} .node.k-res .d{color:#d9d3c6}
+.node.k-res .tags span{color:#d9d3c6;border-color:#55504a}
+.node.k-res svg text{fill:#e9e4d8} .node.k-res svg line{stroke:#6b655c}
 .node .kind{display:block;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);margin-bottom:2px}
 .node b{display:block;font-size:16px;font-weight:600;line-height:1.3}
 .node .d{display:block;font-size:13.5px;line-height:1.45;color:var(--ink-2);margin-top:4px}
@@ -113,10 +129,12 @@ footer{border-top:1px solid var(--ink);color:var(--ink-3);padding-block:24px 40p
 
 <main>
 <section class="intro pad"><div class="wide">
+  <div class="introgrid"><div>
   <div class="chap en">Research pipeline</div><div class="chap ko">연구 흐름</div>
   <h1 class="en">From raw data to conclusions</h1><h1 class="ko">원자료에서 결론까지</h1>
   <p class="lead en">Every step of the study, left to right: the public sources, the indicators built from them, the models, and the results. Select a box to see how it was made, the files it produced and the Python code that made it. Drag to move, scroll or pinch to zoom.</p>
   <p class="lead ko">연구의 모든 단계를 왼쪽에서 오른쪽으로 보여 줍니다. 공개 자료, 그 자료로 만든 지표, 통계 모형, 결과 순서입니다. 상자를 누르면 만드는 방법, 결과 파일, 그 파일을 만든 Python 코드가 나옵니다. 끌어서 움직이고, 스크롤하거나 두 손가락으로 확대·축소할 수 있습니다.</p>
+  </div>
   <div class="entries">
     <div class="entry">
       <h2 class="en">A. Check the models in ten minutes</h2><h2 class="ko">A. 10분 안에 모형 확인하기</h2>
@@ -130,6 +148,7 @@ footer{border-top:1px solid var(--ink);color:var(--ink-3);padding-block:24px 40p
       <p class="ko">상자를 왼쪽부터 따라갑니다. 상자마다 실행할 스크립트와, <code>kh_compare.py</code>로 대조할 발표 파일이 있습니다. 실행 순서와 폴더 구조는 README에 있습니다.</p>
       <div class="act"><a class="dl" href="dl/code/README_pipeline.md" download>README_pipeline.md</a><a class="dl code" href="dl/code/kh_compare.py" download>kh_compare.py</a><a class="dl code" href="dl/code/kh_fetch.py" download>kh_fetch.py</a></div>
     </div>
+  </div>
   </div>
 </div></section>
 
@@ -282,7 +301,7 @@ const E = []; N.forEach(n => (n.from || []).forEach(f => E.push([f, n.id])));
 const COLX = [40, 470, 900, 1330], W = 300, TOP = 96, GAP = 14;
 const cv = document.getElementById('cv'), vp = document.getElementById('vp'), svg = document.getElementById('edges');
 const heads = [['1 · Data','1 · 데이터','Public sources','공개 자료'],['2 · Indicators','2 · 지표','Built for this study','이 연구에서 계산'],['3 · Statistical models','3 · 통계 모형','Estimation and inference','추정과 추론'],['4 · Results','4 · 결과','What the data show','자료가 보여 주는 것']];
-heads.forEach((h, i) => { const el = document.createElement('div'); el.className = 'colhead'; el.style.left = COLX[i] + 'px';
+heads.forEach((h, i) => { const el = document.createElement('div'); el.className = `colhead c${i}`; el.style.left = COLX[i] + 'px';
   el.innerHTML = `<span class="en">${h[0]}</span><span class="ko">${h[1]}</span><small class="en">${h[2]}</small><small class="ko">${h[3]}</small>`; cv.appendChild(el); });
 
 function forest(){ const rows = [['Physical','물리적',165,1],['Digital','디지털',80,0],['Lights','불빛',101,0],['Poverty','빈곤',-49,1]];
@@ -319,7 +338,7 @@ function layout(){
   const port = (n, list, other) => { const k = list.indexOf(other), m = list.length; return n.y + n.h * (m === 1 ? .5 : .2 + .6 * k / (m - 1)); };
   Object.values(outs).forEach(l => l.sort((p, q) => byId[p].y - byId[q].y)); Object.values(ins).forEach(l => l.sort((p, q) => byId[p].y - byId[q].y));
   svg.innerHTML = E.map(([a, b]) => { const A = byId[a], B = byId[b], x1 = A.x + W, y1 = port(A, outs[a], b), x2 = B.x, y2 = port(B, ins[b], a), dx = Math.max(60, (x2 - x1) * .5);
-    return `<path data-a="${a}" data-b="${b}" d="M${x1},${y1} C${x1 + dx},${y1} ${x2 - dx},${y2} ${x2},${y2}"/>`; }).join('');
+    return `<path class="e-${A.k}" data-a="${a}" data-b="${b}" d="M${x1},${y1} C${x1 + dx},${y1} ${x2 - dx},${y2} ${x2},${y2}"/>`; }).join('');
 }
 
 /* ---------------- pan and zoom ---------------- */
