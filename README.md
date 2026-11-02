@@ -1,11 +1,11 @@
-# Where Aid Lands: Roads, Connectivity, or Need? Evidence from Cambodia
+# Where Aid Lands: Roads, Connectivity, or Poverty? Evidence from Cambodia
 
 Tae Yoon Moon (University of Seoul) · Claude Opus 5.5 (Anthropic)
 Working results, November 2026. Census (IPUMS) indicators are pending.
 
 Do development projects go where people are poorest, or where they are easiest to reach? We place geocoded aid projects
-starting 2017–2020 (GODAD) onto Cambodia's 141 harmonised districts and compare road access, mobile connectivity,
-economic activity (night lights) and need (Meta Relative Wealth Index), one construct per model, with PPML and province
+starting 2017–2020 (GODAD) onto Cambodia's 141 harmonised districts and compare physical access (roads), digital access (mobile),
+economic activity (night lights) and poverty (Meta Relative Wealth Index), one construct per model, with PPML and province
 fixed effects.
 
 **Website:** the project page is published from `site/` with GitHub Pages (see *Settings → Pages* for the address).
