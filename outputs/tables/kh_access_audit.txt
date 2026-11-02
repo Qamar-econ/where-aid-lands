@@ -1,0 +1,64 @@
+== 1. towns >= 20k: 33
+               name fcode       pop      lat       lon
+         Phnom Penh  PPLC 1573544.0 11.56245 104.91601
+              Takeo  PPLA  843931.0 10.99081 104.78498
+          Siem Reap  PPLA  139458.0 13.36179 103.86056
+         Battambang  PPLA  119251.0 13.10271 103.19822
+          Paoy Paet   PPL   98934.0 13.65805 102.56365
+            Dangkao   PPL   76421.0 11.50881 104.89144
+    Kampong Chhnang  PPLA   75244.0 12.25000 104.66667
+      Sihanoukville  PPLA   73036.0 10.60932 103.52958
+      Preaek Prasab PPLA2   64466.0 12.35367 106.03562
+       Kampong Cham  PPLA   61750.0 11.99339 105.46350
+      Anlong Veaeng PPLA2   56927.0 14.23223 104.08107
+             Pursat  PPLA   52476.0 12.53878 103.91920
+           Ta Khmau  PPLA   52066.0 11.48333 104.95000
+   Phumĭ Yoŭl Toŭng   PPL   44395.0 11.28233 104.73796
+     Phumĭ Véal Srê   PPL   44270.0 10.98081 104.77828
+              Bavet   PPL   43783.0 11.06317 106.13557
+                Kep  PPLA   35990.0 10.48291 104.31672
+           Kandoeng   PPL   33827.0 11.29163 104.84103
+       Kampong Speu  PPLA   33231.0 11.45332 104.52085
+           Koh Kong  PPLA   33134.0 11.61531 102.98380
+          Prey Veng  PPLA   33079.0 11.48682 105.32533
+              Suong  PPLA   30000.0 11.91178 105.65821
+    Smach Mean Chey PPLA2   29329.0 11.54665 103.03569
+  Phumĭ Véal Tônsay   PPL   25168.0 11.69616 104.58062
+        Stung Treng  PPLA   25000.0 13.52586 105.96830
+      Boeng Kak Pir   PPL   24937.0 11.57269 104.89022
+     Tbeng Meanchey  PPLA   24380.0 13.80731 104.98046
+         Svay Rieng  PPLA   23956.0 11.08785 105.79935
+           Sisophon  PPLA   23218.0 13.58588 102.97369
+Chrang Chamreh Muoy   PPL   22911.0 11.63049 104.88542
+                Dar   PPL   22898.0 11.78851 106.09334
+             Kampot  PPLA   22691.0 10.61041 104.18145
+        Phumĭ Tnaôt   PPL   21727.0 12.94731 104.56914
+towns within 3 km of another town (sections of one city): 2
+
+== 2. districts with a GeoNames seat: 95 of 143 | fallback to centroid: 48
+distance from real seat to the district's representative point, km (where both exist): median 8.0 | p75 14.5 | max 64.2
+missing districts with a populated place whose name matches the district name: 14 of 48
+
+== 3. hospital features: 110 | distinct within 200 m: 110 | districts with >= 1: 46 of 143
+provinces without a hospital in OSM 2017: ['023', '088', '099']
+
+== 4. surface tags by class (untagged default: paved for motorway/trunk/primary, unpaved otherwise)
+                     km  tagged_share  paved_if_tagged
+hw                                                    
+trunk          1926.416         0.222            0.988
+primary        2255.994         0.261            0.699
+secondary      3103.624         0.213            0.633
+tertiary       5279.803         0.300            0.279
+unclassified  17622.368         0.189            0.037
+residential   14894.129         0.054            0.081
+track         10557.936         0.097            0.002
+service        1029.366         0.037            0.446
+path            498.533         0.256            0.041
+
+== 5. road grade (DEM cell ~185 m)
+segment length, m: median 52 | share of length in segments < 185 m: 0.481
+share of road length slowed by >10% (grade > 5%): 0.036
+  on flat terrain (slope < 2 deg): 0.015 | on segments < 185 m: 0.967 of that length
+length-weighted mean speed factor from grade: all 0.981 | flat 0.987
+
+== 6. terrain slope: share of land > 25 deg 0.0034 | p99 slope 20.5 deg
