@@ -213,7 +213,7 @@ footer b{color:var(--ink);font-weight:600}
     <div><b>+165%</b><span class="en">more projects per standard deviation of physical access, within the same province</span><span class="ko">같은 주(province) 안에서 물리적 접근성이 1표준편차 높을 때 늘어나는 사업 수</span></div>
     <div><b>39%</b><span class="en">of the explained variation is carried by physical access, more than any other factor</span><span class="ko">설명력 가운데 물리적 접근성의 몫 (다섯 요인 중 가장 큼)</span></div>
     <div><b>−49%</b><span class="en">fewer projects per standard deviation of poverty, entangled with remoteness</span><span class="ko">빈곤 1표준편차당 줄어드는 사업 수 (오지 여부와 겹침)</span></div>
-    <div><b>0</b><span class="en">detectable pull of earlier infrastructure on later projects in an event study</span><span class="ko">사건연구에서 이전 인프라 사업이 이후 사업을 끌어들인 효과는 검출되지 않음</span></div>
+    <div><b>+29%</b><span class="en">other donors' projects after a new transport project; not significant, and effects below about +140% cannot be ruled out</span><span class="ko">새 교통 사업 이후 다른 공여자의 사업 변화. 유의하지 않고, 약 +140%보다 작은 효과는 배제할 수 없음</span></div>
   </div>
   <p class="authors en">Tae Yoon Moon <span>(University of Seoul)</span> &nbsp;·&nbsp; Claude Opus 5.5 <span>(Anthropic)</span></p><p class="authors ko">Tae Yoon Moon <span>(서울시립대학교)</span> &nbsp;·&nbsp; Claude Opus 5.5 <span>(Anthropic)</span></p>
   <div class="en byline"><span>Data: GODAD · IPUMS · Ookla · OSM · <a class="cite" href="https://www.worldpop.org/" target="_blank" rel="noopener">WorldPop</a> · Meta RWI</span><span>Model: PPML, province fixed effects</span><span>Status: working results, census merge pending</span></div><div class="ko byline"><span>데이터: GODAD · IPUMS · Ookla · OSM · <a class="cite" href="https://www.worldpop.org/" target="_blank" rel="noopener">WorldPop</a> · Meta RWI</span><span>모형: PPML, 주 고정효과</span><span>상태: 잠정 결과, 센서스 결합 대기</span></div>
@@ -414,6 +414,20 @@ footer b{color:var(--ink);font-weight:600}
   </figure>
 
   <div class="col">
+    <h3 class="en">Districts at a glance</h3><h3 class="ko">한눈에 보는 군</h3>
+    <p class="en">Six measures against one shared axis, physical access. Two move closely with it: travel time, which is one of its inputs, and poverty (ρ = −0.77). Aid per person barely does (ρ = +0.06). Phnom Penh is the best connected but receives few projects per head, and small remote districts can spike. Switch to <em>within province</em> and the aid link appears (ρ = +0.23). That is the comparison the models below make, with population held fixed.</p><p class="ko">여섯 지표를 같은 가로축, 물리적 접근성에 놓았습니다. 함께 크게 움직이는 것은 둘입니다. 지수의 입력값인 이동시간, 그리고 빈곤(ρ = −0.77)입니다. 1인당 원조는 거의 움직이지 않습니다(ρ = +0.06). 프놈펜은 연결이 가장 좋지만 1인당 사업은 적고, 인구가 적은 외진 군은 값이 튀기도 합니다. <em>주 안에서 비교</em>로 바꾸면 원조와의 관계가 드러납니다(ρ = +0.23). 아래 모형이 인구를 고정하고 하는 비교가 바로 이것입니다.</p>
+  </div>
+  <figure class="wide"><div class="fig">
+    <p class="en figtitle">How do districts differ at different levels of physical access?</p><p class="ko figtitle">물리적 접근성 수준에 따라 군은 어떻게 다른가?</p>
+    <p class="en figsub">Each circle is a district; hover one to find it in every panel. ρ = Spearman rank correlation</p><p class="ko figsub">원 하나가 군 하나. 원에 마우스를 올리면 모든 칸에서 같은 군이 표시됩니다. ρ = 스피어만 순위상관</p>
+    <div class="tabs" role="group" aria-label="Comparison">
+      <button data-mv="raw" aria-pressed="true" class="en">All districts</button><button data-mv="raw" aria-pressed="true" class="ko">전체 군</button>
+      <button data-mv="within" aria-pressed="false" class="en">Within province</button><button data-mv="within" aria-pressed="false" class="ko">주 안에서 비교</button>
+    </div>
+    <svg id="multiples" class="chart" role="img" aria-label="Six district measures plotted against the physical-access index"></svg>
+  </div><figcaption class="en">Log axes except poverty. Districts with no projects or no measured light sit on the band marked 0. <em>Within province</em> subtracts each province's mean from both axes, so the vertical axis shows a ratio to the province's geometric mean (poverty: a difference); zeros enter at half the smallest observed value. Projects 2017–2020 (GODAD); travel time on the 2017 road network; poverty = −Meta Relative Wealth Index; lights 2015 (harmonised DMSP–VIIRS); mobile speed from Ookla, shrunk toward the provincial mean; population WorldPop 2019.</figcaption><figcaption class="ko">빈곤을 뺀 나머지는 로그 축. 사업이나 측정된 불빛이 없는 군은 0으로 표시한 띠에 놓입니다. <em>주 안에서 비교</em>는 두 축 모두에서 주 평균을 빼므로, 세로축은 주 기하평균 대비 배수(빈곤은 차이)입니다. 0은 관측된 최솟값의 절반으로 넣었습니다. 사업 2017–2020(GODAD), 이동시간은 2017 도로망 기준, 빈곤 = −Meta 상대적 부 지수, 불빛 2015(DMSP–VIIRS 통합), 모바일 속도는 Ookla(주 평균 쪽으로 수축), 인구 WorldPop 2019.</figcaption></figure>
+
+  <div class="col">
     <h3 class="en">Roads explain the most</h3><h3 class="ko">도로의 설명력이 가장 크다</h3>
     <p class="en">Physical access explains the most. A district one standard deviation better connected receives about <strong>165% more projects</strong> than a comparable district in the same province (most conservative p = 0.002; Holm-adjusted p = 0.005). No single province drives this: dropping any one leaves at least +107%, dropping the two most influential leaves +147% (p &lt; 0.001), and in 14 of 17 provinces the better-connected districts receive more projects per person. A null-imposed wild cluster bootstrap, which loses power when two provinces dominate, gives p = 0.077.</p><p class="ko">물리적 접근성의 설명력이 가장 큽니다. 1표준편차 더 연결된 군은 같은 주의 비슷한 군보다 사업을 약 <strong>165% 더</strong> 받습니다(가장 보수적인 p = 0.002, Holm 보정 p = 0.005). 특정 주에 기댄 결과도 아닙니다. 어느 주를 빼도 +107% 이상, 영향이 가장 큰 두 주를 빼도 +147%(p &lt; 0.001)이고, 17개 주 중 14개에서 연결이 좋은 군이 1인당 사업을 더 받습니다. 두 주가 지배할 때 검정력이 떨어지는 귀무 부과 wild cluster 부트스트랩으로는 p = 0.077입니다.</p>
   </div>
@@ -469,6 +483,7 @@ footer b{color:var(--ink);font-weight:600}
     <h3 class="en">No sign that infrastructure pulls aid in</h3><h3 class="ko">인프라가 원조를 끌어들인다는 증거는 없다</h3>
     <p class="en">Districts with a road or energy project in 2010–16 received more non-infrastructure projects in 2017–20 (+106% after controls, p = 0.060; randomisation inference p = 0.11). Two checks argue against reading this as infrastructure opening the door.</p><p class="ko">2010–16년에 도로·에너지 사업이 있었던 군은 2017–20년에 비인프라 사업을 더 받았습니다(통제 후 +106%, p = 0.060; 무작위화 추론 p = 0.11). 그러나 두 점검은 인프라가 다른 원조를 끌어들였다는 해석과 맞지 않습니다.</p>
     <p class="en">Earlier <em>social</em> projects show an even larger association (+745%). And in a stacked event study following the same districts, a first transport or energy project is followed by no rise in non-infrastructure projects, with no difference beforehand.</p><p class="ko">이전 <em>사회</em> 분야 사업과의 연관이 더 큽니다(+745%). 같은 군을 추적한 누적 사건연구에서도 첫 교통·에너지 사업 뒤에 비인프라 사업이 늘지 않았고, 그 전에도 차이가 없었습니다.</p>
+    <p class="en">A second test uses every new transport project from 2003 to 2015, not only the first, and counts only other donors' projects. In the five years after, these districts had 29% more non-infrastructure projects than clean controls (95% CI −30% to +140%; randomisation inference p = 0.48). Across 384 variants of this design, 8% of estimates reach p &lt; 0.05, about what chance alone produces. The data cannot detect effects much below +140%, so this is no evidence of a pull, not evidence that there is none.</p><p class="ko">두 번째 검정은 첫 사업만이 아니라 2003–2015년의 모든 새 교통 사업을 쓰고, 다른 공여자의 사업만 셉니다. 이후 5년 동안 이 군들은 깨끗한 통제군보다 비인프라 사업이 29% 많았습니다(95% CI −30% ~ +140%, 무작위화 추론 p = 0.48). 이 설계를 384가지로 바꿔 보면 p &lt; 0.05인 경우가 8%로, 우연만으로 나오는 수준과 비슷합니다. 이 자료로는 +140%보다 많이 작은 효과는 검출할 수 없습니다. 끌어들인다는 증거가 없다는 뜻이지, 효과가 없다는 증거는 아닙니다.</p>
     <div class="formula">\[ \begin{aligned} \mathbb{E}[N^{\text{non-infra}}_{d,t,c}] = \exp\!\Big(&\mu_{d,c} + \lambda_{t,c}\\ &+ \sum_{k\neq -1}\beta_k\,\mathbf{1}\!\left[t-g_d=k\right]\cdot \mathrm{Treated}_{d,c}\Big) \end{aligned} \]</div>
     <p class="en note">For each cohort \(c\) of districts whose first transport or energy project started in year \(g\) (2008–2016), we stack the treated districts with clean controls that had none within the window \(g-5\) to \(g+4\). \(\mu_{d,c}\) and \(\lambda_{t,c}\) are district-by-cohort and year-by-cohort effects, so each cohort is compared only with its own controls (<a class="cite" href="https://doi.org/10.1093/qje/qjz014" target="_blank" rel="noopener">Cengiz et al. 2019</a>). Standard errors are clustered by district.</p><p class="ko note">첫 교통·에너지 사업이 \(g\)년(2008–2016)에 시작된 군의 코호트 \(c\)마다, 처치군을 \(g-5\)~\(g+4\) 기간에 그런 사업이 없던 통제군과 묶어 쌓습니다(stack). \(\mu_{d,c}\)와 \(\lambda_{t,c}\)는 군×코호트, 연도×코호트 효과이므로 각 코호트는 자기 통제군과만 비교됩니다(<a class="cite" href="https://doi.org/10.1093/qje/qjz014" target="_blank" rel="noopener">Cengiz et al. 2019</a>). 표준오차는 군 단위 군집.</p>
   </div>
@@ -685,8 +700,8 @@ Promise.all(['data/districts.geojson', 'data/projects.json', 'data/results.json'
 .catch(e => { document.getElementById('mapcap').textContent = 'The data could not be loaded: ' + e; });
 
 function renderCharts(){ const {geo, res} = DATA;
-  ['#forest', '#shap', '#scatter', '#event', '#tracks', '#bounds'].forEach(q => d3.select(q).selectAll('*').remove());
-  forest(res.main); mainTable(res.main); shap(res.shapley5); scatter(geo); eventChart(res.event); tracks(res.ladder); bounds(res); tables(res); }
+  ['#forest', '#shap', '#scatter', '#multiples', '#event', '#tracks', '#bounds'].forEach(q => d3.select(q).selectAll('*').remove());
+  forest(res.main); mainTable(res.main); shap(res.shapley5); scatter(geo); multiples(geo); eventChart(res.event); tracks(res.ladder); bounds(res); tables(res); }
 
 /* ---------------- map ---------------- */
 const X0 = 102.3, X1 = 107.7, Y0 = 10.35, Y1 = 14.75, W = 1800, H = 1503;
@@ -842,6 +857,68 @@ function scatter(geo){
   svg.append('text').attr('transform', `translate(18,${(M.t + Hh - M.b) / 2}) rotate(-90)`).attr('text-anchor', 'middle').attr('font-size', 13).text(tr('Poverty (−RWI) → poorer', '빈곤 (−RWI) → 더 가난함'));
   svg.append('text').attr('x', Wd - M.r - 6).attr('y', M.t + 14).attr('text-anchor', 'end').attr('font-size', 14).style('fill', css('--laterite')).style('font-family', css('--f-mono')).text('r = −0.84');
 }
+let MV_MODE = 'raw';
+function multiples(geo){
+  const d = geo.features.map(f => f.properties).filter(p => p.access_pc1 != null && p.rwi != null && p.pop_2019 > 1000 && !/Lake/i.test(p.name));
+  const P = [
+    {k: 'pc100k', t: ['Aid projects per 100,000 people', '인구 10만 명당 원조 사업'], log: true, f: v => v.toFixed(1)},
+    {k: 'tt_town_dry', t: ['Travel time to nearest town (min)', '가장 가까운 도시까지 이동시간 (분)'], log: true, f: v => v.toFixed(0)},
+    {k: 'pov', v: p => -p.rwi, t: ['Poverty (−Meta RWI)', '빈곤 (−Meta RWI)'], log: false, f: v => v.toFixed(2)},
+    {k: 'ntl', v: p => p.ntl_pc_2015 * 1000, t: ['Night lights per 1,000 people, 2015', '인구 1,000명당 야간 불빛, 2015'], log: true, f: v => v.toPrecision(2)},
+    {k: 'mob_mbps_shrunk', t: ['Mobile download speed (Mbps)', '모바일 다운로드 속도 (Mbps)'], log: true, f: v => v.toFixed(1)},
+    {k: 'pop_2019', t: ['Population, 2019', '인구, 2019'], log: true, f: v => d3.format(',.0f')(v)}];
+  const within = MV_MODE === 'within';
+  const cols = window.innerWidth < 700 ? 2 : 3, rows = Math.ceil(P.length / cols);
+  const cw = 300, ch = 250, Wd = cw * cols, Hh = ch * rows, M = {l: 52, r: 14, t: 46, b: 40}, ZB = 16;
+  const svg = d3.select('#multiples').attr('viewBox', `0 0 ${Wd} ${Hh}`);
+  svg.selectAll('*').remove();
+  const raw = (q, p) => q.v ? q.v(p) : p[q.k];
+  const byProv = (vals) => { const m = d3.rollup(d.map((p, i) => [p.prov, vals[i]]), a => d3.mean(a, e => e[1]), e => e[0]); return vals.map((v, i) => v - m.get(d[i].prov)); };
+  const rank = a => { const o = a.map((v, i) => [v, i]).sort((x, y) => x[0] - y[0]), r = new Array(a.length); let i = 0;
+    while (i < o.length) { let j = i; while (j + 1 < o.length && o[j + 1][0] === o[i][0]) j++; for (let m = i; m <= j; m++) r[o[m][1]] = (i + j) / 2; i = j + 1; } return r; };
+  const rho = (a, b) => { const ra = rank(a), rb = rank(b), ma = d3.mean(ra), mb = d3.mean(rb);
+    return d3.sum(ra, (v, i) => (v - ma) * (rb[i] - mb)) / Math.sqrt(d3.sum(ra, v => (v - ma) ** 2) * d3.sum(rb, v => (v - mb) ** 2)); };
+  const ax0 = d.map(p => p.access_pc1), xs = within ? byProv(ax0) : ax0;
+  const tick = v => v >= 1000 ? d3.format('~s')(v) : v >= 1 ? d3.format('~g')(v) : String(+v.toPrecision(1));
+  const dots = [];
+  P.forEach((q, i) => {
+    const g = svg.append('g').attr('transform', `translate(${(i % cols) * cw},${Math.floor(i / cols) * ch})`);
+    g.append('rect').attr('x', 4).attr('y', 4).attr('width', cw - 8).attr('height', ch - 8).attr('fill', 'none').attr('stroke', css('--rule'));
+    g.append('text').attr('x', 14).attr('y', 26).attr('font-size', 14).attr('font-weight', 600).style('font-family', css('--f-ui')).text(tr(...q.t));
+    const v0 = d.map(p => raw(q, p)), pos = v0.filter(v => v > 0), floor = q.log ? d3.min(pos) / 2 : 0;
+    const lv = q.log ? v0.map(v => Math.log(v > 0 ? v : floor)) : v0;          // zeros enter the rank and the within-province mean at half the smallest value
+    const shown = within ? byProv(lv).map(e => q.log ? Math.exp(e) : e) : v0;  // within: ratio to the province's geometric mean (log measures) or difference (poverty)
+    const x = d3.scaleLinear().domain(d3.extent(xs)).nice().range([M.l, cw - M.r]);
+    const zeroBand = q.log && !within && v0.some(v => !(v > 0));
+    const yv = shown.filter((v, j) => within || !q.log || v0[j] > 0);
+    const y = (q.log ? d3.scaleLog() : d3.scaleLinear()).domain(d3.extent(yv)).nice().range([ch - M.b - (zeroBand ? ZB : 0), M.t]);
+    const yy = (v, j) => zeroBand && !(v0[j] > 0) ? ch - M.b - 3 : y(v);
+    const ax = g.append('g').attr('class', 'axis').attr('transform', `translate(0,${ch - M.b})`).call(d3.axisBottom(x).ticks(5).tickSizeOuter(0));
+    const fmt = q.log ? (within ? (v => tick(v) + '×') : tick) : d3.format('~g');
+    const man = v => +(v / 10 ** Math.floor(Math.log10(v) + 1e-9)).toFixed(3);
+    let tv = q.log ? y.ticks().filter(v => man(v) === 1) : null;
+    if (q.log && tv.length < 3) tv = y.ticks().filter(v => [1, 2, 5].includes(man(v)));
+    const ay = g.append('g').attr('class', 'axis').attr('transform', `translate(${M.l},0)`).call((q.log ? d3.axisLeft(y).tickValues(tv) : d3.axisLeft(y).ticks(5)).tickFormat(fmt).tickSizeOuter(0));
+    [ax, ay].forEach(a => a.selectAll('text').attr('font-size', 11));
+    if (zeroBand) g.append('text').attr('x', M.l - 9).attr('y', ch - M.b + 1).attr('text-anchor', 'end').attr('font-size', 11).style('fill', css('--ink-3')).text('0');
+    const r = rho(xs, within ? byProv(lv) : lv);
+    g.append('text').attr('x', cw - M.r - 2).attr('y', M.t - 4).attr('text-anchor', 'end').attr('font-size', 12.5).style('font-family', css('--f-mono')).style('fill', css('--laterite')).text(`ρ = ${r >= 0 ? '+' : '−'}${Math.abs(r).toFixed(2)}`);
+    const c = g.append('g').selectAll('circle').data(d.map((p, j) => ({p, j}))).join('circle').attr('cx', e => x(xs[e.j])).attr('cy', e => yy(shown[e.j], e.j)).attr('r', 3.4)
+      .attr('fill', css('--teal')).attr('fill-opacity', .3).attr('stroke', css('--teal')).attr('stroke-width', .9)
+      .on('mousemove', (ev, e) => { hl(e.p.unit); showTip(`<b>${esc(e.p.name)}</b><span class="k">${tr(...q.t)}</span> ${q.f(v0[e.j])}<br><span class="k">${tr('Physical access', '물리적 접근성')}</span> ${e.p.access_pc1.toFixed(2)}`, ev); })
+      .on('mouseleave', () => { hl(null); hideTip(); });
+    dots.push(c);
+    if (Math.floor(i / cols) === rows - 1) g.append('text').attr('x', (M.l + cw - M.r) / 2).attr('y', ch - 8).attr('text-anchor', 'middle').attr('font-size', 11.5).style('fill', css('--ink-3'))
+      .text(within ? tr('physical access vs province mean (SD) →', '주 평균 대비 물리적 접근성 (SD) →') : tr('physical access (SD) →', '물리적 접근성 (SD) →'));
+  });
+  function hl(u){ dots.forEach(c => c.attr('fill', e => e.p.unit === u ? css('--laterite') : css('--teal')).attr('fill-opacity', e => u == null ? .3 : e.p.unit === u ? 1 : .12)
+    .attr('stroke', e => e.p.unit === u ? css('--laterite') : css('--teal')).attr('r', e => e.p.unit === u ? 6 : 3.4).filter(e => e.p.unit === u).raise()); }
+}
+document.querySelectorAll('[data-mv]').forEach(b => b.addEventListener('click', () => {
+  MV_MODE = b.dataset.mv;
+  document.querySelectorAll('[data-mv]').forEach(o => o.setAttribute('aria-pressed', String(o.dataset.mv === MV_MODE)));
+  if (DATA) multiples(DATA.geo);
+}));
 function eventChart(ev){
   const rows = ev.concat([{k: -1, b: 0, se: 0}]).sort((a, b) => a.k - b.k);
   const Wd = 900, Hh = 320, M = {l: 70, r: 20, t: 16, b: 46}, svg = d3.select('#event').attr('viewBox', `0 0 ${Wd} ${Hh}`), P = b => 100 * (Math.exp(b) - 1);
