@@ -1,0 +1,11 @@
+districts split at the median of the physical-access index (remote = below)
+GODAD transport/energy activity-district events 1995-2019: remote half 104, connected half 128
+major ADB/Japan road districts: remote half 14, connected half 26
+  GODAD infrastructure       non-infrastructure  remote half     events  74 | lags 1-5 -65% (95% CI -91% to +42%, p 0.14) | leads +57% (95% CI -20% to +206%, p 0.19)
+  GODAD infrastructure       non-infrastructure  connected half  events 102 | lags 1-5 +36% (95% CI -20% to +129%, p 0.25) | leads -13% (95% CI -40% to +26%, p 0.45)
+  GODAD infrastructure       social              remote half     events  65 | lags 1-5 -32% (95% CI -92% to +483%, p 0.72) | leads +334% (95% CI +19% to +1481%, p 0.03)
+  GODAD infrastructure       social              connected half  events  96 | lags 1-5 +61% (95% CI -20% to +222%, p 0.18) | leads +7% (95% CI -33% to +69%, p 0.78)
+  GODAD + major roads        non-infrastructure  remote half     events  89 | lags 1-5 -37% (95% CI -86% to +175%, p 0.54) | leads +49% (95% CI -21% to +181%, p 0.22)
+  GODAD + major roads        non-infrastructure  connected half  events 125 | lags 1-5 +49% (95% CI -9% to +144%, p 0.11) | leads -6% (95% CI -30% to +27%, p 0.71)
+  GODAD + major roads        social              remote half     events  80 | lags 1-5 +17% (95% CI -89% to +1098%, p 0.89) | leads +272% (95% CI -8% to +1405%, p 0.07)
+  GODAD + major roads        social              connected half  events 117 | lags 1-5 +87% (95% CI -3% to +259%, p 0.06) | leads +15% (95% CI -19% to +62%, p 0.43)
