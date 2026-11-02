@@ -36,15 +36,20 @@ a{color:var(--teal)}
 .lang button{font-family:var(--f-ui);font-size:13.5px;border:0;background:var(--surface);color:var(--ink-2);padding:4px 10px;cursor:pointer}
 .lang button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
 /* intro */
-.intro{padding-block:44px 18px}
+.intro{padding-block:32px 6px}
 .chap{font-family:var(--f-display);font-style:italic;font-size:19px;color:var(--laterite)}
 h1{font-family:var(--f-title);font-weight:600;font-size:clamp(32px,4.6vw,48px);line-height:1.08;margin:6px 0 14px}
 .lead{font-size:19px;line-height:1.55;max-width:72ch;color:var(--ink-2);margin:0 0 22px}
-.introgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,560px);gap:32px;align-items:start}
+.introgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,500px);gap:28px;align-items:start}
 @media (max-width:1000px){.introgrid{grid-template-columns:minmax(0,1fr)}}
 .introgrid .lead{margin-bottom:0}
-.entries{display:grid;grid-template-columns:minmax(0,1fr);gap:10px}
-.entry{padding:13px 16px}
+.entries{display:grid;grid-template-columns:minmax(0,1fr);gap:8px}
+.entries .entry{padding:9px 13px 10px;font-size:13.5px;line-height:1.45}
+.entries .entry h2{font-size:14.5px;margin:0 0 3px}
+.entries .entry p{margin:0 0 7px}
+.entries .entry code{font-size:12.5px;padding:0 4px}
+.entries .act{gap:5px}
+.entries .dl{font-size:12px;padding:2px 7px}
 .entry{background:var(--surface);border:1px solid var(--rule);border-radius:4px;padding:16px 18px;font-family:var(--f-ui);font-size:15px;color:var(--ink-2)}
 .entry h2{font-family:var(--f-ui);font-size:16.5px;font-weight:600;color:var(--ink);margin:0 0 6px}
 .entry p{margin:0 0 10px}
@@ -57,7 +62,7 @@ h1{font-family:var(--f-title);font-weight:600;font-size:clamp(32px,4.6vw,48px);l
 .dl.code::before{content:"↓ .py  "}
 .dl:focus-visible,.lnk:focus-visible,.node:focus-visible,.tool button:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
 /* canvas + panel */
-.stage{display:grid;grid-template-columns:minmax(0,1fr) 400px;gap:18px;align-items:start;padding-block:10px 40px}
+.stage{display:grid;grid-template-columns:minmax(0,1fr) 400px;gap:18px;align-items:start;padding-block:14px 40px}
 @media (max-width:1100px){.stage{grid-template-columns:minmax(0,1fr)}}
 .board{position:relative;background:var(--surface);border:1px solid var(--rule);border-radius:4px;overflow:hidden}
 .vp{position:relative;height:min(74vh,780px);overflow:hidden;cursor:grab;touch-action:none;outline:none}
@@ -138,14 +143,14 @@ footer{border-top:1px solid var(--ink);color:var(--ink-3);padding-block:24px 40p
   <div class="entries">
     <div class="entry">
       <h2 class="en">A. Check the models in ten minutes</h2><h2 class="ko">A. 10분 안에 모형 확인하기</h2>
-      <p class="en">Download four files into one folder and run <code>python kh_replicate.py</code>. It rebuilds the index and re-estimates every headline model from the data, then sets your numbers beside ours.</p>
-      <p class="ko">파일 네 개를 한 폴더에 받아 <code>python kh_replicate.py</code>를 실행합니다. 자료에서 지수를 다시 만들고 대표 모형을 모두 다시 추정한 뒤, 그 값을 우리 발표값과 나란히 보여 줍니다.</p>
+      <p class="en">Put four files in one folder and run <code>python kh_replicate.py</code>: it re-estimates the headline models from the data and sets them beside ours.</p>
+      <p class="ko">파일 네 개를 한 폴더에 받아 <code>python kh_replicate.py</code>를 실행하면, 자료로 대표 모형을 다시 추정해 발표값과 나란히 보여 줍니다.</p>
       <div class="act"><a class="dl" href="dl/data/kh_analysis.csv" download>kh_analysis.csv</a><a class="dl" href="dl/data/kh_access.csv" download>kh_access.csv</a><a class="dl" href="dl/data/kh_published.csv" download>kh_published.csv</a><a class="dl code" href="dl/code/kh_replicate.py" download>kh_replicate.py</a></div>
     </div>
     <div class="entry">
       <h2 class="en">B. Rebuild everything from the raw sources</h2><h2 class="ko">B. 원자료부터 전부 다시 만들기</h2>
-      <p class="en">Follow the boxes from left to right. Each one lists the script to run and the published table to compare against with <code>kh_compare.py</code>. The order and folder layout are in the README.</p>
-      <p class="ko">상자를 왼쪽부터 따라갑니다. 상자마다 실행할 스크립트와, <code>kh_compare.py</code>로 대조할 발표 파일이 있습니다. 실행 순서와 폴더 구조는 README에 있습니다.</p>
+      <p class="en">Follow the boxes left to right, run each script and compare its output with <code>kh_compare.py</code>. Order and folders: README.</p>
+      <p class="ko">상자를 왼쪽부터 따라가며 스크립트를 실행하고, <code>kh_compare.py</code>로 발표 파일과 대조합니다. 순서와 폴더 구조는 README에 있습니다.</p>
       <div class="act"><a class="dl" href="dl/code/README_pipeline.md" download>README_pipeline.md</a><a class="dl code" href="dl/code/kh_compare.py" download>kh_compare.py</a><a class="dl code" href="dl/code/kh_fetch.py" download>kh_fetch.py</a></div>
     </div>
   </div>
@@ -345,8 +350,9 @@ function layout(){
 let s = 1, tx = 0, ty = 0, moved = false;
 const zlab = document.getElementById('zlab');
 function apply(){ cv.style.transform = `translate(${tx}px,${ty}px) scale(${s})`; zlab.textContent = Math.round(s * 100) + '%'; }
-function clampPan(){ const w = cv.offsetWidth * s, h = cv.offsetHeight * s, W0 = vp.clientWidth, H0 = vp.clientHeight, m = 80;
-  tx = Math.min(m, Math.max(W0 - w - m, tx)); ty = Math.min(m, Math.max(H0 - h - m, ty)); if (w < W0) tx = (W0 - w) / 2; }
+function clampPan(){ const w = cv.offsetWidth * s, h = cv.offsetHeight * s, W0 = vp.clientWidth, H0 = vp.clientHeight, m = 16;   // little overscroll, so no empty band appears above or beside the diagram
+  tx = Math.min(m, Math.max(W0 - w - m, tx)); ty = Math.min(m, Math.max(H0 - h - m, ty));
+  if (w < W0) tx = (W0 - w) / 2; if (h < H0) ty = 0; }   // a diagram smaller than the window sits at the top, not in the middle
 function zoomAt(f, cx, cy){ const ns = Math.min(2.2, Math.max(.3, s * f)); tx = cx - (cx - tx) * ns / s; ty = cy - (cy - ty) * ns / s; s = ns; clampPan(); apply(); }
 function fit(){ const W0 = vp.clientWidth; s = Math.min(1, Math.max(.3, W0 / cv.offsetWidth));
   tx = (W0 - cv.offsetWidth * s) / 2; ty = 8; clampPan(); apply(); }
