@@ -89,14 +89,14 @@ def ppml(y, X, fe1, fe2, cl=None, se=True):
 
 
 # ---------------- stacked panel ----------------
-def stack(events, outcome=OUT, lo=-5, hi=5, units=UNITS, years=range(2003, 2016), drop_donor=True, treat_rule="own"):
+def stack(events, outcome=OUT, lo=-5, hi=5, units=UNITS, years=range(2003, 2016), drop_donor=True, treat_rule="own", pre=5, keep0=False):
     ev_years = events.groupby("unit").yr.apply(set).to_dict()
     has = lambda u, a, b: any(a <= t <= b for t in ev_years.get(u, ()))
     rows = []
     for g in years:
         if treat_rule == "own":
-            tr = [u for u in units if g in ev_years.get(u, ()) and not has(u, g - 5, g - 1)]
-            co = [u for u in units if not has(u, g - 5, g + hi)]
+            tr = [u for u in units if g in ev_years.get(u, ()) and not has(u, g - pre, g - 1)]
+            co = [u for u in units if not has(u, g - pre, g + hi)]
         else:                      # neighbours of event districts (S7)
             ev_u = [u for u in units if g in ev_years.get(u, ()) and not has(u, g - 5, g - 1)]
             near = set().union(*[NB.get(u, set()) for u in ev_u]) if ev_u else set()
@@ -110,11 +110,11 @@ def stack(events, outcome=OUT, lo=-5, hi=5, units=UNITS, years=range(2003, 2016)
         yy = o[o.yr.between(g + lo, g + hi)].groupby(["unit", "yr"]).w.sum()
         for u in tr + co:
             for k in range(lo, hi + 1):
-                if k == 0:
+                if k == 0 and not keep0:
                     continue
                 rows.append((g, u, k, g + k, int(u in tr), yy.get((u, g + k), 0.0)))
     P = pd.DataFrame(rows, columns=["stk", "unit", "k", "yr", "treat", "y"])
-    P["post"] = (P.k > 0).astype(int)
+    P["post"] = (P.k >= 0).astype(int)
     return P
 
 

@@ -1,0 +1,14 @@
+specifications estimated: 384
+  all                        n 384 | median effect +4% (IQR -20% to +33%) | positive 53% | p<0.05 8% (positive & p<0.05 4%, negative & p<0.05 4%) | rules out +50% 42% | median MDE80 118%
+  event = transport          n  96 | median effect +31% (IQR +14% to +46%) | positive 85% | p<0.05 7% (positive & p<0.05 7%, negative & p<0.05 0%) | rules out +50% 8% | median MDE80 133%
+  event = transport+energy   n  96 | median effect +7% (IQR -11% to +27%) | positive 59% | p<0.05 2% (positive & p<0.05 2%, negative & p<0.05 0%) | rules out +50% 30% | median MDE80 141%
+  event = transport+major    n  96 | median effect +14% (IQR -4% to +45%) | positive 66% | p<0.05 7% (positive & p<0.05 7%, negative & p<0.05 0%) | rules out +50% 30% | median MDE80 137%
+  event = major only         n  96 | median effect -22% (IQR -28% to -18%) | positive 0% | p<0.05 15% (positive & p<0.05 0%, negative & p<0.05 15%) | rules out +50% 100% | median MDE80 74%
+  outcome = non-infra        n 192 | median effect +12% (IQR -12% to +35%) | positive 62% | p<0.05 9% (positive & p<0.05 4%, negative & p<0.05 5%) | rules out +50% 35% | median MDE80 104%
+  outcome = social           n 192 | median effect -7% (IQR -22% to +26%) | positive 43% | p<0.05 6% (positive & p<0.05 4%, negative & p<0.05 2%) | rules out +50% 49% | median MDE80 145%
+  expected share p<0.05 under no effect anywhere: 5% (specifications are correlated, so the realised share varies)
+  by window: 3: median +42%, p<0.05 14% | 4: median +2%, p<0.05 9% | 5: median -11%, p<0.05 0%
+  by pre: 3: median +1%, p<0.05 7% | 5: median +6%, p<0.05 9%
+  by year0: dropped: median +4%, p<0.05 3% | post: median +3%, p<0.05 13%
+  by donors: excluded: median +3%, p<0.05 8% | kept: median +4%, p<0.05 7%
+  by fe: stack-year: median +9%, p<0.05 8% | tercile: median -6%, p<0.05 7%
