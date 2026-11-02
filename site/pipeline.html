@@ -64,8 +64,10 @@ h1{font-family:var(--f-title);font-weight:600;font-size:clamp(32px,4.6vw,48px);l
 /* canvas + panel */
 .stage{display:grid;grid-template-columns:minmax(0,1fr) 400px;gap:18px;align-items:start;padding-block:14px 40px}
 @media (max-width:1100px){.stage{grid-template-columns:minmax(0,1fr)}}
-.board{position:relative;background:var(--surface);border:1px solid var(--rule);border-radius:4px;overflow:hidden}
-.vp{position:relative;height:min(74vh,780px);overflow:hidden;cursor:grab;touch-action:none;outline:none}
+.stage{--stageh:min(calc(100vh - 80px),920px)}
+/* the diagram and the panel share one height */
+.board{position:relative;background:var(--surface);border:1px solid var(--rule);border-radius:4px;overflow:hidden;display:flex;flex-direction:column;height:var(--stageh)}
+.vp{position:relative;flex:1;min-height:0;overflow:hidden;cursor:grab;touch-action:none;outline:none}
 .vp.drag{cursor:grabbing}
 .cv{position:absolute;left:0;top:0;transform-origin:0 0}
 .tool{position:absolute;right:10px;bottom:10px;z-index:3;display:flex;gap:4px;align-items:center;background:rgba(250,248,243,.94);border:1px solid var(--rule);border-radius:4px;padding:3px}
@@ -120,8 +122,8 @@ svg.edges path.dim{stroke-opacity:.12}
 .node.dim{opacity:.38}
 .node svg text{font-family:var(--f-ui);fill:var(--ink-2)}
 /* panel */
-.panel{position:sticky;top:62px;background:var(--surface);border:1px solid var(--rule);border-radius:4px;padding:18px 20px;max-height:calc(100vh - 80px);overflow:auto;font-family:var(--f-ui);font-size:15px;color:var(--ink-2)}
-@media (max-width:1100px){.panel{position:static;max-height:none}}
+.panel{position:sticky;top:62px;background:var(--surface);border:1px solid var(--rule);border-radius:4px;padding:18px 20px;height:var(--stageh);overflow:auto;font-family:var(--f-ui);font-size:15px;color:var(--ink-2)}
+@media (max-width:1100px){.panel{position:static;height:auto}.board{height:72vh}}
 .panel .kind{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
 .panel h3{font-family:var(--f-display);font-weight:600;font-size:23px;line-height:1.2;color:var(--ink);margin:4px 0 10px}
 .panel h4{font-family:var(--f-ui);font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3);margin:18px 0 6px;font-weight:600}
@@ -372,10 +374,10 @@ function clampPan(){ const w = cv.offsetWidth * s, h = cv.offsetHeight * s, W0 =
   tx = Math.min(m, Math.max(W0 - w - m, tx)); ty = Math.min(m, Math.max(H0 - h - m, ty));
   if (w < W0) tx = (W0 - w) / 2; if (h < H0) ty = 0; }   // a diagram smaller than the window sits at the top, not in the middle
 function zoomAt(f, cx, cy){ const ns = Math.min(2.2, Math.max(.3, s * f)); tx = cx - (cx - tx) * ns / s; ty = cy - (cy - ty) * ns / s; s = ns; clampPan(); apply(); }
-function fit(){ const W0 = vp.clientWidth; s = Math.min(1, Math.max(.3, W0 / cv.offsetWidth));
-  tx = (W0 - cv.offsetWidth * s) / 2; ty = 8; clampPan(); apply(); }
-// first view: readable text, starting from the data column; "Fit" shows the whole pipeline
-function home(){ const W0 = vp.clientWidth; s = Math.min(1, Math.max(.85, W0 / cv.offsetWidth)); tx = 0; ty = 0; clampPan(); apply(); }
+function fit(){ const W0 = vp.clientWidth, H0 = vp.clientHeight; s = Math.min(1, Math.max(.3, Math.min(W0 / cv.offsetWidth, H0 / cv.offsetHeight)));
+  tx = (W0 - cv.offsetWidth * s) / 2; ty = 0; clampPan(); apply(); }
+// first view: the whole pipeline fits the window; tabs, zoom and selection take it from there
+function home(){ fit(); }
 document.getElementById('zin').onclick = () => zoomAt(1.2, vp.clientWidth / 2, vp.clientHeight / 2);
 document.getElementById('zout').onclick = () => zoomAt(1 / 1.2, vp.clientWidth / 2, vp.clientHeight / 2);
 document.getElementById('zfit').onclick = fit; document.getElementById('zfit2').onclick = fit;
