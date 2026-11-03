@@ -35,8 +35,17 @@ cur = reclassify_geocodes(L[L.start.between(2017, 2020) & (L.family != "ict")], 
 N = cur.groupby("unit").w.sum()
 DF["N"] = DF.unit.map(N).fillna(0)
 DF["pc100k"] = DF.N / DF.pop_2019 * 1e5
+CEN = ROOT / "data/processed/cambodia/kh_census.csv"          # district aggregates only (never the IPUMS microdata), for the map layers
+census_cols = []
+if CEN.exists():
+    c19 = pd.read_csv(CEN).query("year == 2019").set_index("unit")
+    shares = c19[[c for c in c19.columns if c.startswith("dep_") and not c.endswith("_latok")]]
+    DF["phone_pct"] = (100 * DF.unit.map(c19.phone_share)).round(1)
+    DF["dep_pct"] = (100 * DF.unit.map(shares.mean(axis=1))).round(1)
+    dz = DF.unit.map(c19.deprivation); DF["dep_z"] = ((dz - dz.mean()) / dz.std()).round(2)
+    census_cols = ["phone_pct", "dep_pct", "dep_z"]
 geo = U[["unit", "ADMIN_NAME", "geometry"]].merge(
-    DF[["unit", "PARENT", "pop_2019", "N", "pc100k", "ntl_pc_2015", "ntl_pc_2019", "access", "access_pc1", "conn_index", "mob_mbps_shrunk", "rwi", "tt_town_dry", "prior_infra"]],
+    DF[["unit", "PARENT", "pop_2019", "N", "pc100k", "ntl_pc_2015", "ntl_pc_2019", "access", "access_pc1", "conn_index", "mob_mbps_shrunk", "rwi", "tt_town_dry", "prior_infra"] + census_cols],
     on="unit", how="left")
 geo["geometry"] = geo.geometry.simplify(0.004, preserve_topology=True)
 for c in geo.columns:

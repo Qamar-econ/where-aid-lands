@@ -99,23 +99,115 @@ def estimate(label, a, xs, draws=DRAWS, extra=None):
 
 say(f"districts {len(DF)} | projects {MAIN.project_id.nunique()} (weight {MAIN.w.sum():.1f}) | corr(reach, poverty) = {DF.reach.corr(DF.poverty):.2f} | "
     f"median travel time {DF.tt_town_dry.median():.0f} min (IQR {DF.tt_town_dry.quantile(.25):.0f}-{DF.tt_town_dry.quantile(.75):.0f})")
-say("== MAIN (reach: per doubling of travel time; poverty: per SD)")
-estimate("reach alone", MAIN, ["reach"]); estimate("poverty alone", MAIN, ["poverty"]); estimate("both", MAIN, ["reach", "poverty"])
-R = pd.DataFrame(rows)
-p2 = R[R.model.isin(["reach alone", "poverty alone"])].sort_values("p_ri"); run = 0; holm = {}
-for i, (ix, r) in enumerate(p2.iterrows()):
-    run = max(run, min(1, (2 - i) * r.p_ri)); holm[r.model] = run
-say("  Holm-adjusted RI p: " + ", ".join(f"{k} {v:.3f}" for k, v in holm.items()))
-
 import os
-CEN = Path(os.environ.get("KH_CENSUS_IN", PROC / "kh_census.csv"))   # built by kh_census_build.py once the IPUMS extract arrives
+zs = lambda s: (s - s.mean()) / s.std()
+CEN = Path(os.environ.get("KH_CENSUS_IN", PROC / "kh_census.csv"))   # built by kh_census_build.py from the IPUMS extract
+DF["speed"] = zs(np.log(DF.mob_mbps_shrunk))                          # Ookla mobile speed, 2019-2020 (check measure)
 if CEN.exists():
-    c = pd.read_csv(CEN); c19 = c[c.year == 2019].set_index("unit")
-    DF["deprivation"] = DF.unit.map(c19.deprivation); DF["deprivation"] = (DF.deprivation - DF.deprivation.mean()) / DF.deprivation.std()
-    say(f"== CENSUS 2019 (pre-registered H-C1: deprivation per SD; {int(c19.n_indicators.iloc[0])} indicators) | corr(reach, deprivation) = {DF.reach.corr(DF.deprivation):.2f}")
-    estimate("H-C1 deprivation alone", MAIN, ["deprivation"]); estimate("H-C1b reach + deprivation", MAIN, ["reach", "deprivation"])
+    c = pd.read_csv(CEN); c19, c08 = c[c.year == 2019].set_index("unit"), c[c.year == 2008].set_index("unit")
+    DF["phone"] = zs(DF.unit.map(c19.phone_share)); DF["deprivation"] = zs(DF.unit.map(c19.deprivation))
+    DF["phone_2008"] = zs(DF.unit.map(c08.phone_share))
+    for col, src_ in [("dep_nowater", c19.deprivation_nowater), ("dep_latok", c19.deprivation_latok), ("dep_pc1", c19.deprivation_pc1), ("dep_2008", c08.deprivation)]:
+        DF[col] = zs(DF.unit.map(src_))
+    DIGITAL, POVERTY = "phone", "deprivation"
+    say(f"census 2019: {int(c19.n_indicators.iloc[0])} deprivation indicators | phone ownership mean {c19.phone_share.reindex(DF.unit).mean():.2f}, "
+        f"SD {c19.phone_share.reindex(DF.unit).std():.3f}")
 else:
-    say(f"== CENSUS: {CEN.name} not found, H-C1 skipped (IPUMS extract pending)")
+    DIGITAL, POVERTY = "speed", "poverty"
+    say(f"census file {CEN.name} not found: digital access = Ookla speed, poverty = Meta RWI")
+C3 = {"reach": "physical access", DIGITAL: "digital access", POVERTY: "poverty"}
+say("correlations: " + ", ".join(f"{C3[a]}-{C3[b]} {DF[a].corr(DF[b]):+.2f}" for a, b in [("reach", DIGITAL), ("reach", POVERTY), (DIGITAL, POVERTY)]))
+
+say("== MAIN: one construct per model (physical access per doubling of travel time; digital access and poverty per SD)")
+for v, lab in C3.items():
+    estimate(f"{lab} alone", MAIN, [v])
+R = pd.DataFrame(rows)
+p3 = R[R.model.isin([f"{l} alone" for l in C3.values()])].sort_values("p_ri"); run = 0; holm = {}
+for i, (ix, r) in enumerate(p3.iterrows()):
+    run = max(run, min(1, (3 - i) * r.p_ri)); holm[r.model] = run
+say("  Holm-adjusted RI p (three tests): " + ", ".join(f"{k} {v:.3f}" for k, v in holm.items()))
+say("== SUPPLEMENTARY: all three together (not interpreted where |r| >= 0.7, spec 9-29)")
+estimate("all three together", MAIN, list(C3))
+for x, y in [("reach", DIGITAL), ("reach", POVERTY), (DIGITAL, POVERTY)]:      # pairs, interpreted only if |r| < 0.7
+    r_ = DF[x].corr(DF[y])
+    if abs(r_) < .7:
+        estimate(f"pair: {C3[x]} + {C3[y]} (r = {r_:+.2f})", MAIN, [x, y])
+    else:
+        say(f"  pair {C3[x]} + {C3[y]}: r = {r_:+.2f}, not estimated (|r| >= 0.7)")
+
+say("== CHECK MEASURES (alone)")
+estimate("digital check: phone ownership 2008", MAIN, ["phone_2008"], draws=999) if "phone_2008" in DF else None
+estimate("digital check: Ookla mobile speed", MAIN, ["speed"], draws=999)
+estimate("poverty check: Meta RWI", MAIN, ["poverty"], draws=999)
+for col, lab in [("dep_nowater", "without water (piped only)"), ("dep_latok", "latrine counted as improved"), ("dep_pc1", "first principal component"),
+                 ("dep_2008", "2008 index")]:
+    if col in DF:
+        estimate(f"poverty check: {lab}", MAIN, [col], draws=999)
+
+
+# ---------------- poverty chapter: night lights (economic activity, 2015, before the projects) ----------------
+DF["lights"] = zs(np.log1p(DF.ntl_pc_2015 * 1000))
+estimate("need check: night lights per person 2015", MAIN, ["lights"], draws=999)
+
+# ---------------- conclusion: which matters more (spec 9-30) ----------------
+say("== WHICH MATTERS MORE (spec 9-30): travel time, phones, deprivation, lights")
+DF["reach_sd"] = zs(DF.reach)                                          # per SD of log travel time, for a common unit
+FOUR = {"reach_sd": "physical access", DIGITAL: "digital access", POVERTY: "poverty", "lights": "night lights"}
+CM = DF[list(FOUR)].corr()
+say("  correlations:\n" + CM.round(2).rename(index=FOUR, columns=FOUR).to_string())
+for v, lab in FOUR.items():                                             # (a) same unit: per SD
+    estimate(f"per SD: {lab}", MAIN, [v], draws=999)
+dd = counts(MAIN).dropna(subset=list(FOUR)).reset_index(drop=True)
+dev = lambda xs: smf.glm("N ~ " + " + ".join(list(xs) + ["lnpop", "C(prov)"]), data=dd, family=sm.families.Poisson()).fit(maxiter=300).deviance
+D0, Dnull = dev([]), smf.glm("N ~ 1", data=dd, family=sm.families.Poisson()).fit().deviance
+import itertools, math
+V = {S: (D0 - dev(S)) / Dnull for k in range(len(FOUR) + 1) for S in itertools.combinations(sorted(FOUR), k)}
+key = lambda S: tuple(sorted(S))
+shap = {j: sum(math.factorial(len(S)) * math.factorial(len(FOUR) - len(S) - 1) / math.factorial(len(FOUR)) * (V[key(S + (j,))] - V[key(S)])
+               for k in range(len(FOUR)) for S in itertools.combinations(sorted(set(FOUR) - {j}), k)) for j in FOUR}
+tot = sum(shap.values())
+say(f"  (b) Shapley split of the deviance explained by the four (pseudo-R2 {1 - D0 / Dnull:.3f} -> {1 - dev(list(FOUR)) / Dnull:.3f}): " +
+    ", ".join(f"{FOUR[j]} {100 * shap[j] / tot:.0f}%" for j in sorted(shap, key=shap.get, reverse=True)))
+CVR = np.random.default_rng(11)
+
+
+def cv_gain(xs, reps=20, k=5):
+    """Out-of-sample Poisson deviance gain over province FE + ln population, folds stratified by province."""
+    gains = []
+    for _ in range(reps):
+        fold = np.full(len(dd), -1)
+        for pv, ix in dd.groupby("prov").indices.items():
+            if len(ix) >= 2:
+                fold[ix] = CVR.permutation(np.arange(len(ix)) % k)
+        db = dm = 0.0
+        for j in range(k):
+            tr, te = dd[fold != j], dd[(fold == j)]
+            te = te[te.prov.isin(tr.prov)]
+            if te.empty:
+                continue
+            for xs_, acc_ in ((list(), "b"), (list(xs), "m")):
+                m = smf.glm("N ~ " + " + ".join(xs_ + ["lnpop", "C(prov)"]), data=tr, family=sm.families.Poisson()).fit(maxiter=200)
+                mu = np.clip(m.predict(te), 1e-9, None); y = te.N.values
+                dv = 2 * np.sum(np.where(y > 0, y * np.log(np.where(y > 0, y, 1) / mu), 0) - (y - mu))
+                if acc_ == "b":
+                    db += dv
+                else:
+                    dm += dv
+        gains.append(100 * (db - dm) / db)
+    return float(np.mean(gains)), float(np.std(gains))
+
+
+CV = {j: cv_gain([j]) for j in FOUR}
+say("  (c) cross-validated deviance gain over province FE + ln population (5-fold x 20): " +
+    ", ".join(f"{FOUR[j]} {CV[j][0]:+.1f}% (sd {CV[j][1]:.1f})" for j in sorted(CV, key=lambda j: CV[j][0], reverse=True)))
+for a, b in itertools.combinations(list(FOUR), 2):                     # (d) pairs, only where |r| < 0.7
+    r_ = CM.loc[a, b]
+    if abs(r_) < .7:
+        estimate(f"pair: {FOUR[a]} + {FOUR[b]} (r = {r_:+.2f})", MAIN, [a, b], draws=999)
+    else:
+        say(f"  pair {FOUR[a]} + {FOUR[b]}: r = {r_:+.2f}, not interpreted (|r| >= 0.7)")
+pd.DataFrame([{"measure": FOUR[j], "var": j, "shapley_share": 100 * shap[j] / tot, "shapley_pts": 100 * shap[j], "cv_gain": CV[j][0], "cv_sd": CV[j][1]}
+              for j in FOUR]).to_csv(T / "kh_main_importance.csv", index=False)
 
 say("== WHERE THE GRADIENT COMES FROM (exploratory, spec 9-28): capital khans, provincial towns (Krong), rural districts")
 DF["type"] = np.where(DF.capital, "capital", np.where(DF.ADMIN_NAME.str.contains("Krong"), "town", "rural"))
@@ -126,9 +218,10 @@ for t, g in dt.groupby("type"):
         f"projects per 100,000 people {1e5 * g.N.sum() / g.pop_2019.sum():.2f} | median travel time {g.tt_town_dry.median():.0f} min")
 estimate("district type (vs rural)", MAIN, ["capital_d", "town_d"])
 RUR = counts(MAIN)[lambda x: x.type == "rural"]
-estimate("rural districts: reach alone", MAIN, ["reach"], extra=RUR)
-estimate("rural districts: poverty alone", MAIN, ["poverty"], extra=RUR)
-estimate("rural districts: both", MAIN, ["reach", "poverty"], extra=RUR)
+for v, lab in C3.items():
+    estimate(f"rural districts: {lab} alone", MAIN, [v], extra=RUR)
+estimate("rural districts: night lights alone", MAIN, ["lights"], extra=RUR)
+estimate("rural districts: all three together", MAIN, list(C3), extra=RUR)
 
 say("== ROBUSTNESS (reach alone)")
 estimate("R1a geocodes as published (no reclassification)", ADM2, ["reach"], draws=999)

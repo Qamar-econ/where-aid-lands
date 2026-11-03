@@ -50,8 +50,10 @@ Run the scripts from `research/scripts`, in this order:
 | `kh_main.py [draws]` | the main analysis: travel time and poverty, within provinces, randomisation inference; breakdown by district type; robustness; donor groups; census tests if `kh_census.csv` exists | `outputs/tables/kh_main_simple.csv`, `.txt` |
 | `kh_figures.py` | figures F1-F5 in English and Korean, from the same data step and results table | `outputs/figures/cambodia/F*.pdf/.png` |
 | `kh_census_build.py extract.csv` | once the IPUMS extract arrives: deprivation index and phone ownership by district, classifying answer codes from the codebook labels | `kh_census.csv` |
-| `kh_check.py` | 45 automated checks from the sample to every number on the site; exit code 1 on any failure | (console) |
+| `kh_check.py` | 59 automated checks from the sample to every number on the site; exit code 1 on any failure | (console) |
 | `kh_run_all.sh` | reruns every step downstream of the sample, in dependency order | `outputs/logs/` |
+
+**The census data are not redistributed.** IPUMS terms forbid sharing the microdata, and the district tables built from it (`kh_census.csv`) are kept local as well. To reproduce the census results, request your own IPUMS International extract (Cambodia 2008 and 2019; variables listed in the pre-registration, amendment 2) and run `kh_census_build.py` on it.
 
 When the census extract arrives: put it and its DDI codebook in `data/raw/cambodia/ipums/`, run `kh_census_build.py`, then `kh_run_all.sh` and `kh_check.py`.
 

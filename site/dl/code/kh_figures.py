@@ -28,6 +28,11 @@ BOOT = 2000
 MINUS = "−"
 
 d = counts(MAIN)
+CEN = PROC / "kh_census.csv"
+if CEN.exists():                                   # census measures, standardised over the same 141 districts as kh_main.py
+    c19 = pd.read_csv(CEN).query("year == 2019").set_index("unit")
+    d["phone_share"] = d.unit.map(c19.phone_share)
+    dep = d.unit.map(c19.deprivation); d["deprivation"] = (dep - dep.mean()) / dep.std()
 d["type"] = np.where(d.capital, "capital", np.where(d.ADMIN_NAME.str.contains("Krong"), "town", "rural"))
 d["rel"] = d.reach - d.groupby("prov").reach.transform("mean")
 provs = d.prov.unique()
@@ -58,6 +63,18 @@ grid = np.linspace(np.percentile(d.rel, 2), np.percentile(d.rel, 98), 100)   # n
 base = np.mean(fit2.predict(d.assign(rel=0)) / d.pop_2019)
 f2_fit = 1e5 * base * np.exp(fit2.params["rel"] * grid)
 rural = d.type == "rural"
+G7 = {}
+if "phone_share" in d:
+    d["lights_z"] = (lambda v: (v - v.mean()) / v.std())(np.log1p(d.ntl_pc_2015 * 1000))
+    d["phone_z"] = (d.phone_share - d.phone_share.mean()) / d.phone_share.std()
+    for col in ["phone_z", "deprivation", "lights_z"]:
+        rel = d[col] - d.groupby("prov")[col].transform("mean"); d["bin"] = pd.qcut(rel.rank(method="first"), K, labels=False)
+        o_, l_, h_ = boot_rates("bin", range(K), 7)
+        m_ = smf.glm(f"N ~ rel_ + lnpop + C(prov)", data=d.assign(rel_=rel), family=sm.families.Poisson()).fit(maxiter=300)
+        g_ = np.linspace(np.percentile(rel, 2), np.percentile(rel, 98), 100)
+        b_ = np.mean(m_.predict(d.assign(rel_=0)) / d.pop_2019)
+        G7[col] = (rel.groupby(d["bin"]).mean().values, o_, l_, h_, g_, 1e5 * b_ * np.exp(m_.params["rel_"] * g_), 100 * (np.exp(m_.params["rel_"]) - 1))
+IMP = ROOT / "outputs/tables/kh_main_importance.csv"
 d["grp"] = d.type
 d.loc[rural, "grp"] = "rural" + pd.qcut(d.loc[rural, "tt_town_dry"], 3, labels=["1", "2", "3"]).astype(str)
 G3 = ["capital", "town", "rural1", "rural2", "rural3"]
@@ -75,17 +92,36 @@ TX = {
                f2ticks=["¼×", "½×", "province\naverage", "2×", "4×"],
                f3t="Projects concentrate in Phnom Penh and provincial towns", f3y="Projects per 100,000 people",
                f3lab=["Phnom Penh\n(4 khans)", "Provincial\ntowns", "Rural:\nclosest third", "Rural:\nmiddle third", "Rural:\nfarthest third"],
-               f3sub=lambda n, t: f"{n} districts\n{t:.0f} min",               f4t="Change in projects when travel time doubles, across checks", f4x="% change in projects (95% CI, province-clustered); teal: CI excludes 0 and randomisation-inference p < 0.05",
+               f3sub=lambda n, t: f"{n} districts\n{t:.0f} min",               f4t="Physical access: the travel-time estimate across checks", f4x="% change in projects (95% CI, province-clustered); teal: CI excludes 0 and randomisation-inference p < 0.05",
                f4g=["Main estimate", "Robustness", "Donor groups", "Subsample"],
-               f4lab={"reach alone": "Main estimate (all 141 districts)", "R1a geocodes as published (no reclassification)": "Geocodes as published",
+               f4lab={"physical access alone": "Main estimate (all 141 districts)", "R1a geocodes as published (no reclassification)": "Geocodes as published",
                       "R1b worst case: province-level geocodes to remotest district": "Reclassified projects in remotest district",
                       "R2a province-only projects added at remotest district": "+ province-only projects, remotest district",
                       "R2b province-only projects added at best-reached district": "+ province-only projects, best-reached district",
                       "R3 Phnom Penh excluded": "Phnom Penh excluded", "R4 Weiss et al. (2018) travel time to cities": "Weiss et al. (2018) travel-time map",
-                      "rural districts: reach alone": "Rural districts only (112)",
+                      "rural districts: physical access alone": "Rural districts only (112)",
                       "donors: EU/US": "EU and US donors", "donors: World Bank": "World Bank", "donors: China": "China"},
                f5t="Remote districts are also the poorest", f5x="Travel time to the nearest town (minutes, log scale)", f5y="Poverty (−Meta wealth index, SD)",
-               f5leg="Projects"),
+               f5leg="Projects",
+               f4c_t="Three constructs: each alone, with checks, and in rural districts only",
+               f4c_x="% change in projects (95% CI, province-clustered); teal: CI excludes 0 and randomisation p < 0.05",
+               f4c_g=["Physical access (travel time ×2)", "Digital access (+1 SD)", "Poverty and economic activity (+1 SD)"],
+               f4c={"physical access alone": "Main estimate", "pair: physical access + digital access (r = -0.62)": "Holding digital access fixed",
+                    "R4 Weiss et al. (2018) travel time to cities": "Weiss et al. (2018) map", "rural districts: physical access alone": "Rural districts only",
+                    "digital access alone": "Main estimate: phone ownership 2019", "digital check: phone ownership 2008": "Phone ownership 2008 (before projects)",
+                    "digital check: Ookla mobile speed": "Ookla mobile speed", "pair:phone": "Holding physical access fixed",
+                    "rural districts: digital access alone": "Rural districts only",
+                    "poverty alone": "Main estimate: census deprivation 2019", "poverty check: 2008 index": "Census deprivation 2008",
+                    "poverty check: without water (piped only)": "Deprivation without water", "poverty check: Meta RWI": "Meta wealth index (negative)", "need check: night lights per person 2015": "Night lights per person 2015 (richer = more)",
+                    "rural districts: poverty alone": "Rural districts only"},
+               f5c_t="Remote districts are less connected and poorer", f5c_y1="Households with a mobile phone, 2019 (%)",
+               f5c_y2="Census deprivation, 2019 (SD)",
+               f7_t="Projects by decile of each measure, within province",
+               f7_p=["Digital access: phone ownership 2019", "Poverty: census deprivation 2019", "Economic activity: night lights 2015"],
+               f7_x=["phone ownership vs province mean (SD)", "deprivation vs province mean (SD)", "night lights vs province mean (SD)"],
+               f7_y="Projects per 100,000 people",
+               f8_t="Which matters more?", f8_a="Share of explained variation (Shapley)", f8_b="Out-of-sample gain in fit (%, 5-fold × 20)",
+               f8_lab={"physical access": "Physical access", "digital access": "Digital access", "poverty": "Poverty", "night lights": "Night lights"}),
     "ko": dict(font="Malgun Gothic", sfx="_ko",
                f1t="군별 원조 사업과 가장 가까운 도시까지의 이동시간", f1cb="인구 2만 명 이상 도시까지 이동시간 (분, 로그 눈금)",
                f1leg="사업 2017–2020", proj=lambda n: f"사업 {n}개",
@@ -95,17 +131,36 @@ TX = {
                f2ticks=["¼배", "½배", "주\n평균", "2배", "4배"],
                f3t="사업은 프놈펜과 도청 소재지에 몰린다", f3y="인구 10만 명당 사업 수",
                f3lab=["프놈펜\n(4개 칸)", "도청\n소재지", "농촌:\n가까운 1/3", "농촌:\n중간 1/3", "농촌:\n먼 1/3"],
-               f3sub=lambda n, t: f"{n}개 군\n{t:.0f}분",               f4t="이동시간이 두 배일 때 사업 수 변화: 점검별 비교", f4x="사업 수 변화 % (95% 신뢰구간, 주 군집); 청록: 구간이 0을 포함하지 않고 무작위화 추론 p < 0.05",
+               f3sub=lambda n, t: f"{n}개 군\n{t:.0f}분",               f4t="물리적 접근성: 이동시간 추정치의 점검별 비교", f4x="사업 수 변화 % (95% 신뢰구간, 주 군집); 청록: 구간이 0을 포함하지 않고 무작위화 추론 p < 0.05",
                f4g=["주 추정치", "견고성 점검", "공여자 그룹", "하위 표본"],
-               f4lab={"reach alone": "주 추정치 (141개 군 전체)", "R1a geocodes as published (no reclassification)": "지오코딩 원자료 그대로",
+               f4lab={"physical access alone": "주 추정치 (141개 군 전체)", "R1a geocodes as published (no reclassification)": "지오코딩 원자료 그대로",
                       "R1b worst case: province-level geocodes to remotest district": "재분류 사업을 가장 외진 군에",
                       "R2a province-only projects added at remotest district": "+ 주 단위 사업, 가장 외진 군에",
                       "R2b province-only projects added at best-reached district": "+ 주 단위 사업, 가장 가까운 군에",
                       "R3 Phnom Penh excluded": "프놈펜 제외", "R4 Weiss et al. (2018) travel time to cities": "Weiss et al. (2018) 이동시간 지도",
-                      "rural districts: reach alone": "농촌 군만 (112개)",
+                      "rural districts: physical access alone": "농촌 군만 (112개)",
                       "donors: EU/US": "유럽·미국", "donors: World Bank": "세계은행", "donors: China": "중국"},
                f5t="외진 군이 가장 가난한 군이기도 하다", f5x="가장 가까운 도시까지 이동시간 (분, 로그 눈금)", f5y="빈곤 (−Meta 부 지수, 표준편차)",
-               f5leg="사업 수"),
+               f5leg="사업 수",
+               f4c_t="세 구성개념: 단독 추정, 점검 측정치, 농촌 군만",
+               f4c_x="사업 수 변화 % (95% 신뢰구간, 주 군집); 청록: 구간이 0을 포함하지 않고 무작위화 p < 0.05",
+               f4c_g=["물리적 접근성 (이동시간 ×2)", "디지털 접근성 (+1SD)", "빈곤과 경제활동 (+1SD)"],
+               f4c={"physical access alone": "주 추정치", "pair: physical access + digital access (r = -0.62)": "디지털 접근성 고정",
+                    "R4 Weiss et al. (2018) travel time to cities": "Weiss et al. (2018) 지도", "rural districts: physical access alone": "농촌 군만",
+                    "digital access alone": "주 추정치: 2019 휴대전화 보유율", "digital check: phone ownership 2008": "2008 보유율 (사업 이전)",
+                    "digital check: Ookla mobile speed": "Ookla 모바일 속도", "pair:phone": "물리적 접근성 고정",
+                    "rural districts: digital access alone": "농촌 군만",
+                    "poverty alone": "주 추정치: 2019 센서스 박탈", "poverty check: 2008 index": "2008 센서스 박탈",
+                    "poverty check: without water (piped only)": "식수 제외 박탈 지수", "poverty check: Meta RWI": "Meta 부 지수 (음수)", "need check: night lights per person 2015": "2015 1인당 야간 불빛 (밝을수록 부유)",
+                    "rural districts: poverty alone": "농촌 군만"},
+               f5c_t="외진 군일수록 연결이 약하고 더 가난하다", f5c_y1="휴대전화 보유 가구, 2019 (%)",
+               f5c_y2="센서스 박탈 지수, 2019 (표준편차)",
+               f7_t="측정치별 10분위에 따른 사업 수 (주 안 비교)",
+               f7_p=["디지털 접근성: 2019 휴대전화 보유율", "빈곤: 2019 센서스 박탈", "경제활동: 2015 야간 불빛"],
+               f7_x=["주 평균 대비 휴대전화 보유율 (SD)", "주 평균 대비 박탈 (SD)", "주 평균 대비 야간 불빛 (SD)"],
+               f7_y="인구 10만 명당 사업 수",
+               f8_t="무엇이 더 중요한가?", f8_a="설명력 배분 (Shapley)", f8_b="표본 밖 적합도 개선 (%, 5겹 × 20회)",
+               f8_lab={"physical access": "물리적 접근성", "digital access": "디지털 접근성", "poverty": "빈곤", "night lights": "야간 불빛"}),
 }
 
 U = gpd.read_file(PROC / "kh_units.gpkg").rename(columns={"GEOLEVEL2": "unit"}); U["unit"] = U.unit.astype("int64")
@@ -164,7 +219,7 @@ for lang, t in TX.items():
     keys = list(t["f4lab"])
     F = R[R.model.isin(keys) & R["var"].isin(["reach", "reach_weiss"])].copy()
     F["o"] = F.model.map({k: i for i, k in enumerate(keys)}); F = F.sort_values("o")
-    breaks = {1: t["f4g"][1], keys.index("rural districts: reach alone"): t["f4g"][3], keys.index("donors: EU/US"): t["f4g"][2]}
+    breaks = {1: t["f4g"][1], keys.index("rural districts: physical access alone"): t["f4g"][3], keys.index("donors: EU/US"): t["f4g"][2]}
     fig, ax = plt.subplots(figsize=(6.8, 4.8))
     y, ypos, heads = 0, [], []
     for row in F.itertuples():
@@ -181,9 +236,84 @@ for lang, t in TX.items():
         ax.text(0, yy, h, transform=ax.get_yaxis_transform(), fontsize=8.5, fontweight="bold", color=INK, va="center", ha="right")
     ax.set_yticks(ypos); ax.set_yticklabels([t["f4lab"][k] for k in F.model]); ax.invert_yaxis()
     ax.set_xlabel(t["f4x"]); ax.set_title(t["f4t"])
-    save(fig, "F4_coefficients")
+    save(fig, "F6_robustness")
 
-    # F5 overlap
+
+    # F4 three constructs
+    pair = "pair: physical access + digital access (r = -0.62)"
+    spec = [(0, [("physical access alone", "reach"), (pair, "reach"), ("R4 Weiss et al. (2018) travel time to cities", "reach_weiss"), ("rural districts: physical access alone", "reach")]),
+            (1, [("digital access alone", "phone"), ("digital check: phone ownership 2008", "phone_2008"), ("digital check: Ookla mobile speed", "speed"),
+                 (pair, "phone"), ("rural districts: digital access alone", "phone")]),
+            (2, [("poverty alone", "deprivation"), ("poverty check: 2008 index", "dep_2008"), ("poverty check: without water (piped only)", "dep_nowater"),
+                 ("poverty check: Meta RWI", "poverty"), ("need check: night lights per person 2015", "lights"), ("rural districts: poverty alone", "deprivation")])]
+    if all(((R.model == m) & (R["var"] == v)).any() for _, rows_ in spec for m, v in rows_):
+        fig, axes = plt.subplots(3, 1, figsize=(6.8, 7.8), gridspec_kw={"height_ratios": [4, 5, 6], "hspace": .55})
+        for (g, rows_), ax in zip(spec, axes):
+            sub = [R[(R.model == m) & (R["var"] == v)].iloc[0] for m, v in rows_]
+            ax.axvline(0, color=INK2, lw=.8)
+            for i, r_ in enumerate(sub):
+                c = TEAL if (r_.p_ri < .05 and (r_.ci_hi < 0 or r_.ci_lo > 0)) else MUTED
+                ax.plot([r_.ci_lo, r_.ci_hi], [i, i], color=c, lw=1.7, solid_capstyle="butt")
+                ax.plot(r_.pct, i, "D" if i == 0 else "o", color=c, ms=6 if i == 0 else 5)
+                ax.text(1.01, i, f"{r_.pct:+.0f}%  p {r_.p_ri:.3f}".replace("-", MINUS), transform=ax.get_yaxis_transform(), va="center", fontsize=8, color=INK2)
+            labs = [t["f4c"]["pair:phone" if (m == pair and v == "phone") else m] for m, v in rows_]
+            ax.set_yticks(range(len(rows_))); ax.set_yticklabels(labs); ax.set_ylim(len(rows_) - .5, -.7)
+            ax.set_title(t["f4c_g"][g], fontsize=9.5)
+        axes[-1].set_xlabel(t["f4c_x"]); fig.suptitle(t["f4c_t"], x=.01, ha="left", fontsize=10, fontweight="bold")
+        save(fig, "F4_three_constructs")
+
+    # F5 overlap with the census measures
+    if "phone_share" in d:
+        fig, axes = plt.subplots(1, 2, figsize=(7.4, 3.6), sharex=True)
+        for ax, col, ylab, scale in [(axes[0], "phone_share", t["f5c_y1"], 100), (axes[1], "deprivation", t["f5c_y2"], 1)]:
+            ax.scatter(d.tt_town_dry, d[col] * scale, s=8 + d.N * 12, facecolor=TEAL, alpha=.35, edgecolor=TEAL, linewidth=.6)
+            ax.set_xscale("log"); ax.set_xticks([10, 30, 100, 300]); ax.set_xticklabels(["10", "30", "100", "300"])
+            ax.set_xlabel(t["f5x"], fontsize=8); ax.set_ylabel(ylab, fontsize=8.5)
+            ax.text(.03, .97 if col == "deprivation" else .1, f"r = {np.corrcoef(np.log(d.tt_town_dry), d[col])[0, 1]:.2f}".replace("-", MINUS),
+                    transform=ax.transAxes, va="top", color=RUST)
+        fig.suptitle(t["f5c_t"], x=.01, ha="left", fontsize=10, fontweight="bold"); fig.tight_layout()
+        save(fig, "F5_reach_poverty")
+
+    # F7 gradients for digital access, poverty and night lights
+    if G7:
+        fig, axes = plt.subplots(1, 3, figsize=(9.6, 3.4), sharey=True)
+        for ax, col, ttl, xl in zip(axes, ["phone_z", "deprivation", "lights_z"], t["f7_p"], t["f7_x"]):
+            xm, o_, l_, h_, g_, f_, pct_ = G7[col]
+            ax.vlines(xm, l_, h_, color=MUTED, lw=1.1); ax.plot(xm, o_, "o", color=TEAL, ms=4.5, zorder=3)
+            ax.plot(g_, f_, color=RUST, lw=1.5); ax.set_ylim(bottom=0)
+            ax.set_title(ttl, fontsize=9); ax.set_xlabel(xl, fontsize=8)
+            ax.text(.97, .95, f"{pct_:+.0f}% / SD".replace("-", MINUS), transform=ax.transAxes, ha="right", va="top", color=RUST, fontsize=8.5)
+        axes[0].set_ylabel(t["f7_y"]); fig.suptitle(t["f7_t"], x=.01, ha="left", fontsize=10, fontweight="bold"); fig.tight_layout()
+        save(fig, "F7_gradients")
+        for name, cols_ in [("F7_digital", ["phone_z"]), ("F7_need", ["deprivation", "lights_z"])]:   # one figure per chapter
+            idx = [["phone_z", "deprivation", "lights_z"].index(c) for c in cols_]
+            fig, axes = plt.subplots(1, len(cols_), figsize=(3.6 * len(cols_) + .6, 3.4), sharey=True, squeeze=False)
+            for ax, col, k in zip(axes[0], cols_, idx):
+                xm, o_, l_, h_, g_, f_, pct_ = G7[col]
+                ax.vlines(xm, l_, h_, color=MUTED, lw=1.1); ax.plot(xm, o_, "o", color=TEAL, ms=4.5, zorder=3)
+                ax.plot(g_, f_, color=RUST, lw=1.5); ax.set_ylim(bottom=0)
+                ax.set_title(t["f7_p"][k], fontsize=9); ax.set_xlabel(t["f7_x"][k], fontsize=8)
+                ax.text(.97, .95, f"{pct_:+.0f}% / SD".replace("-", MINUS), transform=ax.transAxes, ha="right", va="top", color=RUST, fontsize=8.5)
+            axes[0][0].set_ylabel(t["f7_y"]); fig.tight_layout()
+            save(fig, name)
+
+    # F8 which matters more
+    if IMP.exists():
+        I = pd.read_csv(IMP).sort_values("shapley_share", ascending=True)
+        fig, (a1, a2) = plt.subplots(1, 2, figsize=(8.4, 2.9), sharey=True)
+        yl = [t["f8_lab"][m] for m in I.measure]; cols = [TEAL if m == "physical access" else MUTED for m in I.measure]
+        a1.barh(yl, I.shapley_share, color=cols, height=.6)
+        for i, v in enumerate(I.shapley_share):
+            a1.text(v + 1, i, f"{v:.0f}%", va="center", fontsize=8.5)
+        a1.set_xlim(0, 100); a1.set_title(t["f8_a"], fontsize=9)
+        a2.barh(yl, I.cv_gain, xerr=I.cv_sd, color=cols, height=.6, error_kw={"ecolor": INK2, "lw": .9})
+        for i, v in enumerate(I.cv_gain):
+            a2.text(max(v, 0) + I.cv_sd.iloc[i] + .6, i, f"{v:+.1f}%".replace("-", MINUS), va="center", fontsize=8.5)
+        a2.axvline(0, color=INK2, lw=.8); a2.set_title(t["f8_b"], fontsize=9)
+        fig.suptitle(t["f8_t"], x=.01, ha="left", fontsize=10, fontweight="bold"); fig.tight_layout()
+        save(fig, "F8_importance")
+
+    # F5 with the Meta wealth index (kept for comparison)
     q = d.dropna(subset=["poverty"])
     fig, ax = plt.subplots(figsize=(5.6, 4.2))
     ax.scatter(q.tt_town_dry, q.poverty, s=8 + q.N * 14, facecolor=TEAL, alpha=.35, edgecolor=TEAL, linewidth=.6)
@@ -194,5 +324,5 @@ for lang, t in TX.items():
         ax.scatter([], [], s=8 + n * 14, facecolor=TEAL, alpha=.35, edgecolor=TEAL, label=f"{n}")
     ax.legend(title=t["f5leg"], loc="lower right", fontsize=8, title_fontsize=8, labelspacing=1.0)
     ax.set_title(t["f5t"])
-    save(fig, "F5_reach_poverty")
+    save(fig, "F5_reach_poverty_rwi")
 print("figures written to", FIG)

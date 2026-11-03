@@ -54,6 +54,7 @@
   "dl/tables/kh_joint_test.csv",
   "dl/tables/kh_ladder.csv",
   "dl/tables/kh_main.csv",
+  "dl/tables/kh_main_importance.csv",
   "dl/tables/kh_main_simple.csv",
   "dl/tables/kh_major_roads_event.csv",
   "dl/tables/kh_need.csv",

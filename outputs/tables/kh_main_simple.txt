@@ -1,34 +1,77 @@
 districts 141 | projects 186 (weight 185.9) | corr(reach, poverty) = 0.83 | median travel time 126 min (IQR 81-186)
-== MAIN (reach: per doubling of travel time; poverty: per SD)
-  reach alone                                  reach          -36% (95% CI -51% to -17%) | p RI 0.008 | cluster 0.001 | Conley 0.000 | projects 185.9
-  poverty alone                                poverty        -34% (95% CI -53% to -8%) | p RI 0.121 | cluster 0.015 | Conley 0.001 | projects 180.7
-  both                                         reach          -54% (95% CI -83% to +24%) | p RI 0.012 | cluster 0.125 | Conley 0.062 | projects 180.7
-  both                                         poverty        +48% (95% CI -46% to +306%) | p RI 0.260 | cluster 0.444 | Conley 0.353 | projects 180.7
-  Holm-adjusted RI p: reach alone 0.017, poverty alone 0.121
-== CENSUS: kh_census.csv not found, H-C1 skipped (IPUMS extract pending)
+census 2019: 5 deprivation indicators | phone ownership mean 0.91, SD 0.037
+correlations: physical access-digital access -0.62, physical access-poverty +0.75, digital access-poverty -0.75
+== MAIN: one construct per model (physical access per doubling of travel time; digital access and poverty per SD)
+  physical access alone                        reach          -36% (95% CI -51% to -17%) | p RI 0.008 | cluster 0.001 | Conley 0.000 | projects 185.9
+  digital access alone                         phone          +79% (95% CI -9% to +255%) | p RI 0.042 | cluster 0.092 | Conley 0.045 | projects 185.9
+  poverty alone                                deprivation    -50% (95% CI -77% to +6%) | p RI 0.019 | cluster 0.072 | Conley 0.022 | projects 185.9
+  Holm-adjusted RI p (three tests): physical access alone 0.025, poverty alone 0.039, digital access alone 0.042
+== SUPPLEMENTARY: all three together (not interpreted where |r| >= 0.7, spec 9-29)
+  all three together                           reach          -39% (95% CI -50% to -27%) | p RI 0.034 | cluster 0.000 | Conley 0.000 | projects 185.9
+  all three together                           phone           -5% (95% CI -30% to +28%) | p RI 0.831 | cluster 0.720 | Conley 0.728 | projects 185.9
+  all three together                           deprivation    +10% (95% CI -27% to +66%) | p RI 0.870 | cluster 0.637 | Conley 0.603 | projects 185.9
+  pair: physical access + digital access (r = -0.62) reach          -38% (95% CI -51% to -20%) | p RI 0.011 | cluster 0.000 | Conley 0.000 | projects 185.9
+  pair: physical access + digital access (r = -0.62) phone           -8% (95% CI -33% to +26%) | p RI 0.707 | cluster 0.604 | Conley 0.616 | projects 185.9
+  pair physical access + poverty: r = +0.75, not estimated (|r| >= 0.7)
+  pair digital access + poverty: r = -0.75, not estimated (|r| >= 0.7)
+== CHECK MEASURES (alone)
+  digital check: phone ownership 2008          phone_2008     +94% (95% CI +36% to +176%) | p RI 0.003 | cluster 0.000 | Conley 0.000 | projects 185.9
+  digital check: Ookla mobile speed            speed          +60% (95% CI +23% to +110%) | p RI 0.027 | cluster 0.001 | Conley 0.000 | projects 185.9
+  poverty check: Meta RWI                      poverty        -34% (95% CI -53% to -8%) | p RI 0.124 | cluster 0.015 | Conley 0.001 | projects 180.7
+  poverty check: without water (piped only)    dep_nowater    -41% (95% CI -72% to +23%) | p RI 0.073 | cluster 0.161 | Conley 0.080 | projects 185.9
+  poverty check: latrine counted as improved   dep_latok      -51% (95% CI -78% to +6%) | p RI 0.015 | cluster 0.071 | Conley 0.022 | projects 185.9
+  poverty check: first principal component     dep_pc1        -50% (95% CI -77% to +9%) | p RI 0.039 | cluster 0.080 | Conley 0.027 | projects 185.9
+  poverty check: 2008 index                    dep_2008       -46% (95% CI -62% to -22%) | p RI 0.004 | cluster 0.001 | Conley 0.000 | projects 185.9
+  need check: night lights per person 2015     lights         +49% (95% CI -3% to +129%) | p RI 0.126 | cluster 0.070 | Conley 0.036 | projects 185.9
+== WHICH MATTERS MORE (spec 9-30): travel time, phones, deprivation, lights
+  correlations:
+                 physical access  digital access  poverty  night lights
+physical access             1.00           -0.62     0.75         -0.03
+digital access             -0.62            1.00    -0.75         -0.02
+poverty                     0.75           -0.75     1.00          0.12
+night lights               -0.03           -0.02     0.12          1.00
+  per SD: physical access                      reach_sd       -45% (95% CI -61% to -22%) | p RI 0.008 | cluster 0.001 | Conley 0.000 | projects 185.9
+  per SD: digital access                       phone          +79% (95% CI -9% to +255%) | p RI 0.031 | cluster 0.092 | Conley 0.045 | projects 185.9
+  per SD: poverty                              deprivation    -50% (95% CI -77% to +6%) | p RI 0.017 | cluster 0.072 | Conley 0.022 | projects 185.9
+  per SD: night lights                         lights         +49% (95% CI -3% to +129%) | p RI 0.102 | cluster 0.070 | Conley 0.036 | projects 185.9
+  (b) Shapley split of the deviance explained by the four (pseudo-R2 0.548 -> 0.683): physical access 64%, poverty 15%, night lights 11%, digital access 10%
+  (c) cross-validated deviance gain over province FE + ln population (5-fold x 20): physical access +22.5% (sd 4.3), digital access +4.4% (sd 3.6), night lights +3.4% (sd 4.2), poverty +2.8% (sd 4.2)
+  pair: physical access + digital access (r = -0.62) reach_sd       -47% (95% CI -61% to -26%) | p RI 0.011 | cluster 0.000 | Conley 0.000 | projects 185.9
+  pair: physical access + digital access (r = -0.62) phone           -8% (95% CI -33% to +26%) | p RI 0.727 | cluster 0.604 | Conley 0.616 | projects 185.9
+  pair physical access + poverty: r = +0.75, not interpreted (|r| >= 0.7)
+  pair: physical access + night lights (r = -0.03) reach_sd       -42% (95% CI -58% to -18%) | p RI 0.024 | cluster 0.002 | Conley 0.000 | projects 185.9
+  pair: physical access + night lights (r = -0.03) lights         +23% (95% CI -7% to +63%) | p RI 0.391 | cluster 0.143 | Conley 0.128 | projects 185.9
+  pair digital access + poverty: r = -0.75, not interpreted (|r| >= 0.7)
+  pair: digital access + night lights (r = -0.02) phone          +63% (95% CI -22% to +243%) | p RI 0.111 | cluster 0.197 | Conley 0.103 | projects 185.9
+  pair: digital access + night lights (r = -0.02) lights         +32% (95% CI -13% to +103%) | p RI 0.273 | cluster 0.194 | Conley 0.105 | projects 185.9
+  pair: poverty + night lights (r = +0.12)     deprivation    -44% (95% CI -73% to +16%) | p RI 0.040 | cluster 0.119 | Conley 0.042 | projects 185.9
+  pair: poverty + night lights (r = +0.12)     lights         +31% (95% CI -6% to +84%) | p RI 0.258 | cluster 0.111 | Conley 0.065 | projects 185.9
 == WHERE THE GRADIENT COMES FROM (exploratory, spec 9-28): capital khans, provincial towns (Krong), rural districts
   capital  districts   4 | projects   45.4 (24%) | population 3% | projects per 100,000 people 8.16 | median travel time 7 min
   rural    districts 112 | projects   90.2 (49%) | population 77% | projects per 100,000 people 0.72 | median travel time 144 min
   town     districts  25 | projects   50.3 (27%) | population 20% | projects per 100,000 people 1.52 | median travel time 60 min
-  district type (vs rural)                     capital_d    +1120% (95% CI +748% to +1656%) | p RI 0.026 | cluster 0.000 | Conley 0.000 | projects 185.9
-  district type (vs rural)                     town_d        +106% (95% CI -2% to +337%) | p RI 0.087 | cluster 0.058 | Conley 0.017 | projects 185.9
-  rural districts: reach alone                 reach           +9% (95% CI -15% to +40%) | p RI 0.673 | cluster 0.489 | Conley 0.464 | projects 90.2
-  rural districts: poverty alone               poverty        +37% (95% CI +2% to +84%) | p RI 0.387 | cluster 0.037 | Conley 0.081 | projects 90.2
-  rural districts: both                        reach          -17% (95% CI -59% to +68%) | p RI 0.468 | cluster 0.603 | Conley 0.515 | projects 90.2
-  rural districts: both                        poverty        +67% (95% CI -31% to +307%) | p RI 0.232 | cluster 0.257 | Conley 0.203 | projects 90.2
+  district type (vs rural)                     capital_d    +1120% (95% CI +748% to +1656%) | p RI 0.030 | cluster 0.000 | Conley 0.000 | projects 185.9
+  district type (vs rural)                     town_d        +106% (95% CI -2% to +337%) | p RI 0.078 | cluster 0.058 | Conley 0.017 | projects 185.9
+  rural districts: physical access alone       reach           +9% (95% CI -15% to +40%) | p RI 0.695 | cluster 0.489 | Conley 0.464 | projects 90.2
+  rural districts: digital access alone        phone          -12% (95% CI -41% to +30%) | p RI 0.393 | cluster 0.512 | Conley 0.451 | projects 90.2
+  rural districts: poverty alone               deprivation    +40% (95% CI -3% to +102%) | p RI 0.140 | cluster 0.071 | Conley 0.026 | projects 90.2
+  rural districts: night lights alone          lights         +12% (95% CI -17% to +50%) | p RI 0.567 | cluster 0.457 | Conley 0.364 | projects 90.2
+  rural districts: all three together          reach           -3% (95% CI -27% to +29%) | p RI 0.910 | cluster 0.831 | Conley 0.820 | projects 90.2
+  rural districts: all three together          phone           -5% (95% CI -37% to +42%) | p RI 0.716 | cluster 0.795 | Conley 0.754 | projects 90.2
+  rural districts: all three together          deprivation    +41% (95% CI -9% to +119%) | p RI 0.217 | cluster 0.124 | Conley 0.033 | projects 90.2
 == ROBUSTNESS (reach alone)
-  R1a geocodes as published (no reclassification) reach          -48% (95% CI -66% to -22%) | p RI 0.001 | cluster 0.002 | Conley 0.000 | projects 196.9
-  R1b worst case: province-level geocodes to remotest district reach          -22% (95% CI -42% to +5%) | p RI 0.184 | cluster 0.100 | Conley 0.098 | projects 185.9
-  R2a province-only projects added at remotest district reach          -23% (95% CI -41% to +2%) | p RI 0.103 | cluster 0.065 | Conley 0.038 | projects 223.9
+  R1a geocodes as published (no reclassification) reach          -48% (95% CI -66% to -22%) | p RI 0.003 | cluster 0.002 | Conley 0.000 | projects 196.9
+  R1b worst case: province-level geocodes to remotest district reach          -22% (95% CI -42% to +5%) | p RI 0.164 | cluster 0.100 | Conley 0.098 | projects 185.9
+  R2a province-only projects added at remotest district reach          -23% (95% CI -41% to +2%) | p RI 0.073 | cluster 0.065 | Conley 0.038 | projects 223.9
   R2b province-only projects added at best-reached district reach          -44% (95% CI -56% to -29%) | p RI 0.001 | cluster 0.000 | Conley 0.000 | projects 223.9
-  R3 Phnom Penh excluded                       reach          -26% (95% CI -51% to +12%) | p RI 0.030 | cluster 0.154 | Conley 0.043 | projects 140.5
-  R4 Weiss et al. (2018) travel time to cities reach_weiss    -26% (95% CI -40% to -8%) | p RI 0.025 | cluster 0.007 | Conley 0.000 | projects 185.9
-  R5 ten-component physical-access index (per SD) index          +87% (95% CI +23% to +186%) | p RI 0.008 | cluster 0.003 | Conley 0.000 | projects 185.9
+  R3 Phnom Penh excluded                       reach          -26% (95% CI -51% to +12%) | p RI 0.026 | cluster 0.154 | Conley 0.043 | projects 140.5
+  R4 Weiss et al. (2018) travel time to cities reach_weiss    -26% (95% CI -40% to -8%) | p RI 0.044 | cluster 0.007 | Conley 0.000 | projects 185.9
+  R5 ten-component physical-access index (per SD) index          +87% (95% CI +23% to +186%) | p RI 0.011 | cluster 0.003 | Conley 0.000 | projects 185.9
 == DONOR GROUPS (reach alone)
-  donors: EU/US                                reach          -36% (95% CI -53% to -13%) | p RI 0.035 | cluster 0.004 | Conley 0.000 | projects 126.0
+  donors: EU/US                                reach          -36% (95% CI -53% to -13%) | p RI 0.025 | cluster 0.004 | Conley 0.000 | projects 126.0
     EU/US: 126 activities over 126 districts
-  donors: World Bank                           reach          -40% (95% CI -52% to -25%) | p RI 0.015 | cluster 0.000 | Conley 0.000 | projects 11.9
+  donors: World Bank                           reach          -40% (95% CI -52% to -25%) | p RI 0.012 | cluster 0.000 | Conley 0.000 | projects 11.9
     World Bank: 12 activities over 45 districts
-  donors: China                                reach          -36% (95% CI -52% to -15%) | p RI 0.020 | cluster 0.003 | Conley 0.000 | projects 48.0
+  donors: China                                reach          -36% (95% CI -52% to -15%) | p RI 0.018 | cluster 0.003 | Conley 0.000 | projects 48.0
     China: 48 activities over 40 districts
 == FIGURE: projects per 100,000 people by within-province travel-time quintile (1 = closest): Q1 2.59, Q2 0.63, Q3 0.69, Q4 0.71, Q5 0.99

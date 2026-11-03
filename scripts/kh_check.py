@@ -100,9 +100,12 @@ html = (SITE / "index.html").read_text(encoding="utf-8")
 txt = re.sub(r"<[^>]+>", " ", html).replace("&lt;", "<")
 M = pd.read_csv(T / "kh_main_simple.csv")                       # the main analysis (kh_main.py)
 pc = lambda x: f"{x:+.0f}%".replace("-", "−").replace("+−", "−")
-for model, var, keys in [("reach alone", "reach", ["pct", "ci", "p_ri", "p_cluster"]), ("poverty alone", "poverty", ["pct", "ci", "p_ri", "p_cluster"]),
-                         ("both", "reach", ["pct", "ci", "p_ri", "p_cluster"]), ("both", "poverty", ["pct", "ci", "p_ri", "p_cluster"]),
-                         ("rural districts: reach alone", "reach", ["pct", "ci", "p_ri"]), ("rural districts: poverty alone", "poverty", ["p_ri"]),
+PAIR = "pair: physical access + digital access (r = -0.62)"
+for model, var, keys in [("physical access alone", "reach", ["pct", "ci", "p_ri", "p_cluster"]), ("digital access alone", "phone", ["pct", "ci", "p_ri", "p_cluster"]),
+                         ("poverty alone", "deprivation", ["pct", "ci", "p_ri", "p_cluster"]), (PAIR, "reach", ["pct", "ci", "p_ri"]), (PAIR, "phone", ["pct", "ci", "p_ri", "p_cluster"]),
+                         ("digital check: phone ownership 2008", "phone_2008", ["pct"]),
+                         ("rural districts: physical access alone", "reach", ["pct", "ci"]), ("rural districts: digital access alone", "phone", ["pct", "p_ri"]),
+                         ("rural districts: poverty alone", "deprivation", ["pct", "p_ri"]),
                          ("district type (vs rural)", "capital_d", ["p_ri"]), ("district type (vs rural)", "town_d", ["p_ri"]),
                          ("R1a geocodes as published (no reclassification)", "reach", ["pct"]), ("R3 Phnom Penh excluded", "reach", ["pct", "p_ri"]),
                          ("R4 Weiss et al. (2018) travel time to cities", "reach_weiss", ["pct"]), ("R5 ten-component physical-access index (per SD)", "index", ["pct"])]:
@@ -110,10 +113,21 @@ for model, var, keys in [("reach alone", "reach", ["pct", "ci", "p_ri", "p_clust
     for k in keys:
         s = {"pct": pc(r.pct), "ci": f"{pc(r.ci_lo)} to {pc(r.ci_hi)}", "p_ri": f"{r.p_ri:.3f}", "p_cluster": f"{r.p_cluster:.3f}"}[k]
         check(f"E1 site shows {model} / {var} / {k} = {s}", s in txt or s.replace(" to ", " ~ ") in txt)
-holm = M[M.model.isin(["reach alone", "poverty alone"])].sort_values("p_ri").p_ri.values
-check("E1 site shows the Holm-adjusted p for travel time", f"{min(1, 2 * holm[0]):.3f}" in txt, f"{min(1, 2 * holm[0]):.3f}")
-stale = [s for s in ["+165%", "2.6 times", "−49%", "p = 0.042", "five factors", "39%"] if s in txt]
+main3 = M[M.model.isin(["physical access alone", "digital access alone", "poverty alone"])].sort_values("p_ri"); run, hp = 0, []
+for i_, r in enumerate(main3.itertuples()):
+    run = max(run, min(1, (3 - i_) * r.p_ri)); hp.append(f"{run:.3f}")
+check("E1 site shows the three Holm-adjusted p", all(h in txt for h in hp), ", ".join(hp))
+IMP = pd.read_csv(T / "kh_main_importance.csv")                  # which matters more (spec 9-30)
+for r in IMP.itertuples():
+    sh, cv = f"{r.shapley_share:.0f}%", f"{r.cv_gain:+.1f}%"
+    check(f"E1 site shows {r.measure}: Shapley {sh}, out-of-sample {cv}", sh in txt and cv in txt)
+for v in ["reach_sd", "phone", "deprivation", "lights"]:
+    r = M[(M.model.str.startswith("per SD:")) & (M["var"] == v)].iloc[0]
+    check(f"E1 site shows per-SD effect for {v} = {pc(r.pct)} (p {r.p_ri:.3f})", pc(r.pct) in txt and f"{r.p_ri:.3f}" in txt)
+stale = [s for s in ["+165%", "2.6 times", "−49%", "five factors", "39%", "Reach or Poverty"] if s in txt]
 check("E2 no stale headline numbers on the site", not stale, ", ".join(stale))
+missing = sorted({m for m in re.findall(r'src="(img/[^"?]+)', html) if not (SITE / m).exists()})
+check("E3 every image the page uses exists in site/img", not missing, ", ".join(missing))
 
 print(f"\n{len(passes)} passed, {len(fails)} failed" + (": " + "; ".join(fails) if fails else ""))
 sys.exit(1 if fails else 0)
