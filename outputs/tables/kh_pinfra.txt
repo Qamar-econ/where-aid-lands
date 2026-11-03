@@ -1,0 +1,28 @@
+province-located activities: 845 (671 with district precision) | 21 provinces | per year 2003-2020: 39.5
+== province travel time to Phnom Penh without each work (F = 60 min), % longer
+                          NR48 Koh Kong bridges  Sekong bridge  Prek Tamak bridge  NR78 Ratanakiri paving  Stung Treng bridge  Neak Loeung bridge
+Kampong Cham                                0.0            0.0                2.4                     0.0                 0.0                 0.0
+Kandal + Phnom Penh                         0.0            0.0                6.6                     0.0                 0.0                 0.1
+Koh Kong + Sihanoukville                    8.0            0.0                0.0                     0.0                 0.0                 0.0
+Kratie                                      0.0            0.0                1.5                     0.0                 0.0                 0.0
+Mondulkiri                                  0.0            0.0                1.5                     0.1                 0.0                 0.0
+Prey Veng                                   0.0            0.0               14.2                     0.0                 0.0                16.0
+Ratanakiri                                  0.0            0.0                1.3                    29.3                 0.0                 0.0
+Stung Treng                                 0.0            2.3                1.1                     1.5                 0.0                 0.0
+Svay Rieng                                  0.0            0.0                2.6                     0.0                 0.0                21.6
+== treated provinces (>= 10%): Prey Veng <- Prek Tamak bridge (2010); Ratanakiri <- NR78 Ratanakiri paving (2012); Svay Rieng <- Neak Loeung bridge (2015) | controls 14
+== MAIN (spec 9-34)
+  main (all treated, F 60, >= 10%)              -61.3% (95% CI -74% to -42%) MDE 79% | p RI 0.044 (2000 draws) | cluster 0.000 | treated 3 | controls 14 | treated activities pre 7.1 post 7.8
+== BY EVENT (one treated province each: exact RI over the stack's provinces)
+  event: Prek Tamak bridge                      -73.0% (95% CI -78% to -67%) MDE 35% | p RI 0.200 (15 draws) | cluster 0.000 | treated 1 | controls 14 | treated activities pre 1.2 post 0.6
+  event: NR78 Ratanakiri paving                 -65.5% (95% CI -78% to -46%) MDE 91% | p RI 0.333 (15 draws) | cluster 0.000 | treated 1 | controls 14 | treated activities pre 3.9 post 5.2
+  event: Neak Loeung bridge                     -42.4% (95% CI -54% to -29%) MDE 36% | p RI 0.533 (15 draws) | cluster 0.000 | treated 1 | controls 14 | treated activities pre 2.0 post 1.9
+== ROBUSTNESS
+  district-precise (adm2) activities only       -76.5% (95% CI -90% to -46%) MDE 233% | p RI 0.044 (999 draws) | cluster 0.001 | treated 3 | controls 14 | treated activities pre 4.3 post 3.0
+  ferry 30 min                                  -58.0% (95% CI -71% to -38%) MDE 74% | p RI 0.116 (999 draws) | cluster 0.000 | treated 2 | controls 16 | treated activities pre 6.0 post 7.2
+  ferry 120 min                                 -32.1% (95% CI -48% to -12%) MDE 45% | p RI 0.173 (999 draws) | cluster 0.003 | treated 5 | controls 14 | treated activities pre 52.3 post 72.7
+  threshold >= 5%                               -32.1% (95% CI -48% to -12%) MDE 45% | p RI 0.173 (999 draws) | cluster 0.003 | treated 5 | controls 14 | treated activities pre 52.3 post 72.7
+  EU/US donors only                             -73.2% (95% CI -85% to -53%) MDE 124% | p RI 0.043 (999 draws) | cluster 0.000 | treated 3 | controls 14 | treated activities pre 5.7 post 6.0
+  all activities incl. infrastructure           -46.5% (95% CI -63% to -24%) MDE 66% | p RI 0.062 (999 draws) | cluster 0.001 | treated 3 | controls 14 | treated activities pre 8.2 post 9.3
+== PLACEBO: completion dated 3 years early
+  placebo -3 years                             +192.4% (95% CI +47% to +483%) MDE 168% | p RI 0.052 (999 draws) | cluster 0.002 | treated 3 | controls 14 | treated activities pre 2.6 post 12.3

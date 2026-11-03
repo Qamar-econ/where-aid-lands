@@ -1,0 +1,37 @@
+districts 141 | projects 185.9 | corr(town, capital) = 0.77 | median travel time to Phnom Penh 281 min | zones: plains 52, tonle_sap 49, plateau 28, coastal 12
+== MAIN (spec 9-33): zone fixed effects
+  town alone                               town     FE zone       -42% per doubling (95% CI -52% to -29%) | p RI 0.004 | cluster 0.000 | Conley 0.000 | projects 185.9
+  capital alone                            capital  FE zone       -43% per doubling (95% CI -56% to -28%) | p RI 0.019 | cluster 0.000 | Conley 0.000 | projects 185.9
+  COMPARE all districts                    FE zone     CV gain: town +24.4% (sd 4.5), capital +14.0% (sd 4.9) | Shapley: town 55%, capital 45%
+== ROBUSTNESS
+  Phnom Penh khans excluded: town          town     FE zone       -23% per doubling (95% CI -43% to +4%) | p RI 0.099 | cluster 0.087 | Conley 0.052 | projects 140.5
+  Phnom Penh khans excluded: capital       capital  FE zone        +1% per doubling (95% CI -16% to +21%) | p RI 0.953 | cluster 0.888 | Conley 0.895 | projects 140.5
+  COMPARE Phnom Penh khans excluded        FE zone     CV gain: town +5.8% (sd 3.8), capital -4.4% (sd 2.6) | Shapley: town 83%, capital 17%
+  province FE: town                        town     FE province   -36% per doubling (95% CI -51% to -17%) | p RI 0.010 | cluster 0.001 | Conley 0.000 | projects 185.9
+  province FE: capital                     capital  FE province   -56% per doubling (95% CI -70% to -34%) | p RI 0.004 | cluster 0.000 | Conley 0.000 | projects 185.9
+  COMPARE all districts                    FE province CV gain: town +20.3% (sd 4.8), capital +21.8% (sd 10.6) | Shapley: town 44%, capital 56%
+  none FE: town                            town     FE none       -34% per doubling (95% CI -44% to -23%) | p RI 0.002 | cluster 0.000 | Conley 0.000 | projects 185.9
+  none FE: capital                         capital  FE none       -25% per doubling (95% CI -45% to +2%) | p RI 0.036 | cluster 0.071 | Conley 0.063 | projects 185.9
+  COMPARE all districts                    FE none     CV gain: town +14.0% (sd 4.5), capital -8.1% (sd 14.9) | Shapley: town 72%, capital 28%
+== MECHANISM (exploratory): donor groups and sectors, zone FE
+  donors EU/US: town                       town     FE zone       -40% per doubling (95% CI -52% to -25%) | p RI 0.014 | cluster 0.000 | Conley 0.000 | projects 126.0
+  donors EU/US: capital                    capital  FE zone       -38% per doubling (95% CI -56% to -12%) | p RI 0.066 | cluster 0.008 | Conley 0.005 | projects 126.0
+  COMPARE donors EU/US                     FE zone     CV gain: town +16.0% (sd 5.4), capital -3.6% (sd 6.0) | Shapley: town 69%, capital 31%
+  donors World Bank: town                  town     FE zone       -24% per doubling (95% CI -42% to -1%) | p RI 0.190 | cluster 0.039 | Conley 0.029 | projects 11.9
+  donors World Bank: capital               capital  FE zone       -22% per doubling (95% CI -43% to +7%) | p RI 0.258 | cluster 0.117 | Conley 0.043 | projects 11.9
+  COMPARE donors World Bank                FE zone     CV gain: town +0.5% (sd 2.2), capital -1.6% (sd 2.0) | Shapley: town 69%, capital 31%
+  donors China: town                       town     FE zone       -49% per doubling (95% CI -57% to -40%) | p RI 0.012 | cluster 0.000 | Conley 0.000 | projects 48.0
+  donors China: capital                    capital  FE zone       -56% per doubling (95% CI -61% to -51%) | p RI 0.024 | cluster 0.000 | Conley 0.000 | projects 48.0
+  COMPARE donors China                     FE zone     CV gain: town +27.3% (sd 4.2), capital +38.0% (sd 6.2) | Shapley: town 37%, capital 63%
+  sector social: town                      town     FE zone       -54% per doubling (95% CI -60% to -47%) | p RI 0.014 | cluster 0.000 | Conley 0.000 | projects 101.0
+  sector social: capital                   capital  FE zone       -58% per doubling (95% CI -65% to -51%) | p RI 0.014 | cluster 0.000 | Conley 0.000 | projects 101.0
+  COMPARE sector social                    FE zone     CV gain: town +40.3% (sd 5.8), capital +36.1% (sd 4.5) | Shapley: town 52%, capital 48%
+  sector production: town                  town     FE zone       +11% per doubling (95% CI -34% to +87%) | p RI 0.582 | cluster 0.698 | Conley 0.612 | projects 17.9
+  sector production: capital               capital  FE zone        +0% per doubling (95% CI -49% to +99%) | p RI 0.986 | cluster 0.989 | Conley 0.983 | projects 17.9
+  COMPARE sector production                FE zone     CV gain: town -3.0% (sd 2.1), capital -7.0% (sd 4.0) | Shapley: town 78%, capital 22%
+  sector infrastructure: town              town     FE zone       +15% per doubling (95% CI -22% to +72%) | p RI 0.434 | cluster 0.479 | Conley 0.411 | projects 17.0
+  sector infrastructure: capital           capital  FE zone        -4% per doubling (95% CI -29% to +32%) | p RI 0.802 | cluster 0.816 | Conley 0.779 | projects 17.0
+  COMPARE sector infrastructure            FE zone     CV gain: town -3.2% (sd 1.9), capital -2.2% (sd 1.9) | Shapley: town 63%, capital 37%
+  sector other: town                       town     FE zone       -25% per doubling (95% CI -47% to +6%) | p RI 0.164 | cluster 0.107 | Conley 0.074 | projects 50.0
+  sector other: capital                    capital  FE zone       -12% per doubling (95% CI -43% to +36%) | p RI 0.564 | cluster 0.556 | Conley 0.524 | projects 50.0
+  COMPARE sector other                     FE zone     CV gain: town +2.7% (sd 3.8), capital -5.1% (sd 5.3) | Shapley: town 85%, capital 15%
