@@ -189,5 +189,5 @@ for b in dict.fromkeys(c["bridge"] for c in C):
     for lab, sel in [("pre", lambda e: (e >= -5) & (e <= -1)), ("post", lambda e: (e >= 1) & (e <= 5))]:
         t0 = yr[b]; m = main[main.unit.isin(pu) & sel(main.yr - t0)]
         n_all, n_tr = m.w.sum(), m[m.unit.isin(tu)].w.sum()
-        say(f"  {b:<12s} {lab:<4s}: {n_tr:4.0f} of {n_all:4.0f} projects in {', '.join(provs)} ({100 * n_tr / max(n_all, 1):.0f}%)")
+        say(f"  {b:<12s} {lab:<4s}: {n_tr:4.1f} of {n_all:4.1f} projects in provinces {', '.join(provs)}" + (f" ({100 * n_tr / n_all:.0f}%)" if n_all > 0 else ""))
 (T_OUT / "kh_bridges.txt").write_text("\n".join(log), encoding="utf-8")

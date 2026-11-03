@@ -1,0 +1,40 @@
+check: with-bridge times reproduce kh_access tt_town_dry, max abs diff 0.0000 min
+== treated districts (travel time to Phnom Penh would be >= 25% longer by ferry, F = 60 min; spec 9-32a)
+  Prek Tamak   2010 Srei Santhor           (3               )  165.8 ->  224.2 min (+35%)
+  Prek Tamak   2010 Khsach Kandal          (8               )   84.5 ->  142.8 min (+69%)
+  Prek Tamak   2010 Lvea Aem               (8               )  183.2 ->  240.9 min (+32%)
+  Prek Tamak   2010 Pou Rieng, Pea Reang, Krong Prey Veng (14              )  152.3 ->  204.3 min (+34%)
+  Prek Tamak   2010 Svay Antor             (14              )  172.6 ->  222.7 min (+29%)
+  Prek Tamak   2010 Kamchay Mear           (14              )  186.1 ->  244.6 min (+31%)
+  Prek Tamak   2010 Sithor Kandal          (14              )  207.1 ->  263.4 min (+27%)
+  Neak Loeung  2015 Chantrea, Kampong Rou, Svay Chrum, Krong Svay Rieng, Svay Teab, Krong Bavet (20              )  208.0 ->  265.4 min (+28%)
+  Neak Loeung  2015 Preah Sdach            (14              )  157.0 ->  214.3 min (+37%)
+  Neak Loeung  2015 Kampong Trabaek        (14              )  174.6 ->  231.9 min (+33%)
+  Neak Loeung  2015 Ba Phnum               (14              )  173.4 ->  229.9 min (+33%)
+  Neak Loeung  2015 Peam Ro                (14              )  134.2 ->  185.0 min (+38%)
+  Neak Loeung  2015 Peam Chor              (14              )  219.9 ->  277.0 min (+26%)
+  Sekong       2008 no district crosses the threshold (max +3%)
+  Prek Kdam    2010 no district crosses the threshold (max +2%)
+  Prek Pnov    2010 no district crosses the threshold (max +0%)
+  Koh Puos     2011 no district crosses the threshold (max +0%)
+  Ta Khmau     2015 no district crosses the threshold (max +2%)
+  Stung Treng  2015 no district crosses the threshold (max +0%)
+controls: 122 districts
+== AS FIRST SPECIFIED (spec 9-32): nearest town >= 20,000
+  9-32 nearest town (as specified)           +nan% (95% CI +nan% to +nan%) MDE nan% | p RI nan | cluster nan | treated 2 in 1 bridges, controls 134 | treated projects pre 0 post 1
+== MAIN (spec 9-32a): Phnom Penh, non-ICT, non-infrastructure activities, -5..-1 vs +1..+5
+  main (Phnom Penh, F 60 min, >= 25%)       -69.3% (95% CI -95% to +82%) MDE 1173% | p RI 0.080 | cluster 0.193 | treated 13 in 2 bridges, controls 122 | treated projects pre 3 post 2
+== ROBUSTNESS
+  ferry 30 min                               +nan% (95% CI +nan% to +nan%) MDE nan% | p RI nan | cluster nan | treated 1 in 1 bridges, controls 123 | treated projects pre 0 post 0
+  ferry 120 min                             -68.6% (95% CI -95% to +81%) MDE 1125% | p RI 0.073 | cluster 0.195 | treated 15 in 2 bridges, controls 121 | treated projects pre 3 post 2
+  threshold >= 10%                          -67.2% (95% CI -93% to +60%) MDE 860% | p RI 0.056 | cluster 0.168 | treated 18 in 2 bridges, controls 122 | treated projects pre 3 post 2
+  Prek Kdam opened 2009                     -69.3% (95% CI -95% to +82%) MDE 1173% | p RI 0.086 | cluster 0.193 | treated 13 in 2 bridges, controls 122 | treated projects pre 3 post 2
+  EU/US donors only                         -95.3% (95% CI -96% to -94%) MDE 38% | p RI 0.043 | cluster 0.000 | treated 13 in 2 bridges, controls 122 | treated projects pre 2 post 0
+  all activities incl. infrastructure       -62.4% (95% CI -88% to +22%) MDE 435% | p RI 0.065 | cluster 0.103 | treated 13 in 2 bridges, controls 122 | treated projects pre 4 post 3
+== PLACEBO: opening dated 3 years early
+  placebo -3 years                           +nan% (95% CI +nan% to +nan%) MDE nan% | p RI nan | cluster nan | treated 13 in 2 bridges, controls 122 | treated projects pre 0 post 4
+== DISPERSAL (descriptive): share of the province's projects that land in the bridge's treated districts
+  Prek Tamak   pre :    1 of   42 projects in 3, 8, 14 (2%)
+  Prek Tamak   post:    2 of   56 projects in 3, 8, 14 (3%)
+  Neak Loeung  pre :    2 of    3 projects in 20, 14 (70%)
+  Neak Loeung  post:    0 of    0 projects in 20, 14 (20%)
