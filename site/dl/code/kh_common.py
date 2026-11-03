@@ -49,3 +49,27 @@ def assign_units(K, U):
         nn = nn[~nn.index.duplicated()]
         g.loc[miss, cols] = nn[cols].values
     return pd.DataFrame(g.drop(columns="geometry"))
+
+
+def reclassify_geocodes(A, units, proc, move=("PROVINCE", "UNCLEAR"), drop=("NATIONAL",), how="pop"):
+    """Spec 9-26: EU/US activities geocoded to a province-capital town or a province name, hand-classified from their text
+    (kh_geocode_classified.csv). PROVINCE/UNCLEAR weight at the flagged district is spread over the province's districts by
+    population (Phnom Penh: its four khans); NATIONAL weight is dropped; TOWN stays. A: rows with project_id, unit, w (other
+    columns are carried). units: unit, prov, pop_2019, access, capital. Set KH_GEOCODE=original to skip."""
+    import os
+    if os.environ.get("KH_GEOCODE", "main") == "original":
+        return A
+    cl = pd.read_csv(proc / "kh_geocode_classified.csv")[["project_id", "class"]]
+    fu = pd.read_csv(proc / "kh_geocode_flagged_units.csv").merge(cl, on="project_id")
+    key = fu.set_index(["project_id", "unit"])["class"]
+    cls = pd.Series([key.get((p, u)) for p, u in zip(A.project_id, A.unit)], index=A.index)
+    out = [A[~cls.isin(list(move) + list(drop))]]
+    cap = set(units[units.capital].unit); prov = units.set_index("unit").prov
+    for _, r in A[cls.isin(move)].iterrows():
+        pool = units[units.unit.isin(cap)] if r.unit in cap else units[units.prov == prov.get(r.unit)]
+        sh = (pool.pop_2019 / pool.pop_2019.sum()).values if how == "pop" else \
+             (pool.access == pool.access.min()).astype(float).values if how == "worst" else np.full(len(pool), 1 / len(pool))
+        rows = pd.DataFrame([r] * len(pool)).reset_index(drop=True)
+        rows["unit"] = pool.unit.values; rows["w"] = r.w * sh
+        out.append(rows[rows.w > 0])
+    return pd.concat(out, ignore_index=True)

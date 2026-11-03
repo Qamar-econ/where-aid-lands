@@ -56,7 +56,8 @@ prior = L[L.start.between(2010, 2016)]
 DF["prior_infra"] = DF.unit.isin(prior[prior.family == "infra"].unit).astype(int)
 DF["prior_infra_n"] = np.log1p(DF.unit.map(prior[prior.family == "infra"].groupby("unit").w.sum()).fillna(0))
 DF["prior_social"] = DF.unit.isin(prior[prior.family == "social"].unit).astype(int)
-cur = L[L.start.between(2017, 2020) & (L.family != "ict")]
+from kh_common import reclassify_geocodes
+cur = reclassify_geocodes(L[L.start.between(2017, 2020) & (L.family != "ict")], DF, ROOT / "data/processed/cambodia")  # spec 9-26
 
 
 def outcome(a):
@@ -136,7 +137,7 @@ for _ in range(2000):
     for pv in dn.prov.unique():
         ix = np.where(dn.prov.values == pv)[0]; perm[ix] = RNG.permutation(perm[ix])
     bs.append(smf.glm("N ~ prior_infra + lnpop + C(prov)", data=dn.assign(prior_infra=perm), family=sm.families.Poisson()).fit(maxiter=100).params["prior_infra"])
-H.append({"spec": "f  randomization inference p (a0)", "pct": np.nan, "p": float(np.mean(np.abs(bs) >= abs(b_obs))), "n_projects": np.nan})
+H.append({"spec": "f  randomization inference p (a0)", "pct": np.nan, "p": float((1 + np.sum(np.abs(np.array(bs)) >= abs(b_obs))) / (1 + len(bs))), "n_projects": np.nan})
 HI = pd.DataFrame(H); HI.to_csv(T / "kh_infra2.csv", index=False)
 
 # ---------------- H-infra1: fully interacted stacked model (infrastructure vs social projects) ----------------

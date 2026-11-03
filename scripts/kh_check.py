@@ -97,14 +97,22 @@ check("D1 randomisation p always includes the observed draw", not hits, ", ".joi
 
 # ---------------- E. site claims ----------------
 html = (SITE / "index.html").read_text(encoding="utf-8")
-txt = re.sub(r"<[^>]+>", " ", html)
-need = pd.read_csv(T / "kh_need_conservative.csv").iloc[0]; jt = pd.read_csv(T / "kh_joint_test.csv").iloc[0]
-claims = [("physical access effect", f"+{mn.loc['phys', 'pct']:.0f}%"), ("physical access p", f"p = {mn.loc['phys', 'p_conservative']:.3f}"),
-          ("poverty effect", f"{need.pct:.0f}%".replace("-", "−")), ("poverty p", f"p = {need.p_conservative:.3f}"),
-          ("joint test p", f"p = {jt.p_conservative:.3f}")]
-for name, s in claims:
-    check(f"E1 site shows {name} ({s})", s in txt)
-stale = [s for s in ["+165%", "2.6 times", "−49%", "p = 0.042"] if s in txt]
+txt = re.sub(r"<[^>]+>", " ", html).replace("&lt;", "<")
+M = pd.read_csv(T / "kh_main_simple.csv")                       # the main analysis (kh_main.py)
+pc = lambda x: f"{x:+.0f}%".replace("-", "−").replace("+−", "−")
+for model, var, keys in [("reach alone", "reach", ["pct", "ci", "p_ri", "p_cluster"]), ("poverty alone", "poverty", ["pct", "ci", "p_ri", "p_cluster"]),
+                         ("both", "reach", ["pct", "ci", "p_ri", "p_cluster"]), ("both", "poverty", ["pct", "ci", "p_ri", "p_cluster"]),
+                         ("rural districts: reach alone", "reach", ["pct", "ci", "p_ri"]), ("rural districts: poverty alone", "poverty", ["p_ri"]),
+                         ("district type (vs rural)", "capital_d", ["p_ri"]), ("district type (vs rural)", "town_d", ["p_ri"]),
+                         ("R1a geocodes as published (no reclassification)", "reach", ["pct"]), ("R3 Phnom Penh excluded", "reach", ["pct", "p_ri"]),
+                         ("R4 Weiss et al. (2018) travel time to cities", "reach_weiss", ["pct"]), ("R5 ten-component physical-access index (per SD)", "index", ["pct"])]:
+    r = M[(M.model == model) & (M["var"] == var)].iloc[0]
+    for k in keys:
+        s = {"pct": pc(r.pct), "ci": f"{pc(r.ci_lo)} to {pc(r.ci_hi)}", "p_ri": f"{r.p_ri:.3f}", "p_cluster": f"{r.p_cluster:.3f}"}[k]
+        check(f"E1 site shows {model} / {var} / {k} = {s}", s in txt or s.replace(" to ", " ~ ") in txt)
+holm = M[M.model.isin(["reach alone", "poverty alone"])].sort_values("p_ri").p_ri.values
+check("E1 site shows the Holm-adjusted p for travel time", f"{min(1, 2 * holm[0]):.3f}" in txt, f"{min(1, 2 * holm[0]):.3f}")
+stale = [s for s in ["+165%", "2.6 times", "−49%", "p = 0.042", "five factors", "39%"] if s in txt]
 check("E2 no stale headline numbers on the site", not stale, ", ".join(stale))
 
 print(f"\n{len(passes)} passed, {len(fails)} failed" + (": " + "; ".join(fails) if fails else ""))

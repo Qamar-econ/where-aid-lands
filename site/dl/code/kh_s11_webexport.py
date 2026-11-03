@@ -30,7 +30,8 @@ DF["conn_index"] = z(cc.values @ pcv)
 rwi = pd.read_csv(ROOT / "data/processed/cambodia/kh_rwi.csv").set_index("unit").rwi
 DF["rwi"] = DF.unit.map(rwi)
 
-cur = L[L.start.between(2017, 2020) & (L.family != "ict")]
+from kh_common import reclassify_geocodes
+cur = reclassify_geocodes(L[L.start.between(2017, 2020) & (L.family != "ict")], DF, ROOT / "data/processed/cambodia")  # spec 9-26
 N = cur.groupby("unit").w.sum()
 DF["N"] = DF.unit.map(N).fillna(0)
 DF["pc100k"] = DF.N / DF.pop_2019 * 1e5

@@ -41,6 +41,20 @@ Run the scripts from `research/scripts`, in this order:
 | 9 | `kh_s24_conservative_p.py`, `kh_s25_joint_test.py`, `kh_s27_need_conservative.py`, `kh_s07_shapley.py`, `kh_s18_wild_bootstrap.py` | joint models, joint test, poverty, decomposition, wild bootstrap | site tables |
 | 10 | `kh_s08_extensions.py`, `kh_s09_geobias.py`, `kh_s16_access_sensitivity.py`, `kh_s19`–`kh_s23` | event study, geocoding bounds, index sensitivity and audits | site tables |
 
+### The main analysis (spec 9-27, 9-28)
+
+| Script | What it does | Output |
+|---|---|---|
+| `kh_s38_geocode_extract.py` | lists projects whose location is only a province or town name, for hand classification | `kh_geocode_flagged.csv`, `kh_geocode_flagged_units.csv` |
+| (by hand) | each listed project read and classed TOWN / PROVINCE / UNCLEAR / NATIONAL, with a one-line reason | `kh_geocode_classified.csv` |
+| `kh_main.py [draws]` | the main analysis: travel time and poverty, within provinces, randomisation inference; breakdown by district type; robustness; donor groups; census tests if `kh_census.csv` exists | `outputs/tables/kh_main_simple.csv`, `.txt` |
+| `kh_figures.py` | figures F1-F5 in English and Korean, from the same data step and results table | `outputs/figures/cambodia/F*.pdf/.png` |
+| `kh_census_build.py extract.csv` | once the IPUMS extract arrives: deprivation index and phone ownership by district, classifying answer codes from the codebook labels | `kh_census.csv` |
+| `kh_check.py` | 45 automated checks from the sample to every number on the site; exit code 1 on any failure | (console) |
+| `kh_run_all.sh` | reruns every step downstream of the sample, in dependency order | `outputs/logs/` |
+
+When the census extract arrives: put it and its DDI codebook in `data/raw/cambodia/ipums/`, run `kh_census_build.py`, then `kh_run_all.sh` and `kh_check.py`.
+
 After any step, compare your table with the published one:
 
 ```

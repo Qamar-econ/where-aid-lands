@@ -52,6 +52,10 @@ A = pd.read_csv(PROC / "kh_assign.csv").merge(pd.read_csv(PROC / "kh_projects.cs
                                                on="project_id")
 # ICT projects (first DAC sector code 220) are excluded, as in kh_s06-s11, to avoid reverse causality with connectivity
 A = A[pd.to_numeric(A.sector_code.astype(str).str.extract(r"(\d{3})")[0], errors="coerce").ne(220)]
+import sys; sys.path.insert(0, str(Path(__file__).resolve().parent))
+from kh_common import reclassify_geocodes   # spec 9-26: hand-classified town/province-name geocodes
+_u = DF[~DF.exclude] if "exclude" in DF else DF
+A = pd.concat([reclassify_geocodes(A[A.level == "adm2"], _u.assign(access=_u.phys), PROC), A[A.level != "adm2"]], ignore_index=True)
 D = np.hypot(DF.x_km.values[:, None] - DF.x_km.values[None, :], DF.y_km.values[:, None] - DF.y_km.values[None, :])
 
 
@@ -68,8 +72,8 @@ def conley_se(res, d, var, cutoff):
     """Spatial HAC (Bartlett kernel) sandwich for a Poisson GLM: bread from the Hessian, meat from kernel-weighted scores."""
     X = res.model.exog; mu = res.fittedvalues.values; y = res.model.endog
     S = X * (y - mu)[:, None]
-    idx = d.index.values
-    K = np.clip(1 - D[np.ix_(idx, idx)] / cutoff, 0, None)
+    Dm = np.hypot(d.x_km.values[:, None] - d.x_km.values[None, :], d.y_km.values[:, None] - d.y_km.values[None, :])   # coordinates, not row positions
+    K = np.clip(1 - Dm / cutoff, 0, None)
     bread = np.linalg.pinv(X.T @ (X * mu[:, None]))
     meat = S.T @ K @ S
     Vc = bread @ meat @ bread
@@ -91,7 +95,7 @@ def ri_p(d, var, b_obs, f, draws=2000):
             bs.append(smf.glm(f, data=d.assign(**{var: perm}), family=sm.families.Poisson()).fit(maxiter=100).params[var])
         except Exception:
             pass
-    return float(np.mean(np.abs(bs) >= abs(b_obs)))
+    return float((1 + np.sum(np.abs(bs) >= abs(b_obs))) / (1 + len(bs)))   # observed draw included (Phipson & Smyth 2010)
 
 
 def full(d, var, ri=True):

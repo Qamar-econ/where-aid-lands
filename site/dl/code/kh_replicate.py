@@ -34,8 +34,6 @@ print("1. Physical-access index rebuilt from 10 components: PC1 explains", f"{w[
 print("   loadings:", dict(zip(comp.columns, load.round(3))))
 
 # ---------- helpers ----------
-XY = d[["x_km", "y_km"]].values
-DIST = np.hypot(XY[:, 0][:, None] - XY[:, 0][None, :], XY[:, 1][:, None] - XY[:, 1][None, :])
 
 
 def fit(f, data):
@@ -44,7 +42,8 @@ def fit(f, data):
 
 def conley_cov(r, data, cutoff):
     X = r.model.exog; mu = r.fittedvalues.values; S = X * (r.model.endog - mu)[:, None]
-    ix = data.index.values; K = np.clip(1 - DIST[np.ix_(ix, ix)] / cutoff, 0, None)
+    Dm = np.hypot(data.x_km.values[:, None] - data.x_km.values[None, :], data.y_km.values[:, None] - data.y_km.values[None, :])
+    K = np.clip(1 - Dm / cutoff, 0, None)
     bread = np.linalg.pinv(X.T @ (X * mu[:, None]))
     return bread @ (S.T @ K @ S) @ bread
 
@@ -58,7 +57,7 @@ def ri(data, var, others, f, b_obs):
         for k in np.unique(g):
             j = np.where(g == k)[0]; e[j] = rng.permutation(e0[j])
         bs.append(smf.glm(f, data=data.assign(**{var: fv + e}), family=sm.families.Poisson()).fit(maxiter=100).params[var])
-    return float(np.mean(np.abs(bs) >= abs(b_obs)))
+    return float((1 + np.sum(np.abs(bs) >= abs(b_obs))) / (1 + len(bs)))   # observed draw included
 
 
 def report(var, data, others=()):
@@ -75,8 +74,7 @@ def report(var, data, others=()):
 print(f"\n2. Single-factor PPML (province FE + ln population), randomisation inference with {args.draws} draws")
 rows = [report(v, d) for v in ["phys", "conn", "lights"]]
 dn = d.dropna(subset=["need"]).reset_index(drop=True)
-DIST_FULL = DIST; keep = d.need.notna().values; DIST = DIST_FULL[np.ix_(keep, keep)]
-rows.append(report("need", dn)); DIST = DIST_FULL
+rows.append(report("need", dn))
 mine = pd.DataFrame(rows); print(mine.to_string(index=False))
 
 # ---------- 3. four factors together ----------
