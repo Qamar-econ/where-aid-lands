@@ -36,16 +36,16 @@ night lights               -0.03           -0.02     0.12          1.00
   per SD: night lights                         lights         +49% (95% CI -3% to +129%) | p RI 0.102 | cluster 0.070 | Conley 0.036 | projects 185.9
   (b) Shapley split of the deviance explained by the four (pseudo-R2 0.548 -> 0.683): physical access 64%, poverty 15%, night lights 11%, digital access 10%
   (c) cross-validated deviance gain over province FE + ln population (5-fold x 20): physical access +22.5% (sd 4.3), digital access +4.4% (sd 3.6), night lights +3.4% (sd 4.2), poverty +2.8% (sd 4.2)
-  pair: physical access + digital access (r = -0.62) reach_sd       -47% (95% CI -61% to -26%) | p RI 0.011 | cluster 0.000 | Conley 0.000 | projects 185.9
-  pair: physical access + digital access (r = -0.62) phone           -8% (95% CI -33% to +26%) | p RI 0.727 | cluster 0.604 | Conley 0.616 | projects 185.9
+  pair per SD: physical access + digital access (r = -0.62) reach_sd       -47% (95% CI -61% to -26%) | p RI 0.011 | cluster 0.000 | Conley 0.000 | projects 185.9
+  pair per SD: physical access + digital access (r = -0.62) phone           -8% (95% CI -33% to +26%) | p RI 0.727 | cluster 0.604 | Conley 0.616 | projects 185.9
   pair physical access + poverty: r = +0.75, not interpreted (|r| >= 0.7)
-  pair: physical access + night lights (r = -0.03) reach_sd       -42% (95% CI -58% to -18%) | p RI 0.024 | cluster 0.002 | Conley 0.000 | projects 185.9
-  pair: physical access + night lights (r = -0.03) lights         +23% (95% CI -7% to +63%) | p RI 0.391 | cluster 0.143 | Conley 0.128 | projects 185.9
+  pair per SD: physical access + night lights (r = -0.03) reach_sd       -42% (95% CI -58% to -18%) | p RI 0.024 | cluster 0.002 | Conley 0.000 | projects 185.9
+  pair per SD: physical access + night lights (r = -0.03) lights         +23% (95% CI -7% to +63%) | p RI 0.391 | cluster 0.143 | Conley 0.128 | projects 185.9
   pair digital access + poverty: r = -0.75, not interpreted (|r| >= 0.7)
-  pair: digital access + night lights (r = -0.02) phone          +63% (95% CI -22% to +243%) | p RI 0.111 | cluster 0.197 | Conley 0.103 | projects 185.9
-  pair: digital access + night lights (r = -0.02) lights         +32% (95% CI -13% to +103%) | p RI 0.273 | cluster 0.194 | Conley 0.105 | projects 185.9
-  pair: poverty + night lights (r = +0.12)     deprivation    -44% (95% CI -73% to +16%) | p RI 0.040 | cluster 0.119 | Conley 0.042 | projects 185.9
-  pair: poverty + night lights (r = +0.12)     lights         +31% (95% CI -6% to +84%) | p RI 0.258 | cluster 0.111 | Conley 0.065 | projects 185.9
+  pair per SD: digital access + night lights (r = -0.02) phone          +63% (95% CI -22% to +243%) | p RI 0.111 | cluster 0.197 | Conley 0.103 | projects 185.9
+  pair per SD: digital access + night lights (r = -0.02) lights         +32% (95% CI -13% to +103%) | p RI 0.273 | cluster 0.194 | Conley 0.105 | projects 185.9
+  pair per SD: poverty + night lights (r = +0.12) deprivation    -44% (95% CI -73% to +16%) | p RI 0.040 | cluster 0.119 | Conley 0.042 | projects 185.9
+  pair per SD: poverty + night lights (r = +0.12) lights         +31% (95% CI -6% to +84%) | p RI 0.258 | cluster 0.111 | Conley 0.065 | projects 185.9
 == WHERE THE GRADIENT COMES FROM (exploratory, spec 9-28): capital khans, provincial towns (Krong), rural districts
   capital  districts   4 | projects   45.4 (24%) | population 3% | projects per 100,000 people 8.16 | median travel time 7 min
   rural    districts 112 | projects   90.2 (49%) | population 77% | projects per 100,000 people 0.72 | median travel time 144 min

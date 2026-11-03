@@ -76,6 +76,9 @@ a.cite:hover{color:var(--teal)}
 html:not([lang="ko"]) .ko{display:none!important}
 html[lang="ko"] .en{display:none!important}
 .figimg{display:block;width:100%;height:auto;max-width:860px;margin:0 auto}
+.fig svg.ch{display:block;width:100%;height:auto;max-width:700px;margin:6px auto 0;font-family:var(--f-ui)}
+.fig svg.ch.w2{max-width:820px}
+.fig #multiples{max-width:none}
 .authors{font-family:var(--f-ui);font-size:17px;color:var(--ink);margin:26px 0 0}
 .authors span{color:var(--ink-3)}/* figures */
 figure{margin:28px auto 36px}
@@ -185,14 +188,14 @@ footer b{color:var(--ink);font-weight:600}
 .trace a:hover{border-bottom-color:var(--teal)}
 .dlrow{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 4px}
 /* map tabs carry the colour of their layer */
-.tabs button[data-layer="night"]{--acc:#8e2a5e} .tabs button[data-layer="access"],.tabs button[data-layer="index"]{--acc:#225ea8}
-.tabs button[data-layer="signal"]{--acc:#5b3fa0} .tabs button[data-layer="poverty"]{--acc:#7d5b3a}
+.tabs button[data-layer="night"]{--acc:#9c4a1f} .tabs button[data-layer="access"],.tabs button[data-layer="index"]{--acc:#2160a8}
+.tabs button[data-layer="signal"]{--acc:#159a7a} .tabs button[data-layer="poverty"]{--acc:#9c4a1f}
 .tabs button[data-layer]{color:var(--acc);border-color:color-mix(in srgb,var(--acc) 40%,var(--rule));background:color-mix(in srgb,var(--acc) 6%,var(--surface))}
 .tabs button[data-layer][aria-pressed="true"]{background:var(--acc);border-color:var(--acc);color:#fff}
-.tabgroup[data-g="phys"]{--g:#225ea8} .tabgroup[data-g="dig"]{--g:#5b3fa0} .tabgroup[data-g="pov"]{--g:#7d5b3a}
+.tabgroup[data-g="phys"]{--g:#2160a8} .tabgroup[data-g="dig"]{--g:#159a7a} .tabgroup[data-g="pov"]{--g:#9c4a1f}
 .tabgroup .glab{color:var(--g)}
 .tabgroup{border-color:color-mix(in srgb,var(--g) 30%,var(--rule));background:color-mix(in srgb,var(--g) 5%,var(--tint))}
-.tabs button[data-layer="phone"]{--acc:#5b3fa0} .tabs button[data-layer="deprivation"]{--acc:#7d5b3a}
+.tabs button[data-layer="phone"]{--acc:#159a7a} .tabs button[data-layer="deprivation"]{--acc:#9c4a1f}
 .tabs{display:flex;flex-wrap:wrap;gap:8px}
 .maplinks{font-family:var(--f-ui);font-size:13.5px;color:var(--ink-3);margin:-4px 0 18px}
 .maplink{font-family:var(--f-ui);font-size:13px;border:1px solid var(--rule);background:var(--surface);border-radius:3px;padding:3px 9px;margin-left:6px;cursor:pointer;color:var(--ink-2)}
@@ -344,16 +347,18 @@ footer b{color:var(--ink);font-weight:600}
     <p class="en">Within a province, a district whose travel time to the nearest town is twice as long receives <strong>36% fewer projects</strong> (95% CI −51% to −17%; randomisation p = 0.008, Holm-adjusted 0.025). The shape is a step rather than a slope: the closest tenth of districts stands far above the rest.</p><p class="ko">같은 주 안에서 가장 가까운 도시까지 이동시간이 두 배인 군은 사업을 <strong>36% 적게</strong> 받습니다(95% CI −51% ~ −17%, 무작위화 p = 0.008, Holm 보정 0.025). 형태는 기울기보다 계단에 가깝습니다. 가장 가까운 10%의 군만 나머지보다 훨씬 높습니다.</p>
   </div>
   <figure class="wide"><div class="fig">
-    <img class="en figimg" src="img/F2_reach_gradient.png" alt="Projects per 100,000 people by within-province travel-time decile, with the PPML fit">
-    <img class="ko figimg" src="img/F2_reach_gradient_ko.png" alt="주 안 이동시간 10분위별 인구 10만 명당 사업 수와 PPML 추정선">
+    <p class="en figtitle">Farther from a town, fewer projects</p><p class="ko figtitle">도시에서 멀수록 사업이 적다</p>
+    <p class="en figsub">Projects per 100,000 people by decile of travel time relative to the province; line: PPML fit</p><p class="ko figsub">주 평균 대비 이동시간 10분위별 인구 10만 명당 사업 수, 선: PPML 추정</p>
+    <svg id="ch-travel" class="chart ch" role="img" aria-label="Projects per 100,000 people by within-province travel-time decile, with the PPML fit"></svg>
   </div><figcaption class="en">Deciles of travel time relative to the province average. Intervals: 95%, resampling whole provinces 2,000 times. The line is the PPML fit with province effects averaged.</figcaption><figcaption class="ko">주 평균 대비 이동시간의 10분위. 구간: 주 전체를 2,000번 다시 뽑은 95% 구간. 선은 주 효과를 평균한 PPML 추정입니다.</figcaption></figure>
 
   <div class="col">
     <p class="en">The estimate holds with the published geocodes (−48%), with Weiss et al.'s travel-time map (−26%), with our ten-component access index (+87% per SD of better access), and for European and US donors, the World Bank and China separately (−36% to −40%). It weakens to about −22% in two deliberately extreme geocoding cases. Without Phnom Penh it is −26%; randomisation inference rejects zero (p = 0.026) but the clustered interval does not.</p><p class="ko">추정치는 지오코딩 원자료(−48%), Weiss 등의 이동시간 지도(−26%), 10개 구성요소 접근성 지수(접근성 1SD당 +87%), 유럽·미국, 세계은행, 중국을 따로 본 경우(−36% ~ −40%)에도 유지됩니다. 일부러 극단적으로 잡은 지오코딩 두 경우에는 약 −22%로 약해집니다. 프놈펜을 빼면 −26%이고, 무작위화 추론은 0을 기각하지만(p = 0.026) 군집 구간은 0을 포함합니다.</p>
   </div>
   <figure class="wide"><div class="fig">
-    <img class="en figimg" src="img/F6_robustness.png" alt="Travel-time estimate across robustness checks and donor groups">
-    <img class="ko figimg" src="img/F6_robustness_ko.png" alt="견고성 점검과 공여자 그룹별 이동시간 추정치">
+    <p class="en figtitle">The travel-time estimate across checks</p><p class="ko figtitle">점검별 이동시간 추정치</p>
+    <p class="en figsub">Change in projects when travel time doubles, 95% interval</p><p class="ko figsub">이동시간이 두 배일 때 사업 수 변화, 95% 구간</p>
+    <svg id="ch-robust" class="chart ch" role="img" aria-label="Travel-time estimate across robustness checks and donor groups"></svg>
   </div><figcaption class="en">Teal: the 95% interval excludes zero and randomisation inference gives p &lt; 0.05. World Bank: 12 projects spread over 45 districts.</figcaption><figcaption class="ko">청록: 95% 구간이 0을 포함하지 않고 무작위화 추론 p &lt; 0.05. 세계은행: 사업 12건이 45개 군에 걸쳐 있음.</figcaption></figure>
 
   <div class="col">
@@ -363,8 +368,9 @@ footer b{color:var(--ink);font-weight:600}
     <p class="en">But phones add nothing once roads are known. With travel time in the same model (the two correlate at −0.62), phone ownership falls to <strong>−8%</strong> (p = 0.707) while travel time keeps its size (−38%, p = 0.011). Among rural districts, phones make no difference (−12%, p = 0.393). Digital access in Cambodia marks the same connected places that roads do.</p><p class="ko">그러나 도로를 알고 나면 전화는 더할 것이 없습니다. 이동시간을 같은 모형에 넣으면(둘의 상관 −0.62) 휴대전화 보유율은 <strong>−8%</strong>(p = 0.707)로 떨어지고 이동시간은 크기를 유지합니다(−38%, p = 0.011). 농촌 군 안에서도 차이가 없습니다(−12%, p = 0.393). 캄보디아에서 디지털 접근성은 도로가 표시하는 연결된 곳을 그대로 표시합니다.</p>
   </div>
   <figure class="wide"><div class="fig">
-    <img class="en figimg" src="img/F7_digital.png" alt="Projects per 100,000 people by within-province decile of phone ownership">
-    <img class="ko figimg" src="img/F7_digital_ko.png" alt="주 안 휴대전화 보유율 10분위별 인구 10만 명당 사업 수">
+    <p class="en figtitle">More phones, more projects</p><p class="ko figtitle">휴대전화가 많을수록 사업이 많다</p>
+    <p class="en figsub">Projects per 100,000 people by decile of phone ownership relative to the province</p><p class="ko figsub">주 평균 대비 휴대전화 보유율 10분위별 인구 10만 명당 사업 수</p>
+    <svg id="ch-digital" class="chart ch" role="img" aria-label="Projects per 100,000 people by within-province decile of phone ownership"></svg>
   </div><figcaption class="en">Deciles of 2019 phone ownership relative to the province mean. Intervals: 95%, resampling provinces; those above the plot are cut. Line: PPML fit.</figcaption><figcaption class="ko">주 평균 대비 2019년 휴대전화 보유율의 10분위. 구간: 주를 다시 뽑은 95% 구간, 그림 위로 넘는 부분은 잘림. 선: PPML 추정.</figcaption></figure>
 
   <div class="col">
@@ -374,13 +380,15 @@ footer b{color:var(--ink);font-weight:600}
     <p class="en">Night lights per person in 2015, a measure of economic activity, lean positive (+49% per SD, p = 0.126) and are nearly uncorrelated with the other three. But deprivation and travel time correlate at 0.75: the poorest districts are the remote ones, so these data cannot say whether donors avoid poverty or remoteness. Among rural districts, deprivation makes no difference (+40%, p = 0.140).</p><p class="ko">경제활동을 나타내는 2015년 1인당 야간 불빛은 양(+)의 방향이지만(1SD당 +49%, p = 0.126) 유의하지 않고, 다른 세 요인과 거의 상관이 없습니다. 반면 박탈과 이동시간의 상관은 0.75입니다. 가장 가난한 군이 가장 외진 군이라, 이 자료로는 공여자가 빈곤을 피하는지 외딴 곳을 피하는지 말할 수 없습니다. 농촌 군 안에서는 박탈도 차이를 만들지 않습니다(+40%, p = 0.140).</p>
   </div>
   <figure class="wide"><div class="fig">
-    <img class="en figimg" src="img/F7_need.png" alt="Projects per 100,000 people by within-province decile of deprivation and of night lights">
-    <img class="ko figimg" src="img/F7_need_ko.png" alt="주 안 박탈 10분위와 야간 불빛 10분위별 인구 10만 명당 사업 수">
+    <p class="en figtitle">Poorer districts, fewer projects; brighter ones, slightly more</p><p class="ko figtitle">가난한 군은 사업이 적고, 밝은 군은 약간 많다</p>
+    <p class="en figsub">Projects per 100,000 people by decile of each measure relative to the province</p><p class="ko figsub">주 평균 대비 각 측정치 10분위별 인구 10만 명당 사업 수</p>
+    <svg id="ch-need" class="chart ch w2" role="img" aria-label="Projects per 100,000 people by within-province decile of deprivation and of night lights"></svg>
   </div><figcaption class="en">Deciles relative to the province mean. Intervals: 95%, resampling provinces; those above the plot are cut. Line: PPML fit.</figcaption><figcaption class="ko">주 평균 대비 10분위. 구간: 주를 다시 뽑은 95% 구간, 그림 위로 넘는 부분은 잘림. 선: PPML 추정.</figcaption></figure>
 
   <figure class="wide"><div class="fig">
-    <img class="en figimg" src="img/F5_reach_poverty.png" alt="Travel time against phone ownership and against census deprivation by district">
-    <img class="ko figimg" src="img/F5_reach_poverty_ko.png" alt="군별 이동시간과 휴대전화 보유율, 이동시간과 센서스 박탈 지수">
+    <p class="en figtitle">Remote districts are less connected and poorer</p><p class="ko figtitle">외진 군일수록 연결이 약하고 더 가난하다</p>
+    <p class="en figsub">Each circle is a district; area shows projects 2017–2020. Hover to find a district in both panels</p><p class="ko figsub">원 하나가 군 하나, 면적은 2017–2020년 사업 수. 마우스를 올리면 두 칸에서 같은 군이 표시됩니다</p>
+    <svg id="ch-overlap" class="chart ch w2" role="img" aria-label="Travel time against phone ownership and against census deprivation by district"></svg>
   </div><figcaption class="en">Each circle is a district; area shows projects 2017–2020. Census 2019.</figcaption><figcaption class="ko">원 하나가 군 하나, 면적은 2017–2020년 사업 수. 2019년 센서스.</figcaption></figure>
 
   <div class="col">
@@ -397,13 +405,15 @@ footer b{color:var(--ink);font-weight:600}
     <p class="en note">Effects: one measure per model, province fixed effects and ln population. Shapley: shares of the deviance the four add to province effects and population (pseudo-R² 0.55 → 0.68). Out-of-sample: Poisson deviance in held-out districts, 5-fold cross-validation within provinces, 20 repeats. Physical access is the only measure whose clustered interval also excludes zero.</p><p class="ko note">효과: 모형마다 측정치 하나, 주 고정효과와 ln 인구. Shapley: 네 측정치가 주 효과와 인구 위에 더하는 이탈도의 몫(유사 R² 0.55 → 0.68). 표본 밖: 주 안 5겹 교차검증 20회 반복의 검증용 군 포아송 이탈도. 군집 구간도 0을 배제하는 것은 물리적 접근성뿐입니다.</p>
   </div>
   <figure class="wide"><div class="fig">
-    <img class="en figimg" src="img/F8_importance.png" alt="Shapley share of explained variation and out-of-sample gain in fit for the four measures">
-    <img class="ko figimg" src="img/F8_importance_ko.png" alt="네 측정치의 Shapley 설명력 몫과 표본 밖 적합도 개선">
+    <p class="en figtitle">Which matters more?</p><p class="ko figtitle">무엇이 더 중요한가?</p>
+    <p class="en figsub">Four measures compared on two yardsticks fixed in advance</p><p class="ko figsub">미리 정한 두 기준으로 비교한 네 측정치</p>
+    <svg id="ch-importance" class="chart ch w2" role="img" aria-label="Shapley share of explained variation and out-of-sample gain in fit for the four measures"></svg>
   </div><figcaption class="en">Bars at right: mean over 20 repeats of 5-fold cross-validation, with one standard deviation.</figcaption><figcaption class="ko">오른쪽 막대: 5겹 교차검증 20회 반복의 평균과 표준편차.</figcaption></figure>
 
   <figure class="wide"><div class="fig">
-    <img class="en figimg" src="img/F4_three_constructs.png" alt="Estimates for physical access, digital access and poverty, with check measures and rural districts only">
-    <img class="ko figimg" src="img/F4_three_constructs_ko.png" alt="물리적 접근성, 디지털 접근성, 빈곤의 추정치와 점검 측정치, 농촌 군만">
+    <p class="en figtitle">Each factor alone, with its checks, and in rural districts</p><p class="ko figtitle">요인별 단독 추정, 점검 측정치, 농촌 군만</p>
+    <p class="en figsub">Each row is a separate model; coloured where the 95% interval excludes zero and randomisation p &lt; 0.05</p><p class="ko figsub">각 줄은 별도의 모형. 95% 구간이 0을 포함하지 않고 무작위화 p &lt; 0.05이면 색으로 표시</p>
+    <svg id="ch-coef3" class="chart ch" role="img" aria-label="Estimates for physical access, digital access and poverty, with check measures and rural districts only"></svg>
   </div><figcaption class="en">Each row is a separate model. Teal: the 95% interval excludes zero and randomisation inference gives p &lt; 0.05.</figcaption><figcaption class="ko">각 줄은 별도의 모형입니다. 청록: 95% 구간이 0을 포함하지 않고 무작위화 추론 p &lt; 0.05.</figcaption></figure>
 
   <div class="col">
@@ -425,8 +435,9 @@ footer b{color:var(--ink);font-weight:600}
     <p class="en"><strong>Among the 112 rural districts, none of the factors makes a difference</strong>: travel time +9% per doubling (95% CI −15% to +40%, p = 0.695, an interval that excludes the overall −36%), phones −12%, deprivation +40%, night lights +12% (all p &gt; 0.1). Across the countryside, a remote, unconnected and poor district is no less likely to get a project than a closer, better-off one.</p><p class="ko"><strong>농촌 112개 군 안에서는 어떤 요인도 차이를 만들지 않습니다.</strong> 이동시간 두 배당 +9%(95% CI −15% ~ +40%, p = 0.695, 전체 표본의 −36%를 배제하는 구간), 휴대전화 −12%, 박탈 +40%, 야간 불빛 +12%(모두 p &gt; 0.1)입니다. 농촌 안에서는 외지고, 연결이 약하고, 가난한 군이 더 가깝고 형편이 나은 군보다 사업을 덜 받지 않습니다.</p>
   </div>
   <figure class="wide"><div class="fig">
-    <img class="en figimg" src="img/F3_district_types.png" alt="Projects per 100,000 people in Phnom Penh, provincial towns and rural districts by travel-time third">
-    <img class="ko figimg" src="img/F3_district_types_ko.png" alt="프놈펜, 도청 소재지, 이동시간 3분위별 농촌 군의 인구 10만 명당 사업 수">
+    <p class="en figtitle">Projects concentrate in Phnom Penh and the provincial towns</p><p class="ko figtitle">사업은 프놈펜과 도청 소재지에 몰린다</p>
+    <p class="en figsub">Projects per 100,000 people; dark: urban districts, grey: rural districts by travel-time third</p><p class="ko figsub">인구 10만 명당 사업 수. 짙은색: 도시 군, 회색: 이동시간 3분위별 농촌 군</p>
+    <svg id="ch-types" class="chart ch" role="img" aria-label="Projects per 100,000 people in Phnom Penh, provincial towns and rural districts by travel-time third"></svg>
   </div><figcaption class="en">Exploratory breakdown, added after the main estimate. Intervals: 95%, resampling districts within each group 2,000 times. Below each bar: number of districts and median travel time to a town.</figcaption><figcaption class="ko">주 추정 뒤에 추가한 탐색적 분해. 구간: 각 유형 안에서 군을 2,000번 다시 뽑은 95% 구간. 막대 아래: 군 수와 도시까지 이동시간 중앙값.</figcaption></figure>
 
   <div class="col">
@@ -435,13 +446,13 @@ footer b{color:var(--ink);font-weight:600}
   </div>
   <figure class="wide"><div class="fig">
     <p class="en figtitle">How do districts differ with travel time to the nearest town?</p><p class="ko figtitle">도시까지 이동시간에 따라 군은 어떻게 다른가?</p>
-    <p class="en figsub">Each circle is a district; red: Phnom Penh and provincial towns. ρ = Spearman rank correlation</p><p class="ko figsub">원 하나가 군 하나. 붉은색: 프놈펜과 도청 소재지. ρ = 스피어만 순위상관</p>
+    <p class="en figsub">Each circle is a district; red: Phnom Penh and provincial towns. One measure per factor. ρ = Spearman rank correlation</p><p class="ko figsub">원 하나가 군 하나. 붉은색: 프놈펜과 도청 소재지. ρ = 스피어만 순위상관</p>
     <div class="tabs" role="group" aria-label="Comparison">
       <button data-mv="raw" aria-pressed="true" class="en">All districts</button><button data-mv="raw" aria-pressed="true" class="ko">전체 군</button>
       <button data-mv="within" aria-pressed="false" class="en">Within province</button><button data-mv="within" aria-pressed="false" class="ko">주 안에서 비교</button>
     </div>
     <svg id="multiples" class="chart" role="img" aria-label="District measures plotted against travel time to the nearest town"></svg>
-  </div><figcaption class="en">Log axes except poverty. Districts with no projects sit on the band marked 0. <em>Within province</em> subtracts each province's mean from both axes. Projects 2017–2020 after reclassification; poverty = −Meta Relative Wealth Index; lights 2015 (harmonised DMSP–VIIRS); population WorldPop 2019.</figcaption><figcaption class="ko">빈곤을 뺀 나머지는 로그 축. 사업이 없는 군은 0으로 표시한 띠에 놓입니다. <em>주 안에서 비교</em>는 두 축 모두에서 주 평균을 뺍니다. 사업은 재분류 후 2017–2020년, 빈곤 = −Meta 상대적 부 지수, 불빛 2015년(DMSP–VIIRS 통합), 인구 WorldPop 2019.</figcaption></figure>
+  </div><figcaption class="en">Projects and lights on log axes. Districts with no projects sit on the band marked 0. <em>Within province</em> subtracts each province's mean from both axes. Projects 2017–2020 after reclassification; phones and deprivation from the 2019 census; lights 2015 (harmonised DMSP–VIIRS).</figcaption><figcaption class="ko">사업과 불빛은 로그 축. 사업이 없는 군은 0으로 표시한 띠에 놓입니다. <em>주 안에서 비교</em>는 두 축 모두에서 주 평균을 뺍니다. 사업은 재분류 후 2017–2020년, 휴대전화와 박탈은 2019년 센서스, 불빛 2015년(DMSP–VIIRS 통합).</figcaption></figure>
   <div class="col"><p class="trace"><a href="pipeline.html#res"><span class="en">Every estimate, with code to re-run it</span><span class="ko">모든 추정치와 다시 돌려 볼 코드</span></a></p></div>
 </div></section>
 
@@ -588,7 +599,8 @@ Promise.all(['data/districts.geojson', 'data/projects.json', 'data/results.json'
 .then(([geo, pts, res]) => { DATA = {geo, res}; buildMap(geo, pts); renderCharts(); })
 .catch(e => { document.getElementById('mapcap').textContent = 'The data could not be loaded: ' + e; });
 
-function renderCharts(){ const {geo} = DATA; multiples(geo); }
+window.__site = {css, tr, esc, showTip, hideTip, geo: () => DATA && DATA.geo};   // shared with charts.js
+function renderCharts(){ const {geo} = DATA; multiples(geo); if (window.drawCharts) drawCharts(geo); }
 
 /* ---------------- map ---------------- */
 const X0 = 102.3, X1 = 107.7, Y0 = 10.35, Y1 = 14.75, W = 1800, H = 1503;
@@ -754,13 +766,14 @@ function scatter(geo){
 let MV_MODE = 'raw';
 const CAPITAL = new Set([116008004, 116008005, 116008007, 116008011]);
 function multiples(geo){
-  const d = geo.features.map(f => f.properties).filter(p => p.tt_town_dry > 0 && p.rwi != null && p.pop_2019 > 1000 && !/Lake/i.test(p.name));
+  const d = geo.features.map(f => f.properties).filter(p => p.tt_town_dry > 0 && p.phone_pct != null && p.pop_2019 > 1000 && !/Lake/i.test(p.name));
   const urban = p => CAPITAL.has(p.unit) || /Krong/.test(p.name);
   const P = [
     {k: 'pc100k', t: ['Projects per 100,000 people', '인구 10만 명당 사업'], log: true, f: v => v.toFixed(2)},
-    {k: 'pov', v: p => -p.rwi, t: ['Poverty (−Meta RWI)', '빈곤 (−Meta RWI)'], log: false, f: v => v.toFixed(2)},
+    {k: 'phone_pct', t: ['Digital access: phones (%)', '디지털 접근성: 휴대전화 (%)'], log: false, f: v => v.toFixed(1) + '%'},
+    {k: 'dep_pct', t: ['Poverty: deprivation (%)', '빈곤: 박탈 (%)'], log: false, f: v => v.toFixed(1) + '%'},
     {k: 'ntl', v: p => p.ntl_pc_2015 * 1000, t: ['Night lights per 1,000 people, 2015', '인구 1,000명당 야간 불빛, 2015'], log: true, f: v => v.toPrecision(2)},
-    {k: 'pop_2019', t: ['Population, 2019', '인구, 2019'], log: true, f: v => d3.format(',.0f')(v)}];
+  ];
   const within = MV_MODE === 'within';
   const cols = window.innerWidth < 700 ? 2 : 4, rows = Math.ceil(P.length / cols);
   const cw = 300, ch = 260, Wd = cw * cols, Hh = ch * rows, M = {l: 52, r: 14, t: 46, b: 42}, ZB = 16;
@@ -865,3 +878,4 @@ function tables(res){
 }
 })();
 </script>
+<script src="charts.js?v=4"></script>

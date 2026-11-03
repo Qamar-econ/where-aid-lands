@@ -326,3 +326,20 @@ for lang, t in TX.items():
     ax.set_title(t["f5t"])
     save(fig, "F5_reach_poverty_rwi")
 print("figures written to", FIG)
+
+# ---------------- data for the site's interactive charts (same numbers as the figures above) ----------------
+import json
+r2 = lambda a: [None if (v is None or not np.isfinite(v)) else round(float(v), 4) for v in np.asarray(a, dtype=float)]
+CH = {"grad": {"travel": {"x": r2(f2_x), "rate": r2(f2_obs), "lo": r2(f2_lo), "hi": r2(f2_hi), "fx": r2(grid), "fy": r2(f2_fit),
+                          "pct": round(100 * (np.exp(fit2.params["rel"]) - 1), 1)}},
+      "types": [{"key": g, "rate": round(float(o), 3), "lo": round(float(l), 3), "hi": round(float(h), 3), "n": int(n), "tt": round(float(tt), 0)}
+                for g, o, l, h, n, tt in zip(G3, f3_obs, f3_lo, f3_hi, f3_n, f3_tt)],
+      "coef": R[["model", "var", "pct", "ci_lo", "ci_hi", "p_ri", "p_cluster"]].round(6).to_dict("records")}   # 6 decimals: no double rounding of p
+for col, key in [("phone_z", "phone"), ("deprivation", "deprivation"), ("lights_z", "lights")]:
+    if col in G7:
+        xm, o_, l_, h_, g_, f_, pct_ = G7[col]
+        CH["grad"][key] = {"x": r2(xm), "rate": r2(o_), "lo": r2(l_), "hi": r2(h_), "fx": r2(g_), "fy": r2(f_), "pct": round(float(pct_), 1)}
+if IMP.exists():
+    CH["importance"] = pd.read_csv(IMP).round(2).to_dict("records")
+(ROOT / "site/data/charts.json").write_text(json.dumps(CH, ensure_ascii=False), encoding="utf-8")
+print("site/data/charts.json written")

@@ -128,6 +128,10 @@ stale = [s for s in ["+165%", "2.6 times", "−49%", "five factors", "39%", "Rea
 check("E2 no stale headline numbers on the site", not stale, ", ".join(stale))
 missing = sorted({m for m in re.findall(r'src="(img/[^"?]+)', html) if not (SITE / m).exists()})
 check("E3 every image the page uses exists in site/img", not missing, ", ".join(missing))
+CJ = pd.DataFrame(json.loads((SITE / "data/charts.json").read_text(encoding="utf-8"))["coef"]).set_index(["model", "var"])
+J2 = M.set_index(["model", "var"]).join(CJ, rsuffix="_c", how="inner")
+bad = J2[(J2.pct - J2.pct_c).abs().gt(1e-4) | (J2.p_ri - J2.p_ri_c).abs().gt(1e-5)]
+check("E4 interactive chart data = results table (effects and p)", len(J2) == len(M) and bad.empty, f"{len(J2)} rows, {len(bad)} differ")
 
 print(f"\n{len(passes)} passed, {len(fails)} failed" + (": " + "; ".join(fails) if fails else ""))
 sys.exit(1 if fails else 0)

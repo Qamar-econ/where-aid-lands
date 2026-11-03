@@ -203,7 +203,7 @@ say("  (c) cross-validated deviance gain over province FE + ln population (5-fol
 for a, b in itertools.combinations(list(FOUR), 2):                     # (d) pairs, only where |r| < 0.7
     r_ = CM.loc[a, b]
     if abs(r_) < .7:
-        estimate(f"pair: {FOUR[a]} + {FOUR[b]} (r = {r_:+.2f})", MAIN, [a, b], draws=999)
+        estimate(f"pair per SD: {FOUR[a]} + {FOUR[b]} (r = {r_:+.2f})", MAIN, [a, b], draws=999)   # distinct label from the 9-29 pair models
     else:
         say(f"  pair {FOUR[a]} + {FOUR[b]}: r = {r_:+.2f}, not interpreted (|r| >= 0.7)")
 pd.DataFrame([{"measure": FOUR[j], "var": j, "shapley_share": 100 * shap[j] / tot, "shapley_pts": 100 * shap[j], "cv_gain": CV[j][0], "cv_sd": CV[j][1]}
