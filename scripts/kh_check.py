@@ -117,6 +117,12 @@ main3 = M[M.model.isin(["physical access alone", "digital access alone", "povert
 for i_, r in enumerate(main3.itertuples()):
     run = max(run, min(1, (3 - i_) * r.p_ri)); hp.append(f"{run:.3f}")
 check("E1 site shows the three Holm-adjusted p", all(h in txt for h in hp), ", ".join(hp))
+H3 = pd.read_csv(T / "kh_hc3.csv").set_index("model").loc["H-C3 main"]                      # pre-registered panel test
+check(f"E1 site shows H-C3: {H3.pct:+.1f}% (95% CI {pc(H3.ci_lo)} to {pc(H3.ci_hi)}), p {H3.p_ri:.3f}", f"{H3.pct:+.1f}%" in txt and f"{pc(H3.ci_lo)} to {pc(H3.ci_hi)}" in txt and f"{H3.p_ri:.3f}" in txt)
+fam = sorted([M[(M.model == "poverty alone") & (M["var"] == "deprivation")].p_ri.iloc[0], M[(M.model == "digital access alone") & (M["var"] == "phone")].p_ri.iloc[0], H3.p_ri]); run, fh = 0, []
+for i_, v in enumerate(fam):
+    run = max(run, min(1, (3 - i_) * v)); fh.append(f"{run:.3f}")
+check("E1 site shows Holm p over the pre-registered census family", all(h in txt for h in fh[:2]), ", ".join(fh))
 IMP = pd.read_csv(T / "kh_main_importance.csv")                  # which matters more (spec 9-30)
 for r in IMP.itertuples():
     sh, cv = f"{r.shapley_share:.0f}%", f"{r.cv_gain:+.1f}%"

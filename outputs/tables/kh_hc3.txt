@@ -1,0 +1,8 @@
+phone ownership: 2008 mean 32.9%, 2019 mean 90.8% | change mean 57.9 pp, SD 16.1 pp, range 3.7 to 84.6 | corr(change, log travel time) = 0.71
+== H-C3 MAIN (pre-registered): activities 2009-2012 vs 2017-2020, district and period fixed effects
+  H-C3 main                                             +1.6% per 10 pp (95% CI -6% to +10%) | p RI 0.715 | cluster 0.682 | districts 108 | projects 297
+== ROBUSTNESS (pre-registered and spec 9-31)
+  EU/US donors only                                     +6.6% per 10 pp (95% CI -6% to +20%) | p RI 0.239 | cluster 0.306 | districts 57 | projects 182
+  early period 2005-2008                                +4.8% per 10 pp (95% CI -4% to +15%) | p RI 0.459 | cluster 0.315 | districts 99 | projects 277
+  late period with geocode reclassification            +10.6% per 10 pp (95% CI +2% to +19%) | p RI 0.057 | cluster 0.010 | districts 136 | projects 286
+== Holm over the pre-registered family: H-C1 deprivation p 0.019 -> 0.058, H-C2 phone ownership p 0.042 -> 0.084, H-C3 panel p 0.715 -> 0.715
