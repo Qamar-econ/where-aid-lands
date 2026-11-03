@@ -21,7 +21,7 @@ RULES = {
     "electric":   (["ELECTRIC"], r"^no\b|no access|not available", r"^yes\b|has access"),
     "water":      (["WATSUP", "DRINKWTR"], r"no piped|unprotected|surface|river|lake|pond|stream|vendor|tanker|cart|other source|^no\b",
                    r"piped|tap|borehole|tube ?well|protected|rain|bottled|^yes\b"),
-    "sanitation": (["TOILET", "SEWAGE"], r"no toilet|no flush|open|bush|field|bucket|unimproved|none|not connected|pit latrine without",
+    "sanitation": (["TOILET", "SEWAGE"], r"no toilet|no flush|non-flush|open|bush|field|bucket|unimproved|none|not connected|pit latrine without",
                    r"flush|improved|ventilated|vip|sewer|septic|pit latrine with slab|connected"),
     "floor":      (["FLOOR"], r"earth|dirt|sand|mud|dung|unfinished|bamboo|palm|no floor", r"cement|concrete|tile|wood|parquet|vinyl|ceramic|finished|marble|brick"),
 }
@@ -46,10 +46,13 @@ def labels(ddi):
     return out
 
 
-def classify(var, cats, dep, ok):
-    """code -> 1 deprived, 0 not deprived, NaN missing. Every non-missing label must match exactly one rule."""
+def classify(var, cats, dep, ok, present=None):
+    """code -> 1 deprived, 0 not deprived, NaN missing. Every non-missing label of a code present in the data must match
+    exactly one rule (codes that never occur are skipped)."""
     m = {}
     for code, lab in cats.items():
+        if present is not None and code not in present:
+            continue
         l = lab.lower()
         if re.search(MISSING, l):
             m[code] = np.nan; continue
@@ -72,11 +75,11 @@ def build(csv):
         v = next((x for x in vars_ if x in P and x in L), None)
         if v is None:
             continue
-        used[name] = v; P[f"d_{name}"] = P[v].map(classify(v, L[v], dep, ok))
+        used[name] = v; P[f"d_{name}"] = P[v].map(classify(v, L[v], dep, ok, set(P[v].unique())))
     for name, (v, dep, ok) in PERSON.items():
         if v not in P or v not in L:
             continue
-        used[name] = v; x = P[v].map(classify(v, L[v], dep, ok))
+        used[name] = v; x = P[v].map(classify(v, L[v], dep, ok, set(P[v].unique())))
         if name == "literacy":       # household deprived if no member aged 15+ is literate
             lit = x.where(P.AGE >= 15)
             P["d_literacy"] = P.hh.map(lit.groupby(P.hh).apply(lambda s: np.nan if s.notna().sum() == 0 else float((s == 0).sum() == 0)))
@@ -85,7 +88,7 @@ def build(csv):
             P["d_school"] = P.hh.map(sch.groupby(P.hh).apply(lambda s: 0.0 if s.notna().sum() == 0 else float((s == 1).any())))
     pv = next((x for x in PHONE[0] if x in P and x in L), None)
     if pv:
-        P["has_phone"] = 1 - P[pv].map(classify(pv, L[pv], PHONE[1], PHONE[2]))
+        P["has_phone"] = 1 - P[pv].map(classify(pv, L[pv], PHONE[1], PHONE[2], set(P[pv].unique())))
     ind = [f"d_{k}" for k in used]
     print("indicators used:", used, "| phone:", pv)
     for (yr, u), g in P.groupby(["YEAR", "unit"]):
@@ -102,6 +105,17 @@ def build(csv):
         mean = g[dep].mean(axis=1); C.loc[g.index, "deprivation"] = (mean - mean.mean()) / mean.std()
         Z = (g[dep] - g[dep].mean()) / g[dep].std(); w_, V_ = np.linalg.eigh(np.cov(Z.fillna(0).T)); pc = V_[:, -1] * np.sign(V_[:, -1].sum())
         s = Z.fillna(0).values @ pc; C.loc[g.index, "deprivation_pc1"] = (s - s.mean()) / s.std()
+    # variants (amendment 3): without water (WATSUP only separates piped from not piped), and with an unspecified latrine counted as improved
+    if "sanitation" in used and used["sanitation"] == "TOILET":
+        lab = labels(ddi)["TOILET"]; lat = [c for c, l in lab.items() if re.search(r"latrine", l.lower())]
+        P["d_sanitation_latok"] = np.where(P.TOILET.isin(lat), 0.0, P.d_sanitation)
+        alt = P.groupby(["YEAR", "unit"]).apply(lambda g: np.average(g.d_sanitation_latok.dropna(), weights=g.loc[g.d_sanitation_latok.notna(), "PERWT"]), include_groups=False)
+        C["dep_sanitation_latok"] = [alt.get((y, u), np.nan) for y, u in zip(C.year, C.unit)]
+    for yr, g in C.groupby("year"):
+        for name, cols in [("deprivation_nowater", [c for c in dep if c != "dep_water"]),
+                           ("deprivation_latok", [c if c != "dep_sanitation" else "dep_sanitation_latok" for c in dep])]:
+            if all(c in C for c in cols):
+                mn = g[cols].mean(axis=1); C.loc[g.index, name] = (mn - mn.mean()) / mn.std()
     if len(dep) < 4:
         print(f"WARNING: only {len(dep)} deprivation indicators; H-C1 is exploratory under the pre-registration")
     C.to_csv(os.environ.get("KH_CENSUS_OUT", PROC / "kh_census.csv"), index=False)   # override only for tests
