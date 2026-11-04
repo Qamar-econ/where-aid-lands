@@ -53,6 +53,7 @@ Run the scripts from `research/scripts`, in this order:
 | `kh_s42_capital.py [draws]` | spec 9-33: travel time to Phnom Penh vs to the nearest town, zone fixed effects, cross-validated comparison | `kh_capital.csv`, `kh_capital_compare.csv` |
 | `kh_s43_province_infra.py` | spec 9-34: province-level event study around bridge and road works (counterfactual travel time, exact and sampled randomisation inference); cell-level minutes saved for the map | `kh_pinfra*.csv`, `.txt` |
 | `kh_s44_verify_cases.py` | independent checks of the case studies: engine reproduces kh_access, ferry substitution, outcome by hand, leave-one-out and window | `kh_cases_verify.csv`, `.txt` |
+| `kh_s45_persistence.py [draws]` | spec 9-35: do districts with 2005-2012 projects get more in 2017-2020, holding travel time fixed | `kh_persistence.csv`, `.txt` |
 | `kh_figures.py` | figures F1-F5 in English and Korean, from the same data step and results table | `outputs/figures/cambodia/F*.pdf/.png` |
 | `kh_census_build.py extract.csv` | once the IPUMS extract arrives: deprivation index and phone ownership by district, classifying answer codes from the codebook labels | `kh_census.csv` |
 | `kh_check.py` | 80 automated checks from the sample to every number on the site; exit code 1 on any failure | (console) |

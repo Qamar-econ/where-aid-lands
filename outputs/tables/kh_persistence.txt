@@ -1,0 +1,21 @@
+districts 141 | with 2005-2012 projects 95 (181 activities) | corr(reach, prior) -0.22, corr(reach, prior_n) -0.43
+descriptive: projects per 100,000 people 2017-2020, prior 1: 1.34, prior 0: 0.50
+== MAIN (spec 9-35)
+  1 prior alone                                prior      +106% (95% CI +22% to +248%) | p RI 0.190 | cluster 0.007 | Conley 0.001 | districts 141, projects 185.9
+  2 prior + travel time                        prior       +25% (95% CI -20% to +94%) | p RI 0.647 | cluster 0.322 | Conley 0.238 | districts 141, projects 185.9
+  2 prior + travel time                        reach       -35% (95% CI -50% to -15%) | p RI 0.012 | cluster 0.002 | Conley 0.000 | districts 141, projects 185.9
+== CHECKS
+  3 rural districts: prior + travel time       prior       +28% (95% CI -20% to +106%) | p RI 0.403 | cluster 0.306 | Conley 0.298 | districts 112, projects 90.2
+  3 rural districts: prior + travel time       reach       +14% (95% CI -11% to +45%) | p RI 0.592 | cluster 0.309 | Conley 0.297 | districts 112, projects 90.2
+  4 Phnom Penh khans excluded                  prior       +46% (95% CI -22% to +173%) | p RI 0.385 | cluster 0.235 | Conley 0.149 | districts 137, projects 140.5
+  4 Phnom Penh khans excluded                  reach       -22% (95% CI -46% to +13%) | p RI 0.040 | cluster 0.188 | Conley 0.064 | districts 137, projects 140.5
+  6 prior_n + travel time                      prior_n     +97% (95% CI +58% to +146%) | p RI 0.031 | cluster 0.000 | Conley 0.000 | districts 141, projects 185.9
+  6 prior_n + travel time                      reach       -14% (95% CI -24% to -3%) | p RI 0.229 | cluster 0.016 | Conley 0.008 | districts 141, projects 185.9
+== POST HOC (added after seeing model 6): is the count of past projects only the hubs?
+  7 post hoc: prior_n + travel time, rural only prior_n     +41% (95% CI +18% to +69%) | p RI 0.311 | cluster 0.000 | Conley 0.001 | districts 112, projects 90.2
+  7 post hoc: prior_n + travel time, rural only reach       +16% (95% CI -10% to +50%) | p RI 0.459 | cluster 0.240 | Conley 0.195 | districts 112, projects 90.2
+  8 post hoc: prior_n + travel time, no PP khans prior_n     +64% (95% CI +40% to +91%) | p RI 0.048 | cluster 0.000 | Conley 0.000 | districts 137, projects 140.5
+  8 post hoc: prior_n + travel time, no PP khans reach        -6% (95% CI -23% to +15%) | p RI 0.533 | cluster 0.577 | Conley 0.510 | districts 137, projects 140.5
+  mean prior_n: Phnom Penh khans 2.23, towns 0.76, rural 0.30
+== 5 other donors' past projects only (two-group stack)
+  5 other donors' past projects + travel time  prior_o     +59% (95% CI +19% to +112%) | p RI 0.228 | cluster 0.002 | EU/US projects 126.0, other 59.9
