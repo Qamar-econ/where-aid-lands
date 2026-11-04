@@ -341,5 +341,29 @@ for col, key in [("phone_z", "phone"), ("deprivation", "deprivation"), ("lights_
         CH["grad"][key] = {"x": r2(xm), "rate": r2(o_), "lo": r2(l_), "hi": r2(h_), "fx": r2(g_), "fy": r2(f_), "pct": round(float(pct_), 1)}
 if IMP.exists():
     CH["importance"] = pd.read_csv(IMP).round(2).to_dict("records")
+# capital vs nearest town (spec 9-33) and infrastructure events (spec 9-32, 9-34)
+T = ROOT / "outputs/tables"
+CAPF, PIN = T / "kh_capital_compare.csv", T / "kh_pinfra_panel.csv"
+if CAPF.exists():
+    CH["capital"] = pd.read_csv(CAPF).round(4).to_dict("records")   # one rounding only, in the chart
+    CH["capital_coef"] = pd.read_csv(T / "kh_capital.csv")[["model", "var", "fe", "pct", "ci_lo", "ci_hi", "p_ri", "p_cluster"]].round(6).to_dict("records")
+if PIN.exists():
+    pn = pd.read_csv(PIN)
+    ctl = pn[pn.control].groupby("yr").activities.mean()
+    CH["wpanel"] = {"years": [int(y) for y in ctl.index], "control": r2(ctl.values),
+                    "treated": [{"province": p, "work": g.treated_by.iloc[0], "year": int(g.completed.iloc[0]), "y": r2(g.sort_values("yr").activities.values)}
+                                for p, g in pn[pn.treated_by.notna()].groupby("province")]}
+    CH["wpanel"]["treated"].sort(key=lambda d: d["year"])
+    ev = pd.read_csv(T / "kh_pinfra_events.csv"); pr = pd.read_csv(T / "kh_pinfra.csv")
+    CH["wcoef"] = pd.concat([pr, ev.drop(columns="event")])[["model", "pct", "ci_lo", "ci_hi", "p_ri", "treated_pre", "treated_post"]].drop_duplicates("model").round(4).to_dict("records")
+    cl = pd.read_csv(T / "kh_pinfra_cells.csv"); works = [c for c in cl.columns if c not in ("lon", "lat", "pop", "k")]
+    cl["save"] = cl[works].max(axis=1); cl["work"] = cl[works].idxmax(axis=1)
+    cl["gx"], cl["gy"] = (cl.lon / .04).round() * .04, (cl.lat / .04).round() * .04
+    gcell = cl.sort_values("save").groupby(["gx", "gy"]).tail(1)
+    gcell = gcell[gcell.save >= 5]
+    CH["wgrid"] = {"step": .04, "works": works, "cells": [[round(x, 2), round(y, 2), round(float(v), 0), works.index(w)] for x, y, v, w in zip(gcell.gx, gcell.gy, gcell.save, gcell.work)]}
+    CH["wsites"] = [{"work": "NR48 Koh Kong bridges", "lon": 103.47, "lat": 11.19, "year": 2008}, {"work": "Sekong bridge", "lon": 105.99, "lat": 13.54, "year": 2008},
+                    {"work": "Prek Tamak bridge", "lon": 105.00, "lat": 11.75, "year": 2010}, {"work": "NR78 Ratanakiri paving", "lon": 106.55, "lat": 13.72, "year": 2012},
+                    {"work": "Stung Treng bridge", "lon": 105.94, "lat": 13.53, "year": 2015}, {"work": "Neak Loeung bridge", "lon": 105.27, "lat": 11.27, "year": 2015}]
 (ROOT / "site/data/charts.json").write_text(json.dumps(CH, ensure_ascii=False), encoding="utf-8")
 print("site/data/charts.json written")

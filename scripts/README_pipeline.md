@@ -48,9 +48,13 @@ Run the scripts from `research/scripts`, in this order:
 | `kh_s38_geocode_extract.py` | lists projects whose location is only a province or town name, for hand classification | `kh_geocode_flagged.csv`, `kh_geocode_flagged_units.csv` |
 | (by hand) | each listed project read and classed TOWN / PROVINCE / UNCLEAR / NATIONAL, with a one-line reason | `kh_geocode_classified.csv` |
 | `kh_main.py [draws]` | the main analysis: travel time and poverty, within provinces, randomisation inference; breakdown by district type; robustness; donor groups; census tests if `kh_census.csv` exists | `outputs/tables/kh_main_simple.csv`, `.txt` |
+| `kh_s40_hc3_panel.py` | pre-registered H-C3: 2008-2019 change in phone ownership vs change in projects, district fixed effects | `kh_hc3.csv`, `.txt` |
+| `kh_s41_bridges.py` | spec 9-32: with/without-bridge travel times on the 2017 network (bridge = ferry of F minutes) and a district event study around eight 2008-2015 bridges | `kh_bridges*.csv`, `.txt` |
+| `kh_s42_capital.py [draws]` | spec 9-33: travel time to Phnom Penh vs to the nearest town, zone fixed effects, cross-validated comparison | `kh_capital.csv`, `kh_capital_compare.csv` |
+| `kh_s43_province_infra.py` | spec 9-34: province-level event study around bridge and road works (counterfactual travel time, exact and sampled randomisation inference); cell-level minutes saved for the map | `kh_pinfra*.csv`, `.txt` |
 | `kh_figures.py` | figures F1-F5 in English and Korean, from the same data step and results table | `outputs/figures/cambodia/F*.pdf/.png` |
 | `kh_census_build.py extract.csv` | once the IPUMS extract arrives: deprivation index and phone ownership by district, classifying answer codes from the codebook labels | `kh_census.csv` |
-| `kh_check.py` | 59 automated checks from the sample to every number on the site; exit code 1 on any failure | (console) |
+| `kh_check.py` | 79 automated checks from the sample to every number on the site; exit code 1 on any failure | (console) |
 | `kh_run_all.sh` | reruns every step downstream of the sample, in dependency order | `outputs/logs/` |
 
 **The census data are not redistributed.** IPUMS terms forbid sharing the microdata, and the district tables built from it (`kh_census.csv`) are kept local as well. To reproduce the census results, request your own IPUMS International extract (Cambodia 2008 and 2019; variables listed in the pre-registration, amendment 2) and run `kh_census_build.py` on it.

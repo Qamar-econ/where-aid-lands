@@ -176,7 +176,11 @@ def fit(S, draws=DRAWS, seed=20261106):
         except Exception:
             pass
     bs = np.array(bs); bs = bs[np.isfinite(bs)]
-    p_ri = np.mean(np.abs(bs) >= abs(b) - 1e-12) if single else (1 + np.sum(np.abs(bs) >= abs(b))) / (1 + len(bs))
+    if single:   # exact: the observed assignment is one of the enumerated ones, so it is already in bs
+        assert np.isclose(bs, b, rtol=1e-6, atol=1e-8).any(), "observed assignment missing from the enumeration"
+        p_ri = np.sum(np.abs(bs) >= abs(b) - 1e-12) / len(bs)
+    else:
+        p_ri = (1 + np.sum(np.abs(bs) >= abs(b))) / (1 + len(bs))
     return {"pct": 100 * (np.exp(b) - 1), "ci_lo": 100 * (np.exp(b - 1.96 * s) - 1), "ci_hi": 100 * (np.exp(b + 1.96 * s) - 1),
             "mde_pct": 100 * (np.exp(2.8 * s) - 1), "p_cluster": 2 * norm.sf(abs(b / s)), "p_ri": p_ri, "ri_draws": len(bs), **base}
 

@@ -130,6 +130,27 @@ for r in IMP.itertuples():
 for v in ["reach_sd", "phone", "deprivation", "lights"]:
     r = M[(M.model.str.startswith("per SD:")) & (M["var"] == v)].iloc[0]
     check(f"E1 site shows per-SD effect for {v} = {pc(r.pct)} (p {r.p_ri:.3f})", pc(r.pct) in txt and f"{r.p_ri:.3f}" in txt)
+CAP = pd.read_csv(T / "kh_capital.csv"); CMP = pd.read_csv(T / "kh_capital_compare.csv")   # spec 9-33
+cr = lambda m: CAP[CAP.model == m].iloc[0]
+for m, keys in [("town alone", ["pct", "p_ri"]), ("capital alone", ["pct", "p_ri"]), ("Phnom Penh khans excluded: town", ["pct", "p_ri"]),
+                ("Phnom Penh khans excluded: capital", ["pct", "ci", "p_ri"])]:
+    r = cr(m)
+    for k in keys:
+        v = {"pct": pc(r.pct), "ci": f"{pc(r.ci_lo)} to {pc(r.ci_hi)}", "p_ri": f"{r.p_ri:.3f}"}[k]
+        check(f"E1 site shows 9-33 {m} / {k} = {v}", v in txt or v.replace(" to ", " ~ ") in txt)
+for smp in ["all districts", "donors China"]:
+    r = CMP[(CMP["sample"] == smp) & (CMP.fe == "zone")].iloc[0]
+    v = (f"{r.cv_town:+.0f}% against {r.cv_capital:+.0f}%" if smp == "all districts" else f"{r.cv_capital:+.0f}% against {r.cv_town:+.0f}%")
+    check(f"E1 site shows 9-33 CV gain ({smp}) = {v}", v in txt)
+PI = pd.read_csv(T / "kh_pinfra.csv").set_index("model")                                         # spec 9-34
+pm, pp = PI.loc["main (all treated, F 60, >= 10%)"], PI.loc["placebo -3 years"]
+for v in [f"{pm.treated_pre:.1f} in the five years before and {pm.treated_post:.1f}", f"{pc(pm.pct)}, randomisation p = {pm.p_ri:.3f}", f"{pc(pp.pct)} (p = {pp.p_ri:.3f})"]:
+    check(f"E1 site shows 9-34: {v}", v in txt)
+CJ2 = json.loads((SITE / "data/charts.json").read_text(encoding="utf-8"))
+jc = pd.DataFrame(CJ2["capital"]).set_index(["sample", "fe"]); kc = CMP.set_index(["sample", "fe"])
+check("E4 capital chart data = kh_capital_compare.csv", ((jc.cv_town - kc.cv_town).abs().max() < 1e-3) and ((jc.cv_capital - kc.cv_capital).abs().max() < 1e-3))
+jw = pd.DataFrame(CJ2["wcoef"]).set_index("model")
+check("E4 works chart data = kh_pinfra.csv", (jw.loc[PI.index.intersection(jw.index), "treated_pre"] - PI.loc[PI.index.intersection(jw.index), "treated_pre"]).abs().max() < 1e-3)
 stale = [s for s in ["+165%", "2.6 times", "−49%", "five factors", "39%", "Reach or Poverty"] if s in txt]
 check("E2 no stale headline numbers on the site", not stale, ", ".join(stale))
 missing = sorted({m for m in re.findall(r'src="(img/[^"?]+)', html) if not (SITE / m).exists()})

@@ -1,3 +1,4 @@
+<meta charset="utf-8">
 <title>Where Aid Lands</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg?v=3">
 <meta name="description" content="Where Aid Lands: Roads, Connectivity, or Poverty? Evidence from Cambodia. Tae Yoon Moon (University of Seoul) and Claude Opus 5.5.">
@@ -453,6 +454,35 @@ footer b{color:var(--ink);font-weight:600}
     </div>
     <svg id="multiples" class="chart" role="img" aria-label="District measures plotted against travel time to the nearest town"></svg>
   </div><figcaption class="en">Projects and lights on log axes. Districts with no projects sit on the band marked 0. <em>Within province</em> subtracts each province's mean from both axes. Projects 2017–2020 after reclassification; phones and deprivation from the 2019 census; lights 2015 (harmonised DMSP–VIIRS).</figcaption><figcaption class="ko">사업과 불빛은 로그 축. 사업이 없는 군은 0으로 표시한 띠에 놓입니다. <em>주 안에서 비교</em>는 두 축 모두에서 주 평균을 뺍니다. 사업은 재분류 후 2017–2020년, 휴대전화와 박탈은 2019년 센서스, 불빛 2015년(DMSP–VIIRS 통합).</figcaption></figure>
+  <div class="col">
+    <h3 class="en">Phnom Penh, or the nearest town?</h3><h3 class="ko">프놈펜인가, 가까운 도시인가?</h3>
+    <p class="en">Donor offices sit in Phnom Penh, so distance to the capital is a natural rival to distance to the nearest town. The two are correlated at 0.78, and province effects absorb 77% of the variation in distance to the capital, so this comparison uses Cambodia's four survey zones (plains, Tonle Sap, coast, plateau) instead of provinces. Both predict fewer projects, −42% and −43% per doubling of travel time, but <strong>the nearest town predicts better out of sample</strong> (+24% against +14%). Without Phnom Penh's four khans the capital effect vanishes (+1%, 95% CI −16% to +21%) while the town effect remains (−23%). Aid gathers in the capital itself; in the provinces it follows the provincial towns, not the road to Phnom Penh. China is the exception: for Chinese projects the capital predicts better (+38% against +27%).</p><p class="ko">원조 기관 사무소는 프놈펜에 있으므로, 수도까지 거리는 가까운 도시까지 거리의 자연스러운 경쟁 설명입니다. 두 거리는 0.78로 상관되고, 수도까지 거리 변동의 77%는 주 효과가 흡수하므로, 이 비교는 주 대신 캄보디아 사회경제조사의 네 지대(평야, 톤레삽, 해안, 고원)를 고정효과로 씁니다. 둘 다 사업 감소를 예측하지만(이동시간 두 배당 −42%, −43%), <strong>표본 밖 예측은 가까운 도시가 낫습니다</strong>(+24% 대 +14%). 프놈펜의 4개 칸을 빼면 수도 효과는 사라지고(+1%, 95% CI −16% ~ +21%), 도시 효과는 남습니다(−23%). 원조는 수도 자체에 모이고, 지방에서는 프놈펜으로 가는 길이 아니라 도청 소재지를 따라갑니다. 예외는 중국으로, 중국 사업은 수도까지 거리가 더 잘 예측합니다(+38% 대 +27%).</p>
+  </div>
+  <figure class="wide"><div class="fig">
+    <p class="en figtitle">The nearest town predicts better than the capital</p><p class="ko figtitle">수도보다 가까운 도시가 더 잘 예측한다</p>
+    <p class="en figsub">Out-of-sample gain in fit over zone effects and population, one measure at a time</p><p class="ko figsub">지대 효과와 인구 대비 표본 밖 적합도 개선, 측정치 하나씩</p>
+    <svg id="ch-capital" class="chart ch" role="img" aria-label="Cross-validated gain in fit from travel time to the nearest town and to Phnom Penh, by sample"></svg>
+  </div><figcaption class="en">Exploratory, specified before estimation (spec 9-33). Mean over 20 repeats of 5-fold cross-validation, with one standard deviation. Randomisation p for the full sample: town 0.004, capital 0.019; without Phnom Penh: 0.099 and 0.953.</figcaption><figcaption class="ko">탐색적 분석, 추정 전에 명세(9-33). 5겹 교차검증 20회 반복의 평균과 표준편차. 전체 표본의 무작위화 p: 도시 0.004, 수도 0.019. 프놈펜 제외: 0.099, 0.953.</figcaption></figure>
+
+  <div class="col">
+    <h3 class="en">Did new bridges and roads bring aid?</h3><h3 class="ko">새 다리와 도로가 원조를 불러왔나?</h3>
+    <p class="en">If access shapes where aid goes, a province should draw more projects once a new bridge or road brings it closer. We took every major bridge opened between 2008 and 2015, plus the road works of those years whose completion dates can be verified, and computed on the same 2017 road network how much longer the trip to Phnom Penh would be without each, a bridge being replaced by a 60-minute ferry. Using one map avoids mistaking later mapping for new roads. Three works bring a whole province at least 10% closer: the <strong>Prek Tamak bridge</strong> (Prey Veng, 2010), the <strong>NR78 paving</strong> (Ratanakiri, 2012) and the <strong>Neak Loeung bridge</strong> (Svay Rieng, 2015).</p><p class="ko">접근성이 원조 입지를 정한다면, 새 다리나 도로로 가까워진 주는 그 뒤 사업을 더 끌어와야 합니다. 2008–2015년에 개통한 주요 다리 전부와, 같은 기간 완공 연도를 확인할 수 있는 도로 공사를 골라, 같은 2017년 도로망에서 각 공사가 없었다면 프놈펜까지 얼마나 더 걸렸을지를 계산했습니다(다리는 60분 나룻배로 대체). 지도 하나만 쓰므로 나중에 지도화된 도로를 새 도로로 착각하지 않습니다. 주 전체를 10% 이상 가깝게 만든 공사는 셋입니다. <strong>쁘렉따막교</strong>(프레이벵, 2010), <strong>NR78 포장</strong>(라타나끼리, 2012), <strong>네악루엉교</strong>(스바이리엥, 2015).</p>
+  </div>
+  <figure class="wide"><div class="fig">
+    <p class="en figtitle">What the works changed</p><p class="ko figtitle">공사가 바꾼 것</p>
+    <p class="en figsub">Extra minutes to Phnom Penh, by 4 km cell, if the bridge or road did not exist</p><p class="ko figsub">다리나 도로가 없다면 프놈펜까지 늘어나는 시간 (4 km 격자)</p>
+    <svg id="ch-works" class="chart ch" role="img" aria-label="Map of the extra travel time to Phnom Penh without each bridge or road work"></svg>
+  </div><figcaption class="en">2017 OpenStreetMap network, dry season, from 1 km WorldPop cells; each 4 km cell shows its largest 1 km value, cells under 5 minutes left blank. The Koh Kong bridges save up to three hours locally, but Koh Kong shares a census province with Sihanoukville, where most people live (8% on average). The Stung Treng bridge changes no route to Phnom Penh.</figcaption><figcaption class="ko">2017년 OpenStreetMap 도로망, 건기, 1 km WorldPop 격자 기준. 4 km 칸마다 가장 큰 1 km 값을 표시하고 5분 미만은 비워 둠. 꼬꽁 교량은 현지에서 최대 3시간을 줄이지만, 꼬꽁은 인구 대부분이 사는 시아누크빌과 같은 센서스 주로 묶여 평균 8%. 스퉁트렝교는 프놈펜으로 가는 경로를 바꾸지 않음.</figcaption></figure>
+
+  <div class="col">
+    <p class="en">In those three provinces, activities located at province level or finer numbered <strong>7.1 in the five years before and 7.8 in the five years after</strong>, while the average elsewhere roughly doubled as the records grew. None of nine specifications shows an increase. The pooled relative estimate is negative (−61%, randomisation p = 0.044), but a placebo with the openings dated three years early gives +192% (p = 0.052): treated and control provinces were not moving in parallel, so the gap is not an effect of the works. At district level the data are thinner still, 13 districts with about five activities in ten years. What the cases do show: <strong>better access was not followed by more aid.</strong></p><p class="ko">세 주에서 주 단위 이상으로 위치가 기록된 활동은 <strong>개통 전 5년 7.1건, 후 5년 7.8건</strong>이었고, 같은 기간 다른 주의 평균은 기록이 늘면서 약 두 배가 됐습니다. 9개 모형 어느 것에서도 증가는 나오지 않습니다. 합친 상대 추정치는 음수(−61%, 무작위화 p = 0.044)지만, 개통을 3년 앞당긴 위약 검정에서 +192%(p = 0.052)가 나옵니다. 처리 주와 대조 주가 평행하게 움직이지 않았으므로, 이 차이는 공사의 효과가 아닙니다. 군 단위 자료는 더 얇습니다(13개 군, 10년 동안 활동 약 5건). 사례가 보여주는 것은 이것입니다. <strong>접근성이 좋아진 뒤에도 원조는 늘지 않았습니다.</strong></p>
+  </div>
+  <figure class="wide"><div class="fig">
+    <p class="en figtitle">The provinces brought closer did not draw more projects</p><p class="ko figtitle">가까워진 주에 사업이 늘지 않았다</p>
+    <p class="en figsub">Activities per year in each treated province (bars) and the mean of 14 control provinces (line)</p><p class="ko figsub">처리 주의 연간 활동 수(막대)와 대조 주 14곳의 평균(선)</p>
+    <svg id="ch-events" class="chart ch w2" role="img" aria-label="Activities per year in Prey Veng, Ratanakiri and Svay Rieng around the opening of the works, with the control-province mean"></svg>
+  </div><figcaption class="en">Exploratory, specified before estimation (spec 9-32 to 9-34). GODAD activities with district or province precision, excluding ICT and infrastructure, split equally across provinces. Shaded: the five years either side used in the estimate; grey bar: opening year, not used. The bridges' own projects are infrastructure and so not counted.</figcaption><figcaption class="ko">탐색적 분석, 추정 전에 명세(9-32 ~ 9-34). 군 또는 주 정밀도의 GODAD 활동, ICT·인프라 제외, 여러 주에 걸치면 균등 분할. 음영: 추정에 쓴 전후 5년. 회색 막대: 개통 연도(추정에서 제외). 다리 자체 사업은 인프라라 세지 않음.</figcaption></figure>
+
   <div class="col"><p class="trace"><a href="pipeline.html#res"><span class="en">Every estimate, with code to re-run it</span><span class="ko">모든 추정치와 다시 돌려 볼 코드</span></a></p></div>
 </div></section>
 
@@ -471,7 +501,7 @@ footer b{color:var(--ink);font-weight:600}
       <tr><td class="en">Census items</td><td class="ko">센서스 문항</td><td class="en">No floor question; water records piped supply only. Five indicators, plus a version without water</td><td class="ko">바닥재 문항 없음, 식수는 수도 여부만. 지표 5개와 식수 제외 버전 보고</td></tr>
       <tr><td class="en">Phnom Penh is four districts</td><td class="ko">프놈펜은 군 4개</td><td class="en">Reported with and without; the town gap remains, the clustered interval widens</td><td class="ko">포함·제외 모두 보고. 도시 효과는 남고 군집 구간은 넓어짐</td></tr>
       <tr><td class="en">Few provinces (19)</td><td class="ko">주가 적음 (19개)</td><td class="en">Randomisation inference as the primary test</td><td class="ko">무작위화 추론을 주 검정으로</td></tr>
-      <tr><td class="en">Associations, not causes</td><td class="ko">인과가 아닌 연관</td><td class="en">Roads measured before the projects; we do not claim roads cause placement</td><td class="ko">도로는 사업 전에 측정. 도로가 입지를 만든다고 주장하지 않음</td></tr>
+      <tr><td class="en">Associations, not causes</td><td class="ko">인과가 아닌 연관</td><td class="en">Roads measured before the projects; we do not claim roads cause placement. Bridge and road openings 2008–2015 bring no detectable rise, but only three provinces qualify and their trends differ from the rest</td><td class="ko">도로는 사업 전에 측정. 도로가 입지를 만든다고 주장하지 않음. 2008–2015년 다리·도로 개통 뒤 증가는 보이지 않지만, 해당 주는 3곳이고 추세가 나머지 주와 다름</td></tr>
     </tbody></table></div>
     <p class="trace"><a href="pipeline.html#res"><span class="en">All robustness checks and audits, with code</span><span class="ko">모든 견고성 점검과 감사, 코드 포함</span></a></p>
   </div>
@@ -490,7 +520,7 @@ footer b{color:var(--ink);font-weight:600}
     </tbody></table></div>
   <p class="en">The pattern is a step between towns and the rest: across rural districts none of the factors predicts where a project lands. That sharpens the tarmac-bias story. The bias is not a smooth penalty for every extra hour on the road, and it fits what <a class="cite" href="https://doi.org/10.1093/isq/sqab035" target="_blank" rel="noopener">Briggs (2021)</a> heard from World Bank staff if the hard part of remote work is leaving town at all.</p><p class="ko">이 관계는 도시와 나머지 사이의 계단입니다. 농촌 안에서는 어떤 요인도 사업 입지를 예측하지 못합니다. 이는 포장도로 편향을 더 정확하게 그립니다. 편향은 도로 위 한 시간마다 커지는 벌점이 아니며, 외딴 곳에서 일하는 어려움이 도시를 벗어나는 것 자체에 있다면 <a class="cite" href="https://doi.org/10.1093/isq/sqab035" target="_blank" rel="noopener">Briggs(2021)</a>가 세계은행 직원들에게서 들은 이야기와 맞습니다.</p>
   <p class="en">Two lessons for anyone using geocoded aid data: compare districts within provinces and look at the shape, not only the slope; and check locations that are only a province or town name, which here were half the sample and inflated the physical-access estimate by a third.</p><p class="ko">지오코딩된 원조 자료를 쓰는 연구자에게 두 가지 교훈이 있습니다. 같은 주 안에서 비교하고 기울기뿐 아니라 형태를 볼 것, 그리고 주나 도시 이름으로만 기록된 위치를 확인할 것입니다. 이번 표본에서는 그런 위치가 절반이었고 물리적 접근성 추정치를 3분의 1가량 부풀렸습니다.</p>
-  <p class="en note">These are associations within provinces, covering about a third of aid to Cambodia (GODAD donors) plus China. Digital access and poverty rest on randomisation inference: their clustered intervals include zero, and they do not pass the Holm correction over the pre-registered census tests (0.084 and 0.058). Within districts, rising phone ownership brought no more projects.</p><p class="ko note">이 결과는 같은 주 안의 연관이고, 캄보디아 원조의 약 3분의 1(GODAD 공여자)과 중국을 포괄합니다. 디지털 접근성과 빈곤 결과는 무작위화 추론에 기댑니다. 군집 구간은 0을 포함하고, 사전등록한 센서스 검정에 대한 Holm 보정을 통과하지 못합니다(0.084, 0.058). 같은 군 안에서 휴대전화 보유율이 올라도 사업은 늘지 않았습니다.</p>
+  <p class="en note">These are associations within provinces, covering about a third of aid to Cambodia (GODAD donors) plus China. Digital access and poverty rest on randomisation inference: their clustered intervals include zero, and they do not pass the Holm correction over the pre-registered census tests (0.084 and 0.058). Within districts, rising phone ownership brought no more projects, and in the provinces that new bridges and roads brought closer to Phnom Penh, projects did not rise either.</p><p class="ko note">이 결과는 같은 주 안의 연관이고, 캄보디아 원조의 약 3분의 1(GODAD 공여자)과 중국을 포괄합니다. 디지털 접근성과 빈곤 결과는 무작위화 추론에 기댑니다. 군집 구간은 0을 포함하고, 사전등록한 센서스 검정에 대한 Holm 보정을 통과하지 못합니다(0.084, 0.058). 같은 군 안에서 휴대전화 보유율이 올라도 사업은 늘지 않았고, 새 다리와 도로로 프놈펜과 가까워진 주에서도 사업은 늘지 않았습니다.</p>
   <p class="trace"><a href="pipeline.html#res"><span class="en">Trace this conclusion back to the data</span><span class="ko">이 결론을 자료까지 거슬러 확인하기</span></a></p>
 </div></section>
 
@@ -878,4 +908,4 @@ function tables(res){
 }
 })();
 </script>
-<script src="charts.js?v=4"></script>
+<script src="charts.js?v=5"></script>
