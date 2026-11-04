@@ -7,7 +7,7 @@ cd "$(dirname "$0")"
 for s in kh_s10_rwi kh_s04_models kh_s24_conservative_p kh_s25_joint_test kh_s27_need_conservative kh_s26_analysis_dataset kh_s07_shapley \
          kh_s18_wild_bootstrap kh_s15_access2017 kh_s06_ladder kh_s08_extensions kh_s09_geobias kh_s16_access_sensitivity kh_s17_sample_and_size \
          kh_s20_index_audit kh_s21_speed_iv kh_s22_timing_check kh_s23_usage_measures kh_s28_hospital_check kh_s29_external_validation \
-         kh_main kh_s40_hc3_panel kh_s41_bridges kh_s42_capital kh_s43_province_infra kh_figures kh_s11_webexport kh_s12_site_files kh_s05_maps; do
+         kh_main kh_s40_hc3_panel kh_s41_bridges kh_s42_capital kh_s43_province_infra kh_s44_verify_cases kh_figures kh_s11_webexport kh_s12_site_files kh_s05_maps; do
   t0=$(date +%s)
   if "$PY" -X utf8 -W ignore "$s.py" > "$LOG/$s.log" 2>&1; then st=ok; else st=FAILED; fi
   echo "$(date +%H:%M:%S) $s $st $(( $(date +%s) - t0 ))s"

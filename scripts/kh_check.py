@@ -146,6 +146,8 @@ PI = pd.read_csv(T / "kh_pinfra.csv").set_index("model")                        
 pm, pp = PI.loc["main (all treated, F 60, >= 10%)"], PI.loc["placebo -3 years"]
 for v in [f"{pm.treated_pre:.1f} in the five years before and {pm.treated_post:.1f}", f"{pc(pm.pct)}, randomisation p = {pm.p_ri:.3f}", f"{pc(pp.pct)} (p = {pp.p_ri:.3f})"]:
     check(f"E1 site shows 9-34: {v}", v in txt)
+VER = pd.read_csv(T / "kh_cases_verify.csv")                                                   # kh_s44 independent checks
+check("C6 case studies pass their independent checks (kh_s44)", VER.ok.all(), f"{int(VER.ok.sum())} of {len(VER)}")
 CJ2 = json.loads((SITE / "data/charts.json").read_text(encoding="utf-8"))
 jc = pd.DataFrame(CJ2["capital"]).set_index(["sample", "fe"]); kc = CMP.set_index(["sample", "fe"])
 check("E4 capital chart data = kh_capital_compare.csv", ((jc.cv_town - kc.cv_town).abs().max() < 1e-3) and ((jc.cv_capital - kc.cv_capital).abs().max() < 1e-3))

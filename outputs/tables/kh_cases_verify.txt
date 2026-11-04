@@ -1,0 +1,24 @@
+== 1 counterfactual engine reproduces kh_access
+  kh_s41 town          max abs diff 0.0000 min
+  kh_s41 Phnom Penh    max abs diff 0.0000 min
+  kh_s43 Phnom Penh    max abs diff 0.0000 min
+== 2 ferry substitution: added minutes in the most affected districts vs F - driving time over the bridge
+  Neak Loeung bridge   F  60: max added   57.3 min (F - driving = 57.3; at most this unless a detour is shorter)
+  Prek Tamak bridge    F  60: max added   58.5 min (F - driving = 58.6; at most this unless a detour is shorter)
+  Neak Loeung bridge   F 120: max added  117.3 min (F - driving = 117.3; at most this unless a detour is shorter)
+  Neak Loeung bridge   F  30: max added   27.3 min (F - driving = 27.3; at most this unless a detour is shorter)
+== 3 9-34 outcome by hand
+  Prey Veng   opened 2010: treated 1.15 -> 0.64 | controls 49.6 -> 102.2 (x2.06)
+  Ratanakiri  opened 2012: treated 3.90 -> 5.21 | controls 34.3 -> 132.9 (x3.87)
+  Svay Rieng  opened 2015: treated 2.05 -> 1.95 | controls 78.6 -> 129.6 (x1.65)
+  pooled treated 7.11 -> 7.80 (kh_s43: 7.11 -> 7.80) | controls x2.24 | ratio of ratios -51% vs PPML -61%
+== 4 9-34 stability (999 draws each)
+  drop treated province 14: -59% (p RI 0.116) | treated 6.0 -> 7.2
+  drop treated province 16: -54% (p RI 0.155) | treated 3.2 -> 2.6
+  drop treated province 20: -67% (p RI 0.082) | treated 5.1 -> 5.9
+  drop one control at a time (14): -65% to -57%
+  window -3..+3: -73% (p RI 0.051) | treated 5.9 -> 3.5
+  specifications with a positive estimate: 0 of 18
+== 5 9-33 province-FE town model = kh_main travel-time estimate
+  kh_s42 -36.126% vs kh_main -36.126%
+== 27 of 27 checks ok

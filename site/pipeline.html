@@ -332,7 +332,7 @@ const N = [
   from:['tt','rob'],
   tbl:[['Zone FE: nearest town / Phnom Penh','지대 FE: 가까운 도시 / 프놈펜','−42% / −43%','0.004 / 0.019'],['Without Phnom Penh: town / capital','프놈펜 제외: 도시 / 수도','−23% / +1%','0.099 / 0.953'],['Out-of-sample gain: town / capital','표본 밖 개선: 도시 / 수도','+24% / +14%',''],['Bridges and roads, 3 provinces: activities before → after','다리·도로 3개 주: 활동 전 → 후','7.1 → 7.8',''],['Relative estimate / placebo 3 years early','상대 추정 / 3년 앞당긴 위약','−61% / +192%','0.044 / 0.052']]},
  {id:'concl', col:3, k:'res', t:['Conclusion','결론'],
-  d:['Aid goes where roads and phones reach and poverty is lower: mostly the capital and provincial towns. Physical access carries the pattern; across rural districts none of the three predicts it.','원조는 도로와 전화가 닿고 덜 가난한 곳, 대부분 수도와 도청 소재지로 갑니다. 물리적 접근성이 관계를 이끌고, 농촌 안에서는 세 가지 모두 예측하지 못합니다.'],
+  d:['Aid stays in the hubs, Phnom Penh and the provincial towns. Physical access lines up most closely because it marks them; across rural districts none of the three predicts placement, and better access over time brought no more aid.','원조는 거점, 곧 프놈펜과 도청 소재지에 머뭅니다. 물리적 접근성이 가장 뚜렷한 것은 거점을 가장 잘 짚어내기 때문이고, 농촌 안에서는 세 가지 모두 예측하지 못하며, 길이 좋아져도 원조는 늘지 않았습니다.'],
   from:['rmain','rcompare','rtypes','rrob'],
   how:['Associations within provinces, not causal effects. Covers GODAD donors (about a third of aid to Cambodia) plus China.','같은 주 안의 연관이며 인과 효과가 아닙니다. GODAD 공여자(캄보디아 원조의 약 3분의 1)와 중국을 포괄합니다.']}
 ];
@@ -443,7 +443,7 @@ const SPEC = [
   ['Multiplicity','다중검정','Holm correction over the three main tests','세 주 검정에 Holm 보정'],
   ['Robustness','견고성','Geocodes as published and worst case; province-only projects; Phnom Penh excluded; Weiss et al. map; ten-component index; donor groups','지오코딩 원자료와 최악 가정; 주 단위 사업; 프놈펜 제외; Weiss 지도; 10요소 지수; 공여자 그룹'],
   ['Pre-specification','사전 명세','Main design fixed before estimation (spec 9-27); the district-type breakdown is exploratory (9-28)','주 설계는 추정 전에 고정(명세 9-27); 군 유형별 분해는 탐색적(9-28)'],
-  ['Checks','점검','kh_check.py: 79 automated checks from the sample to every number on the site','kh_check.py: 표본부터 사이트의 모든 숫자까지 자동 점검 79개'],
+  ['Checks','점검','kh_check.py: 80 automated checks from the sample to every number on the site','kh_check.py: 표본부터 사이트의 모든 숫자까지 자동 점검 80개'],
   ['Interpretation','해석','Associations within provinces, not causal effects','같은 주 안의 연관이며 인과 효과가 아님']];
 function setTabs(c){ document.querySelectorAll('.colnav button').forEach(b => b.setAttribute('aria-selected', String(+b.dataset.col === c))); }
 function selectCol(c, pan = true){ cur = null; curCol = c; setTabs(c);
