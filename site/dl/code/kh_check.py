@@ -117,6 +117,12 @@ main3 = M[M.model.isin(["physical access alone", "digital access alone", "povert
 for i_, r in enumerate(main3.itertuples()):
     run = max(run, min(1, (3 - i_) * r.p_ri)); hp.append(f"{run:.3f}")
 check("E1 site shows the three Holm-adjusted p", all(h in txt for h in hp), ", ".join(hp))
+H3 = pd.read_csv(T / "kh_hc3.csv").set_index("model").loc["H-C3 main"]                      # pre-registered panel test
+check(f"E1 site shows H-C3: {H3.pct:+.1f}% (95% CI {pc(H3.ci_lo)} to {pc(H3.ci_hi)}), p {H3.p_ri:.3f}", f"{H3.pct:+.1f}%" in txt and f"{pc(H3.ci_lo)} to {pc(H3.ci_hi)}" in txt and f"{H3.p_ri:.3f}" in txt)
+fam = sorted([M[(M.model == "poverty alone") & (M["var"] == "deprivation")].p_ri.iloc[0], M[(M.model == "digital access alone") & (M["var"] == "phone")].p_ri.iloc[0], H3.p_ri]); run, fh = 0, []
+for i_, v in enumerate(fam):
+    run = max(run, min(1, (3 - i_) * v)); fh.append(f"{run:.3f}")
+check("E1 site shows Holm p over the pre-registered census family", all(h in txt for h in fh[:2]), ", ".join(fh))
 IMP = pd.read_csv(T / "kh_main_importance.csv")                  # which matters more (spec 9-30)
 for r in IMP.itertuples():
     sh, cv = f"{r.shapley_share:.0f}%", f"{r.cv_gain:+.1f}%"
@@ -124,8 +130,78 @@ for r in IMP.itertuples():
 for v in ["reach_sd", "phone", "deprivation", "lights"]:
     r = M[(M.model.str.startswith("per SD:")) & (M["var"] == v)].iloc[0]
     check(f"E1 site shows per-SD effect for {v} = {pc(r.pct)} (p {r.p_ri:.3f})", pc(r.pct) in txt and f"{r.p_ri:.3f}" in txt)
-stale = [s for s in ["+165%", "2.6 times", "−49%", "five factors", "39%", "Reach or Poverty"] if s in txt]
+CAP = pd.read_csv(T / "kh_capital.csv"); CMP = pd.read_csv(T / "kh_capital_compare.csv")   # spec 9-33
+cr = lambda m: CAP[CAP.model == m].iloc[0]
+for m, keys in [("town alone", ["pct", "p_ri"]), ("capital alone", ["pct", "p_ri"]), ("Phnom Penh khans excluded: town", ["pct", "p_ri"]),
+                ("Phnom Penh khans excluded: capital", ["pct", "ci", "p_ri"])]:
+    r = cr(m)
+    for k in keys:
+        v = {"pct": pc(r.pct), "ci": f"{pc(r.ci_lo)} to {pc(r.ci_hi)}", "p_ri": f"{r.p_ri:.3f}"}[k]
+        check(f"E1 site shows 9-33 {m} / {k} = {v}", v in txt or v.replace(" to ", " ~ ") in txt)
+for smp in ["all districts", "donors China"]:
+    r = CMP[(CMP["sample"] == smp) & (CMP.fe == "zone")].iloc[0]
+    v = (f"{r.cv_town:+.0f}% against {r.cv_capital:+.0f}%" if smp == "all districts" else f"{r.cv_capital:+.0f}% against {r.cv_town:+.0f}%")
+    check(f"E1 site shows 9-33 CV gain ({smp}) = {v}", v in txt)
+PI = pd.read_csv(T / "kh_pinfra.csv").set_index("model")                                         # spec 9-34
+pm, pp = PI.loc["main (all treated, F 60, >= 10%)"], PI.loc["placebo -3 years"]
+for v in [f"{pm.treated_pre:.1f} in the five years before and {pm.treated_post:.1f}", f"{pc(pm.pct)}, randomisation p = {pm.p_ri:.3f}", f"{pc(pp.pct)} (p = {pp.p_ri:.3f})"]:
+    check(f"E1 site shows 9-34: {v}", v in txt)
+PST = pd.read_csv(T / "kh_persistence.csv")                                                   # spec 9-35
+for m, v, keys in [("2 prior + travel time", "prior", ["pct", "p_ri"]), ("6 prior_n + travel time", "prior_n", ["pct", "ci", "p_ri"]), ("6 prior_n + travel time", "reach", ["pct", "p_ri"]),
+                   ("7 post hoc: prior_n + travel time, rural only", "prior_n", ["pct", "p_ri"]), ("8 post hoc: prior_n + travel time, no PP khans", "prior_n", ["pct", "p_ri"])]:
+    r = PST[(PST.model == m) & (PST["var"] == v)].iloc[0]
+    for k in keys:
+        sv = {"pct": pc(r.pct), "ci": f"{pc(r.ci_lo)} to {pc(r.ci_hi)}", "p_ri": f"{r.p_ri:.3f}"}[k]
+        check(f"E1 site shows 9-35 {m} / {v} / {k} = {sv}", sv in txt or sv.replace(" to ", " ~ ") in txt)
+_raw = (SITE / "data/charts.json").read_text(encoding="utf-8")
+try:
+    json.loads(_raw, parse_constant=lambda x: (_ for _ in ()).throw(ValueError(x))); _strict = True
+except ValueError:
+    _strict = False
+check("E5 charts.json is strict JSON (no NaN or Infinity), so browsers can read it", _strict)
+DSG = pd.read_csv(T / "kh_designs.csv").set_index("model")                                       # spec 9-36
+for m, keys in [("travel time x2, neighbour pairs", ["pct", "ci", "p_ri"]), ("straight-line distance x2 (detour fixed)", ["pct", "p_ri"]),
+                ("road detour x2 (distance fixed)", ["p_ri"]), ("field projects alone, travel time x2", ["pct"]),
+                ("institutional projects alone, travel time x2", ["pct"]), ("infrastructure projects alone, travel time x2", ["pct"]),
+                ("EU/US alone, travel time x2", ["pct"]), ("China alone, travel time x2", ["pct"])]:
+    r = DSG.loc[m]
+    for k in keys:
+        sv = {"pct": pc(r.pct), "ci": f"{pc(r.ci_lo)} to {pc(r.ci_hi)}", "p_ri": f"{r.p_ri:.3f}"}[k]
+        check(f"E1 site shows 9-36 {m} / {k} = {sv}", sv in txt or sv.replace(" to ", " ~ ") in txt)
+DV = pd.read_csv(T / "kh_designs_verify.csv")
+check("C7 designs pass their independent checks (kh_s47)", DV.ok.all(), f"{int(DV.ok.sum())} of {len(DV)}")
+jd = pd.DataFrame(json.loads((SITE / "data/charts.json").read_text(encoding="utf-8")).get("designs", [])).set_index("model")
+check("E4 designs chart data = kh_designs.csv", len(jd) == len(DSG) and (jd.pct - DSG.pct).abs().max() < 1e-4 and (jd.p_ri.fillna(-1) - DSG.p_ri.fillna(-1)).abs().max() < 1e-5)
+VER = pd.read_csv(T / "kh_cases_verify.csv")                                                   # kh_s44 independent checks
+check("C6 case studies pass their independent checks (kh_s44)", VER.ok.all(), f"{int(VER.ok.sum())} of {len(VER)}")
+CJ2 = json.loads((SITE / "data/charts.json").read_text(encoding="utf-8"))
+jc = pd.DataFrame(CJ2["capital"]).set_index(["sample", "fe"]); kc = CMP.set_index(["sample", "fe"])
+check("E4 capital chart data = kh_capital_compare.csv", ((jc.cv_town - kc.cv_town).abs().max() < 1e-3) and ((jc.cv_capital - kc.cv_capital).abs().max() < 1e-3))
+jw = pd.DataFrame(CJ2["wcoef"]).set_index("model")
+check("E4 works chart data = kh_pinfra.csv", (jw.loc[PI.index.intersection(jw.index), "treated_pre"] - PI.loc[PI.index.intersection(jw.index), "treated_pre"]).abs().max() < 1e-3)
+stale = [s for s in ["+165%", "2.6 times", "−49%", "five factors", "39% of the projects", "Reach or Poverty", "rather than the state of the road"] if s in txt]
 check("E2 no stale headline numbers on the site", not stale, ", ".join(stale))
+HUB = pd.read_csv(T / "kh_hub_consistency.csv")                                               # spec 9-38
+hz = lambda t, smp: HUB[(HUB.test == t) & (HUB["sample"] == smp)].iloc[0]
+for t, smp, keys in [("travel time x2", "rural districts only", ["pct", "ci", "p_ri"]), ("travel time x2, neighbour pairs", "rural-rural pairs", ["pct", "p_ri"]),
+                     ("travel time x2, neighbour pairs", "pairs with a hub", ["pct"]), ("straight-line distance x2", "rural districts only", ["pct"]),
+                     ("road detour x2", "rural districts only", ["pct"]), ("road detour x2", "all districts", ["pct", "p_ri"])]:
+    r = hz(t, smp)
+    for k in keys:
+        sv = {"pct": pc(r.pct), "ci": f"{pc(r.ci_lo)} to {pc(r.ci_hi)}", "p_ri": f"{r.p_ri:.3f}"}[k]
+        check(f"E1 site shows 9-38 {t} / {smp} / {k} = {sv}", sv in txt or sv.replace(" to ", " ~ ") in txt)
+for t, smp, src in [("travel time x2", "all districts", M[(M.model == "physical access alone") & (M["var"] == "reach")].iloc[0]),
+                    ("travel time x2, neighbour pairs", "all pairs", DSG.loc["travel time x2, neighbour pairs"]),
+                    ("road detour x2", "all districts", DSG.loc["road detour x2 (distance fixed)"])]:
+    r = hz(t, smp)
+    check(f"C8 9-38 all-district row = published estimate ({t})", abs(r.pct - src.pct) < 1e-6 and abs(r.p_ri - src.p_ri) < 1e-9, f"{r.pct:.3f} / {r.p_ri:.3f}")
+jh = pd.DataFrame(CJ2.get("hubs", []))
+check("E4 hub chart data = kh_hub_consistency.csv", len(jh) == len(HUB) and (jh.pct - HUB.pct).abs().max() < 1e-4)
+RV = pd.read_csv(T / "kh_river.csv")                                                            # spec 9-39
+fs = RV[(RV.stage == "first stage") & (RV["sample"] == "all districts") & (RV["var"] == "cross")].iloc[0]
+rf = RV[(RV.stage == "reduced form") & (RV["sample"] == "all districts") & (RV["var"] == "cross")].iloc[0]
+for sv in [f"+{fs.coef:.2f}", f"F = {fs.F:.1f}", pc(rf.pct), f"{pc(rf.ci_lo)} to {pc(rf.ci_hi)}", f"p = {rf.p_ri:.3f}"]:
+    check(f"E1 site shows 9-39 river: {sv}", sv in txt or sv.replace(" to ", " ~ ") in txt)
 missing = sorted({m for m in re.findall(r'src="(img/[^"?]+)', html) if not (SITE / m).exists()})
 check("E3 every image the page uses exists in site/img", not missing, ", ".join(missing))
 CJ = pd.DataFrame(json.loads((SITE / "data/charts.json").read_text(encoding="utf-8"))["coef"]).set_index(["model", "var"])

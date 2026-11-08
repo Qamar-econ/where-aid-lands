@@ -306,6 +306,22 @@ function drawAll(geo){
         {d: dz('EU/US alone, travel time x2'), label: tr('EU and US donors', '유럽·미국')},
         {d: dz('China alone, travel time x2'), label: tr('China', '중국')}]}], 720, true);
   }
+  if (CH.hubs && document.getElementById('ch-hubs')) {
+    const hz = (t, s) => CH.hubs.find(r => r.test === t && r.sample === s);
+    coefChart('ch-hubs', [
+      {title: tr('Travel time ×2, districts compared within a province', '이동시간 ×2, 같은 주 안의 군 비교'), color: COL.phys, rows: [
+        {d: hz('travel time x2', 'all districts'), main: true, label: tr('All 141 districts', '전체 141개 군')},
+        {d: hz('travel time x2', 'rural districts only'), label: tr('112 rural districts only', '농촌 112개 군만')}]},
+      {title: tr('Travel time ×2, adjacent districts only', '이동시간 ×2, 맞닿은 군끼리만'), color: COL.phys, rows: [
+        {d: hz('travel time x2, neighbour pairs', 'all pairs'), label: tr('All 361 neighbour pairs', '이웃 군 361쌍 전체')},
+        {d: hz('travel time x2, neighbour pairs', 'pairs with a hub'), label: tr('104 pairs with a hub', '거점이 낀 104쌍')},
+        {d: hz('travel time x2, neighbour pairs', 'rural-rural pairs'), label: tr('257 rural–rural pairs', '농촌–농촌 257쌍')}]},
+      {title: tr('Distance and road detour, in one model', '직선거리와 도로 우회, 한 모형'), color: COL.phys, rows: [
+        {d: hz('straight-line distance x2', 'all districts'), label: tr('Distance ×2, all districts', '거리 ×2, 전체')},
+        {d: hz('road detour x2', 'all districts'), label: tr('Detour ×2, all districts', '우회 ×2, 전체')},
+        {d: hz('straight-line distance x2', 'rural districts only'), label: tr('Distance ×2, rural only', '거리 ×2, 농촌만')},
+        {d: hz('road detour x2', 'rural districts only'), label: tr('Detour ×2, rural only', '우회 ×2, 농촌만')}]}], 720, true);
+  }
   if (geo && CH.wgrid && document.getElementById('ch-works')) worksMap('ch-works', geo);
   if (CH.wpanel && document.getElementById('ch-events')) worksPanels('ch-events');
 }

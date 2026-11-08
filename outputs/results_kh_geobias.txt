@@ -1,8 +1,8 @@
-province-only projects available: 49 | text length median 247, p75 692
+province-only projects available: 49 | text length median 238, p75 641
                                             check  projects  access_pct  access_p  conn_index_pct  conn_index_p  lights_pct  lights_p
-         all district-precise projects (baseline)     196.9     165.207     0.001         142.363           0.0     101.172     0.047
-        well-reported: text >= median (247 chars)      98.0     199.025     0.002         200.009           0.0     131.895     0.028
-      well-reported: text >= 75th pct (692 chars)      49.0     215.977     0.003         233.352           0.0     105.188     0.071
-                              thin text: < median      98.9     137.538     0.001         105.187           0.0      71.737     0.148
-province-only projects spread by population share     245.9     132.433     0.001         116.762           0.0      68.124     0.072
-province-only projects spread equally (reference)     245.9     122.775     0.002         111.575           0.0      73.628     0.053
+         all district-precise projects (baseline)     185.9      87.457     0.003          83.554         0.000      48.823     0.070
+        well-reported: text >= median (238 chars)      92.0      77.490     0.064          84.334         0.005      54.990     0.030
+      well-reported: text >= 75th pct (641 chars)      45.0      38.065     0.404          50.710         0.106      23.192     0.167
+                              thin text: < median      93.9      97.552     0.000          82.574         0.000      42.280     0.225
+province-only projects spread by population share     234.9      72.610     0.006          71.247         0.000      32.655     0.119
+province-only projects spread equally (reference)     234.9      67.764     0.007          67.738         0.000      38.663     0.073

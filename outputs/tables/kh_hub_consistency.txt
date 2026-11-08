@@ -1,0 +1,18 @@
+hubs 29 districts (95.7 projects) | rural 112 districts (90.2 projects)
+== 1 travel time x2, province fixed effects
+  travel time x2                     all districts                 -36% (95% CI -51% to -17%) | p RI 0.010 | p cluster 0.001 | n 141
+  travel time x2                     rural districts only           +9% (95% CI -15% to +40%) | p RI 0.690 | p cluster 0.489 | n 112
+== 2 neighbour pairs, pair fixed effects
+  travel time x2, neighbour pairs    all pairs                     -34% (95% CI -47% to -17%) | p RI 0.009 | p cluster 0.000 | n 361
+  travel time x2, neighbour pairs    rural-rural pairs             +12% (95% CI -11% to +42%) | p RI 0.412 | p cluster 0.337 | n 257
+  travel time x2, neighbour pairs    pairs with a hub              -39% (95% CI -51% to -23%) | p RI 0.089 | p cluster 0.000 | n 104
+== 3 straight-line distance vs road detour, one model
+  straight-line distance x2          all districts                 -36% (95% CI -51% to -17%) | p RI 0.006 | p cluster 0.001 | n 141
+  road detour x2                     all districts                 -42% (95% CI -59% to -16%) | p RI 0.186 | p cluster 0.003 | n 141
+  straight-line distance x2          rural districts only          +17% (95% CI -8% to +49%) | p RI 0.492 | p cluster 0.204 | n 112
+  road detour x2                     rural districts only           -4% (95% CI -35% to +43%) | p RI 0.882 | p cluster 0.857 | n 112
+  published p RI carried over for travel time x2 / all districts: 0.010 -> 0.008
+  published p RI carried over for travel time x2 / rural districts only: 0.690 -> 0.695
+  published p RI carried over for travel time x2, neighbour pairs / all pairs: 0.009 -> 0.012
+  published p RI carried over for straight-line distance x2 / all districts: 0.006 -> 0.008
+  published p RI carried over for road detour x2 / all districts: 0.186 -> 0.202

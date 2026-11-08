@@ -1,8 +1,8 @@
 (A) GEOCODING-BIAS BOUNDS (physical access, % per SD):
                                                                             scenario  access_pct     p  projects
-                                                    observed (district-precise only)     165.207 0.001     196.9
-                              worst case: province-only -> least accessible district      68.424 0.063     245.9
-                                best case: province-only -> most accessible district     236.571 0.000     245.9
+                                                    observed (district-precise only)      87.457 0.003     185.9
+                              worst case: province-only -> least accessible district      26.406 0.343     234.9
+                                best case: province-only -> most accessible district     148.010 0.000     234.9
 precision check: Spearman(share district-precise, province access) over 21 provinces         NaN 0.108       NaN
    province-only projects added: 49
 (B) STACKED EVENT STUDY: cohorts 2008-2016, treated districts 41, clean controls 37, stacked obs 2173
@@ -19,14 +19,14 @@ precision check: Spearman(share district-precise, province access) over 21 provi
    pre-trend joint Wald p = 0.353 | average post effect = -45%
 (C) CONNECTIVITY (connectivity-only PC1 loadings {'c_speed': np.float64(0.18), 'c_tests': np.float64(0.6), 'c_foot': np.float64(0.62), 'c_fixed': np.float64(0.46)}, share 0.49):
                                                                 model      pct     p
-                                                    alone: conn_index  142.363 0.000
-                                                       alone: c_speed   80.417 0.000
-                                                       alone: c_tests  160.348 0.002
-                                                        alone: c_foot  139.359 0.001
-                                                       alone: c_fixed  153.281 0.005
-                               conn_index controlling physical access  122.083 0.000
-control function (mobile speed | fixed speed IV; first-stage F = 3.8) 6755.939 0.952
-             interaction conn_index x access (negative = substitutes)   -1.667 0.871
-                            social vs other: other-sector conn effect   67.140 0.068
-                           social vs other: social-sector conn effect  220.245 0.000
+                                                    alone: conn_index   83.554 0.000
+                                                       alone: c_speed   60.333 0.001
+                                                       alone: c_tests   82.236 0.018
+                                                        alone: c_foot   84.355 0.001
+                                                       alone: c_fixed   85.321 0.045
+                               conn_index controlling physical access   95.710 0.001
+control function (mobile speed | fixed speed IV; first-stage F = 3.8) 1463.032 0.929
+             interaction conn_index x access (negative = substitutes)   14.217 0.012
+                            social vs other: other-sector conn effect   28.322 0.231
+                           social vs other: social-sector conn effect  127.165 0.000
    (for the 'social-sector' row, p refers to the difference from other sectors)

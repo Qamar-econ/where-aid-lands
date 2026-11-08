@@ -179,8 +179,29 @@ jc = pd.DataFrame(CJ2["capital"]).set_index(["sample", "fe"]); kc = CMP.set_inde
 check("E4 capital chart data = kh_capital_compare.csv", ((jc.cv_town - kc.cv_town).abs().max() < 1e-3) and ((jc.cv_capital - kc.cv_capital).abs().max() < 1e-3))
 jw = pd.DataFrame(CJ2["wcoef"]).set_index("model")
 check("E4 works chart data = kh_pinfra.csv", (jw.loc[PI.index.intersection(jw.index), "treated_pre"] - PI.loc[PI.index.intersection(jw.index), "treated_pre"]).abs().max() < 1e-3)
-stale = [s for s in ["+165%", "2.6 times", "−49%", "five factors", "39%", "Reach or Poverty"] if s in txt]
+stale = [s for s in ["+165%", "2.6 times", "−49%", "five factors", "39% of the projects", "Reach or Poverty", "rather than the state of the road"] if s in txt]
 check("E2 no stale headline numbers on the site", not stale, ", ".join(stale))
+HUB = pd.read_csv(T / "kh_hub_consistency.csv")                                               # spec 9-38
+hz = lambda t, smp: HUB[(HUB.test == t) & (HUB["sample"] == smp)].iloc[0]
+for t, smp, keys in [("travel time x2", "rural districts only", ["pct", "ci", "p_ri"]), ("travel time x2, neighbour pairs", "rural-rural pairs", ["pct", "p_ri"]),
+                     ("travel time x2, neighbour pairs", "pairs with a hub", ["pct"]), ("straight-line distance x2", "rural districts only", ["pct"]),
+                     ("road detour x2", "rural districts only", ["pct"]), ("road detour x2", "all districts", ["pct", "p_ri"])]:
+    r = hz(t, smp)
+    for k in keys:
+        sv = {"pct": pc(r.pct), "ci": f"{pc(r.ci_lo)} to {pc(r.ci_hi)}", "p_ri": f"{r.p_ri:.3f}"}[k]
+        check(f"E1 site shows 9-38 {t} / {smp} / {k} = {sv}", sv in txt or sv.replace(" to ", " ~ ") in txt)
+for t, smp, src in [("travel time x2", "all districts", M[(M.model == "physical access alone") & (M["var"] == "reach")].iloc[0]),
+                    ("travel time x2, neighbour pairs", "all pairs", DSG.loc["travel time x2, neighbour pairs"]),
+                    ("road detour x2", "all districts", DSG.loc["road detour x2 (distance fixed)"])]:
+    r = hz(t, smp)
+    check(f"C8 9-38 all-district row = published estimate ({t})", abs(r.pct - src.pct) < 1e-6 and abs(r.p_ri - src.p_ri) < 1e-9, f"{r.pct:.3f} / {r.p_ri:.3f}")
+jh = pd.DataFrame(CJ2.get("hubs", []))
+check("E4 hub chart data = kh_hub_consistency.csv", len(jh) == len(HUB) and (jh.pct - HUB.pct).abs().max() < 1e-4)
+RV = pd.read_csv(T / "kh_river.csv")                                                            # spec 9-39
+fs = RV[(RV.stage == "first stage") & (RV["sample"] == "all districts") & (RV["var"] == "cross")].iloc[0]
+rf = RV[(RV.stage == "reduced form") & (RV["sample"] == "all districts") & (RV["var"] == "cross")].iloc[0]
+for sv in [f"+{fs.coef:.2f}", f"F = {fs.F:.1f}", pc(rf.pct), f"{pc(rf.ci_lo)} to {pc(rf.ci_hi)}", f"p = {rf.p_ri:.3f}"]:
+    check(f"E1 site shows 9-39 river: {sv}", sv in txt or sv.replace(" to ", " ~ ") in txt)
 missing = sorted({m for m in re.findall(r'src="(img/[^"?]+)', html) if not (SITE / m).exists()})
 check("E3 every image the page uses exists in site/img", not missing, ", ".join(missing))
 CJ = pd.DataFrame(json.loads((SITE / "data/charts.json").read_text(encoding="utf-8"))["coef"]).set_index(["model", "var"])

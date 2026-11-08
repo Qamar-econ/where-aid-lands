@@ -1,39 +1,39 @@
-districts 141 | current non-ICT projects 2017-2020: 199 (non-infra 182) | districts with prior infra (2010-16): 65 | with prior social: 40
+districts 141 | current non-ICT projects 2017-2020: 188 (non-infra 171) | districts with prior infra (2010-16): 65 | with prior social: 40
 VIF (race model): {'lights': np.float64(1.05), 'access': np.float64(1.07), 'conn': np.float64(1.01), 'prior_infra': np.float64(1.22), 'lnpop': np.float64(1.19)}
 LADDER (% per SD; prior_infra = % more for districts with prior infrastructure):
       track                              model  theta  p_theta_eq1  pseudoR2  dR2_over_M0  cv_dev_gain_pct  lights_pct  lights_p  access_pct  access_p  conn_pct  conn_p  prior_infra_pct  prior_infra_p
-      count                   M0 Scale (theta)  0.460        0.075     0.410        0.000           -0.512         NaN       NaN         NaN       NaN       NaN     NaN              NaN            NaN
-      count       M1 Wealth/need: night lights  0.182        0.000     0.478        0.068            5.585     101.172     0.047         NaN       NaN       NaN     NaN              NaN            NaN
-      count         M2 Access: physical access  0.682        0.241     0.609        0.198           15.227         NaN       NaN     165.207     0.001       NaN     NaN              NaN            NaN
-      count      M3 Connectivity: mobile speed  0.519        0.080     0.520        0.110          -10.241         NaN       NaN         NaN       NaN    80.417   0.000              NaN            NaN
-      count M4 Prior infrastructure (H-infra2)  0.336        0.050     0.469        0.059            3.212         NaN       NaN         NaN       NaN       NaN     NaN          206.966          0.000
-      count              M5 Race: all together  0.240        0.005     0.693        0.283           20.483      84.605     0.001      80.761     0.000    50.293   0.000           83.342          0.067
-amount ($m)                   M0 Scale (theta)  0.850        0.178     0.576        0.000            5.475         NaN       NaN         NaN       NaN       NaN     NaN              NaN            NaN
-amount ($m)       M1 Wealth/need: night lights  0.716        0.145     0.590        0.014            4.639      47.376     0.318         NaN       NaN       NaN     NaN              NaN            NaN
-amount ($m)         M2 Access: physical access  0.843        0.178     0.577        0.001           -2.905         NaN       NaN      -8.398     0.674       NaN     NaN              NaN            NaN
-amount ($m)      M3 Connectivity: mobile speed  0.874        0.381     0.579        0.004           -4.149         NaN       NaN         NaN       NaN    14.229   0.688              NaN            NaN
-amount ($m) M4 Prior infrastructure (H-infra2)  0.846        0.426     0.576        0.000           -5.036         NaN       NaN         NaN       NaN       NaN     NaN            1.692          0.981
-amount ($m)              M5 Race: all together  0.695        0.338     0.604        0.028          -30.735      71.444     0.325     -13.355     0.473    29.998   0.424           -7.456          0.878
+      count                   M0 Scale (theta)  0.564        0.110     0.548        0.000            1.543         NaN       NaN         NaN       NaN       NaN     NaN              NaN            NaN
+      count       M1 Wealth/need: night lights  0.391        0.001     0.577        0.029            7.572      48.823     0.070         NaN       NaN       NaN     NaN              NaN            NaN
+      count         M2 Access: physical access  0.670        0.159     0.661        0.113           12.300         NaN       NaN      87.457     0.003       NaN     NaN              NaN            NaN
+      count      M3 Connectivity: mobile speed  0.609        0.081     0.636        0.088            5.592         NaN       NaN         NaN       NaN    60.333   0.001              NaN            NaN
+      count M4 Prior infrastructure (H-infra2)  0.493        0.100     0.576        0.027            6.803         NaN       NaN         NaN       NaN       NaN     NaN           85.945          0.000
+      count              M5 Race: all together  0.464        0.014     0.714        0.166           19.267      37.876     0.025      45.717     0.010    40.006   0.000           26.172          0.348
+amount ($m)                   M0 Scale (theta)  0.860        0.217     0.582        0.000            4.131         NaN       NaN         NaN       NaN       NaN     NaN              NaN            NaN
+amount ($m)       M1 Wealth/need: night lights  0.733        0.189     0.595        0.013            3.992      43.648     0.357         NaN       NaN       NaN     NaN              NaN            NaN
+amount ($m)         M2 Access: physical access  0.851        0.221     0.584        0.002           -3.281         NaN       NaN     -11.391     0.555       NaN     NaN              NaN            NaN
+amount ($m)      M3 Connectivity: mobile speed  0.881        0.403     0.585        0.003           -5.614         NaN       NaN         NaN       NaN    12.677   0.724              NaN            NaN
+amount ($m) M4 Prior infrastructure (H-infra2)  0.865        0.495     0.582        0.000           -6.554         NaN       NaN         NaN       NaN       NaN     NaN           -2.462          0.972
+amount ($m)              M5 Race: all together  0.723        0.402     0.608        0.026          -37.133      64.618     0.361     -15.866     0.392    28.095   0.458          -11.649          0.802
 H-INFRA2:
                                                       spec     pct     p  n_projects
-   a0 non-infra projects ~ prior infra + ln pop + province 219.462 0.000       179.9
-                                      a1 + physical access 109.134 0.062       179.9
-                                a2 + access + night lights 106.113 0.060       179.9
-b1 prior SOCIAL projects instead (placebo-type comparison) 745.363 0.000       179.9
-                             b2 both together: prior infra 137.176 0.007       179.9
-                            b2 both together: prior social 676.137 0.000       179.9
-                                   c  excluding Phnom Penh 170.813 0.062       123.8
-                               d  prior infra as log count 485.096 0.003       179.9
-                                      e  amount track ($m) 179.825 0.227      1057.3
-                         f  randomization inference p (a0)     NaN 0.106         NaN
+   a0 non-infra projects ~ prior infra + ln pop + province  84.824 0.000       168.9
+                                      a1 + physical access  36.202 0.253       168.9
+                                a2 + access + night lights  35.280 0.261       168.9
+b1 prior SOCIAL projects instead (placebo-type comparison) 205.810 0.001       168.9
+                             b2 both together: prior infra  56.689 0.003       168.9
+                            b2 both together: prior social 185.763 0.000       168.9
+                                   c  excluding Phnom Penh  63.331 0.111       123.6
+                               d  prior infra as log count 159.270 0.001       168.9
+                                      e  amount track ($m) 134.376 0.301      1037.8
+                         f  randomization inference p (a0)     NaN 0.263         NaN
 H-INFRA1 (fully interacted stacked model; infra vs social):
 construct  social_pct  social_p  infra_pct  difference_b  difference_p  n_social  n_infra
-   access     239.237     0.000    -26.563        -1.530         0.000       111       17
-     conn     100.031     0.000     -3.252        -0.726         0.007       111       17
-   lights     143.843     0.061     23.668        -0.679         0.183       111       17
+   access     140.757     0.000    -26.563        -1.187         0.000       101       17
+     conn      77.114     0.000     -3.252        -0.605         0.037       101       17
+   lights      71.106     0.063     23.668        -0.325         0.365       101       17
 SIMPLE OLS (ln(1+projects per 100k), province dummies):
   regressor     b     p    R2
-     lights 0.218 0.011 0.311
-     access 0.303 0.003 0.366
-       conn 0.120 0.131 0.283
-prior_infra 0.245 0.052 0.284
+     lights 0.115 0.060 0.432
+     access 0.164 0.041 0.455
+       conn 0.093 0.127 0.432
+prior_infra 0.154 0.111 0.426

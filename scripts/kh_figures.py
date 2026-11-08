@@ -346,6 +346,10 @@ T = ROOT / "outputs/tables"
 CAPF, PIN = T / "kh_capital_compare.csv", T / "kh_pinfra_panel.csv"
 if (T / "kh_designs.csv").exists():   # spec 9-36
     CH["designs"] = pd.read_csv(T / "kh_designs.csv")[["design", "model", "pct", "ci_lo", "ci_hi", "p_ri", "p_cluster"]].round(6).to_dict("records")
+if (T / "kh_hub_consistency.csv").exists():   # spec 9-38: each design on all districts and on the countryside alone
+    CH["hubs"] = pd.read_csv(T / "kh_hub_consistency.csv")[["test", "sample", "pct", "ci_lo", "ci_hi", "p_ri", "p_cluster", "n"]].round(6).to_dict("records")
+if (T / "kh_river.csv").exists():   # spec 9-39
+    CH["river"] = pd.read_csv(T / "kh_river.csv").round(6).to_dict("records")
 if CAPF.exists():
     CH["capital"] = pd.read_csv(CAPF).round(4).to_dict("records")   # one rounding only, in the chart
     CH["capital_coef"] = pd.read_csv(T / "kh_capital.csv")[["model", "var", "fe", "pct", "ci_lo", "ci_hi", "p_ri", "p_cluster"]].round(6).to_dict("records")

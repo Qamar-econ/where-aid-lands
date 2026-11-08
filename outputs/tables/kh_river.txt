@@ -1,0 +1,15 @@
+barrier: 12 river components, 1438 km2; Tonle Sap lake 2463 km2
+cells 214537: crossing share of population 0.185 (with lake 0.186)
+  cell check, minutes per km to town, crossing vs not, within 30 km of a town: 8.19 vs 5.74
+  all districts: 141 districts, 65 with >5% crossing, mean cross 0.244, provinces with variation 12
+  rural districts only: 112 districts, 50 with >5% crossing, mean cross 0.252, provinces with variation 12
+  riverine band (centre within 20 km): 68 districts, 50 with >5% crossing, mean cross 0.401, provinces with variation 10
+== first stage and reduced form (cross = share of population whose line to the town crosses the river)
+  first stage  all districts                          cross      detour log2 +0.881 (SE 0.202) | F 18.9 | n 141 
+  reduced form all districts                          cross         -39% (95% CI -86% to +160%) | MDE -87% | p RI 0.651 | p cluster 0.505 | n 141 | expected if detour acts like -42% per doubling: -38%
+  first stage  rural districts only                   cross      detour log2 +0.985 (SE 0.236) | F 17.4 | n 112 
+  reduced form rural districts only                   cross         -29% (95% CI -81% to +170%) | MDE -85% | p RI 0.544 | p cluster 0.614 | n 112 | expected if detour acts like -42% per doubling: -42%
+  first stage  riverine band (centre within 20 km)    cross      detour log2 +0.961 (SE 0.320) | F 9.1 | n 68 
+  reduced form riverine band (centre within 20 km)    cross         -75% (95% CI -95% to +23%) | MDE -90% | p RI 0.335 | p cluster 0.088 | n 68 | expected if detour acts like -42% per doubling: -41%
+  first stage  all districts                          cross_lake detour log2 +0.888 (SE 0.201) | F 19.6 | n 141 
+  reduced form all districts                          cross_lake    -40% (95% CI -86% to +157%) | MDE -87% | p RI 0.671 | p cluster 0.495 | n 141 | expected if detour acts like -42% per doubling: -38%
