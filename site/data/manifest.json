@@ -33,6 +33,7 @@
   "dl/tables/kh_access_pca_unp05.csv",
   "dl/tables/kh_access_pca_unp09.csv",
   "dl/tables/kh_access_sensitivity.csv",
+  "dl/tables/kh_audit.csv",
   "dl/tables/kh_bridges.csv",
   "dl/tables/kh_bridges_cases.csv",
   "dl/tables/kh_bridges_dt.csv",
@@ -148,6 +149,7 @@
   "dl/code/kh_s48_need_match.py",
   "dl/code/kh_s49_hub_consistency.py",
   "dl/code/kh_s50_river.py",
+  "dl/code/kh_s51_audit.py",
   "dl/code/README_pipeline.md"
  ]
 }

@@ -59,6 +59,7 @@ Run the scripts from `research/scripts`, in this order:
 | `kh_s48_need_match.py [draws]` | spec 9-37: do projects within a district go to the sector with the larger census need | `kh_needmatch.csv`, `.txt` |
 | `kh_s49_hub_consistency.py [draws]` | spec 9-38 (post hoc): travel time, neighbour pairs and distance vs detour on all districts and on rural districts only | `kh_hub_consistency.csv`, `.txt` |
 | `kh_s50_river.py [draws]` | spec 9-39: river barriers in the 2017 OSM as a natural source of road detour (first stage, reduced form) | `kh_river.csv`, `.txt`; `kh_river_cells.csv` |
+| `kh_s51_audit.py [draws]` | spec 9-40 (pipeline audit): travel time to the 25 provincial capitals, Phnom Penh's mixed outer units, persistence with past town-name geocodes corrected | `kh_audit.csv`, `.txt` |
 | `kh_figures.py` | figures F1-F5 in English and Korean, from the same data step and results table | `outputs/figures/cambodia/F*.pdf/.png` |
 | `kh_census_build.py extract.csv` | once the IPUMS extract arrives: deprivation index and phone ownership by district, classifying answer codes from the codebook labels | `kh_census.csv` |
 | `kh_check.py` | 104 automated checks from the sample to every number on the site; exit code 1 on any failure | (console) |

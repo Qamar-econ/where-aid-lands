@@ -202,6 +202,15 @@ fs = RV[(RV.stage == "first stage") & (RV["sample"] == "all districts") & (RV["v
 rf = RV[(RV.stage == "reduced form") & (RV["sample"] == "all districts") & (RV["var"] == "cross")].iloc[0]
 for sv in [f"+{fs.coef:.2f}", f"F = {fs.F:.1f}", pc(rf.pct), f"{pc(rf.ci_lo)} to {pc(rf.ci_hi)}", f"p = {rf.p_ri:.3f}"]:
     check(f"E1 site shows 9-39 river: {sv}", sv in txt or sv.replace(" to ", " ~ ") in txt)
+AUD = pd.read_csv(T / "kh_audit.csv").set_index("model")                                       # spec 9-40 audit
+for m, keys in [("travel time x2, provincial capitals, all districts", ["pct", "p_ri"]), ("travel time x2, provincial capitals, rural districts", ["pct", "p_ri"]),
+                ("travel time x2, rural districts, outer-khan units dropped", ["pct", "ci"]), ("past projects, flagged locations dropped", ["pct", "p_ri"]),
+                ("past projects, flagged locations spread over province", ["pct", "p_ri"])]:
+    r = AUD.loc[m]
+    for k in keys:
+        sv = {"pct": pc(r.pct), "ci": f"{pc(r.ci_lo)} to {pc(r.ci_hi)}", "p_ri": f"{r.p_ri:.3f}"}[k]
+        check(f"E1 site shows 9-40 {m} / {k} = {sv}", sv in txt or sv.replace(" to ", " ~ ") in txt)
+check("E2 inference not mislabelled as Freedman-Lane on the site", "Freedman" not in html and "Freedman" not in (SITE / "pipeline.html").read_text(encoding="utf-8"))
 missing = sorted({m for m in re.findall(r'src="(img/[^"?]+)', html) if not (SITE / m).exists()})
 check("E3 every image the page uses exists in site/img", not missing, ", ".join(missing))
 CJ = pd.DataFrame(json.loads((SITE / "data/charts.json").read_text(encoding="utf-8"))["coef"]).set_index(["model", "var"])

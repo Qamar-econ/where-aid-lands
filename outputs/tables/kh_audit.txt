@@ -1,0 +1,12 @@
+== A1 travel time to the 25 provincial capitals instead of GeoNames places of 20,000+
+  corr(main travel time, capitals travel time) 0.923; median 126 vs 124 min
+  A1 travel time x2, provincial capitals, all districts            -35% (95% CI -49% to -18%) | p RI 0.007 | p cluster 0.000 | n 141
+  A1 travel time x2, provincial capitals, rural districts          +11% (95% CI -14% to +44%) | p RI 0.629 | p cluster 0.410 | n 112
+== A2 Phnom Penh's outer khans (mixed units 116008001, 116008002)
+  A2 travel time x2, rural districts, outer-khan units dropped      +1% (95% CI -32% to +50%) | p RI 0.958 | p cluster 0.972 | n 110
+  projects in the two outer units: 9.6; hub share if counted as hubs: 0.566 of projects, 0.363 of people
+== A4 persistence with the same town/province-name rule applied to 2005-2012 locations
+  past activities 181, weight 180.4; flagged weight 63.6 (68 activities)
+  A4 past projects as published (= kh_s45 model 6)                 +97% (95% CI +58% to +146%) | p RI 0.032 | p cluster 0.000 | n 141
+  A4 past projects, flagged locations dropped                     +119% (95% CI +80% to +166%) | p RI 0.026 | p cluster 0.000 | n 141
+  A4 past projects, flagged locations spread over province        +170% (95% CI +99% to +266%) | p RI 0.010 | p cluster 0.000 | n 141
