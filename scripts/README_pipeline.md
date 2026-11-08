@@ -56,7 +56,7 @@ Run the scripts from `research/scripts`, in this order:
 | `kh_s45_persistence.py [draws]` | spec 9-35: do districts with 2005-2012 projects get more in 2017-2020, holding travel time fixed | `kh_persistence.csv`, `.txt` |
 | `kh_figures.py` | figures F1-F5 in English and Korean, from the same data step and results table | `outputs/figures/cambodia/F*.pdf/.png` |
 | `kh_census_build.py extract.csv` | once the IPUMS extract arrives: deprivation index and phone ownership by district, classifying answer codes from the codebook labels | `kh_census.csv` |
-| `kh_check.py` | 80 automated checks from the sample to every number on the site; exit code 1 on any failure | (console) |
+| `kh_check.py` | 91 automated checks from the sample to every number on the site; exit code 1 on any failure | (console) |
 | `kh_run_all.sh` | reruns every step downstream of the sample, in dependency order | `outputs/logs/` |
 
 **The census data are not redistributed.** IPUMS terms forbid sharing the microdata, and the district tables built from it (`kh_census.csv`) are kept local as well. To reproduce the census results, request your own IPUMS International extract (Cambodia 2008 and 2019; variables listed in the pre-registration, amendment 2) and run `kh_census_build.py` on it.

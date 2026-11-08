@@ -146,6 +146,13 @@ PI = pd.read_csv(T / "kh_pinfra.csv").set_index("model")                        
 pm, pp = PI.loc["main (all treated, F 60, >= 10%)"], PI.loc["placebo -3 years"]
 for v in [f"{pm.treated_pre:.1f} in the five years before and {pm.treated_post:.1f}", f"{pc(pm.pct)}, randomisation p = {pm.p_ri:.3f}", f"{pc(pp.pct)} (p = {pp.p_ri:.3f})"]:
     check(f"E1 site shows 9-34: {v}", v in txt)
+PST = pd.read_csv(T / "kh_persistence.csv")                                                   # spec 9-35
+for m, v, keys in [("2 prior + travel time", "prior", ["pct", "p_ri"]), ("6 prior_n + travel time", "prior_n", ["pct", "ci", "p_ri"]), ("6 prior_n + travel time", "reach", ["pct", "p_ri"]),
+                   ("7 post hoc: prior_n + travel time, rural only", "prior_n", ["pct", "p_ri"]), ("8 post hoc: prior_n + travel time, no PP khans", "prior_n", ["pct", "p_ri"])]:
+    r = PST[(PST.model == m) & (PST["var"] == v)].iloc[0]
+    for k in keys:
+        sv = {"pct": pc(r.pct), "ci": f"{pc(r.ci_lo)} to {pc(r.ci_hi)}", "p_ri": f"{r.p_ri:.3f}"}[k]
+        check(f"E1 site shows 9-35 {m} / {v} / {k} = {sv}", sv in txt or sv.replace(" to ", " ~ ") in txt)
 VER = pd.read_csv(T / "kh_cases_verify.csv")                                                   # kh_s44 independent checks
 check("C6 case studies pass their independent checks (kh_s44)", VER.ok.all(), f"{int(VER.ok.sum())} of {len(VER)}")
 CJ2 = json.loads((SITE / "data/charts.json").read_text(encoding="utf-8"))
