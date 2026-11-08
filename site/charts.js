@@ -311,7 +311,8 @@ function drawAll(geo){
 }
 window.drawCharts = function(geo){
   if (CH) return drawAll(geo);
-  fetch('data/charts.json').then(r => r.json()).then(j => { CH = j; drawAll(geo); }).catch(e => console.error('charts.json', e));
+  // no-cache: revalidate with the server, because charts.json changes more often than this script's version tag
+  fetch('data/charts.json', {cache: 'no-cache'}).then(r => r.json()).then(j => { CH = j; drawAll(geo); }).catch(e => console.error('charts.json', e));
 };
 if (window.__site.geo()) window.drawCharts(window.__site.geo());
 })();
