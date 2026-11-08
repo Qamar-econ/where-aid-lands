@@ -153,6 +153,25 @@ for m, v, keys in [("2 prior + travel time", "prior", ["pct", "p_ri"]), ("6 prio
     for k in keys:
         sv = {"pct": pc(r.pct), "ci": f"{pc(r.ci_lo)} to {pc(r.ci_hi)}", "p_ri": f"{r.p_ri:.3f}"}[k]
         check(f"E1 site shows 9-35 {m} / {v} / {k} = {sv}", sv in txt or sv.replace(" to ", " ~ ") in txt)
+_raw = (SITE / "data/charts.json").read_text(encoding="utf-8")
+try:
+    json.loads(_raw, parse_constant=lambda x: (_ for _ in ()).throw(ValueError(x))); _strict = True
+except ValueError:
+    _strict = False
+check("E5 charts.json is strict JSON (no NaN or Infinity), so browsers can read it", _strict)
+DSG = pd.read_csv(T / "kh_designs.csv").set_index("model")                                       # spec 9-36
+for m, keys in [("travel time x2, neighbour pairs", ["pct", "ci", "p_ri"]), ("straight-line distance x2 (detour fixed)", ["pct", "p_ri"]),
+                ("road detour x2 (distance fixed)", ["p_ri"]), ("field projects alone, travel time x2", ["pct"]),
+                ("institutional projects alone, travel time x2", ["pct"]), ("infrastructure projects alone, travel time x2", ["pct"]),
+                ("EU/US alone, travel time x2", ["pct"]), ("China alone, travel time x2", ["pct"])]:
+    r = DSG.loc[m]
+    for k in keys:
+        sv = {"pct": pc(r.pct), "ci": f"{pc(r.ci_lo)} to {pc(r.ci_hi)}", "p_ri": f"{r.p_ri:.3f}"}[k]
+        check(f"E1 site shows 9-36 {m} / {k} = {sv}", sv in txt or sv.replace(" to ", " ~ ") in txt)
+DV = pd.read_csv(T / "kh_designs_verify.csv")
+check("C7 designs pass their independent checks (kh_s47)", DV.ok.all(), f"{int(DV.ok.sum())} of {len(DV)}")
+jd = pd.DataFrame(json.loads((SITE / "data/charts.json").read_text(encoding="utf-8")).get("designs", [])).set_index("model")
+check("E4 designs chart data = kh_designs.csv", len(jd) == len(DSG) and (jd.pct - DSG.pct).abs().max() < 1e-4 and (jd.p_ri.fillna(-1) - DSG.p_ri.fillna(-1)).abs().max() < 1e-5)
 VER = pd.read_csv(T / "kh_cases_verify.csv")                                                   # kh_s44 independent checks
 check("C6 case studies pass their independent checks (kh_s44)", VER.ok.all(), f"{int(VER.ok.sum())} of {len(VER)}")
 CJ2 = json.loads((SITE / "data/charts.json").read_text(encoding="utf-8"))

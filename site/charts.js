@@ -55,9 +55,9 @@ function coefChart(id, groups, W, shared = false){
   const rh = 25, M = {l: 238, r: 128, t: 6, b: 34}, head = 26;
   const H = M.t + M.b + d3.sum(groups, g => g.rows.length * rh + (g.title ? head : 6));
   const svg = svgOf(id, W, H); let yy = M.t;
-  const all = groups.flatMap(g => g.rows.map(r => row(r.m, r.v)).filter(Boolean));
+  const all = groups.flatMap(g => g.rows.map(r => r.d || row(r.m, r.v)).filter(Boolean));
   groups.forEach((g, gi) => {
-    const rows = g.rows.map(r => ({...r, d: row(r.m, r.v)})).filter(r => r.d);
+    const rows = g.rows.map(r => ({...r, d: r.d || row(r.m, r.v)})).filter(r => r.d);
     const src = shared ? all : rows.map(r => r.d), lo = d3.min(src, r => r.ci_lo), hi = d3.max(src, r => r.ci_hi);
     const x = d3.scaleLinear().domain([Math.min(lo, 0), Math.max(hi, 0)]).nice().range([M.l, W - M.r]);
     if (g.title) { svg.append('text').attr('x', 0).attr('y', yy + 16).attr('font-size', 12.5).attr('font-weight', 600).style('fill', g.color).text(g.title); yy += head; }
@@ -290,6 +290,22 @@ function drawAll(geo){
   types('ch-types');
   if (geo && document.getElementById('ch-overlap')) overlap('ch-overlap', geo);
   if (CH.capital && document.getElementById('ch-capital')) capitalChart('ch-capital');
+  if (CH.designs && document.getElementById('ch-designs')) {
+    const dz = m => CH.designs.find(r => r.model === m);
+    coefChart('ch-designs', [
+      {title: tr('Only adjacent districts compared', '맞닿은 군끼리만 비교'), color: COL.phys, rows: [
+        {d: dz('travel time x2, neighbour pairs'), main: true, label: tr('Travel time ×2, 361 neighbour pairs', '이동시간 ×2, 이웃 군 361쌍')}]},
+      {title: tr('Distance to a town, or the roads?', '도시까지 거리인가, 길인가?'), color: COL.phys, rows: [
+        {d: dz('straight-line distance x2 (detour fixed)'), label: tr('Straight-line distance ×2', '직선거리 ×2')},
+        {d: dz('road detour x2 (distance fixed)'), label: tr('Road detour ×2 (minutes per km)', '도로 우회 ×2 (km당 분)')}]},
+      {title: tr('Type of project', '사업 유형'), color: COL.phys, rows: [
+        {d: dz('field projects alone, travel time x2'), label: tr('Field projects (water, schools, farms)', '현장 사업 (수자원, 학교, 농업)')},
+        {d: dz('institutional projects alone, travel time x2'), label: tr('Institutional projects', '기관 사업')},
+        {d: dz('infrastructure projects alone, travel time x2'), label: tr('Infrastructure (23 projects)', '인프라 (23건)')}]},
+      {title: tr('Donor', '공여자'), color: COL.phys, rows: [
+        {d: dz('EU/US alone, travel time x2'), label: tr('EU and US donors', '유럽·미국')},
+        {d: dz('China alone, travel time x2'), label: tr('China', '중국')}]}], 720, true);
+  }
   if (geo && CH.wgrid && document.getElementById('ch-works')) worksMap('ch-works', geo);
   if (CH.wpanel && document.getElementById('ch-events')) worksPanels('ch-events');
 }

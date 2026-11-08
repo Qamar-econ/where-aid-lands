@@ -344,6 +344,8 @@ if IMP.exists():
 # capital vs nearest town (spec 9-33) and infrastructure events (spec 9-32, 9-34)
 T = ROOT / "outputs/tables"
 CAPF, PIN = T / "kh_capital_compare.csv", T / "kh_pinfra_panel.csv"
+if (T / "kh_designs.csv").exists():   # spec 9-36
+    CH["designs"] = pd.read_csv(T / "kh_designs.csv")[["design", "model", "pct", "ci_lo", "ci_hi", "p_ri", "p_cluster"]].round(6).to_dict("records")
 if CAPF.exists():
     CH["capital"] = pd.read_csv(CAPF).round(4).to_dict("records")   # one rounding only, in the chart
     CH["capital_coef"] = pd.read_csv(T / "kh_capital.csv")[["model", "var", "fe", "pct", "ci_lo", "ci_hi", "p_ri", "p_cluster"]].round(6).to_dict("records")
@@ -365,5 +367,13 @@ if PIN.exists():
     CH["wsites"] = [{"work": "NR48 Koh Kong bridges", "lon": 103.47, "lat": 11.19, "year": 2008}, {"work": "Sekong bridge", "lon": 105.99, "lat": 13.54, "year": 2008},
                     {"work": "Prek Tamak bridge", "lon": 105.00, "lat": 11.75, "year": 2010}, {"work": "NR78 Ratanakiri paving", "lon": 106.55, "lat": 13.72, "year": 2012},
                     {"work": "Stung Treng bridge", "lon": 105.94, "lat": 13.53, "year": 2015}, {"work": "Neak Loeung bridge", "lon": 105.27, "lat": 11.27, "year": 2015}]
-(ROOT / "site/data/charts.json").write_text(json.dumps(CH, ensure_ascii=False), encoding="utf-8")
+def _clean(o):   # browsers reject NaN in JSON: write missing values as null
+    if isinstance(o, dict):
+        return {k: _clean(v) for k, v in o.items()}
+    if isinstance(o, list):
+        return [_clean(v) for v in o]
+    return None if isinstance(o, float) and not np.isfinite(o) else o
+
+
+(ROOT / "site/data/charts.json").write_text(json.dumps(_clean(CH), ensure_ascii=False, allow_nan=False), encoding="utf-8")
 print("site/data/charts.json written")
