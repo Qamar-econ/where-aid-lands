@@ -1,0 +1,14 @@
+== 1 fast PPML = statsmodels GLM
+  [ok] A pair-FE estimate, GLM vs kh_designs: -33.763 vs -33.763
+  [ok] C gap estimate, GLM vs kh_designs: 21.848 vs 21.848
+== 2 neighbour pairs
+  [ok] no duplicate pairs: 0
+  [ok] pairs share >= 1 km of edge (200 m tolerance): 0.983 of pairs; the rest touch at a corner, dropped in a check
+  [ok] every district is in a pair: 141
+== 3 distance and detour
+  [ok] log2 T = dist + detour (no clipping bites): max 1.11e-15
+  [ok] projected distance matches haversine (500 cells): median relative error 0.0016, max 0.006
+== 4 labels add up
+  [ok] type labels cover the sample weight: {'field': 82.9, 'infra': 23.0, 'inst': 64.0, 'other': 16.0}
+  [ok] donor labels cover the sample weight: {'China': 48.0, 'EU/US': 126.0, 'World Bank': 11.9}
+== 9 of 9 checks ok

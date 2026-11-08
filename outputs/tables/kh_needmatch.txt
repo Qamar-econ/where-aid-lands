@@ -1,0 +1,11 @@
+activities: water 17 (weight 17.0), education 33 (weight 33.0), energy 9 (weight 9.0)
+== (1) by sector: own need, holding travel time
+  corr(need_water, travel time) +0.65
+  water: own need (+ travel time)                           -46% per SD (95% CI -88% to +141%) MDE 757% | p RI 0.599 | p cluster 0.415 | n 17.0 
+  corr(need_education, travel time) +0.52
+  education: own need (+ travel time)                        +3% per SD (95% CI -50% to +110%) MDE 177% | p RI 0.928 | p cluster 0.941 | n 33.0 
+  corr(need_energy, travel time) +0.60
+  energy: own need (+ travel time)                         +334% per SD (95% CI +119% to +761%) MDE 166% | p RI 0.051 | p cluster 0.000 | n 9.0 
+== (2) within district: sector with the larger need
+  need of the sector, district + sector FE                  -13% per SD (95% CI -49% to +47%) MDE 112% | p RI 0.689 | p cluster 0.595 | n 59 
+  same + province x sector FE, ln pop x sector              +46% per SD (95% CI -41% to +263%) MDE 267% | p RI 0.461 | p cluster 0.413 | n 59 

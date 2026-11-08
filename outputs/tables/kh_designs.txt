@@ -1,0 +1,26 @@
+== A neighbour pairs (pair fixed effects)
+  361 adjacent pairs (233 within a province, 128 across), districts in pairs 141
+  A travel time x2, neighbour pairs                         -34% (95% CI -47% to -17%) | p RI 0.012 | p cluster 0.000 | n 361 
+  A travel time x2, pairs within a province                 -34% (95% CI -47% to -18%) | p RI nan | p cluster 0.000 | n 233 
+  A travel time x2, pairs sharing >= 1 km of edge           -28% (95% CI -41% to -12%) | p RI nan | p cluster 0.001 | n 355 
+== B straight-line distance vs road detour
+  towns 33 | check: cell-weighted travel time vs kh_access, max abs diff 0.0000 min
+  median straight-line distance 27.0 km, median minutes per km 4.77 | corr(dist, detour) -0.42, corr(reach, dist) +0.92, corr(reach, detour) -0.02
+  B straight-line distance x2 (detour fixed)                -36% (95% CI -51% to -17%) | p RI 0.008 | p cluster 0.001 | n 141 
+  B road detour x2 (distance fixed)                         -42% (95% CI -59% to -16%) | p RI 0.202 | p cluster 0.003 | n 141 
+  B straight-line distance x2 alone                         -32% (95% CI -50% to -8%) | p RI 0.011 | p cluster 0.011 | n 141 
+  B road detour x2 alone                                    -16% (95% CI -32% to +4%) | p RI 0.621 | p cluster 0.116 | n 141 
+== C field vs institutional projects
+  activities by type: field 83 (weight 82.9), inst 64 (weight 64.0), infra 23 (weight 23.0), other 16 (weight 16.0)
+  C field projects alone, travel time x2                    -37% (95% CI -61% to +2%) | p RI 0.047 | p cluster 0.058 | n 82.9 
+  C institutional projects alone, travel time x2            -35% (95% CI -41% to -29%) | p RI 0.052 | p cluster 0.000 | n 64.0 
+  C infrastructure projects alone, travel time x2            -4% (95% CI -32% to +34%) | p RI 0.686 | p cluster 0.802 | n 23.0 
+  C slope gap field minus institutional, district FE        +22% (95% CI +4% to +42%) | p RI 0.013 | p cluster 0.012 | n 147 
+  C post hoc: same gap + ln pop gap + province x type FE    -10% (95% CI -35% to +24%) | p RI 0.421 | p cluster 0.511 | n 147 
+  C post hoc: gap with codes 120/310 counted as field        +8% (95% CI -7% to +26%) | p RI 0.294 | p cluster 0.299 | n 163 
+  C post hoc: gap with codes 120/310 counted as inst        +34% (95% CI +14% to +57%) | p RI 0.000 | p cluster 0.000 | n 163 
+== D EU/US vs China within the same district
+  D EU/US alone, travel time x2                             -36% (95% CI -53% to -13%) | p RI 0.031 | p cluster 0.004 | n 126.0 
+  D China alone, travel time x2                             -36% (95% CI -52% to -15%) | p RI 0.022 | p cluster 0.003 | n 48.0 
+  D slope gap China minus EU/US, district FE                -21% (95% CI -34% to -6%) | p RI 0.006 | p cluster 0.009 | n 174 
+  D post hoc: same gap + ln pop gap + province x donor FE    -16% (95% CI -38% to +14%) | p RI 0.244 | p cluster 0.260 | n 174 
